@@ -10,4 +10,12 @@
         </locale-config>
     </application>
 
+    <lifecycle>
+        <phase-listener>br.com.engebras.util.PhaseListenerEngebras</phase-listener>
+    </lifecycle>
+    <managed-bean>
+        <manage-bean-name>now</manage-bean-name>
+        <manage-bean-class>java.util.Date</manage-bean-class>
+        <manage-bean-scope>request</manage-bean-scope>
+    </managed-bean>
 </faces-config>

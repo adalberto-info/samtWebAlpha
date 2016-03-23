@@ -8,6 +8,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import br.com.engebras.model.entities.Filial;
+import br.com.engebras.util.FacesContextUtil;
+import br.com.engebras.model.dao.InterfaceDAO;
+import br.com.engebras.model.dao.HibernateDAO;
+import br.com.engebras.model.entities.Filial;
 
 /**
  * @author Adalberto dt. criacao: 22/03/2016
@@ -25,6 +29,12 @@ public class MbFilial implements Serializable {
     public MbFilial() {
     }
 
+    private InterfaceDAO<Filial> filialDAO(){
+        InterfaceDAO<Filial> filialDAO = new HibernateDAO<Filial>(Filial.class, FacesContextUtil.getRequestSession());
+        return filialDAO;
+    }
+    
+    
     public String limpaFilial() {
         return editFilial();
     }
