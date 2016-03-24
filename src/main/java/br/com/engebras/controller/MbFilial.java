@@ -36,6 +36,7 @@ public class MbFilial implements Serializable {
     
     
     public String limpaFilial() {
+        filial = new Filial();
         return editFilial();
     }
 
@@ -49,6 +50,7 @@ public class MbFilial implements Serializable {
         } else {
             updateFilial();
         }
+        limpaFilial();
         return null;
     }
 
@@ -76,6 +78,7 @@ public class MbFilial implements Serializable {
     }
 
     public List<Filial> getFiliais() {
+        filiais = filialDAO().getEntities();
         return filiais;
     }
 
