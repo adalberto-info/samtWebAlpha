@@ -16,7 +16,7 @@ import br.com.engebras.model.entities.Filial;
 /**
  * @author Adalberto dt. criacao: 22/03/2016
  */
-@ManagedBean(name = "mbfilial")
+@ManagedBean(name = "mbFilial")
 @SessionScoped
 public class MbFilial implements Serializable {
 
