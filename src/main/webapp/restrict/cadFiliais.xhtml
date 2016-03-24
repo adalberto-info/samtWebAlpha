@@ -7,8 +7,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 template="/WEB-INF/templates/LayoutMaster.xhtml">
-
-    <ui:define name="tarefas">
+    <ui:define name="content">
         <p:fieldset legend="Cadastrar Filiais">
             <br/>
             <p:tabView id="tbv1" dynamic="true" cache="true">
@@ -61,43 +60,42 @@
 
             <h:form id="formtable">
                 <p:growl id="msg1"/>
-                <div class="ui-fluid">
 
-                    <p:dataTable id="idTabela" var="filial" value="#{mbFilial.filiais}"
-                                 paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
-                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
-                                 {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                 rowsPerPageTemplate="5,10,15">
+                <p:dataTable id="idTabela" var="filial" value="#{mbFilial.filiais}"
+                             paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
 
-                        <f:facet name="header">Lista de Filiais</f:facet>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nome"/>
-                            </f:facet>
-                            <h:outputText value="#{filial.dc_filial}"/>
-                        </p:column>
+                    <f:facet name="header">Lista de Filiais</f:facet>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="#{filial.dc_filial}"/>
+                    </p:column>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Ações"/>
-                            </f:facet>
-                            <p:commandButton value="Editar" image="ui-icon ui-icon-pencil"
-                                             process="@this" update=":tbv1:formCadFilial">
-                                <f:setPropertyActionListener target="#{mbFilial.filial}"
-                                                             value="#{filial}"/>
-                            </p:commandButton>
-                            <p:commandButton value="Remover" action="#{mbFilial.deleteFilial}"
-                                             image="ui-icon ui-icon-close" update="@form">
-                                <f:setPropertyActionListener target="#{mbFilial.filial}"
-                                                             value="#{filial}"/>
-                            </p:commandButton>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ações"/>
+                        </f:facet>
+                        <p:commandButton value="Editar" image="ui-icon ui-icon-pencil"
+                                         process="@this" update=":tbv1:formCadFilial">
+                            <f:setPropertyActionListener target="#{mbFilial.filial}"
+                                                         value="#{filial}"/>
+                        </p:commandButton>
+                        <p:commandButton value="Remover" action="#{mbFilial.deleteFilial}"
+                                         image="ui-icon ui-icon-close" update="@form">
+                            <f:setPropertyActionListener target="#{mbFilial.filial}"
+                                                         value="#{filial}"/>
+                        </p:commandButton>
 
-                        </p:column>
+                    </p:column>
 
-                    </p:dataTable>
-                </div>
+                </p:dataTable>
             </h:form>
 
         </p:fieldset>
+
     </ui:define>
 </ui:composition>

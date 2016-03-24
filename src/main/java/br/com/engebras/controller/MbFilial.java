@@ -40,7 +40,7 @@ public class MbFilial implements Serializable {
     }
 
     public String editFilial() {
-        return "restrict/cadFiliais.faces";
+        return "/restrict/cadFiliais.faces";
     }
 
     public String addFilial() {
