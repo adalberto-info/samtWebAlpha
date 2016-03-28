@@ -86,5 +86,11 @@ public class MbFilial implements Serializable {
         this.filiais = filiais;
     }
     
-    
+    private boolean verificaDuplicidade(String nomeFilial){
+        boolean vll_retorno = false;
+        
+        
+        
+        return vll_retorno;
+    }
 }

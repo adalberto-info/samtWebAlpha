@@ -7,13 +7,22 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 template="/WEB-INF/templates/LayoutMaster.xhtml">
+
     <ui:define name="content">
+        <style>
+            .ui-growl{
+                position:fixed;
+                top:70px;
+                right:5px;
+                width:301px;
+            }
+        </style>
         <p:fieldset legend="Cadastrar Filiais">
             <br/>
             <p:tabView id="tbv1" dynamic="true" cache="true">
                 <p:tab title="Filial" id="cadFilial">
                     <h:form prependId="false" id="formCadFilial">
-                        <p:growl id="msg0"/>
+                        <p:growl id="msg0" />
 
                         <div class="ui-fluid">
                             <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
@@ -34,10 +43,10 @@
                                 <p:inputText id="dc_bairro" size="25" value="#{mbFilial.filial.dc_bairro}"/>
 
                                 <p:outputLabel for="dc_cidade" value="Cidade: "/>
-                                <p:inputText id="dc_cidade" size="30" value="#{mbFilial.filial.dc_cidade}"/>
+                                <p:inputText id="dc_cidade" size="30" value="#{mbFilial.filial.dc_cidade}" required="true" requiredMessage="O campo [Cidade] é obrigatório..."/>
 
                                 <p:outputLabel for="dc_uf" value="UF: "/>
-                                <p:inputText id="dc_uf" size="2" value="#{mbFilial.filial.dc_uf}"/>
+                                <p:inputText id="dc_uf" size="2" value="#{mbFilial.filial.dc_uf}" required="true" requiredMessage="O campo [UF] é obrigatório..."/>
 
                                 <p:outputLabel for="dc_responsavel" value="Responsável: "/>
                                 <p:inputText id="dc_responsavel" size="30" value="#{mbFilial.filial.dc_responsavel}"/>
@@ -45,15 +54,17 @@
                                 <p:outputLabel for="dc_telefone" value="Telefone: "/>
                                 <p:inputText id="dc_telefone" size="25" value="#{mbFilial.filial.dc_telefone}"/>
 
-                                <p:toolbar>
-                                    <p:toolbarGroup>
-                                        <p:commandButton value="Salvar" action="#{mbFilial.addFilial}" image="ui-icon ui-icon-disk" update="@form :formtable"/>
-                                        <p:commandButton value="Cancelar" actionListener="#{mbFilial.limpaFilial}" image="ui-icon ui-icon-close" update="@form"/>
-                                    </p:toolbarGroup>
-                                </p:toolbar>
-
                             </p:panelGrid>
+
                         </div>
+                        <br/>
+                        <p:toolbar>
+                            <p:toolbarGroup>
+                                <p:commandButton value="Salvar" action="#{mbFilial.addFilial}" image="ui-icon ui-icon-disk" update="@form :formtable"/>
+                                <p:commandButton value="Cancelar" actionListener="#{mbFilial.limpaFilial}" image="ui-icon ui-icon-close" update="@form"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+
                     </h:form>
                 </p:tab>
             </p:tabView>    
