@@ -61,4 +61,19 @@
         margin-left: 0;
     }
 }
+/* FOOTER */
+.aw-footer {
+    padding: 0 15px;
+    margin-top: 20px;
+    transition: margin-left 0.5s;
+}
 
+@media (min-width: 960px) {
+    .aw-footer {
+        margin-left: 220px;
+    }
+
+    .aw-footer.is-toggled {
+        margin-left: 0;
+    }
+}

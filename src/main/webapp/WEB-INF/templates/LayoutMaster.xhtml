@@ -1,41 +1,54 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<f:facet name="first">
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-	</f:facet>
+    <h:head>
+        <f:facet name="first">
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </f:facet>
+        <title><ui:insert name="titulo">Sistema de Administração de Multas</ui:insert></title>
 
-	<title>samtWebAlpha</title>
+        <h:outputStylesheet library="engebras" name="styles/custom.css" />
+        <h:outputStylesheet library="engebras" name="styles/layout.css" />
+        <h:outputStylesheet library="engebras" name="styles/components.css" />
 
-	<h:outputStylesheet library="engebras" name="styles/custom.css" />
-	<h:outputStylesheet library="engebras" name="styles/layout.css" />
-	<h:outputStylesheet library="engebras" name="styles/components.css" />
-	
-	<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
-	<h:outputScript target="body" library="engebras" name="javascripts/app.js" />
-</h:head>
+        <h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
+        <h:outputScript target="body" library="engebras" name="javascripts/app.js" />
+    </h:head>
 
-<h:body>
+    <h:body>
+        <p:ajaxStatus styleClass="ajax-status">
+            <f:facet name="start">
+                <h:graphicImage library="engebras" name="images/loading.gif"/>
+            </f:facet>
+            <f:facet name="complete">
+                <h:outputText value=""/>
+            </f:facet>
+        </p:ajaxStatus>
+        <header class="aw-topbar">
+            <h:graphicImage library="engebras" name="images/logo.png" />
 
-	<header class="aw-topbar">
-		<h:graphicImage library="engebras" name="images/logo.png" />
-		
-		<a href="#" class="aw-toggle  js-toggle"><i class="fa  fa-bars"></i></a>
-	</header>
-	
-	<aside class="aw-sidebar  js-sidebar">
-		<ui:include src="Menu.xhtml" />
-	</aside>
-	
-	<section class="aw-content  js-content">
-		<ui:insert name="content" />
-	</section>
-	
-</h:body>
+            <a href="#" class="aw-toggle  js-toggle"><i class="fa  fa-bars"></i></a>
+        </header>
 
+        <aside class="aw-sidebar  js-sidebar">
+            <ui:include src="Menu.xhtml" />
+        </aside>
+
+        <section class="aw-content  js-content">
+            <ui:insert name="content" />
+        </section>
+
+    </h:body>
+    <p:separator style="margin-top: 20px"/>
+    <footer>
+        <section class="aw-footer js-footer">
+        SAMT - Sistema de Administração de Multas - Copyright &#169; Engebras S/A - 2016
+        <a href="http://www.engebras.com.br" target="_blank">www.engebras.com.br</a>
+        </section>
+    </footer>
 </html>
