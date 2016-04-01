@@ -13,6 +13,7 @@ import br.com.engebras.util.HibernateUtil;
 import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.Filial;
+import java.util.ArrayList;
 import java.util.Map;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -32,8 +33,10 @@ public class MbFilial implements Serializable {
     private Filial filial = new Filial();
 
     private List<Filial> filiais;
+    private List ufs = new ArrayList<>();
 
     public MbFilial() {
+        geraListaUfs();
     }
 
     private InterfaceDAO<Filial> filialDAO() {
@@ -54,12 +57,10 @@ public class MbFilial implements Serializable {
 
         if (verificaDuplicidade(filial.getDc_filial()) == true) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Já existe uma filial cadastrada com o nome:" + filial.getDc_filial(), ""));
-        } else{ 
-            if (filial.getNr_codigo() == null || filial.getNr_codigo() == 0) {
-                insertFilial();
-            } else {
-                updateFilial();
-            }
+        } else if (filial.getNr_codigo() == null || filial.getNr_codigo() == 0) {
+            insertFilial();
+        } else {
+            updateFilial();
         }
         limpaFilial();
         return null;
@@ -105,12 +106,11 @@ public class MbFilial implements Serializable {
         Session session = FacesContextUtil.getRequestSession();
         vlc_sql = "select f.dc_filial from filial f where f.dc_filial = '" + nomeFilial + "' ";
 
-   //     consFiliais = session.createSQLQuery(vlc_sql).list();
-
+        //     consFiliais = session.createSQLQuery(vlc_sql).list();
         SQLQuery query = session.createSQLQuery(vlc_sql);
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
         consFiliais = query.list();
-   
+
         if (consFiliais.size() > 0) {
             vll_retorno = true;
         } else {
@@ -118,7 +118,7 @@ public class MbFilial implements Serializable {
         }
 
         for (Object oFilial : consFiliais) {
-            Map row = (Map)oFilial;
+            Map row = (Map) oFilial;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Filial selecionada: " + row.get("dc_filial"), ""));
         }
 
@@ -126,4 +126,34 @@ public class MbFilial implements Serializable {
 
         return vll_retorno;
     }
+
+    public void geraListaUfs() {
+        List listaSQL;
+        String vlc_sql;
+        vlc_sql = "select dc_uf from uf order by dc_uf";
+
+        Session session = FacesContextUtil.getRequestSession();
+
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+
+        if (listaSQL.size() > 0) {
+
+            for (Object oUf : listaSQL) {
+                Map row = (Map) oUf;
+                this.ufs.add(row.get("dc_uf"));
+            }
+        }
+
+    }
+
+    public List getUfs() {
+        return ufs;
+    }
+
+    public void setUfs(List ufs) {
+        this.ufs = ufs;
+    }
+
 }
