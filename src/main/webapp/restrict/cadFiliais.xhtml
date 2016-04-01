@@ -43,10 +43,17 @@
                                 <p:inputText id="dc_bairro" size="25" value="#{mbFilial.filial.dc_bairro}"/>
 
                                 <p:outputLabel for="dc_cidade" value="Cidade: "/>
-                                <p:inputText id="dc_cidade" size="30" value="#{mbFilial.filial.dc_cidade}" required="true" requiredMessage="O campo [Cidade] é obrigatório..."/>
+                                <p:inputText id="dc_cidade" size="30" value="#{mbFilial.filial.dc_cidade}" onkeyup="this.value = this.value.toUpperCase()" 
+                                             required ="true" requiredMessage="O campo [Cidade] é obrigatório..."/>
 
                                 <p:outputLabel for="dc_uf" value="UF: "/>
-                                <p:inputText id="dc_uf" size="2" value="#{mbFilial.filial.dc_uf}" required="true" requiredMessage="O campo [UF] é obrigatório..."/>
+
+                                <p:selectOneMenu id="dc_uf" value="#{mbFilial.filial.dc_uf}" style="width:150px" required ="true" requiredMessage="O campo [UF] é obrigatório...">
+                                    <f:selectItem itemLabel="Selecione a UF" itemValue="" />
+                                    <f:selectItem itemLabel="AC" itemValue="AC" />
+                                    <f:selectItem itemLabel="AL" itemValue="AL" />
+                                    <f:selectItem itemLabel="AP" itemValue="AP" />
+                                </p:selectOneMenu>
 
                                 <p:outputLabel for="dc_responsavel" value="Responsável: "/>
                                 <p:inputText id="dc_responsavel" size="30" value="#{mbFilial.filial.dc_responsavel}"/>
