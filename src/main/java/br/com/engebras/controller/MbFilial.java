@@ -7,12 +7,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import br.com.engebras.model.entities.Filial;
 import br.com.engebras.util.FacesContextUtil;
 import br.com.engebras.util.HibernateUtil;
 import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.Filial;
+import br.com.engebras.model.entities.Uf;
 import java.util.ArrayList;
 import java.util.Map;
 import org.hibernate.Criteria;
@@ -142,7 +142,7 @@ public class MbFilial implements Serializable {
 
             for (Object oUf : listaSQL) {
                 Map row = (Map) oUf;
-                this.ufs.add(row.get("dc_uf"));
+                this.ufs.add(new Uf(row.get("dc_uf"),""));
             }
         }
 

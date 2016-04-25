@@ -51,7 +51,7 @@
                                 <p:selectOneMenu id="dc_uf" value="#{mbFilial.filial.dc_uf}" style="width:150px" required ="true" requiredMessage="O campo [UF] é obrigatório...">
                                     <f:selectItem itemLabel="Selecione a UF" itemValue="" />
                                     <f:selectItems value="#{mbFilial.ufs}" var="listaUfs" 
-                                                   itemLabel="#{listaUfs.dc_uf}" itemValue="listaUfs.dc_uf"/>
+                                                   itemLabel="#{listaUfs.dc_uf}" itemValue="#{listaUfs}"/>
                                 </p:selectOneMenu>
 
                                 <p:outputLabel for="dc_responsavel" value="Responsável: "/>
