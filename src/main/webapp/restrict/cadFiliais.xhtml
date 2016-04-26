@@ -52,6 +52,7 @@
                                     <f:selectItem itemLabel="Selecione a UF" itemValue="" />
                                     <f:selectItems value="#{mbFilial.ufs}" var="listaUfs" 
                                                    itemLabel="#{listaUfs.dc_uf}" itemValue="#{listaUfs}"/>
+
                                 </p:selectOneMenu>
 
                                 <p:outputLabel for="dc_responsavel" value="Responsável: "/>
@@ -82,7 +83,7 @@
                              paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
                              {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15">
+                             rowsPerPageTemplate="5,10,15" paginatorPosition="bottom">
 
                     <f:facet name="header">Lista de Filiais</f:facet>
                     <p:column>

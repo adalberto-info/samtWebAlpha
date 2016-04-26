@@ -20,7 +20,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
-
 /**
  * @author Adalberto dt. criacao: 22/03/2016
  */
@@ -29,7 +28,7 @@ import org.hibernate.SQLQuery;
 public class MbFilial implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     private Filial filial = new Filial();
 
     private List<Filial> filiais;
@@ -54,7 +53,6 @@ public class MbFilial implements Serializable {
     }
 
     public String addFilial() {
-
         if (verificaDuplicidade(filial.getDc_filial()) == true) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Já existe uma filial cadastrada com o nome:" + filial.getDc_filial(), ""));
         } else if (filial.getNr_codigo() == null || filial.getNr_codigo() == 0) {
@@ -130,7 +128,7 @@ public class MbFilial implements Serializable {
     public void geraListaUfs() {
         List listaSQL;
         String vlc_sql;
-        vlc_sql = "select dc_uf from uf order by dc_uf";
+        vlc_sql = "select dc_uf, dc_descricao from uf order by dc_uf";
 
         Session session = FacesContextUtil.getRequestSession();
 
@@ -138,13 +136,7 @@ public class MbFilial implements Serializable {
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
         listaSQL = query.list();
 
-        if (listaSQL.size() > 0) {
-
-            for (Object oUf : listaSQL) {
-                Map row = (Map) oUf;
-                this.ufs.add(new Uf(row.get("dc_uf"),""));
-            }
-        }
+        this.ufs = listaSQL;
 
     }
 
