@@ -137,7 +137,6 @@ public class MbFilial implements Serializable {
         listaSQL = query.list();
 
         this.ufs = listaSQL;
-
     }
 
     public List getUfs() {
