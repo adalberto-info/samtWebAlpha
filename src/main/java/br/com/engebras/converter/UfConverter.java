@@ -2,11 +2,11 @@ package br.com.engebras.converter;
 
 import br.com.engebras.model.entities.Uf;
 import br.com.engebras.repository.Ufs;
+import br.com.engebras.util.cdi.CDIServiceLocator;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-
 
 
 
@@ -17,13 +17,18 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter(forClass = Uf.class)
 public class UfConverter implements Converter{
 
+    private Ufs ufs;
+    
+    public UfConverter(){
+        ufs = CDIServiceLocator.getBean(Ufs.class);
+    }
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         Uf retorno = null;
         
         if (value != null){
             String dc_uf = new String(value);
-            return Ufs.porDc_uf(dc_uf);
+            retorno = ufs.porDc_uf(dc_uf);
         }
         return retorno;
     }
