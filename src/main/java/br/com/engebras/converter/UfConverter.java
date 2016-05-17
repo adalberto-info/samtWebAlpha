@@ -1,45 +1,34 @@
 package br.com.engebras.converter;
 
-import br.com.engebras.model.entities.Uf;
-import br.com.engebras.repository.Ufs;
-import br.com.engebras.util.cdi.CDIServiceLocator;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-
-
+import br.com.engebras.model.entities.Uf;
 
 /**
  * @author Adalberto
  * dt. criação: 28/04/2016
  */
 @FacesConverter(forClass = Uf.class)
-public class UfConverter implements Converter{
-
-    private Ufs ufs;
-    
-    public UfConverter(){
-        ufs = CDIServiceLocator.getBean(Ufs.class);
-    }
+public class UfConverter implements Converter {
     @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        Uf retorno = null;
-        
-        if (value != null){
-            String dc_uf = new String(value);
-            retorno = ufs.porDc_uf(dc_uf);
+    public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {
+        if (value != null && !value.isEmpty()) {
+            return (Uf) uiComponent.getAttributes().get(value);
         }
-        return retorno;
+        return null;
     }
 
     @Override
-    public String getAsString(FacesContext context, UIComponent component, Object value) {
-        if (value != null){
-            return ((Uf) value).getDc_uf().toString();
+    public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object value) {
+        if (value instanceof Uf) {
+            Uf entity= (Uf) value;
+            if (entity != null && entity instanceof Uf && entity.getDc_uf() != null) {
+                uiComponent.getAttributes().put( entity.getDc_uf(), entity);
+                return entity.getDc_uf();
+            }
         }
-        
         return "";
     }
-    
 }

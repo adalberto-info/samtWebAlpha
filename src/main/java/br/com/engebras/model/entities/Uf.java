@@ -81,6 +81,9 @@ public class Uf implements Serializable {
         }
         return true;
     }
+    @Override
+    public String toString() {
+        return dc_uf;
     
-    
+    }
 }
