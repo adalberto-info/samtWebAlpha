@@ -25,7 +25,7 @@ public class UfConverter implements Converter {
         if (value instanceof Uf) {
             Uf entity= (Uf) value;
             if (entity != null && entity instanceof Uf && entity.getDc_uf() != null) {
-                uiComponent.getAttributes().put( entity.getDc_uf(), entity);
+                uiComponent.getAttributes().put(entity.getDc_uf(), entity);
                 return entity.getDc_uf();
             }
         }

@@ -83,7 +83,7 @@ public class Uf implements Serializable {
     }
     @Override
     public String toString() {
-        return dc_uf;
+        return this.dc_uf;
     
     }
 }

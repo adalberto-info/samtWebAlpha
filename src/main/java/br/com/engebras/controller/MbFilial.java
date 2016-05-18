@@ -33,10 +33,8 @@ public class MbFilial implements Serializable {
 
     private List<Filial> filiais;
     private List ufs = new ArrayList<>();
-    private Uf uf;
 
     public MbFilial() {
-        uf = new Uf();
         geraListaUfs();
     }
 
@@ -55,7 +53,6 @@ public class MbFilial implements Serializable {
     }
 
     public String addFilial() {
-         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "UF: " + filial.getDc_uf() + ".",""));
         if (verificaDuplicidade(filial.getDc_filial()) == true) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Já existe uma filial cadastrada com o nome:" + filial.getDc_filial(), ""));
         } else if (filial.getNr_codigo() == null || filial.getNr_codigo() == 0) {
@@ -149,17 +146,6 @@ public class MbFilial implements Serializable {
     public void setUfs(List ufs) {
         this.ufs = ufs;
     }
-    public String getUfEscolhida(){
-        return uf!=null && uf.getDc_uf() != null ? uf.toString():"Uf não escolhida";
-        
-    }
 
-    public Uf getUf() {
-        return uf;
-    }
-
-    public void setUf(Uf uf) {
-        this.uf = uf;
-    }
     
 }
