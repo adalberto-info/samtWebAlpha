@@ -68,6 +68,9 @@
                                 <p:commandButton value="Salvar" action="#{mbFilial.addFilial}" image="ui-icon ui-icon-disk" update="@form :formtable"/>
                                 <p:commandButton value="Cancelar" actionListener="#{mbFilial.limpaFilial}" image="ui-icon ui-icon-close" update="@form" process="@this"/>
                             </p:toolbarGroup>
+                            <p:toolbarGroup align="right">
+                                <p:button value="Pesquisa" outcome="/restrict/pesquisaFiliais.xhtml"  image="ui-icon-search" />
+                            </p:toolbarGroup>
                         </p:toolbar>
 
                     </h:form>
