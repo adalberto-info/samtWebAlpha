@@ -21,7 +21,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 /**
- * @author Adalberto dt. criacao: 22/03/2016
+ * @author Adalberto 
+ * dt. criacao: 22/03/2016
  */
 @ManagedBean(name = "mbFilial")
 @SessionScoped

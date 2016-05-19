@@ -20,6 +20,7 @@
         </style>
         <p:fieldset legend="Pesquisa Filiais">
             <br/>
+
             <p:tabView id="tbv1" dynamic="true" cache="true">
                 <p:tab title="Pesquisa Filial" id="PesquisaFilial">
                     <h:form prependId="false" id="formPesqFilial">
@@ -33,21 +34,21 @@
                                                      update="@form" />
                                 </p:toolbarGroup>
                                 <p:toolbarGroup align="right">
-                                    <p:button value="Novo" />
+                                    <p:button value="Novo" outcome="/restrict/cadFiliais.xhtml" image="ui-icon-document"/>
                                 </p:toolbarGroup>
                             </p:toolbar>
 
                             <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
                                 <p:outputLabel value="Nome Filial"/>
-
+                                <p:inputText size="40"/>
                             </p:panelGrid>
                         </div>
                         <br/>
-
                     </h:form>
                 </p:tab>
             </p:tabView>    
-
+            
+            
             <h:form id="formtable">
                 <p:growl id="msg1"/>
 
@@ -70,7 +71,7 @@
                             <h:outputText value="Ações"/>
                         </f:facet>
                         <p:commandButton value="Editar" image="ui-icon ui-icon-pencil"
-                                         process="@this" update=":tbv1:formCadFilial">
+                                         process="@this" >
                             <f:setPropertyActionListener target="#{mbFilial.filial}"
                                                          value="#{filial}"/>
                         </p:commandButton>
