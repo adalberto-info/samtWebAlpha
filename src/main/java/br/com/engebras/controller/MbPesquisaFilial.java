@@ -17,6 +17,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.criterion.Order;
 
 /**
  * @author Adalberto
@@ -64,7 +65,8 @@ public class MbPesquisaFilial implements Serializable {
         if (StringUtils.isNotBlank(filtro.getDc_filial())){
             criteria.add(Restrictions.like("dc_filial",filtro.getDc_filial(), MatchMode.ANYWHERE));
         }
-        
+     
+        return criteria.addOrder(Order.asc("dc_filial")).list();
     }
 
     
@@ -72,5 +74,8 @@ public class MbPesquisaFilial implements Serializable {
         return manager.find(Filial.class, nr_codigo);
     }
 
+    public List<Filial> porDc_filial(String dc_filial) {
+        return this.manager.createQuery("from filial where upper(dc_filial) like :dc_filial", Filial.class).setParameter("dc_filial", dc_filial.toUpperCase() + "%").getResultList();
+    }
     
 }
