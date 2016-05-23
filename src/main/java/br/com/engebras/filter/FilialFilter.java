@@ -1,4 +1,4 @@
-package br.com.engebras.repository.filter;
+package br.com.engebras.filter;
 
 import java.io.Serializable;
 

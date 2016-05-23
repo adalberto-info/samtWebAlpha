@@ -7,7 +7,7 @@ import javax.faces.bean.ViewScoped;
 import java.util.List;
 
 import br.com.engebras.model.entities.Filial;
-import br.com.engebras.repository.filter.FilialFilter;
+import br.com.engebras.filter.FilialFilter;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
@@ -58,6 +58,10 @@ public class MbPesquisaFilial implements Serializable {
         }
     }
 
+    public void pesquisar(){
+        filiaisFiltradas = filtrados(filtro);
+    }
+    
     public List<Filial> filtrados(FilialFilter filtro) {
         Session session = manager.unwrap(Session.class);
         Criteria criteria = session.createCriteria(Filial.class);
@@ -69,6 +73,17 @@ public class MbPesquisaFilial implements Serializable {
         return criteria.addOrder(Order.asc("dc_filial")).list();
     }
 
+    public FilialFilter getFiltro(){
+        return filtro;
+    }
+    
+    public Filial getFilialSelecionada(){
+        return filialSelecionada;
+    }
+    
+    public void setFilialSelecionada(Filial filialSelecionada){
+        this.filialSelecionada = filialSelecionada;
+    }
     
     public Filial porNr_codigo(int nr_codigo){
         return manager.find(Filial.class, nr_codigo);

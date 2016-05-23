@@ -25,7 +25,7 @@
                         <p:growl id="msg0" />
                             <p:toolbar>
                                 <p:toolbarGroup>
-                                    <p:commandButton value="Salvar" action="#{mbFilial.addFilial}" image="ui-icon ui-icon-disk" update="@form :formtable"/>
+                                    <p:commandButton value="Salvar" action="#{mbFilial.addFilial}" image="ui-icon ui-icon-disk" update="@form"/>
                                     <p:commandButton value="Cancelar" actionListener="#{mbFilial.limpaFilial}" image="ui-icon ui-icon-close" update="@form" process="@this"/>
                                 </p:toolbarGroup>
                                 <p:toolbarGroup align="right">
@@ -77,42 +77,6 @@
                 </p:tab>
             </p:tabView>    
 
-            <h:form id="formtable">
-                <p:growl id="msg1"/>
-
-                <p:dataTable id="idTabela" var="filial" value="#{mbFilial.filiais}"
-                             paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
-                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
-                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15" paginatorPosition="bottom">
-
-                    <f:facet name="header">Lista de Filiais</f:facet>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Nome"/>
-                        </f:facet>
-                        <h:outputText value="#{filial.dc_filial}"/>
-                    </p:column>
-
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Ações"/>
-                        </f:facet>
-                        <p:commandButton value="Editar" image="ui-icon ui-icon-pencil"
-                                         process="@this" update=":tbv1:formCadFilial">
-                            <f:setPropertyActionListener target="#{mbFilial.filial}"
-                                                         value="#{filial}"/>
-                        </p:commandButton>
-                        <p:commandButton value="Remover" action="#{mbFilial.deleteFilial}"
-                                         image="ui-icon ui-icon-close" update="@form">
-                            <f:setPropertyActionListener target="#{mbFilial.filial}"
-                                                         value="#{filial}"/>
-                        </p:commandButton>
-
-                    </p:column>
-
-                </p:dataTable>
-            </h:form>
 
         </p:fieldset>
 

@@ -30,7 +30,7 @@
 
                             <p:toolbar style="margin-top: 20px">
                                 <p:toolbarGroup>
-                                    <p:commandButton value="Pesquisar" 
+                                    <p:commandButton value="Pesquisar" action="#{mbPesquisaFilial.pesquisar()}"
                                                      update="@form" />
                                 </p:toolbarGroup>
                                 <p:toolbarGroup align="right">
@@ -40,7 +40,7 @@
 
                             <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
                                 <p:outputLabel value="Nome Filial"/>
-                                <p:inputText size="40"/>
+                                <p:inputText id="dc_filial" size="40" value="#{mbPesquisaFilial.filtro.dc_filial}"/>
                             </p:panelGrid>
                         </div>
                         <br/>
@@ -52,7 +52,7 @@
             <h:form id="formtable">
                 <p:growl id="msg1"/>
 
-                <p:dataTable id="idTabela" var="filial" value="#{mbFilial.filiais}"
+                <p:dataTable id="idTabela" var="filial" value="#{mbPesquisaFilial.filialSelecionada}" 
                              paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
                              {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -70,20 +70,27 @@
                         <f:facet name="header">
                             <h:outputText value="Ações"/>
                         </f:facet>
-                        <p:commandButton value="Editar" image="ui-icon ui-icon-pencil"
-                                         process="@this" >
-                            <f:setPropertyActionListener target="#{mbFilial.filial}"
-                                                         value="#{filial}"/>
-                        </p:commandButton>
+                        <p:button outcome = "/restrict/cadFiliais.xhtml" title="Editar" icon="ui-icon ui-icon-pencil">
+                                <f:param name="filial" value="#{filial.nr_codigo}" />
+                        </p:button>
                         <p:commandButton value="Remover" action="#{mbFilial.deleteFilial}"
-                                         image="ui-icon ui-icon-close" update="@form">
-                            <f:setPropertyActionListener target="#{mbFilial.filial}"
+                                         image="ui-icon ui-icon-close" update="@form" process="this">
+                            <f:setPropertyActionListener target="#{mbPesquisaFilial.filialSelecionada}"
                                                          value="#{filial}"/>
                         </p:commandButton>
 
                     </p:column>
 
                 </p:dataTable>
+
+               	<p:confirmDialog header="Exclusão de filial" 
+                                 message="Tem certeza que deseja excluir a filial #{mbPesquisaFilial.filialSelecionada.dc_filial}?"
+	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();"
+                                         action="#{mbPesquisaFilial.remover(filial)}" process="@this"
+	    			update=":formtable:idTabela" />
+	    	</p:confirmDialog>
             </h:form>
 
         </p:fieldset>
