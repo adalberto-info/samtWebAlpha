@@ -31,7 +31,7 @@
                             <p:toolbar style="margin-top: 20px">
                                 <p:toolbarGroup>
                                     <p:commandButton value="Pesquisar" action="#{mbPesquisaFilial.pesquisar()}"
-                                                     update="@form" />
+                                                     update="@form :formtable" />
                                 </p:toolbarGroup>
                                 <p:toolbarGroup align="right">
                                     <p:button value="Novo" outcome="/restrict/cadFiliais.xhtml" image="ui-icon-document"/>
@@ -52,7 +52,7 @@
             <h:form id="formtable">
                 <p:growl id="msg1"/>
 
-                <p:dataTable id="idTabela" var="filial" value="#{mbPesquisaFilial.filialSelecionada}" 
+                <p:dataTable id="idTabela" var="filial" value="#{mbPesquisaFilial.filiaisFiltradas}" 
                              paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
                              {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -74,7 +74,7 @@
                                 <f:param name="filial" value="#{filial.nr_codigo}" />
                         </p:button>
                         <p:commandButton value="Remover" action="#{mbFilial.deleteFilial}"
-                                         image="ui-icon ui-icon-close" update="@form" process="this">
+                                         image="ui-icon ui-icon-close" update="@form" process="@this">
                             <f:setPropertyActionListener target="#{mbPesquisaFilial.filialSelecionada}"
                                                          value="#{filial}"/>
                         </p:commandButton>
