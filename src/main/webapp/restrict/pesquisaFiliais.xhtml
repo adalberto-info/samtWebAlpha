@@ -73,12 +73,11 @@
                         <p:button outcome = "/restrict/cadFiliais.xhtml" title="Editar" icon="ui-icon ui-icon-pencil">
                                 <f:param name="filial" value="#{filial.nr_codigo}" />
                         </p:button>
-                        <p:commandButton value="Remover" action="#{mbFilial.deleteFilial}"
-                                         image="ui-icon ui-icon-close" update="@form" process="@this">
-                            <f:setPropertyActionListener target="#{mbPesquisaFilial.filialSelecionada}"
+                        <p:commandButton value="Remover" action="#{mbPesquisaFilial.deleteFilial}"
+                                         image="ui-icon ui-icon-close" update="@form">
+                            <f:setPropertyActionListener target="#{mbPesquisaFilial.filial}"
                                                          value="#{filial}"/>
                         </p:commandButton>
-
                     </p:column>
 
                 </p:dataTable>

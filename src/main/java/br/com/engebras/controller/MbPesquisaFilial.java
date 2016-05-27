@@ -8,6 +8,8 @@ import java.util.List;
 
 import br.com.engebras.model.entities.Filial;
 import br.com.engebras.filter.FilialFilter;
+import br.com.engebras.model.dao.HibernateDAO;
+import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.util.FacesContextUtil;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -41,8 +43,15 @@ public class MbPesquisaFilial implements Serializable {
 
     private Filial filialSelecionada;
     
+    private Filial filial = new Filial();
+    
     public MbPesquisaFilial(){
         filtro = new FilialFilter();
+    }
+
+    private InterfaceDAO<Filial> filialDAO() {
+        InterfaceDAO<Filial> filialDAO = new HibernateDAO<Filial>(Filial.class, FacesContextUtil.getRequestSession());
+        return filialDAO;
     }
 
     
@@ -60,6 +69,12 @@ public class MbPesquisaFilial implements Serializable {
         }
     }
 
+    public void deleteFilial() {
+        filialDAO().remove(filial);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso!!!", ""));
+    }
+
+    
     public void pesquisar(){
         filiaisFiltradas = filtrados(filtro);
     }
@@ -103,6 +118,14 @@ public class MbPesquisaFilial implements Serializable {
 
     public void setFiliaisFiltradas(List<Filial> filiaisFiltradas) {
         this.filiaisFiltradas = filiaisFiltradas;
+    }
+
+    public Filial getFilial() {
+        return filial;
+    }
+
+    public void setFilial(Filial filial) {
+        this.filial = filial;
     }
  
         

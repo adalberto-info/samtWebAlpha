@@ -245,7 +245,14 @@
             <artifactId>hibernate-c3p0</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
-            
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.0.1.Final</version>
+            <scope>compile</scope>
+	</dependency>
+    
         <!-- ############### C3P0 ################## -->
         <dependency>
             <artifactId>c3p0</artifactId>
