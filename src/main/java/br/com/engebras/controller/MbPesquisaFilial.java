@@ -58,19 +58,10 @@ public class MbPesquisaFilial implements Serializable {
     public Filial guardar(Filial filial){
         return manager.merge(filial);
     }
-    
-    public void remover(Filial filial){
-        try{
-            filial = porNr_codigo(filial.getNr_codigo());
-            manager.remove(filial);
-            manager.flush();
-        } catch (PersistenceException e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Filial não pode ser excluída.", ""));
-        }
-    }
 
     public void deleteFilial() {
         filialDAO().remove(filial);
+        pesquisar();
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso!!!", ""));
     }
 

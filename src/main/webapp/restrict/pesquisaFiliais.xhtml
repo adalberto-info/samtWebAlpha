@@ -74,7 +74,7 @@
                                 <f:param name="filial" value="#{filial.nr_codigo}" />
                         </p:button>
                         <p:commandButton value="Remover" action="#{mbPesquisaFilial.deleteFilial}"
-                                         image="ui-icon ui-icon-close" update="@form">
+                                         image="ui-icon ui-icon-close" update="@form :formtable">
                             <f:setPropertyActionListener target="#{mbPesquisaFilial.filial}"
                                                          value="#{filial}"/>
                         </p:commandButton>
