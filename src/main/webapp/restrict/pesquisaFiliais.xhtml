@@ -70,9 +70,12 @@
                         <f:facet name="header">
                             <h:outputText value="Ações"/>
                         </f:facet>
-                        <p:button outcome = "/restrict/cadFiliais.xhtml" title="Editar" icon="ui-icon ui-icon-pencil">
-                                <f:param name="filial" value="#{filial.nr_codigo}" />
-                        </p:button>
+
+                        <p:commandButton value="Editar" action="#{mbFilial.editarFilial(filial)}"
+                                         image="ui-icon ui-icon-pencil">
+                            <f:setPropertyActionListener target="#{mbPesquisaFilial.filial}" value="#{filial}"/>
+                        </p:commandButton> 
+                        
                         <p:commandButton value="Remover" action="#{mbPesquisaFilial.deleteFilial}"
                                          image="ui-icon ui-icon-close" update="@form :formtable">
                             <f:setPropertyActionListener target="#{mbPesquisaFilial.filial}"

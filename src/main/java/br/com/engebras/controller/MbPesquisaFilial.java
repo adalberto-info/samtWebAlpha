@@ -53,11 +53,7 @@ public class MbPesquisaFilial implements Serializable {
         InterfaceDAO<Filial> filialDAO = new HibernateDAO<Filial>(Filial.class, FacesContextUtil.getRequestSession());
         return filialDAO;
     }
-
     
-    public Filial guardar(Filial filial){
-        return manager.merge(filial);
-    }
 
     public void deleteFilial() {
         filialDAO().remove(filial);

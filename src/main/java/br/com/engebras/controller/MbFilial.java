@@ -53,6 +53,11 @@ public class MbFilial implements Serializable {
         return "/restrict/cadFiliais.faces";
     }
 
+    public String editarFilial(Filial filial){
+        this.filial = filial; 
+        return "/restrict/cadFiliais.faces";
+    }
+    
     public String addFilial() {
         if (verificaDuplicidade(filial.getDc_filial()) == true) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Já existe uma filial cadastrada com o nome:" + filial.getDc_filial(), ""));
@@ -104,7 +109,9 @@ public class MbFilial implements Serializable {
 
         Session session = FacesContextUtil.getRequestSession();
         vlc_sql = "select f.dc_filial from filial f where f.dc_filial = '" + nomeFilial + "' ";
-
+        if (filial.getNr_codigo() != null && filial.getNr_codigo() != null)
+            vlc_sql = vlc_sql + "and f.nr_codigo <> " + filial.getNr_codigo();
+        
         //     consFiliais = session.createSQLQuery(vlc_sql).list();
         SQLQuery query = session.createSQLQuery(vlc_sql);
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
@@ -118,7 +125,6 @@ public class MbFilial implements Serializable {
 
         for (Object oFilial : consFiliais) {
             Map row = (Map) oFilial;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Filial selecionada: " + row.get("dc_filial"), ""));
         }
 
         consFiliais = null;
