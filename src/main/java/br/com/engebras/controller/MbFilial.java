@@ -55,10 +55,10 @@ public class MbFilial implements Serializable {
 
     public String editarFilial(Filial filial){
         this.filial = filial; 
-        return "/restrict/cadFiliais.faces";
+        return editFilial();
     }
     
-    public String addFilial() {
+    public void addFilial() {
         if (verificaDuplicidade(filial.getDc_filial()) == true) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Já existe uma filial cadastrada com o nome:" + filial.getDc_filial(), ""));
         } else if (filial.getNr_codigo() == null || filial.getNr_codigo() == 0) {
@@ -67,7 +67,6 @@ public class MbFilial implements Serializable {
             updateFilial();
         }
         limpaFilial();
-        return null;
     }
 
     public void insertFilial() {
@@ -109,7 +108,7 @@ public class MbFilial implements Serializable {
 
         Session session = FacesContextUtil.getRequestSession();
         vlc_sql = "select f.dc_filial from filial f where f.dc_filial = '" + nomeFilial + "' ";
-        if (filial.getNr_codigo() != null && filial.getNr_codigo() != null)
+        if (filial.getNr_codigo() != null && filial.getNr_codigo() != 0)
             vlc_sql = vlc_sql + "and f.nr_codigo <> " + filial.getNr_codigo();
         
         //     consFiliais = session.createSQLQuery(vlc_sql).list();
