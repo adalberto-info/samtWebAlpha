@@ -29,7 +29,7 @@
                                 <p:commandButton value="Cancelar" actionListener="#{mbUsuario.limpaUsuario}" image="ui-icon ui-icon-close" update="@form" process="@this"/>
                             </p:toolbarGroup>
                             <p:toolbarGroup align="right">
-                                <p:button value="Pesquisa" outcome="/restrict/pesquisaUsuarios.xhtml"  image="ui-icon-search" />
+                                <p:button value="Pesquisa" image="ui-icon-search" />
                             </p:toolbarGroup>
                         </p:toolbar>
 
@@ -65,7 +65,7 @@
                                 <p:password id="dc_confirmaSenha" size="10" value="#{mbUsuario.dc_confirmaSenha}"/>
                                 
                                 <p:outputLabel for="lg_ativo" value="Ativo ? "/>
-                                <p:selectBooleanCheckbox value="#{mbUsuario.usuario.lg_ativo}"
+                                <p:selectBooleanCheckbox id="lg_ativo" value="#{mbUsuario.usuario.lg_ativo}"/>
 
                             </p:panelGrid>
                         </div>

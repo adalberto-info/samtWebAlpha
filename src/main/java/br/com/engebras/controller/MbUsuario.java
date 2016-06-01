@@ -35,6 +35,7 @@ public class MbUsuario implements Serializable {
     private Usuario usuario = new Usuario(); 
 
     private List<Usuario> usuarios; 
+    private String dc_confirmaSenha = ""; 
     
     public MbUsuario(){
         
