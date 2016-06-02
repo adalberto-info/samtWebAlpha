@@ -50,8 +50,10 @@
                                 <p:inputText id="dc_cargo" size="30" value="#{mbUsuario.usuario.dc_cargo}"/>
 
                                 <p:outputLabel for="nr_codFilial" value="Filial: "/>
-                                <p:selectOneMenu id="nr_codFilial" value="mbUsuario.usuario.nr_codFilial" style="width:150px">
-                                    <f:selectItem itemLabel="Selecione a filial" itemValue=""/>
+                                <p:selectOneMenu id="nr_codFilial" value="#{mbUsuario.usuario.nr_codFilial}" style="width:150px">
+                                    <f:selectItem itemLabel="Selecione a filial" itemValue="0"/>
+                                    <f:selectItems value="#{mbUsuario.filiais}" var="listaFiliais"
+                                                   itemLabel="#{listaFiliais.dc_filial}" itemValue="#{listaFiliais.nr_codigo}"/>
                                 </p:selectOneMenu>
 
                                 <p:outputLabel for="nr_nivel" value="Nível: "/>

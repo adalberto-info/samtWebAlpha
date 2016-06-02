@@ -18,6 +18,7 @@ import br.com.engebras.util.HibernateUtil;
 import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.Usuario;
+import br.com.engebras.model.entities.Filial;
 import java.util.ArrayList;
 import java.util.Map;
 import org.hibernate.Criteria;
@@ -33,12 +34,12 @@ public class MbUsuario implements Serializable {
     private static final long servialVersionUID = 1L; 
     
     private Usuario usuario = new Usuario(); 
-
     private List<Usuario> usuarios; 
     private String dc_confirmaSenha = ""; 
+    private List filiais = new ArrayList<>();
     
     public MbUsuario(){
-        
+        geraListaFiliais();
     }
     
     private InterfaceDAO<Usuario> usuarioDAO() {
@@ -52,7 +53,7 @@ public class MbUsuario implements Serializable {
     }
     
     public String editUsuario(){
-        return "/restric/cadUsuario.faces"; 
+        return "/restrict/cadUsuario.faces"; 
     }
     
     public String editarUsuario(Usuario usuario){
@@ -89,6 +90,7 @@ public class MbUsuario implements Serializable {
     }
 
     public List<Usuario> getUsuarios() {
+        usuarios = usuarioDAO().getEntities();
         return usuarios;
     }
 
@@ -126,4 +128,38 @@ public class MbUsuario implements Serializable {
         return vll_retorno; 
         
     }
+    
+    public void geraListaFiliais(){
+        List listaSQL; 
+        String vlc_sql; 
+        
+        vlc_sql = "select dc_filial, nr_codigo from filial order by dc_filial "; 
+        
+        Session session = FacesContextUtil.getRequestSession(); 
+        
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+        
+        this.filiais = listaSQL; 
+    }
+
+    public String getDc_confirmaSenha() {
+        return dc_confirmaSenha;
+    }
+
+    public void setDc_confirmaSenha(String dc_confirmaSenha) {
+        this.dc_confirmaSenha = dc_confirmaSenha;
+    }
+
+    public List getFiliais() {
+        return filiais;
+    }
+
+    public void setFiliais(List filiais) {
+        this.filiais = filiais;
+    }
+    
+    
+    
 }
