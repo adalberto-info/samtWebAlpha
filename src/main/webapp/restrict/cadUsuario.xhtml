@@ -53,7 +53,7 @@
                                 <p:selectOneMenu id="nr_codFilial" value="#{mbUsuario.usuario.nr_codFilial}" style="width:150px">
                                     <f:selectItem itemLabel="Selecione a filial" itemValue="0"/>
                                     <f:selectItems value="#{mbUsuario.filiais}" var="listaFiliais"
-                                                   itemLabel="#{listaFiliais.dc_filial}" itemValue="#{listaFiliais.nr_codigo}"/>
+                                                   itemLabel="#{listaFiliais.dc_filial}" itemValue="#{listaFiliais.nr_codigo.toString()}"/>
                                 </p:selectOneMenu>
 
                                 <p:outputLabel for="nr_nivel" value="Nível: "/>
@@ -67,7 +67,7 @@
                                 <p:password id="dc_confirmaSenha" size="10" value="#{mbUsuario.dc_confirmaSenha}"/>
                                 
                                 <p:outputLabel for="lg_ativo" value="Ativo ? "/>
-                                <p:selectBooleanCheckbox id="lg_ativo" value="#{mbUsuario.usuario.lg_ativo}"/>
+                                <p:selectBooleanCheckbox id="lg_ativo" value="#{mbUsuario.lg_ativo}"/>
 
                             </p:panelGrid>
                         </div>

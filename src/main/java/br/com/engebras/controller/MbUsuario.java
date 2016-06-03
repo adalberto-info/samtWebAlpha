@@ -27,7 +27,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 
-@ManagedBean(name="mbusuario")
+@ManagedBean(name="mbUsuario")
 @SessionScoped
 public class MbUsuario implements Serializable {
     
@@ -37,8 +37,9 @@ public class MbUsuario implements Serializable {
     private List<Usuario> usuarios; 
     private String dc_confirmaSenha = ""; 
     private List filiais = new ArrayList<>();
+    boolean lg_ativo = true; 
     
-    public MbUsuario(){
+    public MbUsuario() {
         geraListaFiliais();
     }
     
@@ -132,7 +133,7 @@ public class MbUsuario implements Serializable {
     public void geraListaFiliais(){
         List listaSQL; 
         String vlc_sql; 
-        
+
         vlc_sql = "select dc_filial, nr_codigo from filial order by dc_filial "; 
         
         Session session = FacesContextUtil.getRequestSession(); 
@@ -158,6 +159,14 @@ public class MbUsuario implements Serializable {
 
     public void setFiliais(List filiais) {
         this.filiais = filiais;
+    }
+
+    public boolean isLg_ativo() {
+        return lg_ativo;
+    }
+
+    public void setLg_ativo(boolean lg_ativo) {
+        this.lg_ativo = lg_ativo;
     }
     
     

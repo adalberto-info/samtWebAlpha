@@ -27,9 +27,9 @@ public class FilialConverter implements Converter {
     public String getAsString(FacesContext facescontext, UIComponent uiComponent, Object value) {
         if (value instanceof Filial) {
             Filial entity = (Filial) value; 
-            if (entity != null && entity instanceof Filial && entity.getDc_filial() != null){
-                uiComponent.getAttributes().put(entity.getDc_filial(), entity); 
-                return entity.getDc_filial();
+            if (entity != null && entity instanceof Filial && entity.getNr_codigo() != null){
+                uiComponent.getAttributes().put(entity.getNr_codigo().toString(), entity); 
+                return entity.getNr_codigo().toString();
             }
         }
         return "";

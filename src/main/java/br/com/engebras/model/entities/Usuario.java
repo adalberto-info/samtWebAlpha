@@ -34,7 +34,7 @@ public class Usuario implements Serializable {
     @Column(name="nr_codigo", length=6)
     private Integer nr_codigo; 
     @Column(name="dc_nomeUsuario", nullable=false, length=30)
-    private String dc_nomeUusario; 
+    private String dc_nomeUsuario; 
     @Column(name="dc_login", nullable=false, length=25)
     private String dc_login; 
     @Column(name="dc_senha", nullable=false, length=10)
@@ -56,13 +56,14 @@ public class Usuario implements Serializable {
         this.nr_codigo = nr_codigo;
     }
 
-    public String getDc_nomeUusario() {
-        return dc_nomeUusario;
+    public String getDc_nomeUsuario() {
+        return dc_nomeUsuario;
     }
 
-    public void setDc_nomeUusario(String dc_nomeUusario) {
-        this.dc_nomeUusario = dc_nomeUusario;
+    public void setDc_nomeUsuario(String dc_nomeUsuario) {
+        this.dc_nomeUsuario = dc_nomeUsuario;
     }
+
 
     public String getDc_login() {
         return dc_login;
