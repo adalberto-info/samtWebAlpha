@@ -35,6 +35,7 @@ dt. criação: 23/03/2016
         <property name="c3p0.idle_test_period">300</property>
         
         <!-- LISTA DE ENTIDADES -->
-        <mapping class="br.com.engebras.model.entities.Filial"/>        
+        <mapping class="br.com.engebras.model.entities.Filial"/>      
+        <mapping class="br.com.engebras.model.entities.Usuario"/>  
     </session-factory>
 </hibernate-configuration>

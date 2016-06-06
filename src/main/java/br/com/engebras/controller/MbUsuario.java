@@ -37,7 +37,7 @@ public class MbUsuario implements Serializable {
     private List<Usuario> usuarios; 
     private String dc_confirmaSenha = ""; 
     private List filiais = new ArrayList<>();
-    boolean lg_ativo = true; 
+    private boolean lg_ativo ; 
     
     public MbUsuario() {
         geraListaFiliais();
@@ -63,9 +63,13 @@ public class MbUsuario implements Serializable {
     }
     
     public void addUsuario(){
+        if (lg_ativo == true)
+            usuario.setLg_ativo(1);
+        else
+            usuario.setLg_ativo(0);
         if (verificaDuplicidade(usuario.getDc_login())== true){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Já existe um usuário cadastrado com o login: " + usuario.getDc_login(),""));
-        }else if(usuario.getNr_codigo() == null && usuario.getNr_codigo() == 0){
+        }else if(usuario.getNr_codigo() == null || usuario.getNr_codigo() == 0){
             insertUsuario();
         }else {
             updateUsuario();

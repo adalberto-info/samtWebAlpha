@@ -57,9 +57,13 @@
                                 </p:selectOneMenu>
 
                                 <p:outputLabel for="nr_nivel" value="Nível: "/>
-                                <p:inputText id="nr_nivel" size="2" value="#{mbUsuario.usuario.nr_nivel}"  
-                                             required ="true" requiredMessage="O campo [Nível] é obrigatório..."/>
-
+                                <p:selectOneMenu id="nr_nivel" value="#{mbUsuario.usuario.nr_nivel}" style="width:150px" required="true" requiredMessage="O campo [Nível] é obrigatório...">
+                                    <f:selectItem itemLabel="Selecione o nível" itemValue="0"/>
+                                    <f:selectItem itemLabel="Administrador" itemValue ="1"/>
+                                    <f:selectItem itemLabel="Digitador" itemValue="2"/>
+                                    <f:selectItem itemLabel="Operador" itemValue="3"/>
+                                </p:selectOneMenu>
+                                
                                 <p:outputLabel for="dc_senha" value="Senha: "/>
                                 <p:password id="dc_senha" size="10" value="#{mbUsuario.usuario.dc_senha}"/>
 
