@@ -59,6 +59,12 @@ public class MbUsuario implements Serializable {
     
     public String editarUsuario(Usuario usuario){
         this.usuario = usuario; 
+//        if (this.usuario.getLg_ativo() == 1)
+//            this.lg_ativo = true;
+//        else
+//            this.lg_ativo = false;
+
+//        this.dc_confirmaSenha = this.usuario.getDc_senha();
         return editUsuario();
     }
     
