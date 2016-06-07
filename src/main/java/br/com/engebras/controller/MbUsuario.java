@@ -57,14 +57,9 @@ public class MbUsuario implements Serializable {
         return "/restrict/cadUsuario.faces"; 
     }
     
-    public String editarUsuario(Usuario usuario){
+    public String editarUsuario(Usuario usuario, Integer lg_ativo){
         this.usuario = usuario; 
-//        if (this.usuario.getLg_ativo() == 1)
-//            this.lg_ativo = true;
-//        else
-//            this.lg_ativo = false;
-
-//        this.dc_confirmaSenha = this.usuario.getDc_senha();
+        this.lg_ativo = (lg_ativo == 1 ? true:false); 
         return editUsuario();
     }
     
