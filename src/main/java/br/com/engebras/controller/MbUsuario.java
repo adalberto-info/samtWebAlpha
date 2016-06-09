@@ -40,6 +40,7 @@ public class MbUsuario implements Serializable {
     private boolean lg_ativo ; 
     
     public MbUsuario() {
+        limpaUsuario();
         geraListaFiliais();
     }
     
@@ -64,12 +65,18 @@ public class MbUsuario implements Serializable {
     }
     
     public void addUsuario(){
+        
+        if (usuario.getNr_nivel()==0){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informe o nível do usuário!",""));
+            return;
+        }
         if (lg_ativo == true)
             usuario.setLg_ativo(1);
         else
             usuario.setLg_ativo(0);
         if (verificaDuplicidade(usuario.getDc_login())== true){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Já existe um usuário cadastrado com o login: " + usuario.getDc_login(),""));
+            return;
         }else if(usuario.getNr_codigo() == null || usuario.getNr_codigo() == 0){
             insertUsuario();
         }else {
