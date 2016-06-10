@@ -53,8 +53,8 @@ public class MbFilial implements Serializable {
         return "/restrict/cadFilial.faces";
     }
 
-    public String editarFilial(Filial filial){
-        this.filial = filial; 
+    public String editarFilial(Integer nr_codigo){
+        this.filial = porNr_codigo(nr_codigo); 
         return editFilial();
     }
     
@@ -153,5 +153,9 @@ public class MbFilial implements Serializable {
         this.ufs = ufs;
     }
 
+    public Filial porNr_codigo(Integer nr_codigo) {
+
+        return filialDAO().getEntity(nr_codigo);
+    }
     
 }

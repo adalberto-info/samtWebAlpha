@@ -27,23 +27,25 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 
+
 @ManagedBean(name="mbUsuario")
 @SessionScoped
 public class MbUsuario implements Serializable {
-    
-    private static final long servialVersionUID = 1L; 
-    
-    private Usuario usuario = new Usuario(); 
-    private List<Usuario> usuarios; 
-    private String dc_confirmaSenha = ""; 
+
+    private static final long servialVersionUID = 1L;
+
+    private Usuario usuario = new Usuario();
+    private List<Usuario> usuarios;
+    private String dc_confirmaSenha = "";
     private List filiais = new ArrayList<>();
-    private boolean lg_ativo ; 
-    
+    private boolean lg_ativo ;
+
+
     public MbUsuario() {
         limpaUsuario();
         geraListaFiliais();
     }
-    
+
     private InterfaceDAO<Usuario> usuarioDAO() {
     InterfaceDAO<Usuario> usuarioDAO = new HibernateDAO<Usuario>(Usuario.class, FacesContextUtil.getRequestSession());
     return usuarioDAO;
@@ -53,19 +55,20 @@ public class MbUsuario implements Serializable {
         usuario = new Usuario();
         return editUsuario();
     }
-    
+
     public String editUsuario(){
-        return "/restrict/cadUsuario.faces"; 
+        return "/restrict/cadUsuario.faces";
     }
-    
-    public String editarUsuario(Usuario usuario, Integer lg_ativo){
-        this.usuario = usuario; 
-        this.lg_ativo = (lg_ativo == 1 ? true:false); 
+
+    public String editarUsuario(Integer nr_codigo){
+        this.usuario = porNr_codigo(nr_codigo);
+        this.lg_ativo = (usuario.getLg_ativo() == 1 ? true:false);
         return editUsuario();
     }
-    
+   
+
     public void addUsuario(){
-        
+
         if (usuario.getNr_nivel()==0){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informe o nível do usuário!",""));
             return;
@@ -84,12 +87,12 @@ public class MbUsuario implements Serializable {
         }
         limpaUsuario();
     }
-    
+
     public void insertUsuario(){
-        usuarioDAO().save(usuario); 
+        usuarioDAO().save(usuario);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso!",""));
     }
-    
+
     public void updateUsuario(){
         usuarioDAO().update(usuario);
     }
@@ -112,49 +115,49 @@ public class MbUsuario implements Serializable {
     }
 
     private boolean verificaDuplicidade(String dc_login){
-        boolean vll_retorno = false; 
-        
-        String vlc_sql = ""; 
-        
+        boolean vll_retorno = false;
+
+        String vlc_sql = "";
+
         List consUsuarios;
-        
-        Session session = FacesContextUtil.getRequestSession(); 
-        vlc_sql = "select u.dc_login from usuario u where u.dc_login = '" + dc_login + "' "; 
+
+        Session session = FacesContextUtil.getRequestSession();
+        vlc_sql = "select u.dc_login from usuario u where u.dc_login = '" + dc_login + "' ";
         if (usuario.getNr_codigo() != null && usuario.getNr_codigo() != 0 )
             vlc_sql = vlc_sql + "and u.nr_codigo <> " + usuario.getNr_codigo();
-        
-        SQLQuery query = session.createSQLQuery(vlc_sql); 
-        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP); 
-        consUsuarios = query.list(); 
-        
+
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        consUsuarios = query.list();
+
         if (consUsuarios.size() > 0){
-            vll_retorno = true; 
-        }else 
-            vll_retorno = false; 
-        
+            vll_retorno = true;
+        }else
+            vll_retorno = false;
+
         for (Object oUsuario : consUsuarios){
-            Map row = (Map) oUsuario; 
+            Map row = (Map) oUsuario;
         }
-        
-        consUsuarios = null; 
 
-        return vll_retorno; 
-        
+        consUsuarios = null;
+
+        return vll_retorno;
+
     }
-    
-    public void geraListaFiliais(){
-        List listaSQL; 
-        String vlc_sql; 
 
-        vlc_sql = "select dc_filial, nr_codigo from filial order by dc_filial "; 
-        
-        Session session = FacesContextUtil.getRequestSession(); 
-        
+    public void geraListaFiliais(){
+        List listaSQL;
+        String vlc_sql;
+
+        vlc_sql = "select dc_filial, nr_codigo from filial order by dc_filial ";
+
+        Session session = FacesContextUtil.getRequestSession();
+
         SQLQuery query = session.createSQLQuery(vlc_sql);
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
         listaSQL = query.list();
-        
-        this.filiais = listaSQL; 
+
+        this.filiais = listaSQL;
     }
 
     public String getDc_confirmaSenha() {
@@ -180,7 +183,11 @@ public class MbUsuario implements Serializable {
     public void setLg_ativo(boolean lg_ativo) {
         this.lg_ativo = lg_ativo;
     }
-    
-    
-    
+
+    public Usuario porNr_codigo(Integer nr_codigo) {
+
+        return usuarioDAO().getEntity(nr_codigo);
+    }
+
+
 }

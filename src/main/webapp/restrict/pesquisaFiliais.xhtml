@@ -71,7 +71,7 @@
                             <h:outputText value="Ações"/>
                         </f:facet>
 
-                        <p:commandButton value="Editar" action="#{mbFilial.editarFilial(filial)}"
+                        <p:commandButton value="Editar" action="#{mbFilial.editarFilial(filial.nr_codigo)}"
                                          image="ui-icon ui-icon-pencil">
                             <f:setPropertyActionListener target="#{mbPesquisaFilial.filial}" value="#{filial}"/>
                         </p:commandButton> 
