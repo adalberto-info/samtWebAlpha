@@ -37,5 +37,6 @@ dt. criação: 23/03/2016
         <!-- LISTA DE ENTIDADES -->
         <mapping class="br.com.engebras.model.entities.Filial"/>      
         <mapping class="br.com.engebras.model.entities.Usuario"/>  
+        <mapping class="br.com.engebras.model.entities.Contrato"/>
     </session-factory>
 </hibernate-configuration>
