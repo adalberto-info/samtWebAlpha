@@ -49,25 +49,31 @@
                                                    itemLabel="#{listaFiliais.dc_filial}" itemValue="#{listaFiliais.nr_codigo.toString()}"/>
                                 </p:selectOneMenu>
 
-                                <p:outputLabel for="dc_uf" value="UF: "/>
-                                <p:selectOneMenu id="dc_uf" value="#{mbContrato.contrato.dc_uf}" style="width:150px" required ="true" requiredMessage="O campo [UF] é obrigatório...">
-                                    <f:selectItem itemLabel="Selecione a UF" itemValue="" />
-                                    <f:selectItems value="#{mbContrato.ufs}" var="listaUfs" 
-                                                   itemLabel="#{listaUfs.dc_uf}" itemValue="#{listaUfs.dc_uf}"/>
-                                </p:selectOneMenu>
-
                                 <p:outputLabel for="nr_codMunicipio" value="Município: "/>
                                 <p:selectOneMenu id="nr_codMunicipio" value="#{mbContrato.contrato.nr_codMunicipio}" style="width:150px">
                                     <f:selectItem itemLabel="Selecione o Município" itemValue="" />
                                     <f:selectItems value="#{mbContrato.municipios}" var="listaMunicipios" 
                                                    itemLabel="#{listaMunicipios.dc_municipio}" itemValue="#{listaMunicipios.dc_municipio}"/>
                                 </p:selectOneMenu>
-
+                                
+                                <p:outputLabel for="dc_uf" value="UF: "/>
+                                <p:selectOneMenu id="dc_uf" value="#{mbContrato.contrato.dc_uf}" style="width:150px" required ="true" requiredMessage="O campo [UF] é obrigatório...">
+                                    <f:selectItem itemLabel="Selecione a UF" itemValue="" />
+                                    <f:selectItems value="#{mbContrato.ufs}" var="listaUfs" 
+                                                   itemLabel="#{listaUfs.dc_uf}" itemValue="#{listaUfs.dc_uf}"/>
+                                </p:selectOneMenu>
                                 
                                 <p:outputLabel for="dc_responsavel" value="Responsável: "/>
                                 <p:inputText id="dc_responsavel" size="30" value="#{mbContrato.contrato.dc_responsavel}"/>
 
-
+                                <p:outputLabel for="dt_inicioContrato" value="Dt. início contrato: "/>
+                                <p:calendar id="dt_inicioContrato" size="10" pattern="dd/MM/yyyy" value="#{mbContrato.contrato.dt_inicioContrato}"/>
+                                
+                                <p:outputLabel for="dt_fimContrato" value="Dt. fim contrato: "/>
+                                <p:calendar id="dt_fimContrato" size="10" pattern="dd/MM/yyyy" value="#{mbContrato.contrato.dt_fimContrato}"/>
+                                
+                                
+                                
                             </p:panelGrid>
                         </div>
                         <br/>

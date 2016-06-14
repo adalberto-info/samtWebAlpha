@@ -1,7 +1,8 @@
 package br.com.engebras.controller;
 
 /**
- * @author Adalberto dt. criacao: 09/06/2016
+ * @author Adalberto 
+ * dt. criacao: 09/06/2016
  */
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -34,6 +35,8 @@ public class MbContrato implements Serializable {
 
     private List<Contrato> contratos;
     private List filiais = new ArrayList<>();
+    private List municipios = new ArrayList<>();
+    private List ufs = new ArrayList<>();
     private boolean vll_novoContrato = true;
 
     public MbContrato() {
