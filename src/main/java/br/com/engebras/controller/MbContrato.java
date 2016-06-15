@@ -165,6 +165,22 @@ public class MbContrato implements Serializable {
     public void setVll_novoContrato(boolean vll_novoContrato) {
         this.vll_novoContrato = vll_novoContrato;
     }
+
+    public List getMunicipios() {
+        return municipios;
+    }
+
+    public void setMunicipios(List municipios) {
+        this.municipios = municipios;
+    }
+
+    public List getUfs() {
+        return ufs;
+    }
+
+    public void setUfs(List ufs) {
+        this.ufs = ufs;
+    }
  
     
     
