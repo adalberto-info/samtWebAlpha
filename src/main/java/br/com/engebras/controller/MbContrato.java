@@ -138,9 +138,9 @@ public class MbContrato implements Serializable {
     public void geraListaMunicipios(){
         List listaSQL; 
         String vlc_sql; 
-        vlc_sql = "select concat(a.dc_uf, ' | ', a.dc_municipio) as dc_municipio, a.nr_codigo ";
+        vlc_sql = "select concat(a.dc_uf, ' | ', a.dc_municipio) as dc_municipio, a.nr_codigo, a.dc_uf ";
         vlc_sql += "from municipio a ";
-        vlc_sql += "order by a.dc_municipio ";
+        vlc_sql += "order by a.dc_uf, a.dc_municipio ";
         
         Session session = FacesContextUtil.getRequestSession();
         SQLQuery query = session.createSQLQuery(vlc_sql);
