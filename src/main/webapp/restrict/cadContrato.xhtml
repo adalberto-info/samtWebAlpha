@@ -36,7 +36,7 @@
                         <div class="ui-fluid">
 
                             <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
-                                <p:outputLabel id="nr_crd" value="Nr. CRD: "/>
+                                <p:outputLabel for="nr_crd" value="Nr. CRD: "/>
                                 <p:inputText id="nr_crd" size="6" value="#{mbContrato.contrato.nr_crd}"/>
 
                                 <p:outputLabel for="dc_contrato" value="Descricao: "/>
@@ -50,15 +50,15 @@
                                 </p:selectOneMenu>
 
                                 <p:outputLabel for="nr_codMunicipio" value="Município: "/>
-                                <p:selectOneMenu id="nr_codMunicipio" value="#{mbContrato.contrato.nr_codMunicipio}" style="width:150px">
-                                    <f:selectItem itemLabel="Selecione o Município" itemValue="" />
+                                <p:selectOneMenu id="nr_codMunicipio" value="#{mbContrato.contrato.nr_codMunicipio}" style="width:300px">
+                                    <f:selectItem itemLabel="Selecione o Município" itemValue="0" />
                                     <f:selectItems value="#{mbContrato.municipios}" var="listaMunicipios" 
-                                                   itemLabel="#{listaMunicipios.dc_municipio}" itemValue="#{listaMunicipios.dc_municipio}"/>
+                                                   itemLabel="#{listaMunicipios.dc_municipio}" itemValue="#{listaMunicipios.nr_codigo.toString()}"/>
                                 </p:selectOneMenu>
                                 
                                 <p:outputLabel for="dc_uf" value="UF: "/>
                                 <p:selectOneMenu id="dc_uf" value="#{mbContrato.contrato.dc_uf}" style="width:150px" required ="true" requiredMessage="O campo [UF] é obrigatório...">
-                                    <f:selectItem itemLabel="Selecione a UF" itemValue="" />
+                                    <f:selectItem itemLabel="Selecione a UF" itemValue=" " />
                                     <f:selectItems value="#{mbContrato.ufs}" var="listaUfs" 
                                                    itemLabel="#{listaUfs.dc_uf}" itemValue="#{listaUfs.dc_uf}"/>
                                 </p:selectOneMenu>
@@ -71,9 +71,6 @@
                                 
                                 <p:outputLabel for="dt_fimContrato" value="Dt. fim contrato: "/>
                                 <p:calendar id="dt_fimContrato" size="10" pattern="dd/MM/yyyy" value="#{mbContrato.contrato.dt_fimContrato}"/>
-                                
-                                
-                                
                             </p:panelGrid>
                         </div>
                         <br/>

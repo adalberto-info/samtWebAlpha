@@ -17,6 +17,8 @@ import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.Filial;
 import br.com.engebras.model.entities.Contrato;
+import br.com.engebras.model.entities.Municipio;
+import br.com.engebras.model.entities.Uf;
 import java.util.ArrayList;
 import java.util.Map;
 import org.hibernate.Criteria;
@@ -40,6 +42,9 @@ public class MbContrato implements Serializable {
     private boolean vll_novoContrato = true;
 
     public MbContrato() {
+        geraListaFiliais();
+        geraListaMunicipios();
+        geraListaUfs();
     }
 
     private InterfaceDAO<Contrato> contratoDAO() {
@@ -129,7 +134,37 @@ public class MbContrato implements Serializable {
         
         this.filiais = listaSQL; 
     }
+    
+    public void geraListaMunicipios(){
+        List listaSQL; 
+        String vlc_sql; 
+        vlc_sql = "select concat(a.dc_uf, ' | ', a.dc_municipio) as dc_municipio, a.nr_codigo ";
+        vlc_sql += "from municipio a ";
+        vlc_sql += "order by a.dc_municipio ";
+        
+        Session session = FacesContextUtil.getRequestSession();
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+        
+        this.municipios = listaSQL; 
+    }
 
+    public void geraListaUfs() {
+        List listaSQL;
+        String vlc_sql;
+        vlc_sql = "select dc_uf, dc_descricao from uf order by dc_uf";
+
+        Session session = FacesContextUtil.getRequestSession();
+
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+
+        this.ufs = listaSQL;
+    }
+
+    
     public Contrato porNr_crd(Integer nr_crd){
         return contratoDAO().getEntity(nr_crd);
     }
