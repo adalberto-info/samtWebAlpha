@@ -66,7 +66,7 @@ public class MbPesquisaContrato implements Serializable {
         Session session = FacesContextUtil.getRequestSession();
         Criteria criteria = session.createCriteria(Contrato.class);
         
-        if (filtro.getNr_crd() > 0 ){
+        if (filtro.getNr_crd() != null && filtro.getNr_crd() > 0  ){
             criteria.add(Restrictions.eq("nr_crd", filtro.getNr_crd()));
         }
         return criteria.addOrder(Order.asc("nr_crd")).list(); 
