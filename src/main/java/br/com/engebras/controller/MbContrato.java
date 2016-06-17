@@ -64,6 +64,7 @@ public class MbContrato implements Serializable {
 
     public String editarContrato(Integer nr_crd) {
         this.contrato = porNr_crd(nr_crd);
+        this.vll_novoContrato = false; 
         return editContrato();
     }
 
