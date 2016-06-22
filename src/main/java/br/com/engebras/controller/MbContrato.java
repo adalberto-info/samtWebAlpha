@@ -217,7 +217,5 @@ public class MbContrato implements Serializable {
     public void setUfs(List ufs) {
         this.ufs = ufs;
     }
- 
-    
     
 }

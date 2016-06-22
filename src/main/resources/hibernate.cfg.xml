@@ -39,6 +39,6 @@ dt. criação: 23/03/2016
         <mapping class="br.com.engebras.model.entities.Usuario"/>  
         <mapping class="br.com.engebras.model.entities.Contrato"/>
         <mapping class="br.com.engebras.model.entities.Municipio"/>
-        <mapping class="br.com.engebras.model.entities.Entidade"/>
+        <mapping class="br.com.engebras.model.entities.Equipamento"/>
     </session-factory>
 </hibernate-configuration>
