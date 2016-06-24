@@ -63,9 +63,9 @@ public class MbGrupoAutuador implements Serializable {
     }
     
     public void addGrupoAutuador(){
-        if (verificaDuplicidade(grupoAutuador.dc_codigo) == true){
+        if (verificaDuplicidade(grupoAutuador.getDc_codigo()) == true){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Já existe um grupo autuador cadastrado com o código: " + grupoAutuador.getDc_codigo(),""));
-        }else if(vll_novoContrato == true){
+        }else if(vll_novoGrupoAutuador == true){
             insertGrupoAutuador();
         }else {
             updateGrupoAutuador();
@@ -103,7 +103,7 @@ public class MbGrupoAutuador implements Serializable {
             query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
             consGrupoAutuador = query.list();
             
-            if (consGrupoAutuador.size > 0) {
+            if (consGrupoAutuador.size() > 0) {
                 vll_retorno = true; 
             } else {
                 vll_retorno = false; 
@@ -118,5 +118,35 @@ public class MbGrupoAutuador implements Serializable {
         
         return vll_retorno; 
     }
+    
+    public GrupoAutuador porDc_codigo(String dc_codigo){
+        return grupoAutuadorDAO().getEntity(dc_codigo);
+    }
+
+    public GrupoAutuador getGrupoAutuador() {
+        return grupoAutuador;
+    }
+
+    public void setGrupoAutuador(GrupoAutuador grupoAutuador) {
+        this.grupoAutuador = grupoAutuador;
+    }
+
+    public List<GrupoAutuador> getGruposAutuadores() {
+        return gruposAutuadores;
+    }
+
+    public void setGruposAutuadores(List<GrupoAutuador> gruposAutuadores) {
+        this.gruposAutuadores = gruposAutuadores;
+    }
+
+    public boolean isVll_novoGrupoAutuador() {
+        return vll_novoGrupoAutuador;
+    }
+
+    public void setVll_novoGrupoAutuador(boolean vll_novoGrupoAutuador) {
+        this.vll_novoGrupoAutuador = vll_novoGrupoAutuador;
+    }
+
+    
     
 }
