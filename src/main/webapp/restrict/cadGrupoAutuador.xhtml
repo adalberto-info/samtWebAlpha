@@ -36,8 +36,8 @@
                         <div class="ui-fluid">
 
                             <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
-                                <p:outputLabel/>
-                                <p:inputText id="nr_codigo" value="#{mbGrupoAutuador.grupoAutuador.dc_codigo}" onkeyup="this.value = this.value.toUpperCase()"
+                                <p:outputLabel for="dc_codigo" value="Código: "/>
+                                <p:inputText id="dc_codigo" value="#{mbGrupoAutuador.grupoAutuador.dc_codigo}" onkeyup="this.value = this.value.toUpperCase()"
                                              required="true" requiredMessage="O campo [Grupo Autudor] é obrigatório..."/>
 
                                 <p:outputLabel for="dc_descricao" value="Descrição: "/>

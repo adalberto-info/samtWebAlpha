@@ -95,26 +95,33 @@ public class MbGrupoAutuador implements Serializable {
         String vlc_sql = "";
         List consGrupoAutuador; 
         
-        if (vll_novoGrupoAutuador == true){
-            Session session = FacesContextUtil.getRequestSession();
-            vlc_sql = "select g.dc_codigo from grupoAutuador g where g.dc_codigo = '" + dc_codigo + "' "; 
+        Session session = FacesContextUtil.getRequestSession();
+        vlc_sql = "select g.dc_codigo from grupoAutuador g where g.dc_codigo = '" + dc_codigo + "' "; 
             
-            SQLQuery query = session.createSQLQuery(vlc_sql);
-            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-            consGrupoAutuador = query.list();
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        consGrupoAutuador = query.list();
+
+        if (vll_novoGrupoAutuador == true){
             
             if (consGrupoAutuador.size() > 0) {
-                vll_retorno = true; 
-            } else {
                 vll_retorno = false; 
+            } else {
+                vll_retorno = true; 
             }
             
-            for (Object oGrupoAutuador : consGrupoAutuador) {
-                Map row = (Map) oGrupoAutuador; 
+        }else {
+            if (consGrupoAutuador.size() > 1) {
+                vll_retorno = false; 
+            } else {
+                vll_retorno = true; 
             }
-            
-            consGrupoAutuador = null;
         }
+            
+        for (Object oGrupoAutuador : consGrupoAutuador) {
+            Map row = (Map) oGrupoAutuador; 
+        }
+        consGrupoAutuador = null;
         
         return vll_retorno; 
     }
