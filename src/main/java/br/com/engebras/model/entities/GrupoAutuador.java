@@ -30,6 +30,7 @@ public class GrupoAutuador implements Serializable {
     @Id
     @Column(name = "dc_codigo", length = 2)
     private String dc_codigo;
+    @Id
     @Column(name = "nr_codEnquadramento", length = 5)
     private Integer nr_codEnquadramento;
     @Column(name = "dc_descricao", length = 40)
@@ -61,8 +62,9 @@ public class GrupoAutuador implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + Objects.hashCode(this.dc_codigo);
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.dc_codigo);
+        hash = 97 * hash + Objects.hashCode(this.nr_codEnquadramento);
         return hash;
     }
 
@@ -81,7 +83,11 @@ public class GrupoAutuador implements Serializable {
         if (!Objects.equals(this.dc_codigo, other.dc_codigo)) {
             return false;
         }
+        if (!Objects.equals(this.nr_codEnquadramento, other.nr_codEnquadramento)) {
+            return false;
+        }
         return true;
     }
+
 
 }
