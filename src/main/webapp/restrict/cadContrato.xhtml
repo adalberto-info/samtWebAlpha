@@ -66,10 +66,10 @@
 
                             <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
                                 <p:outputLabel for="nr_crd" value="Nr. CRD: "/>
-                                <p:inputText id="nr_crd" size="6" value="#{mbContrato.contrato.nr_crd}"/>
+                                <p:inputText id="nr_crd" size="6" maxlength="6"  value="#{mbContrato.contrato.nr_crd}"/>
 
                                 <p:outputLabel for="dc_contrato" value="Descricao: "/>
-                                <p:inputText id="dc_contrato" size="30" value="#{mbContrato.contrato.dc_contrato}"/>
+                                <p:inputText id="dc_contrato" size="30" maxlength="30" value="#{mbContrato.contrato.dc_contrato}"/>
                                 
                                 <p:outputLabel for="nr_codFilial" value="Filial: "/>
                                 <p:selectOneMenu id="nr_codFilial" value="#{mbContrato.contrato.nr_codFilial}" style="width:150px">
@@ -93,7 +93,7 @@
                                 </p:selectOneMenu>
                                 
                                 <p:outputLabel for="dc_responsavel" value="Responsável: "/>
-                                <p:inputText id="dc_responsavel" size="30" value="#{mbContrato.contrato.dc_responsavel}"/>
+                                <p:inputText id="dc_responsavel" size="30"  maxlength="30" value="#{mbContrato.contrato.dc_responsavel}"/>
 
                                 <p:outputLabel for="dt_inicioContrato" value="Dt. início contrato: "/>
                                 <p:calendar id="dt_inicioContrato" size="10" pattern="dd/MM/yyyy" value="#{mbContrato.contrato.dt_inicioContrato}" navigator="true" locale="pt"/>

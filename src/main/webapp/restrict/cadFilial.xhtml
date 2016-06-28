@@ -40,20 +40,20 @@
                                 <h:inputHidden id="nr_codigo" value="#{mbFilial.filial.nr_codigo}"/>
 
                                 <p:outputLabel for="dc_filial" value="Nome Filial: "/>
-                                <p:inputText id="dc_filial" size="30" value="#{mbFilial.filial.dc_filial}" onkeyup="this.value = this.value.toUpperCase()"
+                                <p:inputText id="dc_filial" size="30" maxlength="30" value="#{mbFilial.filial.dc_filial}" onkeyup="this.value = this.value.toUpperCase()"
                                              required="true" requiredMessage="O campo [Nome Filial] é obrigatório..."/>
 
                                 <p:outputLabel for="dc_endereco" value="Endereço: "/>
-                                <p:inputText id="dc_endereco" size="30" value="#{mbFilial.filial.dc_endereco}"/> 
+                                <p:inputText id="dc_endereco" size="30" maxlength="30" value="#{mbFilial.filial.dc_endereco}"/> 
 
                                 <p:outputLabel for="dc_numero" value="Número: "/>
-                                <p:inputText id="dc_numero" size="15" value="#{mbFilial.filial.dc_numero}"/>
+                                <p:inputText id="dc_numero" size="15" maxlength="15" value="#{mbFilial.filial.dc_numero}"/>
 
                                 <p:outputLabel for="dc_bairro" value="Bairro: "/>
-                                <p:inputText id="dc_bairro" size="25" value="#{mbFilial.filial.dc_bairro}"/>
+                                <p:inputText id="dc_bairro" size="25" maxlength="25" value="#{mbFilial.filial.dc_bairro}"/>
 
                                 <p:outputLabel for="dc_cidade" value="Cidade: "/>
-                                <p:inputText id="dc_cidade" size="30" value="#{mbFilial.filial.dc_cidade}" onkeyup="this.value = this.value.toUpperCase()" 
+                                <p:inputText id="dc_cidade" size="30" maxlength="30" value="#{mbFilial.filial.dc_cidade}" onkeyup="this.value = this.value.toUpperCase()" 
                                              required ="true" requiredMessage="O campo [Cidade] é obrigatório..."/>
 
                                 <p:outputLabel for="dc_uf" value="UF: "/>
@@ -65,10 +65,10 @@
                                 </p:selectOneMenu>
 
                                 <p:outputLabel for="dc_responsavel" value="Responsável: "/>
-                                <p:inputText id="dc_responsavel" size="30" value="#{mbFilial.filial.dc_responsavel}"/>
+                                <p:inputText id="dc_responsavel" size="30" maxlength="30" value="#{mbFilial.filial.dc_responsavel}"/>
 
                                 <p:outputLabel for="dc_telefone" value="Telefone: "/>
-                                <p:inputText id="dc_telefone" size="25" value="#{mbFilial.filial.dc_telefone}"/>
+                                <p:inputText id="dc_telefone" size="25" maxlength="25" value="#{mbFilial.filial.dc_telefone}"/>
 
                             </p:panelGrid>
                         </div>

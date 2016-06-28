@@ -40,14 +40,14 @@
                                 <h:inputHidden id="nr_codigo" value="#{mbUsuario.usuario.nr_codigo}"/>
 
                                 <p:outputLabel for="dc_nomeUsuario" value="Nome Usuário: "/>
-                                <p:inputText id="dc_nomeUsuario" size="30" value="#{mbUsuario.usuario.dc_nomeUsuario}" onkeyup="this.value = this.value.toUpperCase()"
+                                <p:inputText id="dc_nomeUsuario" size="30" maxlength="30" value="#{mbUsuario.usuario.dc_nomeUsuario}" onkeyup="this.value = this.value.toUpperCase()"
                                              required="true" requiredMessage="O campo [Nome Usuário] é obrigatório..."/>
 
                                 <p:outputLabel for="dc_login" value="Login: "/>
-                                <p:inputText id="dc_login" size="25" value="#{mbUsuario.usuario.dc_login}" required="true" requiredMessage="O campo [Login] é obrigatório..."/> 
+                                <p:inputText id="dc_login" size="25" maxlength="25" value="#{mbUsuario.usuario.dc_login}" required="true" requiredMessage="O campo [Login] é obrigatório..."/> 
 
                                 <p:outputLabel for="dc_cargo" value="Cargo: "/>
-                                <p:inputText id="dc_cargo" size="30" value="#{mbUsuario.usuario.dc_cargo}"/>
+                                <p:inputText id="dc_cargo" size="30" maxlength="30" value="#{mbUsuario.usuario.dc_cargo}"/>
 
                                 <p:outputLabel for="nr_codFilial" value="Filial: "/>
                                 <p:selectOneMenu id="nr_codFilial" value="#{mbUsuario.usuario.nr_codFilial}" style="width:150px">
@@ -65,10 +65,10 @@
                                 </p:selectOneMenu>
                                 
                                 <p:outputLabel for="dc_senha" value="Senha: "/>
-                                <p:password id="dc_senha" size="10" value="#{mbUsuario.usuario.dc_senha}" required="true" requiredMessage="O campo [senha] é obrigatório..."/>
+                                <p:password id="dc_senha" size="10" maxlength="10" value="#{mbUsuario.usuario.dc_senha}" required="true" requiredMessage="O campo [senha] é obrigatório..."/>
 
                                 <p:outputLabel for="dc_confirmaSenha" value="Confirmar senha: "/>
-                                <p:password id="dc_confirmaSenha" size="10" value="#{mbUsuario.dc_confirmaSenha}" required="true" requiredMessage="O campo [confirma senha] é obrigatório..."/>
+                                <p:password id="dc_confirmaSenha" size="10" maxlength="10" value="#{mbUsuario.dc_confirmaSenha}" required="true" requiredMessage="O campo [confirma senha] é obrigatório..."/>
                                 
                                 <p:outputLabel for="lg_ativo" value="Ativo ? "/>
                                 <p:selectBooleanCheckbox id="lg_ativo" value="#{mbUsuario.lg_ativo}"/>

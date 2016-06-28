@@ -40,17 +40,17 @@
                                 <h:inputHidden id="nr_codigo" value="#{mbEquipamento.equipamento.nr_codigo}"/>
 
                                 <p:outputLabel for="dc_serieEquipamento" value="Série Equipamento: "/>
-                                <p:inputText id="dc_serieEquipamento" size="15" value="#{mbEquipamento.equipamento.dc_serieEquipamento}" onkeyup="this.value = this.value.toUpperCase()"
+                                <p:inputText id="dc_serieEquipamento" size="15" maxlength="15" value="#{mbEquipamento.equipamento.dc_serieEquipamento}" onkeyup="this.value = this.value.toUpperCase()"
                                              required="true" requiredMessage="O campo [Série Equipamento] é obrigatório..."/>
 
                                 <p:outputLabel for="dc_fabricante" value="Fabricante: "/>
-                                <p:inputText id="dc_fabricante" size="20" value="#{mbEquipamento.equipamento.dc_fabricante}" onkeyup="this.value = this.value.toUpperCase()"/> 
+                                <p:inputText id="dc_fabricante" size="20" maxlength="20" value="#{mbEquipamento.equipamento.dc_fabricante}" onkeyup="this.value = this.value.toUpperCase()"/> 
 
                                 <p:outputLabel for="dc_modelo" value="Modelo: "/>
-                                <p:inputText id="dc_modelo" size="15" value="#{mbEquipamento.equipamento.dc_modelo}" onkeyup="this.value = this.value.toUpperCase()"/>
+                                <p:inputText id="dc_modelo" size="15" maxlength="15" value="#{mbEquipamento.equipamento.dc_modelo}" onkeyup="this.value = this.value.toUpperCase()"/>
 
                                 <p:outputLabel for="dc_empresa" value="Empresa: "/>
-                                <p:inputText id="dc_empresa" size="20" value="#{mbEquipamento.equipamento.dc_empresa}" onkeyup="this.value = this.value.toUpperCase()"/>
+                                <p:inputText id="dc_empresa" size="20" maxlength="20" value="#{mbEquipamento.equipamento.dc_empresa}" onkeyup="this.value = this.value.toUpperCase()"/>
 
 
                                 <p:outputLabel for="dc_status" value="Status: "/>
