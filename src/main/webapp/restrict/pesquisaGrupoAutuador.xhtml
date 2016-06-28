@@ -40,7 +40,7 @@
 
                             <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
                                 <p:outputLabel value="Grupo Autuador"/>
-                                <p:inputText id="dc_codigo" size="40" value="#{mbPesquisaGrupoAutuador.filtro.dc_codigo}"/>
+                                <p:inputText id="dc_codigo" size="2" maxlength="2" value="#{mbPesquisaGrupoAutuador.filtro.dc_codigo}" onkeyup="this.value = this.value.toUpperCase()"/>
                             </p:panelGrid>
                         </div>
                         <br/>
@@ -67,6 +67,12 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
+                            <h:outputText value="Enquadramento"/>
+                        </f:facet>
+                        <h:outputText value="#{tabGrupoAutuador.nr_codEnquadramento}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
                             <h:outputText value="Descrição"/>
                         </f:facet>
                         <h:outputText value="#{tabGrupoAutuador.dc_descricao}"/>
@@ -77,7 +83,7 @@
                             <h:outputText value="Ações"/>
                         </f:facet>
 
-                        <p:commandButton value="Editar" action="#{mbGrupoAutuador.editarGrupoAutuador(tabGrupoAutuador.dc_codigo, tabGrupoAutuador.nr_codEnquadramento)}"
+                        <p:commandButton value="Editar" action="#{mbGrupoAutuador.editarGrupoAutuador(tabGrupoAutuador.nr_codigo)}"
                                          image="ui-icon ui-icon-pencil">
                             <f:setPropertyActionListener target="#{mbPesquisaGrupoAutuador.grupoAutuador}" value="#{tabGrupoAutuador}"/>
                         </p:commandButton> 

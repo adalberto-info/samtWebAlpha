@@ -27,9 +27,9 @@ public class GrupoAutuadorConverter implements Converter {
     public String getAsString(FacesContext context, UIComponent uiComponent, Object value) {
         if (value instanceof GrupoAutuador) {
             GrupoAutuador entity = (GrupoAutuador) value; 
-            if (entity != null && entity instanceof GrupoAutuador && entity.getDc_codigo() != null){
-                uiComponent.getAttributes().put(entity.getDc_codigo(), entity); 
-                return entity.getDc_codigo();
+            if (entity != null && entity instanceof GrupoAutuador && entity.getNr_codigo() != null){
+                uiComponent.getAttributes().put(entity.getNr_codigo().toString(), entity); 
+                return entity.getNr_codigo().toString();
             }
         }
         return "";

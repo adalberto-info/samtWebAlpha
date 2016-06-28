@@ -36,16 +36,19 @@
                         <div class="ui-fluid">
 
                             <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
+                                <p:outputLabel/>
+                                <h:inputHidden id="nr_codigo" value="#{mbGrupoAutuador.grupoAutuador.nr_codigo}"/>
+                                
                                 <p:outputLabel for="dc_codigo" value="Código: "/>
-                                <p:inputText id="dc_codigo" value="#{mbGrupoAutuador.grupoAutuador.dc_codigo}" onkeyup="this.value = this.value.toUpperCase()"
+                                <p:inputText id="dc_codigo" size="2" maxlength="2" value="#{mbGrupoAutuador.grupoAutuador.dc_codigo}" onkeyup="this.value = this.value.toUpperCase()"
                                              required="true" requiredMessage="O campo [Grupo Autudor] é obrigatório..."/>
 
                                 <p:outputLabel for="dc_descricao" value="Descrição: "/>
-                                <p:inputText id="dc_descricao" size="40" value="#{mbGrupoAutuador.grupoAutuador.dc_descricao}" onkeyup="this.value = this.value.toUpperCase()"
+                                <p:inputText id="dc_descricao" size="40" maxlength = "40" value="#{mbGrupoAutuador.grupoAutuador.dc_descricao}" onkeyup="this.value = this.value.toUpperCase()"
                                              required="true" requiredMessage="O campo [Descrição] é obrigatório..."/>
 
                                 <p:outputLabel for="nr_codEnquadramento" value="Enquadramento: "/>
-                                <p:inputText id="nr_codEnquadramento" size="5" value="#{mbGrupoAutuador.grupoAutuador.nr_codEnquadramento}"
+                                <p:inputText id="nr_codEnquadramento" size="5" maxlength = "5" value="#{mbGrupoAutuador.grupoAutuador.nr_codEnquadramento}"
                                              required="true" requiredMessage="O campo [Enquadramento] é obrigatório..."/> 
 
                             </p:panelGrid>

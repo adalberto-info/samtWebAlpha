@@ -28,14 +28,24 @@ public class GrupoAutuador implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "nr_codigo", length = 5)
+    private Integer nr_codigo;
     @Column(name = "dc_codigo", length = 2)
     private String dc_codigo;
-    @Id
     @Column(name = "nr_codEnquadramento", length = 5)
     private Integer nr_codEnquadramento;
     @Column(name = "dc_descricao", length = 40)
     private String dc_descricao;
 
+    public Integer getNr_codigo() {
+        return nr_codigo;
+    }
+
+    public void setNr_codigo(Integer nr_codigo) {
+        this.nr_codigo = nr_codigo;
+    }
+    
     public String getDc_codigo() {
         return dc_codigo;
     }
@@ -62,9 +72,8 @@ public class GrupoAutuador implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.dc_codigo);
-        hash = 97 * hash + Objects.hashCode(this.nr_codEnquadramento);
+        int hash = 3;
+        hash = 59 * hash + Objects.hashCode(this.nr_codigo);
         return hash;
     }
 
@@ -80,14 +89,12 @@ public class GrupoAutuador implements Serializable {
             return false;
         }
         final GrupoAutuador other = (GrupoAutuador) obj;
-        if (!Objects.equals(this.dc_codigo, other.dc_codigo)) {
-            return false;
-        }
-        if (!Objects.equals(this.nr_codEnquadramento, other.nr_codEnquadramento)) {
+        if (!Objects.equals(this.nr_codigo, other.nr_codigo)) {
             return false;
         }
         return true;
     }
 
+    
 
 }

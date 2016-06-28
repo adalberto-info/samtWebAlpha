@@ -52,7 +52,7 @@
             <h:form id="formtable">
                 <p:growl id="msg1"/>
 
-                <p:dataTable id="idTabela" var="filial" value="#{mbPesquisaFilial.filiaisFiltradas}" 
+                <p:dataTable id="idTabela" var="tabFilial" value="#{mbPesquisaFilial.filiaisFiltradas}" 
                              paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
                              {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -63,7 +63,7 @@
                         <f:facet name="header">
                             <h:outputText value="Nome"/>
                         </f:facet>
-                        <h:outputText value="#{filial.dc_filial}"/>
+                        <h:outputText value="#{tabFilial.dc_filial}"/>
                     </p:column>
 
                     <p:column>
@@ -71,15 +71,15 @@
                             <h:outputText value="Ações"/>
                         </f:facet>
 
-                        <p:commandButton value="Editar" action="#{mbFilial.editarFilial(filial.nr_codigo)}"
+                        <p:commandButton value="Editar" action="#{mbFilial.editarFilial(tabFilial.nr_codigo)}"
                                          image="ui-icon ui-icon-pencil">
-                            <f:setPropertyActionListener target="#{mbPesquisaFilial.filial}" value="#{filial}"/>
+                            <f:setPropertyActionListener target="#{mbPesquisaFilial.filial}" value="#{tabFilial}"/>
                         </p:commandButton> 
                         
                         <p:commandButton value="Remover" action="#{mbPesquisaFilial.deleteFilial}"
                                          image="ui-icon ui-icon-close" update="@form :formtable">
                             <f:setPropertyActionListener target="#{mbPesquisaFilial.filial}"
-                                                         value="#{filial}"/>
+                                                         value="#{tabFilial}"/>
                         </p:commandButton>
                     </p:column>
 
@@ -90,7 +90,7 @@
 	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
 	    		<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
 	    		<p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();"
-                                         action="#{mbPesquisaFilial.remover(filial)}" process="@this"
+                                         action="#{mbPesquisaFilial.remover(tabFilial)}" process="@this"
 	    			update=":formtable:idTabela" />
 	    	</p:confirmDialog>
             </h:form>

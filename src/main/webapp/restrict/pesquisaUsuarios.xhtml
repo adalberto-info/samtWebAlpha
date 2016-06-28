@@ -51,7 +51,7 @@
             <h:form id="formtable">
                 <p:growl id="msg1"/>
 
-                <p:dataTable id="idTabela" var="usuario" value="#{mbPesquisaUsuario.usuariosFiltrados}" 
+                <p:dataTable id="idTabela" var="tabUsuario" value="#{mbPesquisaUsuario.usuariosFiltrados}" 
                              paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
                              {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -62,7 +62,7 @@
                         <f:facet name="header">
                             <h:outputText value="Login"/>
                         </f:facet>
-                        <h:outputText value="#{usuario.dc_login}"/>
+                        <h:outputText value="#{tabUsuario.dc_login}"/>
                     </p:column>
 
                     <p:column>
@@ -70,15 +70,15 @@
                             <h:outputText value="Ações"/>
                         </f:facet>
 
-                        <p:commandButton value="Editar" action="#{mbUsuario.editarUsuario(usuario.nr_codigo)}"
+                        <p:commandButton value="Editar" action="#{mbUsuario.editarUsuario(tabUsuario.nr_codigo)}"
                                          image="ui-icon ui-icon-pencil">
-                            <f:setPropertyActionListener target="#{mbPesquisaUsuario.usuario}" value="#{usuario}"/>
+                            <f:setPropertyActionListener target="#{mbPesquisaUsuario.usuario}" value="#{tabUsuario}"/>
                         </p:commandButton> 
                         
                         <p:commandButton value="Remover" action="#{mbPesquisaUsuario.deleteUsuario}"
                                          image="ui-icon ui-icon-close" update="@form :formtable">
                             <f:setPropertyActionListener target="#{mbPesquisaUsuario.usuario}"
-                                                         value="#{usuario}"/>
+                                                         value="#{tabUsuario}"/>
                         </p:commandButton>
                     </p:column>
 
@@ -89,7 +89,7 @@
 	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
 	    		<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
 	    		<p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();"
-                                         action="#{mbPesquisaUsuario.remover(usuario)}" process="@this"
+                                         action="#{mbPesquisaUsuario.remover(tabUsuario)}" process="@this"
 	    			update=":formtable:idTabela" />
 	    	</p:confirmDialog>
             </h:form>
