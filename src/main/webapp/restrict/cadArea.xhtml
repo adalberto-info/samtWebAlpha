@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="/WEB-INF/templates/LayoutMaster.xhtml">
+
+    <ui:define name="content">
+        <style>
+            .ui-growl{
+                position:fixed;
+                top:70px;
+                right:5px;
+                width:301px;
+            }
+        </style>
+        <p:fieldset legend="Cadastrar Áreas">
+            <br/>
+            <p:tabView id="tbv1" dynamic="true" cache="true">
+                <p:tab title="Area" id="cadArea">
+                    <h:form prependId="false" id="formCadArea">
+                        <p:growl id="msg0" />
+                            <p:toolbar>
+                                <p:toolbarGroup>
+                                    <p:commandButton value="Salvar" action="#{mbArea.addArea}" image="ui-icon ui-icon-disk" update="@form"/>
+                                    <p:commandButton value="Cancelar" actionListener="#{mbArea.limpaArea}" image="ui-icon ui-icon-close" update="@form" process="@this"/>
+                                </p:toolbarGroup>
+                                <p:toolbarGroup align="right">
+                                    <p:button value="Pesquisa" outcome="/restrict/pesquisaAreas.xhtml"  image="ui-icon-search" />
+                                </p:toolbarGroup>
+                            </p:toolbar>
+
+                        <div class="ui-fluid">
+
+                            <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
+                                <p:outputLabel for="dc_codArea" value="Código: "/>
+                                <p:inputText id="dc_codArea" size="4" maxlength="4" value="#{mbArea.area.dc_codArea}"/>
+
+                                <p:outputLabel for="dc_area" value="Descrição: "/>
+                                <p:inputText id="dc_area" size="30" maxlength="30" value="#{mbArea.area.dc_area}" onkeyup="this.value = this.value.toUpperCase()"
+                                             required="true" requiredMessage="O campo [Descrição] é obrigatório..."/>
+                            </p:panelGrid>
+                        </div>
+                        <br/>
+                    </h:form>
+                </p:tab>
+            </p:tabView>    
+
+
+        </p:fieldset>
+
+    </ui:define>
+</ui:composition>

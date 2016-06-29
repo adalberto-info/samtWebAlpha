@@ -100,7 +100,6 @@ public class MbContrato implements Serializable {
         String vlc_sql = "";
         List consContrato;
 
-        if (vll_novoContrato == true) {
             Session session = FacesContextUtil.getRequestSession();
             vlc_sql = "select c.nr_crd from contrato c where c.nr_crd = " + nr_crd;
 
@@ -108,18 +107,29 @@ public class MbContrato implements Serializable {
             query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
             consContrato = query.list();
 
-            if (consContrato.size() > 0) {
-                vll_retorno = true;
-            } else {
-                vll_retorno = false;
+            if (vll_novoContrato == true) {
+
+                if (consContrato.size() > 0) {
+                    vll_retorno = true;
+                } else {
+                    vll_retorno = false;
+                }
             }
 
+            if (vll_novoContrato == false) {
+                
+                if (consContrato.size() > 1){
+                    vll_retorno = true;
+                } else {
+                    vll_retorno = false;
+                }
+            }
+            
             for (Object oContrato : consContrato) {
                 Map row = (Map) oContrato;
             }
 
             consContrato = null;
-        }
         return vll_retorno;
     }
     
