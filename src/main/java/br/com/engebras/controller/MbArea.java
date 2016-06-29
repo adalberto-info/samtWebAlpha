@@ -51,7 +51,7 @@ public class MbArea implements Serializable {
     }
 
     public String editArea() {
-        return "/restrict/cad_area.xhtml";
+        return "/restrict/cadArea.xhtml";
     }
 
     public String editarArea(String dc_codArea) {
@@ -69,7 +69,7 @@ public class MbArea implements Serializable {
         } else {
             updateArea();
         }
-
+        limpaArea();
     }
 
     public void insertArea() {
@@ -89,7 +89,7 @@ public class MbArea implements Serializable {
         List consArea;
 
         Session session = FacesContextUtil.getRequestSession();
-        vlc_sql = "select a.dc_codArea from area a where a.dc_codArea = " + dc_codArea;
+        vlc_sql = "select a.dc_codArea from area a where a.dc_codArea = '" + dc_codArea + "' ";
 
         SQLQuery query = session.createSQLQuery(vlc_sql);
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);

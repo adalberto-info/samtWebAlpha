@@ -27,9 +27,9 @@ public class AreaConverter implements Converter{
     public String getAsString(FacesContext context, UIComponent uiComponent, Object value) {
         if (value instanceof Area) {
             Area entity = (Area) value; 
-            if (entity != null && entity instanceof Area && entity.getDc_area() != null){
-                uiComponent.getAttributes().put(entity.getDc_area(), entity); 
-                return entity.getDc_area();
+            if (entity != null && entity instanceof Area && entity.getDc_codArea() != null){
+                uiComponent.getAttributes().put(entity.getDc_codArea(), entity); 
+                return entity.getDc_codArea();
             }
         }
         return "";
