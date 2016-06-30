@@ -42,5 +42,6 @@ dt. criação: 23/03/2016
         <mapping class="br.com.engebras.model.entities.Equipamento"/>
         <mapping class="br.com.engebras.model.entities.GrupoAutuador"/>
         <mapping class="br.com.engebras.model.entities.Area"/>
+        <mapping class="br.com.engebras.model.entities.MotivoInconsistenciaImagem"/>
     </session-factory>
 </hibernate-configuration>

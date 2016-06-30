@@ -33,6 +33,8 @@ public class MotivoInconsistenciaImagem implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="nr_codigo", length=2)
     private Integer nr_codigo; 
+    @Column(name="dc_inconsistencia", length=100)
+    private String dc_inconsistencia; 
     @Column(name="lg_56732",  length=1)
     private Integer lg_56732;
     @Column(name="lg_56810", length=1)
@@ -70,6 +72,14 @@ public class MotivoInconsistenciaImagem implements Serializable {
         this.nr_codigo = nr_codigo;
     }
 
+    public String getDc_inconsistencia() {
+        return dc_inconsistencia;
+    }
+
+    public void setDc_inconsistencia(String dc_inconsistencia) {
+        this.dc_inconsistencia = dc_inconsistencia;
+    }
+    
     public Integer getLg_56732() {
         return lg_56732;
     }
