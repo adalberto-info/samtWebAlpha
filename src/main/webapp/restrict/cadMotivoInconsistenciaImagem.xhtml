@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -20,13 +21,13 @@
         <p:fieldset legend="Cadastrar Motivos Inconsistência Imagem">
             <br/>
             <p:tabView id="tbv1" dynamic="true" cache="true">
-                <p:tab title="Filial" id="cadMotivosInconsistênciaImagem">
+                <p:tab title="Motivo Inconsistência Imagem" id="cadMotivosInconsistenciaImagem">
                     <h:form prependId="false" id="formCadMotivoInconsistenciaImagem">
                         <p:growl id="msg0" />
                             <p:toolbar>
                                 <p:toolbarGroup>
-                                    <p:commandButton value="Salvar" action="#{mbMotivoInconsistenciaImagem.addMotivoInconsistenciaImagem}" image="ui-icon ui-icon-disk" update="@form"/>
-                                    <p:commandButton value="Cancelar" actionListener="#{mbMotivoInconsistenciaImagem.limpaMotivoInconsistenciaImagem}" image="ui-icon ui-icon-close" update="@form" process="@this"/>
+                                    <p:commandButton value="Salvar" action="#{mbMotivoInconsistenciaImagem.addMotivoInconsistenciaImagem}" icon="ui-icon ui-icon-disk" update="@form"/>
+                                    <p:commandButton value="Cancelar" actionListener="#{mbMotivoInconsistenciaImagem.limpaMotivoInconsistenciaImagem}" icon="ui-icon ui-icon-close" update="@form" process="@this"/>
                                 </p:toolbarGroup>
                                 <p:toolbarGroup align="right">
                                     <p:button value="Pesquisa" outcome="/restrict/pesquisaMotivoInconsistenciaImagem.xhtml"  image="ui-icon-search" />
@@ -36,7 +37,8 @@
                         <div class="ui-fluid">
 
                             <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
-                                <p:outputLabel/>
+
+                                <h:outputLabel/>
                                 <h:inputHidden id="nr_codigo" value="#{mbMotivoInconsistenciaImagem.motivoInconsistenciaImagem.nr_codigo}"/>
 
                                 <p:outputLabel for="dc_inconsistencia" value="Descrição: "/>
@@ -91,8 +93,6 @@
                     </h:form>
                 </p:tab>
             </p:tabView>    
-
-
         </p:fieldset>
 
     </ui:define>

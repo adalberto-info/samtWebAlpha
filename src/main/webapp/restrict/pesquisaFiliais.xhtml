@@ -34,7 +34,7 @@
                                                      update="@form :formtable" />
                                 </p:toolbarGroup>
                                 <p:toolbarGroup align="right">
-                                    <p:button value="Novo" outcome="/restrict/cadFilial.xhtml" image="ui-icon-document"/>
+                                    <p:button value="Novo" outcome="/restrict/cadFilial.xhtml" icon="ui-icon-document"/>
                                 </p:toolbarGroup>
                             </p:toolbar>
 
@@ -72,12 +72,12 @@
                         </f:facet>
 
                         <p:commandButton value="Editar" action="#{mbFilial.editarFilial(tabFilial.nr_codigo)}"
-                                         image="ui-icon ui-icon-pencil">
+                                         icon="ui-icon ui-icon-pencil">
                             <f:setPropertyActionListener target="#{mbPesquisaFilial.filial}" value="#{tabFilial}"/>
                         </p:commandButton> 
                         
                         <p:commandButton value="Remover" action="#{mbPesquisaFilial.deleteFilial}"
-                                         image="ui-icon ui-icon-close" update="@form :formtable">
+                                         icon="ui-icon ui-icon-close" update="@form :formtable">
                             <f:setPropertyActionListener target="#{mbPesquisaFilial.filial}"
                                                          value="#{tabFilial}"/>
                         </p:commandButton>
