@@ -2,16 +2,13 @@ package br.com.engebras.filter;
 
 /**
  * @author Adalberto Kamida
- * dt. criação: 30/06/2016
+ * dt. criacao: 30/06/2016
  */
-
 
 import java.io.Serializable;
 
-
 public class MotivoInconsistenciaImagemFilter implements Serializable {
-
-    private static final long serialVersionUID = 1L; 
+    private static final long serialVersionUID = 1L;
     
     private Integer nr_codigo;
 

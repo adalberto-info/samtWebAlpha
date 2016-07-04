@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import br.com.engebras.model.entities.Uf;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -30,11 +29,10 @@ public class MotivoInconsistenciaImagem implements Serializable {
     private static final long serialVersionUID = 1L; 
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="nr_codigo", length=2)
     private Integer nr_codigo; 
     @Column(name="dc_inconsistencia", length=100)
-    private String dc_inconsistencia; 
+    private String dc_inconsistencia;
     @Column(name="lg_56732",  length=1)
     private Integer lg_56732;
     @Column(name="lg_56810", length=1)
@@ -79,7 +77,7 @@ public class MotivoInconsistenciaImagem implements Serializable {
     public void setDc_inconsistencia(String dc_inconsistencia) {
         this.dc_inconsistencia = dc_inconsistencia;
     }
-    
+
     public Integer getLg_56732() {
         return lg_56732;
     }
@@ -195,7 +193,7 @@ public class MotivoInconsistenciaImagem implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.nr_codigo);
+        hash = 67 * hash + Objects.hashCode(this.nr_codigo);
         return hash;
     }
 
@@ -216,7 +214,7 @@ public class MotivoInconsistenciaImagem implements Serializable {
         }
         return true;
     }
-    
+
     
     
     

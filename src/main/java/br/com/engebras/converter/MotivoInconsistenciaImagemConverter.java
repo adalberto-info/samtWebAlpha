@@ -2,7 +2,7 @@ package br.com.engebras.converter;
 
 /**
  * @author Adalberto Kamida
- * dt. criação: 30/06/2016
+ * dt. criacao: 30/06/2016
  */
 
 import javax.faces.component.UIComponent;
@@ -11,17 +11,15 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import br.com.engebras.model.entities.MotivoInconsistenciaImagem;
 
-@FacesConverter
-public class MotivoInconsistenciaImagemConverter implements Converter {
+@FacesConverter(forClass = MotivoInconsistenciaImagem.class)
+public class MotivoInconsistenciaImagemConverter implements Converter{
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent uiComponent, String value) {
         if (value != null && !value.isEmpty()){
             return (MotivoInconsistenciaImagem) uiComponent.getAttributes().get(value);
         }
-        
         return null;
-        
     }
 
     @Override
@@ -36,7 +34,5 @@ public class MotivoInconsistenciaImagemConverter implements Converter {
         return "";
         
     }
-
-
     
 }

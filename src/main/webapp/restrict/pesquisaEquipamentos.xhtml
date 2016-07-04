@@ -33,7 +33,7 @@
                                                      update="@form :formtable" />
                                 </p:toolbarGroup>
                                 <p:toolbarGroup align="right">
-                                    <p:button value="Novo" outcome="/restrict/cadEquipamento.xhtml" icon="ui-icon-document"/>
+                                    <p:button value="Novo" outcome="/restrict/cadEquipamento.xhtml" image="ui-icon-document"/>
                                 </p:toolbarGroup>
                             </p:toolbar>
 
@@ -71,12 +71,12 @@
                         </f:facet>
 
                         <p:commandButton value="Editar" action="#{mbEquipamento.editarEquipamento(tabEquipamento.nr_codigo)}"
-                                         icon="ui-icon ui-icon-pencil">
+                                         image="ui-icon ui-icon-pencil">
                             <f:setPropertyActionListener target="#{mbPesquisaEquipamento.equipamento}" value="#{tabEquipamento}"/>
                         </p:commandButton> 
                         
                         <p:commandButton value="Remover" action="#{mbPesquisaEquipamento.deleteEquipamento}"
-                                         icon="ui-icon ui-icon-close" update="@form :formtable">
+                                         image="ui-icon ui-icon-close" update="@form :formtable">
                             <f:setPropertyActionListener target="#{mbPesquisaEquipamento.equipamento}"
                                                          value="#{tabEquipamento}"/>
                         </p:commandButton>

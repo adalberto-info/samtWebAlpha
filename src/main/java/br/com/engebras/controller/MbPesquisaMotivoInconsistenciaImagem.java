@@ -2,9 +2,8 @@ package br.com.engebras.controller;
 
 /**
  * @author Adalberto Kamida
- * dt. criação: 30/06/2016
+ * dt. criacao: 30/06/2016
  */
-
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -31,7 +30,7 @@ import br.com.engebras.util.FacesContextUtil;
 
 @ManagedBean(name="mbPesquisaMotivoInconsistenciaImagem")
 @ViewScoped
-public class MbPesquisaMotivoInconsistenciaImagem implements Serializable{
+public class MbPesquisaMotivoInconsistenciaImagem implements Serializable {
     private static final long serialVersionUID = 1L; 
     
     private EntityManager manager; 
@@ -41,7 +40,7 @@ public class MbPesquisaMotivoInconsistenciaImagem implements Serializable{
     
     private MotivoInconsistenciaImagem motivoInconsistenciaImagem = new MotivoInconsistenciaImagem() ; 
     
-    MbPesquisaMotivoInconsistenciaImagem(){
+    public MbPesquisaMotivoInconsistenciaImagem(){
         filtro = new MotivoInconsistenciaImagemFilter();
     }
     

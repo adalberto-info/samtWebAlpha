@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -18,19 +17,19 @@
                 width:301px;
             }
         </style>
-        <p:fieldset legend="Cadastrar Motivos Inconsistência Imagem">
+        <p:fieldset legend="Cadastrar Motivo Inconsistência Imagem">
             <br/>
             <p:tabView id="tbv1" dynamic="true" cache="true">
-                <p:tab title="Motivo Inconsistência Imagem" id="cadMotivosInconsistenciaImagem">
+                <p:tab title="MotivoInconsistenciaImagem" id="cadMotivoInconsistenciaImagem">
                     <h:form prependId="false" id="formCadMotivoInconsistenciaImagem">
                         <p:growl id="msg0" />
                             <p:toolbar>
                                 <p:toolbarGroup>
                                     <p:commandButton value="Salvar" action="#{mbMotivoInconsistenciaImagem.addMotivoInconsistenciaImagem}" icon="ui-icon ui-icon-disk" update="@form"/>
-                                    <p:commandButton value="Cancelar" actionListener="#{mbMotivoInconsistenciaImagem.limpaMotivoInconsistenciaImagem}" icon="ui-icon ui-icon-close" update="@form" process="@this"/>
+                                    <p:commandButton value="Cancelar" actionListener="#{mbMotivoInconsistenciaImagem.limpaMotivoInconsistencia}" icon="ui-icon ui-icon-close" update="@form" process="@this"/>
                                 </p:toolbarGroup>
                                 <p:toolbarGroup align="right">
-                                    <p:button value="Pesquisa" outcome="/restrict/pesquisaMotivoInconsistenciaImagem.xhtml"  image="ui-icon-search" />
+                                    <p:button value="Pesquisa" outcome="/restrict/pesquisaMotivoInconsistenciaImagens.xhtml"  icon="ui-icon-search" />
                                 </p:toolbarGroup>
                             </p:toolbar>
 
@@ -38,8 +37,9 @@
 
                             <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
 
-                                <h:outputLabel/>
-                                <h:inputHidden id="nr_codigo" value="#{mbMotivoInconsistenciaImagem.motivoInconsistenciaImagem.nr_codigo}"/>
+                                <p:outputLabel for="nr_codigo" value="Código: "/>
+                                <p:inputText id="nr_codigo" size="2" maxlength="2" value="#{mbMotivoInconsistenciaImagem.motivoInconsistenciaImagem.nr_codigo}" 
+                                             required="true" requiredMessage="O campo [Código] é obrigatório..."/>
 
                                 <p:outputLabel for="dc_inconsistencia" value="Descrição: "/>
                                 <p:inputText id="dc_inconsistencia" size="100" maxlength="100" value="#{mbMotivoInconsistenciaImagem.motivoInconsistenciaImagem.dc_inconsistencia}" onkeyup="this.value = this.value.toUpperCase()"
@@ -93,6 +93,8 @@
                     </h:form>
                 </p:tab>
             </p:tabView>    
+
+
         </p:fieldset>
 
     </ui:define>

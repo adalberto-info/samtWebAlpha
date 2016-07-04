@@ -34,7 +34,7 @@
                                                      update="@form :formtable" />
                                 </p:toolbarGroup>
                                 <p:toolbarGroup align="right">
-                                    <p:button value="Novo" outcome="/restrict/cadGrupoAutuador.xhtml" icon="ui-icon-document"/>
+                                    <p:button value="Novo" outcome="/restrict/cadGrupoAutuador.xhtml" image="ui-icon-document"/>
                                 </p:toolbarGroup>
                             </p:toolbar>
 
@@ -84,12 +84,12 @@
                         </f:facet>
 
                         <p:commandButton value="Editar" action="#{mbGrupoAutuador.editarGrupoAutuador(tabGrupoAutuador.nr_codigo)}"
-                                         icon="ui-icon ui-icon-pencil">
+                                         image="ui-icon ui-icon-pencil">
                             <f:setPropertyActionListener target="#{mbPesquisaGrupoAutuador.grupoAutuador}" value="#{tabGrupoAutuador}"/>
                         </p:commandButton> 
                         
                         <p:commandButton value="Remover" action="#{mbPesquisaGrupoAutuador.deleteGrupoAutuador}"
-                                         icon="ui-icon ui-icon-close" update="@form :formtable">
+                                         image="ui-icon ui-icon-close" update="@form :formtable">
                             <f:setPropertyActionListener target="#{mbPesquisaGrupoAutuador.grupoAutuador}"
                                                          value="#{tabGrupoAutuador}"/>
                         </p:commandButton>

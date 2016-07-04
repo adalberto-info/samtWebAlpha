@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -18,11 +17,11 @@
                 width:301px;
             }
         </style>
-        <p:fieldset legend="Pesquisa Motivo Inconsistência Imagem">
+        <p:fieldset legend="Pesquisa Motivo Inconsistência Imagens">
             <br/>
 
             <p:tabView id="tbv1" dynamic="true" cache="true">
-                <p:tab title="Pesquisa Motivo Inconsistência Imagem" id="PesquisaMotivoInconsistenciaImagem">
+                <p:tab title="Pesquisa Motivo Inconsistência Imagens" id="PesquisaMotivoInconsistenciaImagem">
                     <h:form prependId="false" id="formPesqMotivoInconsistenciaImagem">
                         <p:growl id="msg0" />
 
@@ -39,7 +38,7 @@
                             </p:toolbar>
 
                             <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
-                                <p:outputLabel value="Código: " for="nr_codigo"/>
+                                <p:outputLabel value="Código: "/>
                                 <p:inputText id="nr_codigo" size="2" maxlength="2" value="#{mbPesquisaMotivoInconsistenciaImagem.filtro.nr_codigo}"/>
                             </p:panelGrid>
                         </div>
@@ -58,20 +57,20 @@
                              {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15" paginatorPosition="bottom">
 
-                    <f:facet name="header">Lista de Motivos Inconsistência Imagem</f:facet>
+                    <f:facet name="header">Lista de Motivo Inconsistência Imagem</f:facet>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Código"/>
                         </f:facet>
                         <h:outputText value="#{tabMotivoInconsistenciaImagem.nr_codigo}"/>
                     </p:column>
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Descrição"/>
                         </f:facet>
                         <h:outputText value="#{tabMotivoInconsistenciaImagem.dc_inconsistencia}"/>
                     </p:column>
-
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Ações"/>
@@ -82,21 +81,21 @@
                             <f:setPropertyActionListener target="#{mbPesquisaMotivoInconsistenciaImagem.motivoInconsistenciaImagem}" value="#{tabMotivoInconsistenciaImagem}"/>
                         </p:commandButton> 
                         
-                        <p:commandButton value="Remover" action="#{mbPesquisa.deleteFilial}"
-                                         icon="ui-icon ui-icon-close" update="@form :formtable">
-                            <f:setPropertyActionListener target="#{mbPesquisaFilial.filial}"
-                                                         value="#{tabFilial}"/>
+                        <p:commandButton value="Remover" action="#{mbPesquisaMotivoInconsistenciaImagem.deleteMotivoInconsistenciaImagem}"
+                                         image="ui-icon ui-icon-close" update="@form :formtable">
+                            <f:setPropertyActionListener target="#{mbPesquisaMotivoInconsistenciaImagem.motivoInconsistenciaImagem}"
+                                                         value="#{tabMotivoInconsistenciaImagem}"/>
                         </p:commandButton>
                     </p:column>
 
                 </p:dataTable>
 
-               	<p:confirmDialog header="Exclusão de filial" 
-                                 message="Tem certeza que deseja excluir a filial #{mbPesquisaFilial.filialSelecionada.dc_filial}?"
+               	<p:confirmDialog header="Exclusão de motivo inconsistencia imagem" 
+                                 message="Tem certeza que deseja excluir o motivo #{mbPesquisaMotivoInconsistenciaImagem.motivoInconsistenciaImagem.nr_codigo}?"
 	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
 	    		<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
 	    		<p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();"
-                                         action="#{mbPesquisaFilial.remover(tabFilial)}" process="@this"
+                                         action="#{mbPesquisaMotivoInconsistenciaImagem.remover(tabMotivoInconsistenciaImagem)}" process="@this"
 	    			update=":formtable:idTabela" />
 	    	</p:confirmDialog>
             </h:form>

@@ -2,7 +2,7 @@ package br.com.engebras.controller;
 
 /**
  * @author Adalberto Kamida
- * dt. criação: 30/06/2016
+ * dt. criacao: 30/06/2016
  */
 
 import java.io.Serializable;
@@ -26,14 +26,12 @@ import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.MotivoInconsistenciaImagem;
 
-
 @ManagedBean(name="mbMotivoInconsistenciaImagem")
 @SessionScoped
 public class MbMotivoInconsistenciaImagem implements Serializable {
-
     private static final long serialVersionUID = 1L;
     
-    private MotivoInconsistenciaImagem motivoInconsistenciaImagem = new MotivoInconsistenciaImagem(); 
+        private MotivoInconsistenciaImagem motivoInconsistenciaImagem = new MotivoInconsistenciaImagem(); 
     
     private List<MotivoInconsistenciaImagem> motivoInconsistenciaImagens;
     

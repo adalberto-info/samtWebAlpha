@@ -33,7 +33,7 @@
                                                      update="@form :formtable" />
                                 </p:toolbarGroup>
                                 <p:toolbarGroup align="right">
-                                    <p:button value="Novo" outcome="/restrict/cadUsuario.xhtml" icon="ui-icon-document"/>
+                                    <p:button value="Novo" outcome="/restrict/cadUsuario.xhtml" image="ui-icon-document"/>
                                 </p:toolbarGroup>
                             </p:toolbar>
 
@@ -71,12 +71,12 @@
                         </f:facet>
 
                         <p:commandButton value="Editar" action="#{mbUsuario.editarUsuario(tabUsuario.nr_codigo)}"
-                                         icon="ui-icon ui-icon-pencil">
+                                         image="ui-icon ui-icon-pencil">
                             <f:setPropertyActionListener target="#{mbPesquisaUsuario.usuario}" value="#{tabUsuario}"/>
                         </p:commandButton> 
                         
                         <p:commandButton value="Remover" action="#{mbPesquisaUsuario.deleteUsuario}"
-                                         icon="ui-icon ui-icon-close" update="@form :formtable">
+                                         image="ui-icon ui-icon-close" update="@form :formtable">
                             <f:setPropertyActionListener target="#{mbPesquisaUsuario.usuario}"
                                                          value="#{tabUsuario}"/>
                         </p:commandButton>
