@@ -134,6 +134,8 @@ public class MbMotivoInconsistenciaImagem implements Serializable {
         } else {
             updateMotivoInconsistenciaImagem();
         }
+        
+        limpaMotivoInconsistenciaImagem();
     }
     
     public void insertMotivoInconsistenciaImagem(){

@@ -51,6 +51,8 @@ public class MbPesquisaMotivoInconsistenciaImagem implements Serializable {
     
     public void deleteMotivoInconsistenciaImagem(){
         motivoInconsistenciaImagemDAO().remove(motivoInconsistenciaImagem);
+        pesquisar();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso!!!",""));
     }
     
     public void pesquisar(){
