@@ -33,7 +33,7 @@
                                                      update="@form :formtable" />
                                 </p:toolbarGroup>
                                 <p:toolbarGroup align="right">
-                                    <p:button value="Novo" outcome="/restrict/cadArea.xhtml" image="ui-icon-document"/>
+                                    <p:button value="Novo" outcome="/restrict/cadArea.xhtml" icon="ui-icon-document"/>
                                 </p:toolbarGroup>
                             </p:toolbar>
 
@@ -77,12 +77,12 @@
                         </f:facet>
 
                         <p:commandButton value="Editar" action="#{mbArea.editarArea(tabArea.dc_codArea)}"
-                                         image="ui-icon ui-icon-pencil">
+                                         icon="ui-icon ui-icon-pencil">
                             <f:setPropertyActionListener target="#{mbPesquisaArea.area}" value="#{tabArea}"/>
                         </p:commandButton> 
                         
                         <p:commandButton value="Remover" action="#{mbPesquisaArea.deleteArea()}"
-                                         image="ui-icon ui-icon-close" update="@form :formtable">
+                                         icon="ui-icon ui-icon-close" update="@form :formtable">
                             <f:setPropertyActionListener target="#{mbPesquisaArea.area}"
                                                          value="#{tabArea}"/>
                         </p:commandButton>

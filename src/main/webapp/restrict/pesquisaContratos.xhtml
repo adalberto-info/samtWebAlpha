@@ -34,7 +34,7 @@
                                                      update="@form :formtable" />
                                 </p:toolbarGroup>
                                 <p:toolbarGroup align="right">
-                                    <p:button value="Novo" outcome="/restrict/cadContrato.xhtml" image="ui-icon-document"/>
+                                    <p:button value="Novo" outcome="/restrict/cadContrato.xhtml" icon="ui-icon-document"/>
                                 </p:toolbarGroup>
                             </p:toolbar>
 
@@ -79,12 +79,12 @@
                         </f:facet>
 
                         <p:commandButton value="Editar" action="#{mbContrato.editarContrato(tabContrato.nr_crd)}"
-                                         image="ui-icon ui-icon-pencil">
+                                         icon="ui-icon ui-icon-pencil">
                             <f:setPropertyActionListener target="#{mbPesquisaContrato.contrato}" value="#{tabContrato}"/>
                         </p:commandButton> 
                         
                         <p:commandButton value="Remover" action="#{mbPesquisaContrato.deleteContrato()}"
-                                         image="ui-icon ui-icon-close" update="@form :formtable">
+                                         icon="ui-icon ui-icon-close" update="@form :formtable">
                             <f:setPropertyActionListener target="#{mbPesquisaContrato.contrato}"
                                                          value="#{tabContrato}"/>
                         </p:commandButton>
