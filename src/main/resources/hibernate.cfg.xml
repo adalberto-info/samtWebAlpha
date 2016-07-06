@@ -43,5 +43,6 @@ dt. criação: 23/03/2016
         <mapping class="br.com.engebras.model.entities.GrupoAutuador"/>
         <mapping class="br.com.engebras.model.entities.Area"/>
         <mapping class="br.com.engebras.model.entities.MotivoInconsistenciaImagem"/>
+        <mapping class="br.com.engebras.model.entities.LaudoMetrologico"/>
     </session-factory>
 </hibernate-configuration>

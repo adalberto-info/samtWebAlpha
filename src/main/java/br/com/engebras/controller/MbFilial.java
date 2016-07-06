@@ -7,12 +7,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import br.com.engebras.util.FacesContextUtil;
-import br.com.engebras.util.HibernateUtil;
-import br.com.engebras.model.dao.InterfaceDAO;
-import br.com.engebras.model.dao.HibernateDAO;
-import br.com.engebras.model.entities.Filial;
-import br.com.engebras.model.entities.Uf;
 import java.util.ArrayList;
 import java.util.Map;
 import org.hibernate.Criteria;
@@ -20,6 +14,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
+
+import br.com.engebras.util.FacesContextUtil;
+import br.com.engebras.util.HibernateUtil;
+import br.com.engebras.model.dao.InterfaceDAO;
+import br.com.engebras.model.dao.HibernateDAO;
+import br.com.engebras.model.entities.Filial;
+import br.com.engebras.model.entities.Uf;
+
+
 /**
  * @author Adalberto 
  * dt. criacao: 22/03/2016
