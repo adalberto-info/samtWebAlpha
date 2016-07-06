@@ -48,10 +48,63 @@ public class MbPesquisaLaudoMetrologico implements Serializable {
         filtro = new LaudoMetrologicoFilter(); 
     }
     
-    private InterfaceDAO 
+    private InterfaceDAO<LaudoMetrologico> laudoMetrologicoDAO(){
+        InterfaceDAO<LaudoMetrologico> laudoMetrologicoDAO = new HibernateDAO<LaudoMetrologico>(LaudoMetrologico.class, FacesContextUtil.getRequestSession());
+        return laudoMetrologicoDAO; 
+    }
+         
+    public void deleteLaudoMetrologico(){
+        laudoMetrologicoDAO().remove(laudoMetrologico);
+        pesquisar(); 
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso!!!",""));
+    }
+    
+    public void pesquisar(){
+        laudoMetrologicosFiltrados = filtrados(filtro);
+    }
+    
+    public List<LaudoMetrologico> filtrados(LaudoMetrologicoFilter filtro){
+        Session session = FacesContextUtil.getRequestSession();
+        Criteria criteria = session.createCriteria(LaudoMetrologico.class);
+        
+        if (StringUtils.isBlank(filtro.getDc_serieEquipamento())){
+            criteria.add(Restrictions.eq("dc_serieEquipamento", filtro.getDc_serieEquipamento()));
+        }
+        
+        return criteria.addOrder(Order.asc("dc_serieEquipamento")).list(); 
+    }
 
-    
-    
+    public EntityManager getManager() {
+        return manager;
+    }
+
+    public void setManager(EntityManager manager) {
+        this.manager = manager;
+    }
+
+    public LaudoMetrologicoFilter getFiltro() {
+        return filtro;
+    }
+
+    public void setFiltro(LaudoMetrologicoFilter filtro) {
+        this.filtro = filtro;
+    }
+
+    public List<LaudoMetrologico> getLaudoMetrologicosFiltrados() {
+        return laudoMetrologicosFiltrados;
+    }
+
+    public void setLaudoMetrologicosFiltrados(List<LaudoMetrologico> laudoMetrologicosFiltrados) {
+        this.laudoMetrologicosFiltrados = laudoMetrologicosFiltrados;
+    }
+
+    public LaudoMetrologico getLaudoMetrologico() {
+        return laudoMetrologico;
+    }
+
+    public void setLaudoMetrologico(LaudoMetrologico laudoMetrologico) {
+        this.laudoMetrologico = laudoMetrologico;
+    }
     
     
 }

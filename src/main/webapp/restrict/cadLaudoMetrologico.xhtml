@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="/WEB-INF/templates/LayoutMaster.xhtml">
+
+    <ui:define name="content">
+        <style>
+            .ui-growl{
+                position:fixed;
+                top:70px;
+                right:5px;
+                width:301px;
+            }
+        </style>
+        <p:fieldset legend="Cadastrar Laudo Metrologico">
+            <br/>
+            <p:tabView id="tbv1" dynamic="true" cache="true">
+                <p:tab title="Filial" id="cadLaudoMetroLogico">
+                    <h:form prependId="false" id="formCadFilial">
+                        <p:growl id="msg0" />
+                            <p:toolbar>
+                                <p:toolbarGroup>
+                                    <p:commandButton value="Salvar" action="#{mbFilial.addFilial}" icon="ui-icon ui-icon-disk" update="@form"/>
+                                    <p:commandButton value="Cancelar" actionListener="#{mbFilial.limpaFilial}" icon="ui-icon ui-icon-close" update="@form" process="@this"/>
+                                </p:toolbarGroup>
+                                <p:toolbarGroup align="right">
+                                    <p:button value="Pesquisa" outcome="/restrict/pesquisaFiliais.xhtml"  icon="ui-icon-search" />
+                                </p:toolbarGroup>
+                            </p:toolbar>
+
+                        <div class="ui-fluid">
+
+                            <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
+                                <p:outputLabel/>
+                                <h:inputHidden id="nr_codigo" value="#{mbFilial.filial.nr_codigo}"/>
+
+                                <p:outputLabel for="dc_filial" value="Nome Filial: "/>
+                                <p:inputText id="dc_filial" size="30" maxlength="30" value="#{mbFilial.filial.dc_filial}" onkeyup="this.value = this.value.toUpperCase()"
+                                             required="true" requiredMessage="O campo [Nome Filial] é obrigatório..."/>
+
+                                <p:outputLabel for="dc_endereco" value="Endereço: "/>
+                                <p:inputText id="dc_endereco" size="30" maxlength="30" value="#{mbFilial.filial.dc_endereco}"/> 
+
+                                <p:outputLabel for="dc_numero" value="Número: "/>
+                                <p:inputText id="dc_numero" size="15" maxlength="15" value="#{mbFilial.filial.dc_numero}"/>
+
+                                <p:outputLabel for="dc_bairro" value="Bairro: "/>
+                                <p:inputText id="dc_bairro" size="25" maxlength="25" value="#{mbFilial.filial.dc_bairro}"/>
+
+                                <p:outputLabel for="dc_cidade" value="Cidade: "/>
+                                <p:inputText id="dc_cidade" size="30" maxlength="30" value="#{mbFilial.filial.dc_cidade}" onkeyup="this.value = this.value.toUpperCase()" 
+                                             required ="true" requiredMessage="O campo [Cidade] é obrigatório..."/>
+
+                                <p:outputLabel for="dc_uf" value="UF: "/>
+
+                                <p:selectOneMenu id="dc_uf" value="#{mbFilial.filial.dc_uf}" style="width:150px" required ="true" requiredMessage="O campo [UF] é obrigatório...">
+                                    <f:selectItem itemLabel="Selecione a UF" itemValue="" />
+                                    <f:selectItems value="#{mbFilial.ufs}" var="listaUfs" 
+                                                   itemLabel="#{listaUfs.dc_uf}" itemValue="#{listaUfs.dc_uf}"/>
+                                </p:selectOneMenu>
+
+                                <p:outputLabel for="dc_responsavel" value="Responsável: "/>
+                                <p:inputText id="dc_responsavel" size="30" maxlength="30" value="#{mbFilial.filial.dc_responsavel}"/>
+
+                                <p:outputLabel for="dc_telefone" value="Telefone: "/>
+                                <p:inputText id="dc_telefone" size="25" maxlength="25" value="#{mbFilial.filial.dc_telefone}"/>
+
+                            </p:panelGrid>
+                        </div>
+                        <br/>
+                    </h:form>
+                </p:tab>
+            </p:tabView>    
+
+
+        </p:fieldset>
+
+    </ui:define>
+</ui:composition>
