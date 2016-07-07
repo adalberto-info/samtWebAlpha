@@ -39,8 +39,8 @@ public class LaudoMetrologico implements Serializable {
     private String dc_serieEquipamento; 
     @Column(name="dc_matriculaTecnico", nullable=false, length=10)
     private String dc_matriculaTecnico; 
-    @Column(name="dc_nome", nullable=false, length=30)
-    private String dc_nome; 
+    @Column(name="dc_nomeTecnico", nullable=false, length=30)
+    private String dc_nomeTecnico; 
     @Column(name="dc_orgao", nullable=false, length=40)
     private String dc_orgao; 
     @Column(name="dc_numeroLaudo", nullable=false, length=16)
@@ -84,12 +84,12 @@ public class LaudoMetrologico implements Serializable {
         this.dc_matriculaTecnico = dc_matriculaTecnico;
     }
 
-    public String getDc_nome() {
-        return dc_nome;
+    public String getDc_nomeTecnico() {
+        return dc_nomeTecnico;
     }
 
-    public void setDc_nome(String dc_nome) {
-        this.dc_nome = dc_nome;
+    public void setDc_nomeTecnico(String dc_nomeTecnico) {
+        this.dc_nomeTecnico = dc_nomeTecnico;
     }
 
     public String getDc_orgao() {
