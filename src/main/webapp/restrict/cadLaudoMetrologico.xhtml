@@ -92,20 +92,20 @@
                                 <p:inputText id="dc_numeroLacre2" size="17" maxlength="17" value="#{mbLaudoMetrologico.laudoMetrologico.dc_numeroLacre2}"/>
 
                                 <p:outputLabel for="dt_verificacao" value="Dt. Verificação: "/>
-                                <p:calendar id="dt_verificacao" size="10" pattern="dd/MM/yyyy" value="#{mbLaudoMetrologico.laudoMetrologico.dt_verificacao}" navigator="true" locale="pt"
+                                <p:calendar id="dt_verificacao" size="10" pattern="dd/MM/yyyy" value="#{mbLaudoMetrologico.laudoMetrologico.dt_verificacao}" navigator="true" locale="pt"/>
                                 
                                 <p:outputLabel for="dt_validade" value="Dt. Validade: "/>
-                                <p:calendar id="dt_validade" size="10" pattern="dd/MM/yyyy" value="#{mbLaudoMetrologico.laudoMetrologico.dt_validade}" navigator="true" locale="pt"
+                                <p:calendar id="dt_validade" size="10" pattern="dd/MM/yyyy" value="#{mbLaudoMetrologico.laudoMetrologico.dt_validade}" navigator="true" locale="pt"/>
                                 
                                 <p:outputLabel for="nr_codMotivoLaudo" value="Motivo Laudo: "/>
                                 <p:selectOneMenu id="nr_codMotivoLaudo" value="#{mbLaudoMetrologico.laudoMetrologico.nr_codMotivoLaudo}" style="width:300px">
                                     <f:selectItem itemLabel="Selecione o Motivo Laudo" itemValue="0" />
-                                    <f:selectItems value="#{mbLaudoMetrologico.motivosLaudos}" var="listaMotivosLaudos" 
-                                                   itemLabel="#{listaMotivosLaudos.dc_motivoLaudo}" itemValue="#{listaMotivosLaudos.nr_codigo.toString()}"/>
+                                    <f:selectItems value="#{mbLaudoMetrologico.motivoLaudos}" var="listaMotivoLaudos" 
+                                                   itemLabel="#{listaMotivoLaudos.dc_motivoLaudo}" itemValue="#{listaMotivoLaudos.nr_codigo.toString()}"/>
                                 </p:selectOneMenu>
 
                                 <p:outputLabel for="dc_observacao" value="Observação: "/>
-                                <p:inputTextarea id="#{mbLaudoMetrologico.laudoMetrologico.dc_observacao}" rows="10" cols="50" value="#{mbLaudoMetrologico.laudoMetrologico.dc_observacao}" />
+                                <p:inputTextarea id="dc_observacao" rows="10" cols="50" value="#{mbLaudoMetrologico.laudoMetrologico.dc_observacao}" />
                                             
                             </p:panelGrid>
                         </div>

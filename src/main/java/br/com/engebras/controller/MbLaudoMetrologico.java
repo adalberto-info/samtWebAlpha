@@ -34,11 +34,11 @@ public class MbLaudoMetrologico implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private LaudoMetrologico laudoMetrologico = new LaudoMetrologico(); 
-    
     private List<LaudoMetrologico> laudoMetrologicos; 
+    private List motivoLaudos = new ArrayList<>();
     
     public MbLaudoMetrologico(){
-        
+        geraListaMotivoLaudos(); 
     }
     
     private InterfaceDAO<LaudoMetrologico> laudoMetrologicoDAO(){
@@ -114,6 +114,30 @@ public class MbLaudoMetrologico implements Serializable {
         return laudoMetrologicoDAO().getEntity(nr_codigo);
     }
 
+    public void geraListaMotivoLaudos(){
+        List listaSQL; 
+        String vlc_sql; 
+        vlc_sql = "select nr_codigo, dc_motivoLaudo from motivoLaudo order by nr_codigo"; 
+        
+        Session session = FacesContextUtil.getRequestSession();
+        
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+        
+        this.motivoLaudos = listaSQL; 
+        
+    }
+
+    public List getMotivoLaudos() {
+        return motivoLaudos;
+    }
+
+    public void setMotivoLaudos(List motivoLaudos) {
+        this.motivoLaudos = motivoLaudos;
+    }
+    
+    
     public LaudoMetrologico getLaudoMetrologico() {
         return laudoMetrologico;
     }

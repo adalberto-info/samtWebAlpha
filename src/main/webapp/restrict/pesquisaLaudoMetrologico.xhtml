@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="/WEB-INF/templates/LayoutMaster.xhtml">
+
+    <ui:define name="content">
+        <style>
+            .ui-growl{
+                position:fixed;
+                top:70px;
+                right:5px;
+                width:301px;
+            }
+        </style>
+        <p:fieldset legend="Pesquisa Laudos Metrológicos">
+            <br/>
+
+            <p:tabView id="tbv1" dynamic="true" cache="true">
+                <p:tab title="Pesquisa Laudo Metrológico" id="PesquisaLaudoMetrologico">
+                    <h:form prependId="false" id="formPesqLaudoMetrologico">
+                        <p:growl id="msg0" />
+
+                        <div class="ui-fluid">
+
+                            <p:toolbar style="margin-top: 20px">
+                                <p:toolbarGroup>
+                                    <p:commandButton value="Pesquisar" action="#{mbPesquisaLaudoMetrologico.pesquisar()}"
+                                                     update="@form :formtable" />
+                                </p:toolbarGroup>
+                                <p:toolbarGroup align="right">
+                                    <p:button value="Novo" outcome="/restrict/cadLaudoMetrologico.xhtml" icon="ui-icon-document"/>
+                                </p:toolbarGroup>
+                            </p:toolbar>
+
+                            <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
+                                <p:outputLabel value="Série Equipamento: "/>
+                                <p:inputText id="dc_serieEquipamento" size="15" maxlength="15" value="#{mbPesquisaLaudoMetrologico.filtro.dc_serieEquipamento}"/>
+                            </p:panelGrid>
+                        </div>
+                        <br/>
+                    </h:form>
+                </p:tab>
+            </p:tabView>    
+            
+            
+            <h:form id="formtable">
+                <p:growl id="msg1"/>
+
+                <p:dataTable id="idTabela" var="tabLaudoMetrologico" value="#{mbPesquisaLaudoMetrologico.laudoMetrologicosFiltrados}" 
+                             paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15" paginatorPosition="bottom">
+
+                    <f:facet name="header">Lista de Laudo Metrológico</f:facet>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Código"/>
+                        </f:facet>
+                        <h:outputText value="#{tabLaudoMetrologico.nr_codigo}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Série Equipamento"/>
+                        </f:facet>
+                        <h:outputText value="#{tabLaudoMetrologico.dc_serieEquipamento}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ações"/>
+                        </f:facet>
+
+                        <p:commandButton value="Editar" action="#{mbLaudoMetrologico.editarLaudoMetrologico(tabLaudoMetrologico.nr_codigo)}"
+                                         icon="ui-icon ui-icon-pencil">
+                            <f:setPropertyActionListener target="#{mbPesquisaLaudoMetrologico.laudoMetrologico}" value="#{tabLaudoMetrologico}"/>
+                        </p:commandButton> 
+                        
+                        <p:commandButton value="Remover" action="#{mbPesquisaLaudoMetroLogico.deleteLaudoMetrologico}"
+                                         icon="ui-icon ui-icon-close" update="@form :formtable">
+                            <f:setPropertyActionListener target="#{mbPesquisaLaudoMetrologico.laudoMetrologico}"
+                                                         value="#{tabLaudoMetrologico}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+
+               	<p:confirmDialog header="Exclusão de laudo metrológico" 
+                                 message="Tem certeza que deseja excluir o laudo metrológico #{mbPesquisaLaudoMetrologico.laudoMetrologico.dc_serieEquipamento}?"
+	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();"
+                                         action="#{mbPesquisaLaudoMetrologico.remover(tabLaudoMetrologico)}" process="@this"
+	    			update=":formtable:idTabela" />
+	    	</p:confirmDialog>
+            </h:form>
+
+        </p:fieldset>
+
+    </ui:define>
+
+</ui:composition>
+

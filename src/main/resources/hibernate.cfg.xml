@@ -44,5 +44,6 @@ dt. criação: 23/03/2016
         <mapping class="br.com.engebras.model.entities.Area"/>
         <mapping class="br.com.engebras.model.entities.MotivoInconsistenciaImagem"/>
         <mapping class="br.com.engebras.model.entities.LaudoMetrologico"/>
+        <mapping class="br.com.engebras.model.entities.MotivoLaudo"/>
     </session-factory>
 </hibernate-configuration>

@@ -67,7 +67,7 @@ public class MbPesquisaLaudoMetrologico implements Serializable {
         Session session = FacesContextUtil.getRequestSession();
         Criteria criteria = session.createCriteria(LaudoMetrologico.class);
         
-        if (StringUtils.isBlank(filtro.getDc_serieEquipamento())){
+        if (StringUtils.isNotBlank(filtro.getDc_serieEquipamento())){
             criteria.add(Restrictions.eq("dc_serieEquipamento", filtro.getDc_serieEquipamento()));
         }
         
