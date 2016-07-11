@@ -46,19 +46,19 @@
 	};
 	</script>
 
-        <p:fieldset legend="Cadastrar Laudo Metrologico">
+        <p:fieldset legend="Cadastrar Laudo Não Metrológico">
             <br/>
             <p:tabView id="tbv1" dynamic="true" cache="true">
-                <p:tab title="Laudo Metrológico" id="cadLaudoMetroLogico">
-                    <h:form prependId="false" id="formCadLaudoMetrologico">
+                <p:tab title="Laudo Não Metrológico" id="cadLaudoNaoMetroLogico">
+                    <h:form prependId="false" id="formCadLaudoNaoMetrologico">
                         <p:growl id="msg0" />
                             <p:toolbar>
                                 <p:toolbarGroup>
-                                    <p:commandButton value="Salvar" action="#{mbLaudoMetrologico.addLaudoMetrologico}" icon="ui-icon ui-icon-disk" update="@form"/>
-                                    <p:commandButton value="Cancelar" actionListener="#{mbLaudoMetrologico.limpaLaudoMetrologico}" icon="ui-icon ui-icon-close" update="@form" process="@this"/>
+                                    <p:commandButton value="Salvar" action="#{mbLaudoNaoMetrologico.addLaudoNaoMetrologico}" icon="ui-icon ui-icon-disk" update="@form"/>
+                                    <p:commandButton value="Cancelar" actionListener="#{mbLaudoNaoMetrologico.limpaLaudoNaoMetrologico}" icon="ui-icon ui-icon-close" update="@form" process="@this"/>
                                 </p:toolbarGroup>
                                 <p:toolbarGroup align="right">
-                                    <p:button value="Pesquisa" outcome="/restrict/pesquisaLaudoMetrologico.xhtml"  icon="ui-icon-search" />
+                                    <p:button value="Pesquisa" outcome="/restrict/pesquisaLaudoNaoMetrologico.xhtml"  icon="ui-icon-search" />
                                 </p:toolbarGroup>
                             </p:toolbar>
 
@@ -66,50 +66,50 @@
 
                             <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
                                 <p:outputLabel/>
-                                <h:inputHidden id="nr_codigo" value="#{mbLaudoMetrologico.laudoMetrologico.nr_codigo}"/>
+                                <h:inputHidden id="nr_codigo" value="#{mbLaudoNaoMetrologico.laudoNaoMetrologico.nr_codigo}"/>
 
                                 <p:outputLabel for="dc_serieEquipamento" value="Série Equipamento: "/>
-                                <p:inputText id="dc_serieEquipamento" size="15" maxlength="15" value="#{mbLaudoMetrologico.laudoMetrologico.dc_serieEquipamento}" onkeyup="this.value = this.value.toUpperCase()"
+                                <p:inputText id="dc_serieEquipamento" size="15" maxlength="15" value="#{mbLaudoNaoMetrologico.laudoNaoMetrologico.dc_serieEquipamento}" onkeyup="this.value = this.value.toUpperCase()"
                                              required="true" requiredMessage="O campo [Série Equipamento] é obrigatório..."/>
 
                                 <p:outputLabel for="dc_matriculaTecnico" value="Matrícula Técnico: "/>
-                                <p:inputText id="dc_matriculaTecnico" size="10" maxlength="10" value="#{mbLaudoMetrologico.laudoMetrologico.dc_matriculaTecnico}"/> 
+                                <p:inputText id="dc_matriculaTecnico" size="10" maxlength="10" value="#{mbLaudoNaoMetrologico.laudoNaoMetrologico.dc_matriculaTecnico}"/> 
 
                                 <p:outputLabel for="dc_nomeTecnico" value="Nome Técnico: "/>
-                                <p:inputText id="dc_nomeTecnico" size="30" maxlength="30" value="#{mbLaudoMetrologico.laudoMetrologico.dc_nomeTecnico}"/>
+                                <p:inputText id="dc_nomeTecnico" size="30" maxlength="30" value="#{mbLaudoNaoMetrologico.laudoNaoMetrologico.dc_nomeTecnico}"/>
 
                                 <p:outputLabel for="dc_orgao" value="Órgão: "/>
-                                <p:inputText id="dc_orgao" size="40" maxlength="40" value="#{mbLaudoMetrologico.laudoMetrologico.dc_orgao}"
-                                             required="true" requiredMessage="O campo [Órgão] é obrigatório..."/>
+                                <p:inputText id="dc_orgao" size="40" maxlength="40" value="#{mbLaudoNaoMetrologico.laudoNaoMetrologico.dc_orgao}"
+                                             required="true" requiredMessage="O campo [órgão] é obrigatório..."/>
 
                                 <p:outputLabel for="dc_numeroLaudo" value="Número Laudo: "/>
-                                <p:inputText id="dc_numeroLaudo" size="16" maxlength="16" value="#{mbLaudoMetrologico.laudoMetrologico.dc_numeroLaudo}" onkeyup="this.value = this.value.toUpperCase()" 
-                                             required ="true" requiredMessage="O campo [Número Laudo] é obrigatório..."/>
+                                <p:inputText id="dc_numeroLaudo" size="16" maxlength="16" value="#{mbLaudoNaoMetrologico.laudoNaoMetrologico.dc_numeroLaudo}" onkeyup="this.value = this.value.toUpperCase()" 
+                                             required="true" requiredMessage="O campo [Número Laudo] é obrigatório..."/>
 
                                 <p:outputLabel for="dc_numeroLacre" value="Número Lacre: "/>
-                                <p:inputText id="dc_numeroLacre" size="17" maxlength="17" value="#{mbLaudoMetrologico.laudoMetrologico.dc_numeroLacre}"/>
+                                <p:inputText id="dc_numeroLacre" size="17" maxlength="17" value="#{mbLaudoNaoMetrologico.laudoNaoMetrologico.dc_numeroLacre}"/>
 
                                 <p:outputLabel for="dc_numeroLacre2" value="Número Lacre2: "/>
-                                <p:inputText id="dc_numeroLacre2" size="17" maxlength="17" value="#{mbLaudoMetrologico.laudoMetrologico.dc_numeroLacre2}"/>
+                                <p:inputText id="dc_numeroLacre2" size="17" maxlength="17" value="#{mbLaudoNaoMetrologico.laudoNaoMetrologico.dc_numeroLacre2}"/>
 
                                 <p:outputLabel for="dt_verificacao" value="Dt. Verificação: "/>
-                                <p:calendar id="dt_verificacao" size="10" pattern="dd/MM/yyyy" value="#{mbLaudoMetrologico.laudoMetrologico.dt_verificacao}" navigator="true" locale="pt"
-                                            required="true" requiredMessage="O campo [Dt. Verificação] é obrigatório..."/>
+                                <p:calendar id="dt_verificacao" size="10" pattern="dd/MM/yyyy" value="#{mbLaudoNaoMetrologico.laudoNaoMetrologico.dt_verificacao}" navigator="true" locale="pt"
+                                            required="true" requiredMessage="O campo [Dt. verificação] é obrigatorio..."/>
                                 
                                 <p:outputLabel for="dt_validade" value="Dt. Validade: "/>
-                                <p:calendar id="dt_validade" size="10" pattern="dd/MM/yyyy" value="#{mbLaudoMetrologico.laudoMetrologico.dt_validade}" navigator="true" locale="pt"
+                                <p:calendar id="dt_validade" size="10" pattern="dd/MM/yyyy" value="#{mbLaudoNaoMetrologico.laudoNaoMetrologico.dt_validade}" navigator="true" locale="pt"
                                             required="true" requiredMessage="O campo [Dt. Validade] é obrigatório..."/>
                                 
                                 <p:outputLabel for="nr_codMotivoLaudo" value="Motivo Laudo: "/>
-                                <p:selectOneMenu id="nr_codMotivoLaudo" value="#{mbLaudoMetrologico.laudoMetrologico.nr_codMotivoLaudo}" 
+                                <p:selectOneMenu id="nr_codMotivoLaudo" value="#{mbLaudoNaoMetrologico.laudoNaoMetrologico.nr_codMotivoLaudo}" 
                                                  required="true" requiredMessage="O campo [Motivo Laudo] é obrigatório..." style="width:300px">
                                     <f:selectItem itemLabel="Selecione o Motivo Laudo" itemValue="0" />
-                                    <f:selectItems value="#{mbLaudoMetrologico.motivoLaudos}" var="listaMotivoLaudos" 
+                                    <f:selectItems value="#{mbLaudoNaoMetrologico.motivoLaudos}" var="listaMotivoLaudos" 
                                                    itemLabel="#{listaMotivoLaudos.dc_motivoLaudo}" itemValue="#{listaMotivoLaudos.nr_codigo.toString()}"/>
                                 </p:selectOneMenu>
 
                                 <p:outputLabel for="dc_observacao" value="Observação: "/>
-                                <p:inputTextarea id="dc_observacao" rows="10" cols="50" value="#{mbLaudoMetrologico.laudoMetrologico.dc_observacao}" />
+                                <p:inputTextarea id="dc_observacao" rows="10" cols="50" value="#{mbLaudoNaoMetrologico.laudoNaoMetrologico.dc_observacao}" />
                                             
                             </p:panelGrid>
                         </div>
