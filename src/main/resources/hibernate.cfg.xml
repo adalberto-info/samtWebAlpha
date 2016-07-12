@@ -46,5 +46,6 @@ dt. criação: 23/03/2016
         <mapping class="br.com.engebras.model.entities.LaudoMetrologico"/>
         <mapping class="br.com.engebras.model.entities.MotivoLaudo"/>
         <mapping class="br.com.engebras.model.entities.LaudoNaoMetrologico"/>
+        <mapping class="br.com.engebras.model.entities.ParametroSistema"/>
     </session-factory>
 </hibernate-configuration>
