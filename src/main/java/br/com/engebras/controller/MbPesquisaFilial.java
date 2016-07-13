@@ -5,12 +5,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import java.util.List;
-
-import br.com.engebras.model.entities.Filial;
-import br.com.engebras.filter.FilialFilter;
-import br.com.engebras.model.dao.HibernateDAO;
-import br.com.engebras.model.dao.InterfaceDAO;
-import br.com.engebras.util.FacesContextUtil;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -23,6 +17,13 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.Order;
+
+import br.com.engebras.model.dao.HibernateDAO;
+import br.com.engebras.model.dao.InterfaceDAO;
+import br.com.engebras.util.FacesContextUtil;
+import br.com.engebras.model.entities.Filial;
+import br.com.engebras.filter.FilialFilter;
+
 
 /**
  * @author Adalberto

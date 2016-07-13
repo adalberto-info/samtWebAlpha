@@ -56,19 +56,20 @@ public class MbParametroSistema implements Serializable {
     }
 
     public String editarParametroSistema(Integer nr_codigo){
-
-        parametroSistema = porNr_codigo(); 
+        parametroSistema = porNr_codigo(nr_codigo); 
         return editParametroSistema(); 
     }
 
     public void addParametroSistema(){
-        if (VerificaDuplicidade(parametroSistema.getDc_parametro()) == true){
+        if (verificaDuplicidade(parametroSistema.getDc_parametro()) == true){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Já existe um parâmetro cadastrado com o parâmetro: " + parametroSistema.getDc_parametro()+ ".", ""));
         } else if (parametroSistema.getNr_codigo() == null || parametroSistema.getNr_codigo() == 0){
             insertParametroSistema(); 
         } else {
             updateParametroSistema(); 
         }
+        
+        limpaParametroSistema(); 
     }
 
     public void insertParametroSistema(){
