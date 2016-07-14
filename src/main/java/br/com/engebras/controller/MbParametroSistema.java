@@ -94,7 +94,7 @@ public class MbParametroSistema implements Serializable {
         Session session = FacesContextUtil.getRequestSession();
         vlc_sql = "select p.dc_parametro from parametroSistema p where dc_parametro = '" + dc_parametro + "' "; 
         if (parametroSistema.getNr_codigo() != null && parametroSistema.getNr_codigo() != 0)
-            vlc_sql += "where p.nr_codigo <> " + parametroSistema.getNr_codigo();
+            vlc_sql += "and p.nr_codigo <> " + parametroSistema.getNr_codigo();
 
         SQLQuery query = session.createSQLQuery(vlc_sql);
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
