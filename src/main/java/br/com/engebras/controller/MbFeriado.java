@@ -27,6 +27,7 @@ import br.com.engebras.util.HibernateUtil;
 import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.Feriado;
+import java.text.SimpleDateFormat;
 
 @ManagedBean(name="mbFeriado")
 @SessionScoped
@@ -84,10 +85,14 @@ public class MbFeriado implements Serializable {
     private boolean verificaDuplicidade(Date dt_feriado){
         boolean vll_retorno = false; 
         String vlc_sql = ""; 
+        String vlc_data = "";
         List consFeriado;
+        String data_formato = "yyyyMMdd";
+        SimpleDateFormat data_formatada = new SimpleDateFormat(data_formato);
+        vlc_data = data_formatada.format(dt_feriado);
         
         Session session = FacesContextUtil.getRequestSession();
-        vlc_sql = "select a.dt_feriado from feriado a where dt_feriado = '" + dt_feriado + "' "; 
+        vlc_sql = "select a.dt_feriado from feriado a where dt_feriado = '" + vlc_data + "' "; 
         if (feriado.getNr_codigo() != null && feriado.getNr_codigo() != 0){
             vlc_sql += "and a.nr_codigo <> " + feriado.getNr_codigo();
         }
