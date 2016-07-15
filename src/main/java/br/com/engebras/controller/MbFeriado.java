@@ -20,13 +20,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
+import java.util.Date;
 
 import br.com.engebras.util.FacesContextUtil;
 import br.com.engebras.util.HibernateUtil;
 import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.Feriado;
-import java.util.Date;
 
 @ManagedBean(name="mbFeriado")
 @SessionScoped
@@ -35,7 +35,6 @@ public class MbFeriado implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private Feriado feriado = new Feriado(); 
-    
     private List<Feriado> feriados; 
     
     public MbFeriado(){

@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="/WEB-INF/templates/LayoutMaster.xhtml">
+
+    <ui:define name="content">
+        <style>
+            .ui-growl{
+                position:fixed;
+                top:70px;
+                right:5px;
+                width:301px;
+            }
+        </style>
+        <script>
+	PrimeFaces.locales['pt'] = {
+	    closeText: 'Fechar',
+	    prevText: 'Anterior',
+	    nextText: 'Próximo',
+	    currentText: 'Começo',
+	    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+	    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
+	    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+	    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+	    dayNamesMin: ['D','S','T','Q','Q','S','S'],
+	    weekHeader: 'Semana',
+	    firstDay: 0,
+	    isRTL: false,
+	    showMonthAfterYear: false,
+	    yearSuffix: '',
+	    timeOnlyTitle: 'Só Horas',
+	    timeText: 'Tempo',
+	    hourText: 'Hora',
+	    minuteText: 'Minuto',
+	    secondText: 'Segundo',
+	    ampm: false,
+	    month: 'Mês',
+	    week: 'Semana',
+	    day: 'Dia',
+	    allDayText : 'Todo o Dia'
+	};
+	</script>
+        
+        <p:fieldset legend="Pesquisa Feriados">
+            <br/>
+
+            <p:tabView id="tbv1" dynamic="true" cache="true">
+                <p:tab title="Pesquisa Feriado" id="PesquisaFeriado">
+                    <h:form prependId="false" id="formPesqFeriado">
+                        <p:growl id="msg0" />
+
+                        <div class="ui-fluid">
+
+                            <p:toolbar style="margin-top: 20px">
+                                <p:toolbarGroup>
+                                    <p:commandButton value="Pesquisar" action="#{mbPesquisaFeriado.pesquisar()}"
+                                                     update="@form :formtable" />
+                                </p:toolbarGroup>
+                                <p:toolbarGroup align="right">
+                                    <p:button value="Novo" outcome="/restrict/cadFeriado.xhtml" icon="ui-icon-document"/>
+                                </p:toolbarGroup>
+                            </p:toolbar>
+
+                            <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
+                                <p:outputLabel value="Dt. Feriado"/>
+                                <p:calendar id="dt_feriado" size="10"  value="#{mbPesquisaFeriado.filtro.dt_feriado}" navigator="true" locale="pt"/>
+                            </p:panelGrid>
+                        </div>
+                        <br/>
+                    </h:form>
+                </p:tab>
+            </p:tabView>    
+            
+            
+            <h:form id="formtable">
+                <p:growl id="msg1"/>
+
+                <p:dataTable id="idTabela" var="tabFeriado" value="#{mbPesquisaFeriado.feriadosFiltrados}" 
+                             paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15" paginatorPosition="bottom">
+
+                    <f:facet name="header">Lista de Feriados</f:facet>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data"/>
+                        </f:facet>
+                        <h:outputText value="#{tabFeriado.dt_feriado}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Feriado"/>
+                        </f:facet>
+                        <h:outputText value="#{tabFeriado.dc_feriado}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ações"/>
+                        </f:facet>
+
+                        <p:commandButton value="Editar" action="#{mbFeriado.editarFeriado(tabFeriado.nr_codigo)}"
+                                         icon="ui-icon ui-icon-pencil">
+                            <f:setPropertyActionListener target="#{mbPesquisaFeriado.feriado}" value="#{tabFeriado}"/>
+                        </p:commandButton> 
+                        
+                        <p:commandButton value="Remover" action="#{mbPesquisaFeriado.deleteFeriado()}"
+                                         icon="ui-icon ui-icon-close" update="@form :formtable">
+                            <f:setPropertyActionListener target="#{mbPesquisaFeriado.feriado}"
+                                                         value="#{tabFeriado}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+
+               	<p:confirmDialog header="Exclusão de feriado" 
+                                 message="Tem certeza que deseja excluir o feriado #{mbPesquisaFeriado.feriado.dc_feriado}?"
+	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();"
+                                         action="#{mbPesquisaFeriado.deleteFeriado()}" process="@this"
+	    			update=":formtable:idTabela" />
+	    	</p:confirmDialog>
+            </h:form>
+
+        </p:fieldset>
+
+    </ui:define>
+
+</ui:composition>
+

@@ -105,8 +105,4 @@ public class MbPesquisaFeriado implements Serializable {
         this.feriado = feriado;
     }
 
-    
-    
-    
-    
 }

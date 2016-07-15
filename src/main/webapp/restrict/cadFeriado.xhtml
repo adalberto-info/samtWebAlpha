@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="/WEB-INF/templates/LayoutMaster.xhtml">
+
+    <ui:define name="content">
+        <style>
+            .ui-growl{
+                position:fixed;
+                top:70px;
+                right:5px;
+                width:301px;
+            }
+        </style>
+        <script>
+	PrimeFaces.locales['pt'] = {
+	    closeText: 'Fechar',
+	    prevText: 'Anterior',
+	    nextText: 'Próximo',
+	    currentText: 'Começo',
+	    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+	    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
+	    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+	    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+	    dayNamesMin: ['D','S','T','Q','Q','S','S'],
+	    weekHeader: 'Semana',
+	    firstDay: 0,
+	    isRTL: false,
+	    showMonthAfterYear: false,
+	    yearSuffix: '',
+	    timeOnlyTitle: 'Só Horas',
+	    timeText: 'Tempo',
+	    hourText: 'Hora',
+	    minuteText: 'Minuto',
+	    secondText: 'Segundo',
+	    ampm: false,
+	    month: 'Mês',
+	    week: 'Semana',
+	    day: 'Dia',
+	    allDayText : 'Todo o Dia'
+	};
+	</script>
+
+
+        <p:fieldset legend="Cadastrar Feriados">
+            <br/>
+            <p:tabView id="tbv1" dynamic="true" cache="true">
+                <p:tab title="Feriado" id="cadFeriado">
+                    <h:form prependId="false" id="formCadFeriado">
+                        <p:growl id="msg0" />
+                            <p:toolbar>
+                                <p:toolbarGroup>
+                                    <p:commandButton value="Salvar" action="#{mbFeriado.addFeriado}" icon="ui-icon ui-icon-disk" update="@form"/>
+                                    <p:commandButton value="Cancelar" actionListener="#{mbFeriado.limpaFeriado}" icon="ui-icon ui-icon-close" update="@form" process="@this"/>
+                                </p:toolbarGroup>
+                                <p:toolbarGroup align="right">
+                                    <p:button value="Pesquisa" outcome="/restrict/pesquisaFeriados.xhtml"  icon="ui-icon-search" />
+                                </p:toolbarGroup>
+                            </p:toolbar>
+
+                        <div class="ui-fluid">
+
+                            <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
+                                <p:outputLabel/>
+                                <h:inputHidden id="nr_codigo" value="#{mbFeriado.feriado.nr_codigo}"/>
+
+                                <p:outputLabel for="dt_feriado" value="Dt. Feriado: "/>
+                                <p:calendar id="dt_feriado" size="10" pattern="dd/MM/yyyy" value="#{mbFeriado.feriado.dt_feriado}" navigator="true" locale="pt"
+                                              required="true" requiredMessage="O campo [Dt. Feriado] é obrigatório..."/>
+
+                                <p:outputLabel for="dc_feriado" value="Descrição: "/>
+                                <p:inputText id="dc_feriado" size="30" maxlength="30" value="#{mbFeriado.feriado.dc_feriado}" onkeyup="this.value = this.value.toUpperCase()"
+                                             required="true" requiredMessage="O campo [Descrição] é obrigatório..."/>
+
+                            </p:panelGrid>
+                        </div>
+                        <br/>
+                    </h:form>
+                </p:tab>
+            </p:tabView>    
+
+
+        </p:fieldset>
+
+    </ui:define>
+</ui:composition>
