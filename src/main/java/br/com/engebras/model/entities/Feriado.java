@@ -33,8 +33,8 @@ public class Feriado implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="nr_codigo", length=10)
     private Integer nr_codigo;
-    @Column(name="dt_feriado", nullable=false)
     @Temporal(TemporalType.DATE)
+    @Column(name="dt_feriado", nullable=false)
     private Date dt_feriado; 
     @Column(name="dc_feriado", nullable=false, length=30)
     private String dc_feriado; 
@@ -66,7 +66,7 @@ public class Feriado implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.nr_codigo);
+        hash = 17 * hash + Objects.hashCode(this.nr_codigo);
         return hash;
     }
 
@@ -87,7 +87,7 @@ public class Feriado implements Serializable {
         }
         return true;
     }
-    
+
     
     
 }

@@ -58,14 +58,14 @@ public class MbFeriado implements Serializable {
     }
     
     public String editarFeriado(Integer nr_codigo){
-        feriado = porNr_codigo(nr_codigo); 
+        this.feriado = porNr_codigo(nr_codigo); 
         return editFeriado(); 
     }
     
     public void addFeriado(){
         if (verificaDuplicidade(feriado.getDt_feriado()) == true){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Já existe um feriado na data " + feriado.getDt_feriado() + ".",""));
-        } else if(feriado.getNr_codigo() != null && feriado.getNr_codigo() != 0){
+        } else if(feriado.getNr_codigo() == null || feriado.getNr_codigo() == 0){
             insertFeriado();
         } else {
             updateFeriado(); 
