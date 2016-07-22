@@ -48,5 +48,6 @@ dt. criação: 23/03/2016
         <mapping class="br.com.engebras.model.entities.LaudoNaoMetrologico"/>
         <mapping class="br.com.engebras.model.entities.ParametroSistema"/>
         <mapping class="br.com.engebras.model.entities.Feriado"/>
+        <mapping class="br.com.engebras.model.entities.RestricaoZmrc"/>
     </session-factory>
 </hibernate-configuration>
