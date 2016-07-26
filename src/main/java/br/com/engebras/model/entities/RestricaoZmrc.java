@@ -33,8 +33,8 @@ public class RestricaoZmrc implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="nr_codigo", length=10)
     private Integer nr_codigo; 
-    @Column(name="cd_area", nullable=false, length=4)
-    private String cd_area; 
+    @Column(name="dc_codArea", nullable=false, length=4)
+    private String dc_codArea; 
     @Column(name="nr_diaSemana", nullable=false, length=1)
     private Integer nr_diaSemana; 
     @Column(name="dc_horaIni", nullable=false, length=8)
@@ -56,12 +56,12 @@ public class RestricaoZmrc implements Serializable {
         this.nr_codigo = nr_codigo;
     }
 
-    public String getCd_area() {
-        return cd_area;
+    public String getDc_codArea() {
+        return dc_codArea;
     }
 
-    public void setCd_area(String cd_area) {
-        this.cd_area = cd_area;
+    public void setDc_codArea(String dc_codArea) {
+        this.dc_codArea = dc_codArea;
     }
 
     public Integer getNr_diaSemana() {
