@@ -36,9 +36,10 @@ public class MbRestricaoZmrc implements Serializable {
     
     private RestricaoZmrc restricaoZmrc = new RestricaoZmrc(); 
     private List<RestricaoZmrc> restricaoZmrcs;
+    private List<Area> areas = new ArrayList<>();
     
     public MbRestricaoZmrc(){
-        
+        geraListaAreas();
     }
 
     private InterfaceDAO<RestricaoZmrc> restricaoZmrcDAO() {
@@ -125,6 +126,21 @@ public class MbRestricaoZmrc implements Serializable {
         return restricaoZmrcDAO().getEntity(nr_codigo);
     }
 
+    public void geraListaAreas(){
+        List listaSQL; 
+        String vlc_sql; 
+        
+        vlc_sql = "select dc_codArea, dc_area from area order by dc_codArea";
+        
+        Session session = FacesContextUtil.getRequestSession();
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+        
+        areas = listaSQL;
+        
+    }
+    
     public RestricaoZmrc getRestricaoZmrc() {
         return restricaoZmrc;
     }
