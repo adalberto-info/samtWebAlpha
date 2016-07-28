@@ -26,8 +26,9 @@ import br.com.engebras.util.HibernateUtil;
 import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.RestricaoZmrc;
+import br.com.engebras.model.entities.Area;
 
-@ManagedBean(name = "mbRestricaoZmc")
+@ManagedBean(name = "mbRestricaoZmrc")
 @SessionScoped
 public class MbRestricaoZmrc implements Serializable {
 
