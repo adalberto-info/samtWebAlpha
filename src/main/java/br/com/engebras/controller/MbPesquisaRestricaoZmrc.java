@@ -30,46 +30,45 @@ import br.com.engebras.util.FacesContextUtil;
 import br.com.engebras.model.entities.RestricaoZmrc;
 import br.com.engebras.filter.RestricaoZmrcFilter;
 
-
-@ManagedBean(name="mbPesquisaRestricaoZmrc")
+@ManagedBean(name = "mbPesquisaRestricaoZmrc")
 @ViewScoped
 public class MbPesquisaRestricaoZmrc implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
-    private EntityManager manager; 
-    
-    public RestricaoZmrcFilter filtro; 
-    private List<RestricaoZmrc> restricaoZmrcFiltradas; 
+
+    private EntityManager manager;
+
+    public RestricaoZmrcFilter filtro;
+    private List<RestricaoZmrc> restricaoZmrcFiltradas;
     private RestricaoZmrc restricaoZmrc = new RestricaoZmrc();
 
-    public MbPesquisaRestricaoZmrc(){
-        filtro = new RestricaoZmrcFilter(); 
+    public MbPesquisaRestricaoZmrc() {
+        filtro = new RestricaoZmrcFilter();
     }
 
     private InterfaceDAO<RestricaoZmrc> restricaoZmrcDAO() {
         InterfaceDAO<RestricaoZmrc> restricaoZmrcDAO = new HibernateDAO<RestricaoZmrc>(RestricaoZmrc.class, FacesContextUtil.getRequestSession());
-        return restricaoZmrcDAO; 
-    } 
-
-    public void deleteRestricaoZmrc(){
-        restricaoZmrcDAO().remove(restricaoZmrc);
-        pesquisar(); 
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso!!!",""));
+        return restricaoZmrcDAO;
     }
 
-    public void pesquisar(){
+    public void deleteRestricaoZmrc() {
+        restricaoZmrcDAO().remove(restricaoZmrc);
+        pesquisar();
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso!!!", ""));
+    }
+
+    public void pesquisar() {
         restricaoZmrcFiltradas = filtrados(filtro);
     }
 
-        public List<RestricaoZmrc> filtrados(RestricaoZmrcFilter filtro) {
+    public List<RestricaoZmrc> filtrados(RestricaoZmrcFilter filtro) {
         Session session = FacesContextUtil.getRequestSession();
         Criteria criteria = session.createCriteria(RestricaoZmrc.class);
-        
-        if (filtro.getNr_diaSemana() > 0){
-            criteria.add(Restrictions.eq("nr_diaSemana",filtro.getNr_diaSemana()));
+
+        if (filtro.getNr_diaSemana() > 0) {
+            criteria.add(Restrictions.eq("nr_diaSemana", filtro.getNr_diaSemana()));
         }
-     
+
         return criteria.addOrder(Order.asc("nr_diaSemana")).list();
     }
 
@@ -105,6 +104,4 @@ public class MbPesquisaRestricaoZmrc implements Serializable {
         this.restricaoZmrc = restricaoZmrc;
     }
 
-    
-    
 }

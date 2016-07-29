@@ -137,7 +137,7 @@ public class MbRestricaoZmrc implements Serializable {
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
         listaSQL = query.list();
         
-        areas = listaSQL;
+        this.areas = listaSQL;
         
     }
     
@@ -155,6 +155,14 @@ public class MbRestricaoZmrc implements Serializable {
 
     public void setRestricaoZmrcs(List<RestricaoZmrc> restricaoZmrcs) {
         this.restricaoZmrcs = restricaoZmrcs;
+    }
+
+    public List<Area> getAreas() {
+        return areas;
+    }
+
+    public void setAreas(List<Area> areas) {
+        this.areas = areas;
     }
     
     

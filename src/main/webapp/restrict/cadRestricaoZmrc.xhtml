@@ -73,7 +73,7 @@
                                 <p:selectOneMenu id="dc_codArea" value="#{mbRestricaoZmrc.restricaoZmrc.dc_codArea}" style="width:150px" required="true" requiredMessage="O campo [Área] é obrigatório.">
                                     <f:selectItem itemLabel="Selecione a área"  itemValue=""/>
                                     <f:selectItems value="#{mbRestricaoZmrc.areas}" var="listaAreas"
-                                                   itemLabel="#{mbRestricaoZmrc.dc_codArea}" itemValue="#listaAreas.dc_codArea"/>
+                                                   itemLabel="#{listaAreas.dc_codArea}" itemValue="#{listaAreas.dc_codArea}"/>
                                 </p:selectOneMenu>
 
                                 <p:outputLabel for="nr_diaSemana" value="Dia da Semana"/>

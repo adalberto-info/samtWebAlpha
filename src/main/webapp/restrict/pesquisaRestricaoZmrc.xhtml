@@ -71,36 +71,66 @@
                     <f:facet name="header">Lista de Restrição ZMRC</f:facet>
                     <p:column>
                         <f:facet name="header">
+                            <h:outputText value="Área"/>
+                        </f:facet>
+                        <h:outputText value="#{tabRestricaoZmrc.dc_codArea}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
                             <h:outputText value="Nome"/>
                         </f:facet>
                         <h:outputText value="#{tabRestricaoZmrc.nr_diaSemana}"/>
                     </p:column>
-
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Hr. Início"/>
+                        </f:facet>
+                        <h:outputText value="#{tabRestricaoZmrc.dc_horaIni}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Hr. Fim"/>
+                        </f:facet>
+                        <h:outputText value="#{tabRestricaoZmrc.dc_horaIni}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Dia Início"/>
+                        </f:facet>
+                        <h:outputText value="#{tabRestricaoZmrc.dt_inicio}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Dia Fim"/>
+                        </f:facet>
+                        <h:outputText value="#{tabRestricaoZmrc.dt_fim}"/>
+                    </p:column>
+                    
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Ações"/>
                         </f:facet>
 
-                        <p:commandButton value="Editar" action="#{mbFilial.editarFilial(tabFilial.nr_codigo)}"
+                        <p:commandButton value="Editar" action="#{mbRestricaoZmrc.editarRestricaoZmrc(tabRestricaoZmrc.nr_codigo)}"
                                          icon="ui-icon ui-icon-pencil">
-                            <f:setPropertyActionListener target="#{mbPesquisaFilial.filial}" value="#{tabFilial}"/>
+                            <f:setPropertyActionListener target="#{mbPesquisaRestricaoZmrc.restricaoZmrc}" value="#{tabRestricaoZmrc}"/>
                         </p:commandButton> 
                         
-                        <p:commandButton value="Remover" action="#{mbPesquisaFilial.deleteFilial}"
+                        <p:commandButton value="Remover" action="#{mbPesquisaRestricaoZmrc.deleteRestricaoZmrc()}"
                                          icon="ui-icon ui-icon-close" update="@form :formtable">
-                            <f:setPropertyActionListener target="#{mbPesquisaFilial.filial}"
-                                                         value="#{tabFilial}"/>
+                            <f:setPropertyActionListener target="#{mbPesquisaRestricaoZmrc.restricaoZmrc}"
+                                                         value="#{tabRestricaoZmrc}"/>
                         </p:commandButton>
                     </p:column>
 
                 </p:dataTable>
 
-               	<p:confirmDialog header="Exclusão de filial" 
-                                 message="Tem certeza que deseja excluir a filial #{mbPesquisaFilial.filialSelecionada.dc_filial}?"
+               	<p:confirmDialog header="Exclusão de restrição ZMRC" 
+                                 message="Tem certeza que deseja excluir a restrição ZMRC #{mbPesquisaRestricaoZmrc.restricaoZmrc.nr_diaSemana}?"
 	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
 	    		<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
 	    		<p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();"
-                                         action="#{mbPesquisaFilial.remover(tabFilial)}" process="@this"
+                                         action="#{mbPesquisaRestricaoZmrc.remover(tabRestricaoZmrc)}" process="@this"
 	    			update=":formtable:idTabela" />
 	    	</p:confirmDialog>
             </h:form>
