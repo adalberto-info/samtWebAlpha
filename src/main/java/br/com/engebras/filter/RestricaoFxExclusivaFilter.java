@@ -1,7 +1,7 @@
 /*
  * 
  *  Autor: Adalberto Kamida
- *  Dt. Criacao: 22/07/2016
+ *  Dt. Criacao: 01/08/2016
  * 
  */
 package br.com.engebras.filter;
@@ -9,7 +9,7 @@ package br.com.engebras.filter;
 import java.io.Serializable;
 
 
-public class RestricaoZrmcFilter implements Serializable {
+public class RestricaoFxExclusivaFilter implements Serializable {
     
     private static final long serialVersionUID = 1L; 
     
