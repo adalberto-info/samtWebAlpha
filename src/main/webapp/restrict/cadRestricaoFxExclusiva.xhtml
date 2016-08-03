@@ -72,7 +72,8 @@
                                 <p:outputLabel for="nr_codLocal" value="Local: "/>
                                 <p:selectOneMenu id="nr_codLocal" value="#{mbRestricaoFxExclusiva.restricaoFxExclusiva.nr_codLocal}" style="width:150px" required="true" requiredMessage="O campo [Local] é obrigatório.">
                                     <f:selectItem itemLabel="Selecione o local"  itemValue=""/>
-                                    <f:selectItem itemLabel="Local 01" itemValue="1"/>
+                                    <f:selectItems value="#{mbRestricaoFxExclusiva.localInfracoes}" var="listaLocalInfracoes" 
+                                                   itemLabel="#{listaLocalInfracoes.dc_local}" itemValue="#{listaLocalInfracoes.nr_codigo}"/>
                                 </p:selectOneMenu>
 
                                 <p:outputLabel for="nr_diaSemana" value="Dia da Semana"/>

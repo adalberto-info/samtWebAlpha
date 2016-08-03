@@ -33,35 +33,35 @@ public class LocalInfracao implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="nr_codigo", length=5)
     private Integer nr_codigo; 
-    @Column(name="dc_local", length=80)
+    @Column(name="dc_local", nullable=false, length=80)
     private String dc_local; 
-    @Column(name="dc_bairro", length=30)
+    @Column(name="dc_bairro", nullable=false, length=30)
     private String dc_bairro; 
-    @Column(name="nr_codMunicipio", length=5)
+    @Column(name="nr_codMunicipio", nullable=false, length=5)
     private Integer nr_codMuncipio; 
-    @Column(name="dc_uf", length=2)
+    @Column(name="dc_uf", nullable=false, length=2)
     private String dc_uf; 
-    @Column(name="lg_ativo", length=1)
+    @Column(name="lg_ativo", nullable=false, length=1)
     private Integer lg_ativo; 
-    @Column(name="nr_qtdFaixas", length=1)
+    @Column(name="nr_qtdFaixas", nullable=false, length=1)
     private Integer nr_qtdFaixas; 
-    @Column(name="nr_faixa1", length=1)
+    @Column(name="nr_faixa1", nullable=false, length=1)
     private Integer nr_faixa1; 
-    @Column(name="nr_faixa2", length=1)
+    @Column(name="nr_faixa2", nullable=false, length=1)
     private Integer nr_faixa2; 
-    @Column(name="dc_ladoFaixa1", length=1)
+    @Column(name="dc_ladoFaixa1", nullable=false, length=1)
     private String dc_ladoFaixa1; 
-    @Column(name="dc_ladoFaixa2", length=1)
+    @Column(name="dc_ladoFaixa2", nullable=false, length=1)
     private String dc_ladoFaixa2; 
-    @Column(name="dc_sentido", length=1)
+    @Column(name="dc_sentido", nullable=false, length=1)
     private String dc_sentido; 
-    @Column(name="lg_velocidadeDifPorte", length=1)
+    @Column(name="lg_velocidadeDifPorte", nullable=false, length=1)
     private Integer lg_velocidadeDifPorte; 
-    @Column(name="dc_latitude", length=17)
+    @Column(name="dc_latitude", nullable=false, length=17)
     private String dc_latitude; 
-    @Column(name="dc_longitude", length=17)
+    @Column(name="dc_longitude", nullable=false, length=17)
     private String dc_logitude; 
-    @Column(name="dt_inicio")
+    @Column(name="dt_inicio", nullable=false)
     @Temporal(TemporalType.DATE)
     private Date dt_inicio; 
     @Column(name="dt_ultimaAtualizacao", nullable=false)

@@ -26,6 +26,7 @@ import br.com.engebras.util.HibernateUtil;
 import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.RestricaoFxExclusiva;
+import br.com.engebras.model.entities.LocalInfracao;
 
 @ManagedBean(name = "mbRestricaoFxExclusiva")
 @SessionScoped
@@ -34,9 +35,10 @@ public class MbRestricaoFxExclusiva implements Serializable {
     private static final long serialVersionUID = 1L;
     private RestricaoFxExclusiva restricaoFxExclusiva = new RestricaoFxExclusiva();
     private List<RestricaoFxExclusiva> restricaoFxExclusivas;
+    private List<LocalInfracao> LocalInfracoes;
 
     public MbRestricaoFxExclusiva() {
-
+        geraListaLocalInfracoes();
     }
 
     private InterfaceDAO<RestricaoFxExclusiva> restricaoFxExclusivaDAO() {
@@ -124,6 +126,22 @@ public class MbRestricaoFxExclusiva implements Serializable {
         return restricaoFxExclusivaDAO().getEntity(nr_codigo);
     }
 
+    public void geraListaLocalInfracoes(){
+        List listaSQL; 
+        String vlc_sql; 
+        vlc_sql = "select a.nr_codigo, concat(a.nr_codigo,'-',a.dc_local) as dc_local from localInfracao a order by a.nr_codigo";
+        
+        Session session = FacesContextUtil.getRequestSession();
+        
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+        
+        this.LocalInfracoes = listaSQL; 
+        listaSQL = null;
+    } 
+     
+     
     public RestricaoFxExclusiva getRestricaoFxExclusiva() {
         return restricaoFxExclusiva;
     }
@@ -138,6 +156,14 @@ public class MbRestricaoFxExclusiva implements Serializable {
 
     public void setRestricaoFxExclusivas(List<RestricaoFxExclusiva> restricaoFxExclusivas) {
         this.restricaoFxExclusivas = restricaoFxExclusivas;
+    }
+
+    public List<LocalInfracao> getLocalInfracoes() {
+        return LocalInfracoes;
+    }
+
+    public void setLocalInfracoes(List<LocalInfracao> LocalInfracoes) {
+        this.LocalInfracoes = LocalInfracoes;
     }
     
     
