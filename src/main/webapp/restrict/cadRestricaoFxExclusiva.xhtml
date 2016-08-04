@@ -89,12 +89,14 @@
                                 </p:selectOneMenu>
                                     
                                 <p:outputLabel for="dc_horaIni" value="Hora início: "/>
-                                <p:inputText id="dc_horaIni" size="08" maxlength="08" value="#{mbRestricaoFxExclusiva.restricaoFxExclusiva.dc_horaIni}" 
-                                             required="true" requiredMessage="O campo [Hora início] é obrigatório..."/>
+                                <p:inputMask id="dc_horaIni" size="08" maxlength="08" value="#{mbRestricaoFxExclusiva.restricaoFxExclusiva.dc_horaIni}" 
+                                             required="true" requiredMessage="O campo [Hora início] é obrigatório..."
+                                             mask="99:99:99"/>
 
                                 <p:outputLabel for="dc_horaFim" value="Hora fim: "/>
-                                <p:inputText id="dc_horaFim" size="08" maxlength="08" value="#{mbRestricaoFxExclusiva.restricaoFxExclusiva.dc_horaFim}" 
-                                             required="true" requiredMessage="O campo [Hora fim] é obrigatório..."/>
+                                <p:inputMask id="dc_horaFim" size="08" maxlength="08" value="#{mbRestricaoFxExclusiva.restricaoFxExclusiva.dc_horaFim}" 
+                                             required="true" requiredMessage="O campo [Hora fim] é obrigatório..."
+                                             mask="99:99:99"/>
 
                                 <p:outputLabel for="dt_inicio" value="Data início: "/>
                                 <p:calendar id="dt_inicio" size="10" pattern="dd/MM/yyyy" value="#{mbRestricaoFxExclusiva.restricaoFxExclusiva.dt_inicio}" navigator="true" locale="pt"

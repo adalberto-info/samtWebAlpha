@@ -35,7 +35,7 @@ public class MbRestricaoFxExclusiva implements Serializable {
     private static final long serialVersionUID = 1L;
     private RestricaoFxExclusiva restricaoFxExclusiva = new RestricaoFxExclusiva();
     private List<RestricaoFxExclusiva> restricaoFxExclusivas;
-    private List<LocalInfracao> LocalInfracoes;
+    private List<LocalInfracao> localInfracoes;
 
     public MbRestricaoFxExclusiva() {
         geraListaLocalInfracoes();
@@ -137,7 +137,7 @@ public class MbRestricaoFxExclusiva implements Serializable {
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
         listaSQL = query.list();
         
-        this.LocalInfracoes = listaSQL; 
+        this.localInfracoes = listaSQL; 
         listaSQL = null;
     } 
      
@@ -159,11 +159,11 @@ public class MbRestricaoFxExclusiva implements Serializable {
     }
 
     public List<LocalInfracao> getLocalInfracoes() {
-        return LocalInfracoes;
+        return localInfracoes;
     }
 
     public void setLocalInfracoes(List<LocalInfracao> LocalInfracoes) {
-        this.LocalInfracoes = LocalInfracoes;
+        this.localInfracoes = LocalInfracoes;
     }
     
     
