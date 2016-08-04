@@ -50,6 +50,7 @@ dt. criação: 23/03/2016
         <mapping class="br.com.engebras.model.entities.Feriado"/>
         <mapping class="br.com.engebras.model.entities.RestricaoZmrc"/>
         <mapping class="br.com.engebras.model.entities.RestricaoFxExclusiva"/>
+        <mapping class="br.com.engebras.model.entities.RestricaoConversaoProibida"/>
         <mapping class="br.com.engebras.model.entities.LocalInfracao"/>
     </session-factory>
 </hibernate-configuration>
