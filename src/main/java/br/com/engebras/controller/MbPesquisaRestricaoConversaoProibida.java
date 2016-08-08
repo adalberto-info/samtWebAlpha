@@ -30,7 +30,7 @@ import br.com.engebras.util.FacesContextUtil;
 import br.com.engebras.model.entities.RestricaoConversaoProibida;
 import br.com.engebras.filter.RestricaoConversaoProibidaFilter;
 
-@ManagedBean(name = "mbRestricaoConversaoProibida")
+@ManagedBean(name = "mbPesquisaRestricaoConversaoProibida")
 @ViewScoped
 public class MbPesquisaRestricaoConversaoProibida implements Serializable {
 

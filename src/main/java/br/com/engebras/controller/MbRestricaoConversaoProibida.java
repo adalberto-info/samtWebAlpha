@@ -26,6 +26,7 @@ import br.com.engebras.util.HibernateUtil;
 import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.RestricaoConversaoProibida;
+import br.com.engebras.model.entities.LocalInfracao;
 
 @ManagedBean(name = "mbRestricaoConversaoProibida")
 @SessionScoped
@@ -34,11 +35,12 @@ public class MbRestricaoConversaoProibida implements Serializable{
     private static final long serialVersionUID = 1L; 
     
     private RestricaoConversaoProibida restricaoConversaoProibida = new RestricaoConversaoProibida(); 
-    
     private List<RestricaoConversaoProibida> restricaoConversaoProibidas; 
+    private List<LocalInfracao> localInfracoes;
     
     
     public MbRestricaoConversaoProibida(){
+        geraListaLocalInfracoes();
     }
     
     private InterfaceDAO<RestricaoConversaoProibida> restricaoConversaoProibidaDAO(){
@@ -98,13 +100,13 @@ public class MbRestricaoConversaoProibida implements Serializable{
         List consRestricaoConversaoProibida;
 
         Session session = FacesContextUtil.getRequestSession();
-        vlc_sql = "select a.nr_codLocal, a.nr_diaSemana, a.dt_inicio, a.dc_horaIni, a.dt_fim, a.dc_horaFim from restricaoConversaoProibida where ";
-        vlc_sql += "a.nr_codLocal = " + restricaoConversaoProibida.getNr_codLocal() + " ";
-        vlc_sql += "a.nr_diaSemana = " + restricaoConversaoProibida.getNr_diaSemana() + " ";
-        vlc_sql += "a.dt_inicio = '" + restricaoConversaoProibida.getDt_inicio() + "' ";
-        vlc_sql += "a.dt_fim = '" + restricaoConversaoProibida.getDt_fim() + " "; 
-        vlc_sql += "a.dc_horaIni = '" + restricaoConversaoProibida.getDc_horaIni() + " "; 
-        vlc_sql += "a.dc_horaFim = '" + restricaoConversaoProibida.getDc_horaFim() + " ";
+        vlc_sql = "select a.nr_codLocal, a.nr_diaSemana, a.dt_inicio, a.dc_horaIni, a.dt_fim, a.dc_horaFim from restricaoConversaoProibida a where ";
+        vlc_sql += "a.nr_codLocal = " + restricaoConversaoProibida.getNr_codLocal() + " and ";
+        vlc_sql += "a.nr_diaSemana = " + restricaoConversaoProibida.getNr_diaSemana() + " and ";
+        vlc_sql += "a.dt_inicio = '" + restricaoConversaoProibida.getDt_inicio() + "' and ";
+        vlc_sql += "a.dt_fim = '" + restricaoConversaoProibida.getDt_fim() + "' and "; 
+        vlc_sql += "a.dc_horaIni = '" + restricaoConversaoProibida.getDc_horaIni() + "' and "; 
+        vlc_sql += "a.dc_horaFim = '" + restricaoConversaoProibida.getDc_horaFim() + "' ";
         if (restricaoConversaoProibida.getNr_codigo() != null && restricaoConversaoProibida.getNr_codigo() != 0)
             vlc_sql = vlc_sql + "and a.nr_codigo <> " + restricaoConversaoProibida.getNr_codigo();
         
@@ -127,6 +129,21 @@ public class MbRestricaoConversaoProibida implements Serializable{
         return vll_retorno;
     }
 
+    public void geraListaLocalInfracoes(){
+        List listaSQL; 
+        String vlc_sql; 
+        vlc_sql = "select a.nr_codigo, concat(a.nr_codigo,'-',a.dc_local) as dc_local from localInfracao a order by a.nr_codigo";
+        
+        Session session = FacesContextUtil.getRequestSession();
+        
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+        
+        this.localInfracoes = listaSQL; 
+        listaSQL = null;
+    } 
+
     public RestricaoConversaoProibida porNr_codigo(Integer nr_codigo) {
 
         return restricaoConversaoProibidaDAO().getEntity(nr_codigo);
@@ -146,6 +163,14 @@ public class MbRestricaoConversaoProibida implements Serializable{
 
     public void setRestricaoConversaoProibidas(List<RestricaoConversaoProibida> restricaoConversaoProibidas) {
         this.restricaoConversaoProibidas = restricaoConversaoProibidas;
+    }
+
+    public List<LocalInfracao> getLocalInfracoes() {
+        return localInfracoes;
+    }
+
+    public void setLocalInfracoes(List<LocalInfracao> localInfracoes) {
+        this.localInfracoes = localInfracoes;
     }
     
 }
