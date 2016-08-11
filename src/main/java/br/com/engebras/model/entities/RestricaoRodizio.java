@@ -38,8 +38,8 @@ public class RestricaoRodizio implements Serializable {
     private Integer nr_codLocal; 
     @Column(name = "nr_diaSemana", nullable = false, length = 1)
     private Integer nr_diaSemana; 
-    @Column(name = "dc_placaFinal", nullable = false, length = 1)
-    private String dc_placaFinal; 
+    @Column(name = "dc_finalPlaca", nullable = false, length = 1)
+    private String dc_finalPlaca; 
     @Column(name = "dc_horaIni", nullable = false, length = 8)
     private String dc_horaIni; 
     @Column(name = "dc_horaFim", nullable = false, length = 8)
@@ -75,13 +75,14 @@ public class RestricaoRodizio implements Serializable {
         this.nr_diaSemana = nr_diaSemana;
     }
 
-    public String getDc_placaFinal() {
-        return dc_placaFinal;
+    public String getDc_finalPlaca() {
+        return dc_finalPlaca;
     }
 
-    public void setDc_placaFinal(String dc_placaFinal) {
-        this.dc_placaFinal = dc_placaFinal;
+    public void setDc_finalPlaca(String dc_finalPlaca) {
+        this.dc_finalPlaca = dc_finalPlaca;
     }
+
 
     public String getDc_horaIni() {
         return dc_horaIni;
