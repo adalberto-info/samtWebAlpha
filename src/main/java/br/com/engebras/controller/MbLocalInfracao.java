@@ -27,7 +27,7 @@ import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.LocalInfracao;
 
-@ManagedBean(name = "LocalInfracao")
+@ManagedBean(name = "mbLocalInfracao")
 @SessionScoped
 public class MbLocalInfracao implements Serializable{
     private static final long serialVersionUID = 1L;
