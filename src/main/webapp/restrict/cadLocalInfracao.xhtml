@@ -23,45 +23,51 @@
                 <p:tab title="Local Infração" id="cadLocalInfracao">
                     <h:form prependId="false" id="formCadLocalInfracao">
                         <p:growl id="msg0" />
-                            <p:toolbar>
-                                <p:toolbarGroup>
-                                    <p:commandButton value="Salvar" action="#{mbLocalInfracao.addLocalInfracao}" icon="ui-icon ui-icon-disk" update="@form"/>
-                                    <p:commandButton value="Cancelar" actionListener="#{mbLocalInfracao.limpaLocalInfracao}" icon="ui-icon ui-icon-close" update="@form" process="@this"/>
-                                </p:toolbarGroup>
-                                <p:toolbarGroup align="right">
-                                    <p:button value="Pesquisa" icon="ui-icon-search" />
-                                </p:toolbarGroup>
-                            </p:toolbar>
+                        <p:toolbar>
+                            <p:toolbarGroup>
+                                <p:commandButton value="Salvar" action="#{mbLocalInfracao.addLocalInfracao}" icon="ui-icon ui-icon-disk" update="@form"/>
+                                <p:commandButton value="Cancelar" actionListener="#{mbLocalInfracao.limpaLocalInfracao}" icon="ui-icon ui-icon-close" update="@form" process="@this"/>
+                            </p:toolbarGroup>
+                            <p:toolbarGroup align="right">
+                                <p:button value="Pesquisa" icon="ui-icon-search" />
+                            </p:toolbarGroup>
+                        </p:toolbar>
 
                         <div class="ui-fluid">
 
                             <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
-                                <p:outputLabel/>
-                                <h:inputHidden id="nr_codigo" value="#{mbLocalInfracao.localInfracao.nr_codigo}"/>
+                                <p:outputLabel for="nr_codigo" value="Código: "/>
+                                <p:inputText id="nr_codigo" size="5" maxlength="5" value="#{mbLocalInfracao.localInfracao.nr_codigo}" disabled="true"/>
 
                                 <p:outputLabel for="dc_local" value="Local: "/>
                                 <p:inputText id="dc_local" size="80" maxlength="80" value="#{mbLocalInfracao.localInfracao.dc_local}" onkeyup="this.value = this.value.toUpperCase()"
                                              required="true" requiredMessage="O campo [Local] é obrigatório..."/>
+                                
+                                <p:outputLabel for="dc_codStatus" value="Status: "/>
+                                <p:inputText id="dc_codStatus" size="25" maxlength="25" value="#{mbLocalInfracao.dc_codStatus}"/>
+                                
+                                <p:outputLabel for="lg_ativo" value="Ativo ? "/>
+                                <p:selectBooleanCheckbox id="lg_ativo" value="#{mbLocalInfracao.lg_ativo}"/>
 
-                                
-                                <p:tabView style="margin-top: 20px">
-                                    <p:tab title="Tipo Fiscalização">
-                                    </p:tab>
-                                    <p:tab title="Velocidade">
-                                    </p:tab>
-                                    <p:tab title="Localização">
-                                    </p:tab>
-                                    <p:tab title="Situações">
-                                    </p:tab>
-                                    <p:tab title="Equipamentos">
-                                    </p:tab>
-                                    <p:tab title="Faixas">
-                                    </p:tab>
-                                    <p:tab title="Local Cliente">
-                                    </p:tab>
-                                </p:tabView>    
-                                
                             </p:panelGrid>
+                            <p:tabView style="margin-top: 20px">
+                                <p:tab title="Tipo Fiscalização">
+                                    <ui:include src="/restrict/cadLocalInfracao_tipoFiscalizacao.xhtml" />
+                                </p:tab>
+                                <p:tab title="Velocidade">
+                                </p:tab>
+                                <p:tab title="Localização">
+                                </p:tab>
+                                <p:tab title="Situações">
+                                </p:tab>
+                                <p:tab title="Equipamentos">
+                                </p:tab>
+                                <p:tab title="Faixas">
+                                </p:tab>
+                                <p:tab title="Local Cliente">
+                                </p:tab>
+                            </p:tabView>    
+
                         </div>
                         <br/>
                     </h:form>

@@ -34,10 +34,14 @@ public class MbLocalInfracao implements Serializable{
     
     private LocalInfracao localInfracao = new LocalInfracao();
     private List<LocalInfracao> localInfracoes; 
-    
+    private String dc_codStatus; 
+    private boolean lg_ativo; 
+    private boolean lg_excessoVelocidade;
     
     public MbLocalInfracao(){
-        
+        dc_codStatus = " ";
+        lg_ativo = true;
+        lg_excessoVelocidade = false;
     }
 
     private InterfaceDAO<LocalInfracao> localInfracaoDAO(){
@@ -128,6 +132,30 @@ public class MbLocalInfracao implements Serializable{
 
     public void setLocalInfracoes(List<LocalInfracao> localInfracoes) {
         this.localInfracoes = localInfracoes;
+    }
+
+    public String getDc_codStatus() {
+        return dc_codStatus;
+    }
+
+    public void setDc_codStatus(String dc_codStatus) {
+        this.dc_codStatus = dc_codStatus;
+    }
+
+    public boolean isLg_ativo() {
+        return lg_ativo;
+    }
+
+    public void setLg_ativo(boolean lg_ativo) {
+        this.lg_ativo = lg_ativo;
+    }
+
+    public boolean isLg_excessoVelocidade() {
+        return lg_excessoVelocidade;
+    }
+
+    public void setLg_excessoVelocidade(boolean lg_excessoVelocidade) {
+        this.lg_excessoVelocidade = lg_excessoVelocidade;
     }
 
     
