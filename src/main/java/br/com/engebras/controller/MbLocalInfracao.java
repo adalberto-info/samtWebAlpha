@@ -37,11 +37,37 @@ public class MbLocalInfracao implements Serializable{
     private String dc_codStatus; 
     private boolean lg_ativo; 
     private boolean lg_excessoVelocidade;
+    private boolean lg_avancoSemaforo;
+    private boolean lg_rodizio; 
+    private boolean lg_paradaSobreFaixa; 
+    private boolean lg_faixaExclusiva; 
+    private boolean lg_zmrc; 
+    private boolean lg_faixaNaoDestinada; 
+    private boolean lg_transitarAcostamento; 
+    private boolean lg_retornoProibido; 
+    private boolean lg_conversaoProibida; 
+    private boolean lg_contraMao; 
+    private boolean lg_velocidadeAbaixoPermitida; 
+    private boolean lg_zmrf; 
+    private boolean lg_localNaoPermitidoMoto;
     
     public MbLocalInfracao(){
         dc_codStatus = " ";
         lg_ativo = true;
         lg_excessoVelocidade = false;
+        lg_avancoSemaforo = false;
+        lg_rodizio = false; 
+        lg_paradaSobreFaixa = false; 
+        lg_faixaExclusiva = false; 
+        lg_zmrc = false; 
+        lg_faixaNaoDestinada = false; 
+        lg_transitarAcostamento = false; 
+        lg_retornoProibido = false; 
+        lg_conversaoProibida = false; 
+        lg_contraMao = false; 
+        lg_velocidadeAbaixoPermitida = false; 
+        lg_zmrf = false; 
+        lg_localNaoPermitidoMoto = false;
     }
 
     private InterfaceDAO<LocalInfracao> localInfracaoDAO(){
@@ -156,6 +182,110 @@ public class MbLocalInfracao implements Serializable{
 
     public void setLg_excessoVelocidade(boolean lg_excessoVelocidade) {
         this.lg_excessoVelocidade = lg_excessoVelocidade;
+    }
+
+    public boolean isLg_avancoSemaforo() {
+        return lg_avancoSemaforo;
+    }
+
+    public void setLg_avancoSemaforo(boolean lg_avancoSemaforo) {
+        this.lg_avancoSemaforo = lg_avancoSemaforo;
+    }
+
+    public boolean isLg_rodizio() {
+        return lg_rodizio;
+    }
+
+    public void setLg_rodizio(boolean lg_rodizio) {
+        this.lg_rodizio = lg_rodizio;
+    }
+
+    public boolean isLg_paradaSobreFaixa() {
+        return lg_paradaSobreFaixa;
+    }
+
+    public void setLg_paradaSobreFaixa(boolean lg_paradaSobreFaixa) {
+        this.lg_paradaSobreFaixa = lg_paradaSobreFaixa;
+    }
+
+    public boolean isLg_faixaExclusiva() {
+        return lg_faixaExclusiva;
+    }
+
+    public void setLg_faixaExclusiva(boolean lg_faixaExclusiva) {
+        this.lg_faixaExclusiva = lg_faixaExclusiva;
+    }
+
+    public boolean isLg_zmrc() {
+        return lg_zmrc;
+    }
+
+    public void setLg_zmrc(boolean lg_zmrc) {
+        this.lg_zmrc = lg_zmrc;
+    }
+
+    public boolean isLg_faixaNaoDestinada() {
+        return lg_faixaNaoDestinada;
+    }
+
+    public void setLg_faixaNaoDestinada(boolean lg_faixaNaoDestinada) {
+        this.lg_faixaNaoDestinada = lg_faixaNaoDestinada;
+    }
+
+    public boolean isLg_transitarAcostamento() {
+        return lg_transitarAcostamento;
+    }
+
+    public void setLg_transitarAcostamento(boolean lg_transitarAcostamento) {
+        this.lg_transitarAcostamento = lg_transitarAcostamento;
+    }
+
+    public boolean isLg_retornoProibido() {
+        return lg_retornoProibido;
+    }
+
+    public void setLg_retornoProibido(boolean lg_retornoProibido) {
+        this.lg_retornoProibido = lg_retornoProibido;
+    }
+
+    public boolean isLg_conversaoProibida() {
+        return lg_conversaoProibida;
+    }
+
+    public void setLg_conversaoProibida(boolean lg_conversaoProibida) {
+        this.lg_conversaoProibida = lg_conversaoProibida;
+    }
+
+    public boolean isLg_contraMao() {
+        return lg_contraMao;
+    }
+
+    public void setLg_contraMao(boolean lg_contraMao) {
+        this.lg_contraMao = lg_contraMao;
+    }
+
+    public boolean isLg_velocidaAbaixoPermitida() {
+        return lg_velocidadeAbaixoPermitida;
+    }
+
+    public void setLg_velocidaAbaixoPermitida(boolean lg_velocidaAbaixoPermitida) {
+        this.lg_velocidadeAbaixoPermitida = lg_velocidaAbaixoPermitida;
+    }
+
+    public boolean isLg_zmrf() {
+        return lg_zmrf;
+    }
+
+    public void setLg_zmrf(boolean lg_zmrf) {
+        this.lg_zmrf = lg_zmrf;
+    }
+
+    public boolean isLg_localNaoPermitidoMoto() {
+        return lg_localNaoPermitidoMoto;
+    }
+
+    public void setLg_localNaoPermitidoMoto(boolean lg_localNaoPermitidoMoto) {
+        this.lg_localNaoPermitidoMoto = lg_localNaoPermitidoMoto;
     }
 
     
