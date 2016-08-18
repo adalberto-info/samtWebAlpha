@@ -4,37 +4,61 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    
+    <p:layout style="height:450px;width:1400px">
+        <p:layoutUnit position="west" size="360" style="border-width: 0px">
 
-    <p:panelGrid columns="2" styleClass="panelGrid" id="grid1">
-       <p:outputLabel for="lg_excessoVelocidade" value="Excesso Velocidade: "/>
-       <p:selectBooleanCheckbox id="lg_excessoVelocidade" value="#{mbLocalInfracao.lg_excessoVelocidade}"/>
-       <p:outputLabel for="lg_avancoSemaforo" value="Avanço Semáforo: "/>
-       <p:selectBooleanCheckbox id="lg_avancoSemaforo" value="#{mbLocalInfracao.lg_avancoSemaforo}"/>
-       <p:outputLabel for="lg_rodizio" value="Rodízio: "/>
-       <p:selectBooleanCheckbox id="lg_rodizio" value="#{mbLocalInfracao.lg_rodizio}"/>
-       <p:outputLabel for="lg_paradaSobreFaixa" value="Parada Sobre Faixa: "/>
-       <p:selectBooleanCheckbox id="lg_paradaSobreFaixa" value="#{mbLocalInfracao.lg_paradaSobreFaixa}"/>
-       <p:outputLabel for="lg_faixaExclusiva" value="Faixa Exclusiva: "/>
-       <p:selectBooleanCheckbox id="lg_faixaExclusiva" value="#{mbLocalInfracao.lg_faixaExclusiva}"/>
-       <p:outputLabel for="lg_zmrc" value="ZMRC: "/>
-       <p:selectBooleanCheckbox id="lg_zmrc" value="#{mbLocalInfracao.lg_zmrc}"/>
-       <p:outputLabel for="lg_faixaNaoDestinada" value="Faixa Não Destinada: "/>
-       <p:selectBooleanCheckbox id="lg_faixaNaoDestinada" value="#{mbLocalInfracao.lg_faixaNaoDestinada}"/>
-       <p:outputLabel for="lg_transitarAcostamento" value="Transitar no Acostamento: "/>
-       <p:selectBooleanCheckbox id="lg_transitarAcostamento" value="#{mbLocalInfracao.lg_transitarAcostamento}"/>
-       <p:outputLabel for="lg_retornoProibido" value="Retorno Proibido: "/>
-       <p:selectBooleanCheckbox id="lg_retornoProibido" value="#{mbLocalInfracao.lg_retornoProibido}"/>
-       <p:outputLabel for="lg_conversaoProibida" value="Conversão Proibida: "/>
-       <p:selectBooleanCheckbox id="lg_conversaoProibida" value="#{mbLocalInfracao.lg_conversaoProibida}"/>
-       <p:outputLabel for="lg_contraMao" value="ContraMão: "/>
-       <p:selectBooleanCheckbox id="lg_contraMao" value="#{mbLocalInfracao.lg_contraMao}"/>
-       <p:outputLabel for="lg_velocidadeAbaixoPermitida" value="Velocidade Abaixo Permitido: "/>
-       <p:selectBooleanCheckbox id="lg_velocidadeAbaixoPermitida" value="#{mbLocalInfracao.lg_velocidaAbaixoPermitida}"/>
-       <p:outputLabel for="lg_zmrf" value="ZRMF: "/>
-       <p:selectBooleanCheckbox id="lg_zmrf" value="#{mbLocalInfracao.lg_zmrf}"/>
-       <p:outputLabel for="lg_localNaoPermitidoMoto" value="Local Não Permitido Moto: "/>
-       <p:selectBooleanCheckbox id="lg_localNaoPermitidoMoto" value="#{mbLocalInfracao.lg_localNaoPermitidoMoto}"/>
-    </p:panelGrid>
-    
+            <p:panelGrid columns="1">    
+                <p:outputLabel value="Tipo de Fiscalização"/> 
+            </p:panelGrid>    
+            <p:panelGrid columns="2" styleClass="panelGrid" id="grid1">
+                <p:outputLabel for="lg_excessoVelocidade" value="Excesso Velocidade: "/>
+                <p:selectBooleanCheckbox id="lg_excessoVelocidade" value="#{mbLocalInfracao.lg_excessoVelocidade}"/>
+                <p:outputLabel for="lg_avancoSemaforo" value="Avanço Semáforo: "/>
+                <p:selectBooleanCheckbox id="lg_avancoSemaforo" value="#{mbLocalInfracao.lg_avancoSemaforo}"/>
+                <p:outputLabel for="lg_rodizio" value="Rodízio: "/>
+                <p:selectBooleanCheckbox id="lg_rodizio" value="#{mbLocalInfracao.lg_rodizio}"/>
+                <p:outputLabel for="lg_paradaSobreFaixa" value="Parada Sobre Faixa: "/>
+                <p:selectBooleanCheckbox id="lg_paradaSobreFaixa" value="#{mbLocalInfracao.lg_paradaSobreFaixa}"/>
+                <p:outputLabel for="lg_faixaExclusiva" value="Faixa Exclusiva: "/>
+                <p:selectBooleanCheckbox id="lg_faixaExclusiva" value="#{mbLocalInfracao.lg_faixaExclusiva}"/>
+                <p:outputLabel for="lg_zmrc" value="ZMRC: "/>
+                <p:selectBooleanCheckbox id="lg_zmrc" value="#{mbLocalInfracao.lg_zmrc}"/>
+                <p:outputLabel for="lg_faixaNaoDestinada" value="Faixa Não Destinada: "/>
+                <p:selectBooleanCheckbox id="lg_faixaNaoDestinada" value="#{mbLocalInfracao.lg_faixaNaoDestinada}"/>
+                <p:outputLabel for="lg_transitarAcostamento" value="Transitar no Acostamento: "/>
+                <p:selectBooleanCheckbox id="lg_transitarAcostamento" value="#{mbLocalInfracao.lg_transitarAcostamento}"/>
+                <p:outputLabel for="lg_retornoProibido" value="Retorno Proibido: "/>
+                <p:selectBooleanCheckbox id="lg_retornoProibido" value="#{mbLocalInfracao.lg_retornoProibido}"/>
+                <p:outputLabel for="lg_conversaoProibida" value="Conversão Proibida: "/>
+                <p:selectBooleanCheckbox id="lg_conversaoProibida" value="#{mbLocalInfracao.lg_conversaoProibida}"/>
+                <p:outputLabel for="lg_contraMao" value="ContraMão: "/>
+                <p:selectBooleanCheckbox id="lg_contraMao" value="#{mbLocalInfracao.lg_contraMao}"/>
+                <p:outputLabel for="lg_velocidadeAbaixoPermitida" value="Velocidade Abaixo Permitido: "/>
+                <p:selectBooleanCheckbox id="lg_velocidadeAbaixoPermitida" value="#{mbLocalInfracao.lg_velocidaAbaixoPermitida}"/>
+                <p:outputLabel for="lg_zmrf" value="ZRMF: "/>
+                <p:selectBooleanCheckbox id="lg_zmrf" value="#{mbLocalInfracao.lg_zmrf}"/>
+                <p:outputLabel for="lg_localNaoPermitidoMoto" value="Local Não Permitido Moto: "/>
+                <p:selectBooleanCheckbox id="lg_localNaoPermitidoMoto" value="#{mbLocalInfracao.lg_localNaoPermitidoMoto}"/>
+            </p:panelGrid>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center" size="450" style="border: 0px; alignment-adjust: central">
+            <p:panelGrid columns="1">    
+               <p:outputLabel for="nr_tipoEquipamento" value="Tipo Equipamento:" />
+               <p:selectOneRadio id="nr_tipoEquipamento" layout="grid" columns="1">
+                  <f:selectItem itemLabel="Radar Fixo" itemValue="1"/>
+                  <f:selectItem itemLabel="Radar Estátcio" itemValue="2"/>
+                  <f:selectItem itemLabel="Lombada Eletrônica" itemValue="3"/>
+                  <f:selectItem itemLabel="Equipamento Portátil" itemValue="4"/>
+               </p:selectOneRadio>
+            </p:panelGrid>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="east" size="400" style="border-width: 0px">
+            <p:outputLabel value="Tipo Fixação"/>
+        </p:layoutUnit>
+    </p:layout>
+
 </ui:composition>
-    
