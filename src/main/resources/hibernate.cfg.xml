@@ -53,5 +53,6 @@ dt. criação: 23/03/2016
         <mapping class="br.com.engebras.model.entities.RestricaoConversaoProibida"/>
         <mapping class="br.com.engebras.model.entities.RestricaoRodizio"/>
         <mapping class="br.com.engebras.model.entities.LocalInfracao"/>
+        <mapping class="br.com.engebras.model.entities.TipoFixacaoRadar"/>
     </session-factory>
 </hibernate-configuration>

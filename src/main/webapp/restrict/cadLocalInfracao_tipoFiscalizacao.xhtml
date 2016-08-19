@@ -36,7 +36,7 @@
                 <p:outputLabel for="lg_contraMao" value="ContraMão: "/>
                 <p:selectBooleanCheckbox id="lg_contraMao" value="#{mbLocalInfracao.lg_contraMao}"/>
                 <p:outputLabel for="lg_velocidadeAbaixoPermitida" value="Velocidade Abaixo Permitido: "/>
-                <p:selectBooleanCheckbox id="lg_velocidadeAbaixoPermitida" value="#{mbLocalInfracao.lg_velocidaAbaixoPermitida}"/>
+                <p:selectBooleanCheckbox id="lg_velocidadeAbaixoPermitida" value="#{mbLocalInfracao.lg_velocidadeAbaixoPermitida}"/>
                 <p:outputLabel for="lg_zmrf" value="ZRMF: "/>
                 <p:selectBooleanCheckbox id="lg_zmrf" value="#{mbLocalInfracao.lg_zmrf}"/>
                 <p:outputLabel for="lg_localNaoPermitidoMoto" value="Local Não Permitido Moto: "/>
@@ -57,7 +57,12 @@
         </p:layoutUnit>
 
         <p:layoutUnit position="east" size="400" style="border-width: 0px">
-            <p:outputLabel value="Tipo Fixação"/>
+            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+               <p:outputLabel for="nr_codTipoFixacao" value="Tipo Fixação:" />
+               <p:selectOneRadio id="nr_codTipoFixacao" value="#{mbLocalInfracao.localInfracao.nr_codTipoFixacao}"  layout="grid" columns="1">
+                   <f:selectItems value="#{mbLocalInfracao.tipoFixacaoRadares}" var="listaTipoFixacaoRadares" itemLabel="#{listaTipoFixacaoRadares.dc_descricao}" itemValue="#{listaTipoFixacaoRadares.nr_codigo}"/>
+               </p:selectOneRadio>
+            </h:panelGrid>
         </p:layoutUnit>
     </p:layout>
 

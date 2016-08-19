@@ -26,6 +26,7 @@ import br.com.engebras.util.HibernateUtil;
 import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.LocalInfracao;
+import br.com.engebras.model.entities.TipoFixacaoRadar;
 
 @ManagedBean(name = "mbLocalInfracao")
 @SessionScoped
@@ -34,6 +35,7 @@ public class MbLocalInfracao implements Serializable{
     
     private LocalInfracao localInfracao = new LocalInfracao();
     private List<LocalInfracao> localInfracoes; 
+    private List tipoFixacaoRadares = new ArrayList<>();
     private String dc_codStatus; 
     private boolean lg_ativo; 
     private boolean lg_excessoVelocidade;
@@ -68,6 +70,8 @@ public class MbLocalInfracao implements Serializable{
         lg_velocidadeAbaixoPermitida = false; 
         lg_zmrf = false; 
         lg_localNaoPermitidoMoto = false;
+        
+        geraListaTipoFixacaoRadares();
     }
 
     private InterfaceDAO<LocalInfracao> localInfracaoDAO(){
@@ -142,6 +146,20 @@ public class MbLocalInfracao implements Serializable{
     public LocalInfracao porNr_codigo(Integer nr_codigo) {
 
         return localInfracaoDAO().getEntity(nr_codigo);
+    }
+
+    public void geraListaTipoFixacaoRadares() {
+        List listaSQL;
+        String vlc_sql;
+        vlc_sql = "select nr_codigo, dc_descricao from tipoFixacaoRadar order by nr_codigo";
+
+        Session session = FacesContextUtil.getRequestSession();
+
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+
+        this.tipoFixacaoRadares = listaSQL;
     }
 
     public LocalInfracao getLocalInfracao() {
@@ -264,14 +282,6 @@ public class MbLocalInfracao implements Serializable{
         this.lg_contraMao = lg_contraMao;
     }
 
-    public boolean isLg_velocidaAbaixoPermitida() {
-        return lg_velocidadeAbaixoPermitida;
-    }
-
-    public void setLg_velocidaAbaixoPermitida(boolean lg_velocidaAbaixoPermitida) {
-        this.lg_velocidadeAbaixoPermitida = lg_velocidaAbaixoPermitida;
-    }
-
     public boolean isLg_zmrf() {
         return lg_zmrf;
     }
@@ -286,6 +296,22 @@ public class MbLocalInfracao implements Serializable{
 
     public void setLg_localNaoPermitidoMoto(boolean lg_localNaoPermitidoMoto) {
         this.lg_localNaoPermitidoMoto = lg_localNaoPermitidoMoto;
+    }
+
+    public List getTipoFixacaoRadares() {
+        return tipoFixacaoRadares;
+    }
+
+    public void setTipoFixacaoRadares(List tipoFixacaoRadares) {
+        this.tipoFixacaoRadares = tipoFixacaoRadares;
+    }
+
+    public boolean isLg_velocidadeAbaixoPermitida() {
+        return lg_velocidadeAbaixoPermitida;
+    }
+
+    public void setLg_velocidadeAbaixoPermitida(boolean lg_velocidadeAbaixoPermitida) {
+        this.lg_velocidadeAbaixoPermitida = lg_velocidadeAbaixoPermitida;
     }
 
     
