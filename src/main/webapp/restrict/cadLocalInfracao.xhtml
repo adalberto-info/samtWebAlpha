@@ -19,7 +19,7 @@
         </style>
         <p:fieldset legend="Cadastrar Local Infração">
             <br/>
-            <p:tabView id="tbv1" dynamic="true" cache="true">
+            <p:tabView id="tbv1" dynamic="true" cache="true" >
                 <p:tab title="Local Infração" id="cadLocalInfracao">
                     <h:form prependId="false" id="formCadLocalInfracao" >
                         <p:growl id="msg0" />
@@ -35,22 +35,23 @@
 
                         <div class="ui-fluid">
 
-                            <p:panelGrid columns="4" styleClass="panelGrid" id="grid0">
+                            <p:panelGrid columns="4" styleClass="panelGrid" id="grid0" >
                                 <p:outputLabel for="nr_codigo" value="Código: "/>
                                 <p:inputText id="nr_codigo" size="5" maxlength="5" value="#{mbLocalInfracao.localInfracao.nr_codigo}" disabled="true"/>
 
                                 <p:outputLabel for="dc_local" value="Local: "/>
                                 <p:inputText id="dc_local" size="80" maxlength="80" value="#{mbLocalInfracao.localInfracao.dc_local}" onkeyup="this.value = this.value.toUpperCase()"
                                              required="true" requiredMessage="O campo [Local] é obrigatório..."/>
-                                
+
                                 <p:outputLabel for="dc_codStatus" value="Status: "/>
                                 <p:inputText id="dc_codStatus" size="25" maxlength="25" value="#{mbLocalInfracao.dc_codStatus}"/>
-                                
+
                                 <p:outputLabel for="lg_ativo" value="Ativo ? "/>
                                 <p:selectBooleanCheckbox id="lg_ativo" value="#{mbLocalInfracao.lg_ativo}"/>
 
                             </p:panelGrid>
-                            <p:tabView style="margin-top: 20px">
+                            <p:tabView id="tbv2" dynamic="true" cache="true" >
+
                                 <p:tab title="Tipo Fiscalização">
                                     <ui:include src="/restrict/cadLocalInfracao_tipoFiscalizacao.xhtml" />
                                 </p:tab>

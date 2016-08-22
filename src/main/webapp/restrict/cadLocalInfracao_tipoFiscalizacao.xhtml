@@ -4,15 +4,15 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
-    
-    
-    <p:layout style="height:450px;width:1400px">
-        <p:layoutUnit position="west" size="360" style="border-width: 0px">
+
+    <p:panelGrid columns="3" >
+
+        <p:row> 
 
             <p:panelGrid columns="1">    
                 <p:outputLabel value="Tipo de Fiscalização"/> 
             </p:panelGrid>    
-            <p:panelGrid columns="2" styleClass="panelGrid" id="grid1">
+            <p:panelGrid columns="2" styleClass="panelGrid" id="grid1" >
                 <p:outputLabel for="lg_excessoVelocidade" value="Excesso Velocidade: "/>
                 <p:selectBooleanCheckbox id="lg_excessoVelocidade" value="#{mbLocalInfracao.lg_excessoVelocidade}"/>
                 <p:outputLabel for="lg_avancoSemaforo" value="Avanço Semáforo: "/>
@@ -42,28 +42,27 @@
                 <p:outputLabel for="lg_localNaoPermitidoMoto" value="Local Não Permitido Moto: "/>
                 <p:selectBooleanCheckbox id="lg_localNaoPermitidoMoto" value="#{mbLocalInfracao.lg_localNaoPermitidoMoto}"/>
             </p:panelGrid>
-        </p:layoutUnit>
 
-        <p:layoutUnit position="center" size="450" style="border: 0px; alignment-adjust: central">
-            <p:panelGrid columns="1">    
-               <p:outputLabel for="nr_tipoEquipamento" value="Tipo Equipamento:" />
-               <p:selectOneRadio id="nr_tipoEquipamento" layout="grid" columns="1">
-                  <f:selectItem itemLabel="Radar Fixo" itemValue="1"/>
-                  <f:selectItem itemLabel="Radar Estátcio" itemValue="2"/>
-                  <f:selectItem itemLabel="Lombada Eletrônica" itemValue="3"/>
-                  <f:selectItem itemLabel="Equipamento Portátil" itemValue="4"/>
-               </p:selectOneRadio>
+        </p:row>        
+
+        <p:row >    
+            <p:panelGrid columns="1" >    
+                <p:outputLabel for="nr_tipoEquipamento" value="Tipo Equipamento:" />
+                <p:selectOneRadio id="nr_tipoEquipamento" layout="grid" columns="1" >
+                    <f:selectItem itemLabel="Radar Fixo" itemValue="1"/>
+                    <f:selectItem itemLabel="Radar Estátcio" itemValue="2"/>
+                    <f:selectItem itemLabel="Lombada Eletrônica" itemValue="3"/>
+                    <f:selectItem itemLabel="Equipamento Portátil" itemValue="4"/>
+                </p:selectOneRadio>
             </p:panelGrid>
-        </p:layoutUnit>
-
-        <p:layoutUnit position="east" size="400" style="border-width: 0px">
-            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-               <p:outputLabel for="nr_codTipoFixacao" value="Tipo Fixação:" />
-               <p:selectOneRadio id="nr_codTipoFixacao" value="#{mbLocalInfracao.localInfracao.nr_codTipoFixacao}"  layout="grid" columns="1">
-                   <f:selectItems value="#{mbLocalInfracao.tipoFixacaoRadares}" var="listaTipoFixacaoRadares" itemLabel="#{listaTipoFixacaoRadares.dc_descricao}" itemValue="#{listaTipoFixacaoRadares.nr_codigo}"/>
-               </p:selectOneRadio>
-            </h:panelGrid>
-        </p:layoutUnit>
-    </p:layout>
-
+        </p:row>
+        <p:row>
+            <p:panelGrid columns="2" >
+                <p:outputLabel for="nr_codTipoFixacao" value="Tipo Fixação:" />
+                <p:selectOneRadio id="nr_codTipoFixacao" value="#{mbLocalInfracao.localInfracao.nr_codTipoFixacao}"  layout="grid" columns="1">
+                    <f:selectItems value="#{mbLocalInfracao.tipoFixacaoRadares}" var="listaTipoFixacaoRadares" itemLabel="#{listaTipoFixacaoRadares.dc_descricao}" itemValue="#{listaTipoFixacaoRadares.nr_codigo}"/>
+                </p:selectOneRadio>
+            </p:panelGrid>
+        </p:row>
+    </p:panelGrid>
 </ui:composition>
