@@ -71,7 +71,10 @@ public class LocalInfracao implements Serializable{
     private Integer nr_codStatus; 
     @Column(name="nr_codTipoFixacao", nullable=false, length=5)
     private Integer nr_codTipoFixacao; 
-
+    @Column(name="nr_codTipoEquipamento", nullable=false, length=2)
+    private Integer nr_codTipoEquipamento;
+    
+    
     public Integer getNr_codigo() {
         return nr_codigo;
     }
@@ -223,6 +226,16 @@ public class LocalInfracao implements Serializable{
     public void setNr_codTipoFixacao(Integer nr_codTipoFixacao) {
         this.nr_codTipoFixacao = nr_codTipoFixacao;
     }
+
+    public Integer getNr_codTipoEquipamento() {
+        return nr_codTipoEquipamento;
+    }
+
+    public void setNr_codTipoEquipamento(Integer nr_codTipoEquipamento) {
+        this.nr_codTipoEquipamento = nr_codTipoEquipamento;
+    }
+    
+    
 
     @Override
     public int hashCode() {
