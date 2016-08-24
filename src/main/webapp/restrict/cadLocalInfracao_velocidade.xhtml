@@ -5,6 +5,15 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-    
+    <p:panelGrid columns="4" styleClass="panelGrid" id="grid1" >
+
+        <p:outputLabel for="dt_inicio" value="Dt. início: "/>
+        <p:calendar id="dt_inicio" size="10" pattern="dd/MM/yyyy" value="#{mbLocalInfracao.localInfracao.dt_inicio}" navigator="true" locale="pt"
+                    required="true" requiredMessage="O campo [Data início] é obrigatório..."/>
+
+        <p:outputLabel for="nr_codPorteVeiculo" value="Porte Veículo: "/>
+        <p:inputMask id="nr_codPorteVeiculo"  size="2" maxlength="2" value="#{mbLocalInfracao.localVelocidade.nr_codPorteVeiculo}"
+                     required="true" requiredMessage="O campo [Porte Veículo] é obrigatório..." mask="99"/>
+        
+    </p:panelGrid>     
 </ui:composition>
-    
