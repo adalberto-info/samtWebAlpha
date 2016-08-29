@@ -54,5 +54,7 @@ dt. criação: 23/03/2016
         <mapping class="br.com.engebras.model.entities.RestricaoRodizio"/>
         <mapping class="br.com.engebras.model.entities.LocalInfracao"/>
         <mapping class="br.com.engebras.model.entities.TipoFixacaoRadar"/>
+        <mapping class="br.com.engebras.model.entities.LocalVelocidade"/>
+        <mapping class="br.com.engebras.model.entities.Local_tipoFiscalizacao"/>
     </session-factory>
 </hibernate-configuration>
