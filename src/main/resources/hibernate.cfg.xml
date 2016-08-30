@@ -56,5 +56,6 @@ dt. criação: 23/03/2016
         <mapping class="br.com.engebras.model.entities.TipoFixacaoRadar"/>
         <mapping class="br.com.engebras.model.entities.LocalVelocidade"/>
         <mapping class="br.com.engebras.model.entities.Local_tipoFiscalizacao"/>
+        <mapping class="br.com.engebras.model.entities.StatusLocal"/>
     </session-factory>
 </hibernate-configuration>
