@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-    <p:panelGrid columns="4" styleClass="panelGrid" id="grid1" >
+    <p:panelGrid columns="4" styleClass="panelGrid" id="grid2" >
 
         <p:outputLabel for="dt_inicio" value="Dt. início: "/>
         <p:calendar id="dt_inicio" size="10" pattern="dd/MM/yyyy" value="#{mbLocalInfracao.localInfracao.dt_inicio}" navigator="true" locale="pt"
@@ -16,4 +16,25 @@
                      required="true" requiredMessage="O campo [Porte Veículo] é obrigatório..." mask="99"/>
         
     </p:panelGrid>     
+
+    <p:panelGrid columns="10" styleClass="panelGrid" id="grid3">
+        <p:outputLabel for="nr_velocidadePermitida" value="Vel. Permitida: "/>
+        <p:inputMask id="nr_velocidadePermitida" size="3" maxlength="3" value="#{mbLocalInfracao.localVelocidade.nr_velocidadePermitida}"
+                     required="true" requiredMessage="O campo [Velocidade Permitida] é obrigatório..." mask="999"/>
+        <p:outputLabel for="nr_velocidadeTolerada" value="Vel. Tolerada: "/>
+        <p:inputMask id="nr_velocidadeTolerada" size="8" maxlength="8" value="#{mbLocalInfracao.localVelocidade.nr_velocidadeTolerada}"
+                     required="true" requiredMessage="O campo [Velocidade Tolerada] é obrigatório..." mask="999.9"/>
+        <p:outputLabel for="nr_velocidadeConsiderada" value="Vel. Considerada: "/>
+        <p:inputMask id="nr_velocidadeConsiderada" size="8" maxlength="8" value="#{mbLocalInfracao.localVelocidade.nr_velocidadeConsiderada}"
+                     required="true" requiredMessage="O campo [Velocidade Considerada] é obrigatório..." mask="999.9"/>
+        <p:outputLabel for="nr_velocidadeGrave" value="Vel. Grave: "/>
+        <p:inputMask id="nr_velocidadeGrave" size="3" maxlength="3" value="#{mbLocalInfracao.localVelocidade.nr_velocidadeGrave}"
+                     required="true" requiredMessage="O campo [Velocidade Grave] é obrigatório..." mask="999"/>
+        <p:outputLabel for="nr_velocidadeGravissima" value="Vel. Gravíssima: "/>
+        <p:inputMask id="nr_velocidadeGravissima" size="3" maxlength="3" value="#{mbLocalInfracao.localVelocidade.nr_velocidadeGravissima}"
+                     required="true" requiredMessage="O campo [Velocidade Gravíssima] é obrigatório..." mask="999"/>
+        
+    </p:panelGrid>
+    
+    
 </ui:composition>

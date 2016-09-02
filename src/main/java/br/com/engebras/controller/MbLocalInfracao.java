@@ -27,6 +27,7 @@ import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.LocalInfracao;
 import br.com.engebras.model.entities.TipoFixacaoRadar;
+import br.com.engebras.model.entities.LocalVelocidade;
 
 @ManagedBean(name = "mbLocalInfracao")
 @SessionScoped
@@ -34,6 +35,7 @@ public class MbLocalInfracao implements Serializable{
     private static final long serialVersionUID = 1L;
     
     private LocalInfracao localInfracao = new LocalInfracao();
+    private LocalVelocidade localVelocidade = new LocalVelocidade();
     private List<LocalInfracao> localInfracoes; 
     private List tipoFixacaoRadares = new ArrayList<>();
     private String dc_codStatus; 
@@ -81,6 +83,7 @@ public class MbLocalInfracao implements Serializable{
 
     public String limpaLocalInfracao(){
         localInfracao = new LocalInfracao(); 
+        localVelocidade = new LocalVelocidade();
         return editLocalInfracao(); 
     }
 
@@ -312,6 +315,14 @@ public class MbLocalInfracao implements Serializable{
 
     public void setLg_velocidadeAbaixoPermitida(boolean lg_velocidadeAbaixoPermitida) {
         this.lg_velocidadeAbaixoPermitida = lg_velocidadeAbaixoPermitida;
+    }
+
+    public LocalVelocidade getLocalVelocidade() {
+        return localVelocidade;
+    }
+
+    public void setLocalVelocidade(LocalVelocidade localVelocidade) {
+        this.localVelocidade = localVelocidade;
     }
 
     
