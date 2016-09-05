@@ -17,7 +17,7 @@
         
     </p:panelGrid>     
 
-    <p:panelGrid columns="10" styleClass="panelGrid" id="grid3">
+    <p:panelGrid columns="10" styleClass="panelGrid" style="margin-top: 20px" id="grid3">
         <p:outputLabel for="nr_velocidadePermitida" value="Vel. Permitida: "/>
         <p:inputMask id="nr_velocidadePermitida" size="3" maxlength="3" value="#{mbLocalInfracao.localVelocidade.nr_velocidadePermitida}"
                      required="true" requiredMessage="O campo [Velocidade Permitida] é obrigatório..." mask="999"/>
@@ -35,6 +35,13 @@
                      required="true" requiredMessage="O campo [Velocidade Gravíssima] é obrigatório..." mask="999"/>
         
     </p:panelGrid>
+    <p:toolbar style="margin-top: 20px">
+        <p:toolbarGroup >
+            <p:commandButton value="Novo" icon="ui-icon ui-icon-document" update="grid3"/>
+            <p:commandButton value="Salvar" icon="ui-icon ui-icon-disk" update="grid3"/>
+            <p:commandButton value="Cancelar" icon="ui-icon ui-icon-close" update="grid3" process="@this"/>
+        </p:toolbarGroup>
+    </p:toolbar>
     
     
 </ui:composition>
