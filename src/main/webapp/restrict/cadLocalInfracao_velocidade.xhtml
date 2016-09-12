@@ -45,4 +45,44 @@
         </p:toolbarGroup>
     </p:toolbar>
 
+    <h:form id="formtable">
+        <p:growl id="msg1"/>
+
+        <p:dataTable id="idTabela" var="tabLocalVelocidade" value="#{mbLocalInfracao.localVelocidadeFiltradas}" 
+                     paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                     {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom">
+
+            <f:facet name="header">Lista de Velocidades</f:facet>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Porte Veículo"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalVelocidade.nr_codPorteVeiculo}"/>
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Ações"/>
+                </f:facet>
+
+                <p:commandButton value="Editar" action="#{mbLocalInfracao.editarLocalVelocidade(tabLocalVelocidade.nr_codigo)}"
+                                 icon="ui-icon ui-icon-pencil">
+                    <f:setPropertyActionListener target="#{mbLocalInfracao.localVelocidade}" value="#{tabLocalVelocidade}"/>
+                </p:commandButton> 
+
+                <p:commandButton value="Remover" action="#{mbLocalInfracao.deleteLocalVelocidade}"
+                                 icon="ui-icon ui-icon-close" update="@form :formtable">
+                    <f:setPropertyActionListener target="#{mbLocalInfracao.localVelocidade}"
+                                                 value="#{tabLocalVelocidade}"/>
+                </p:commandButton>
+            </p:column>
+
+        </p:dataTable>
+
+    </h:form>
+
+
+
 </ui:composition>
