@@ -6,6 +6,10 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 
+	<f:metadata>
+            <f:event listener="#{mbLocalVelocidade.inicializar(mbLocalInfracao.localInfracao.nr_codigo)}" type="preRenderView" />
+	</f:metadata>
+    
     <p:panelGrid columns="4" styleClass="panelGrid" id="grid2" >
 
         <p:outputLabel for="dt_inicio" value="Dt. início: "/>
@@ -45,10 +49,10 @@
         </p:toolbarGroup>
     </p:toolbar>
 
-    <h:form id="formtable">
+    <h:form id="formtable" style="margin-top: 40px">
         <p:growl id="msg1"/>
 
-        <p:dataTable id="idTabela" var="tabLocalVelocidade" value="#{mbLocalInfracao.localVelocidadeFiltradas}" 
+        <p:dataTable id="idTabela" var="tabLocalVelocidade" value="#{mbLocalVelocidade.localVelocidadeFiltrados}" 
                      paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
                      {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -67,14 +71,14 @@
                     <h:outputText value="Ações"/>
                 </f:facet>
 
-                <p:commandButton value="Editar" action="#{mbLocalInfracao.editarLocalVelocidade(tabLocalVelocidade.nr_codigo)}"
+                <p:commandButton value="Editar" action="#{mbLocalVelocidade.editarLocalVelocidade(tabLocalVelocidade.nr_codigo)}"
                                  icon="ui-icon ui-icon-pencil">
-                    <f:setPropertyActionListener target="#{mbLocalInfracao.localVelocidade}" value="#{tabLocalVelocidade}"/>
+                    <f:setPropertyActionListener target="#{mbLocalVelocidade.localVelocidade}" value="#{tabLocalVelocidade}"/>
                 </p:commandButton> 
 
-                <p:commandButton value="Remover" action="#{mbLocalInfracao.deleteLocalVelocidade}"
+                <p:commandButton value="Remover" action="#{mbLocalVelocidade.deleteLocalVelocidade}"
                                  icon="ui-icon ui-icon-close" update="@form :formtable">
-                    <f:setPropertyActionListener target="#{mbLocalInfracao.localVelocidade}"
+                    <f:setPropertyActionListener target="#{mbLocalVelocidade.localVelocidade}"
                                                  value="#{tabLocalVelocidade}"/>
                 </p:commandButton>
             </p:column>
