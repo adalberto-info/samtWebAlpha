@@ -27,7 +27,7 @@ import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.LocalInfracao;
 import br.com.engebras.model.entities.TipoFixacaoRadar;
-import br.com.engebras.model.entities.LocalVelocidade;
+import br.com.engebras.model.entities.StatusLocal;
 
 @ManagedBean(name = "mbLocalInfracao")
 @SessionScoped
@@ -35,11 +35,11 @@ public class MbLocalInfracao implements Serializable{
     private static final long serialVersionUID = 1L;
     
     private LocalInfracao localInfracao = new LocalInfracao();
-    private LocalVelocidade localVelocidade = new LocalVelocidade();
     private List<LocalInfracao> localInfracoes; 
     private List tipoFixacaoRadares = new ArrayList<>();
+    private List statusLocais = new ArrayList<>();
     private String dc_codStatus; 
-    private boolean lg_ativo; 
+    private boolean lg_ativo = true; 
     private boolean lg_excessoVelocidade;
     private boolean lg_avancoSemaforo;
     private boolean lg_rodizio; 
@@ -54,8 +54,15 @@ public class MbLocalInfracao implements Serializable{
     private boolean lg_velocidadeAbaixoPermitida; 
     private boolean lg_zmrf; 
     private boolean lg_localNaoPermitidoMoto;
-    
+    private boolean lg_novoRegistro;
+            
+            
     public MbLocalInfracao(){
+        geraListaTipoFixacaoRadares();
+        geraListaStatusLocais();
+    }
+
+    public void init(){
         dc_codStatus = " ";
         lg_ativo = true;
         lg_excessoVelocidade = false;
@@ -72,10 +79,11 @@ public class MbLocalInfracao implements Serializable{
         lg_velocidadeAbaixoPermitida = false; 
         lg_zmrf = false; 
         lg_localNaoPermitidoMoto = false;
-        
-        geraListaTipoFixacaoRadares();
-    }
+        lg_novoRegistro = false;
 
+    }
+    
+    
     private InterfaceDAO<LocalInfracao> localInfracaoDAO(){
         InterfaceDAO<LocalInfracao> localInfracaoDAO = new HibernateDAO<LocalInfracao>(LocalInfracao.class, FacesContextUtil.getRequestSession());
         return localInfracaoDAO;
@@ -83,7 +91,6 @@ public class MbLocalInfracao implements Serializable{
 
     public String limpaLocalInfracao(){
         localInfracao = new LocalInfracao(); 
-        localVelocidade = new LocalVelocidade();
         return editLocalInfracao(); 
     }
 
@@ -165,6 +172,21 @@ public class MbLocalInfracao implements Serializable{
         this.tipoFixacaoRadares = listaSQL;
     }
 
+    public void geraListaStatusLocais() {
+        List listaSQL;
+        String vlc_sql;
+        vlc_sql = "select nr_codigo, dc_descricao from statusLocal order by nr_codigo";
+
+        Session session = FacesContextUtil.getRequestSession();
+
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+
+        this.statusLocais = listaSQL;
+    }
+
+    
     public LocalInfracao getLocalInfracao() {
         return localInfracao;
     }
@@ -317,15 +339,22 @@ public class MbLocalInfracao implements Serializable{
         this.lg_velocidadeAbaixoPermitida = lg_velocidadeAbaixoPermitida;
     }
 
-    public LocalVelocidade getLocalVelocidade() {
-        return localVelocidade;
+    public boolean isLg_novoRegistro() {
+        return lg_novoRegistro;
     }
 
-    public void setLocalVelocidade(LocalVelocidade localVelocidade) {
-        this.localVelocidade = localVelocidade;
+    public void setLg_novoRegistro(boolean lg_novoRegistro) {
+        this.lg_novoRegistro = lg_novoRegistro;
     }
 
-    
+    public List getStatusLocais() {
+        return statusLocais;
+    }
+
+    public void setStatusLocais(List statusLocais) {
+        this.statusLocais = statusLocais;
+    }
+
 
     
 }

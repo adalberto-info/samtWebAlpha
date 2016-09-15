@@ -74,8 +74,12 @@
                                 <p:inputText id="dc_local" size="80" maxlength="80" value="#{mbLocalInfracao.localInfracao.dc_local}" onkeyup="this.value = this.value.toUpperCase()"
                                              required="true" requiredMessage="O campo [Local] é obrigatório..."/>
 
-                                <p:outputLabel for="dc_codStatus" value="Status: "/>
-                                <p:inputText id="dc_codStatus" size="25" maxlength="25" value="#{mbLocalInfracao.dc_codStatus}"/>
+                                <p:outputLabel for="nr_codStatus" value="Status: "/>
+                                <p:selectOneMenu id="nr_codStatus" value="#{mbLocalInfracao.localInfracao.nr_codStatus}" style="width:250px" required ="true" requiredMessage="O campo [Status] é obrigatório...">
+                                    <f:selectItem itemLabel="Selecione o status do local" itemValue="" />
+                                    <f:selectItems value="#{mbLocalInfracao.statusLocais}" var="listaStatusLocais" 
+                                                   itemLabel="#{listaStatusLocais.dc_descricao}" itemValue="#{listaStatusLocais.nr_codigo}"/>
+                                </p:selectOneMenu>
 
                                 <p:outputLabel for="lg_ativo" value="Ativo ? "/>
                                 <p:selectBooleanCheckbox id="lg_ativo" value="#{mbLocalInfracao.lg_ativo}"/>
@@ -86,18 +90,18 @@
                                 <p:tab title="Tipo Fiscalização">
                                     <ui:include src="/restrict/cadLocalInfracao_tipoFiscalizacao.xhtml" />
                                 </p:tab>
-                                <p:tab title="Velocidade">
-                                    <ui:include src="/restrict/cadLocalInfracao_velocidade.xhtml"/>
+                                <p:tab title="Velocidade" disabled="#{mbLocalInfracao.lg_novoRegistro}">
+                                    <ui:include src="/restrict/cadLocalInfracao_velocidade.xhtml" />
                                 </p:tab>
-                                <p:tab title="Localização" disabled="true">
+                                <p:tab title="Localização" disabled="#{mbLocalInfracao.lg_novoRegistro}">
                                 </p:tab>
-                                <p:tab title="Situações" disabled="true">
+                                <p:tab title="Situações" disabled="#{mbLocalInfracao.lg_novoRegistro}">
                                 </p:tab>
-                                <p:tab title="Equipamentos" disabled="true">
+                                <p:tab title="Equipamentos" disabled="#{mbLocalInfracao.lg_novoRegistro}">
                                 </p:tab>
-                                <p:tab title="Faixas" disabled="true">
+                                <p:tab title="Faixas" disabled="#{mbLocalInfracao.lg_novoRegistro}">
                                 </p:tab>
-                                <p:tab title="Local Cliente" disabled="true">
+                                <p:tab title="Local Cliente" disabled="#{mbLocalInfracao.lg_novoRegistro}">
                                 </p:tab>
                             </p:tabView>    
                         </div>
