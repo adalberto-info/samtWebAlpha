@@ -28,6 +28,9 @@ import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.LocalInfracao;
 import br.com.engebras.model.entities.TipoFixacaoRadar;
 import br.com.engebras.model.entities.StatusLocal;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 @ManagedBean(name = "mbLocalInfracao")
 @SessionScoped
@@ -55,11 +58,12 @@ public class MbLocalInfracao implements Serializable{
     private boolean lg_zmrf; 
     private boolean lg_localNaoPermitidoMoto;
     private boolean lg_novoRegistro;
-            
+    private Date dt_atual;         
             
     public MbLocalInfracao(){
         geraListaTipoFixacaoRadares();
         geraListaStatusLocais();
+
     }
 
     public void init(){
@@ -104,6 +108,27 @@ public class MbLocalInfracao implements Serializable{
     }
     
     public void addLocalInfracao() {
+        localInfracao.setDc_bairro("");
+        localInfracao.setDc_ladoFaixa1("");
+        localInfracao.setDc_ladoFaixa2("");
+        localInfracao.setDc_latitude("");
+        localInfracao.setDc_logitude("");
+        localInfracao.setDc_sentido("");
+        localInfracao.setDc_uf("");
+        dt_atual = new Date();
+        localInfracao.setDt_ultimaAtualizacao(dt_atual);
+        localInfracao.setLg_velocidadeDifPorte(0);
+        localInfracao.setNr_codMuncipio(0);
+        localInfracao.setNr_codStatus(0);
+        localInfracao.setNr_codTipoEquipamento(0);
+        localInfracao.setNr_codTipoFixacao(0);
+        localInfracao.setDt_inicio(dt_atual);
+        localInfracao.setLg_ativo(0);
+        localInfracao.setNr_faixa1(1);
+        localInfracao.setNr_faixa2(0);
+        localInfracao.setNr_qtdFaixas(1);
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Entrei na gravação...", ""));
         if (verificaDuplicidade(localInfracao.getDc_local()) == true) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Já existe um local infração cadastrado com o código:" + localInfracao.getNr_codigo() + ".", ""));
         } else if (localInfracao.getNr_codigo() == null || localInfracao.getNr_codigo() == 0) {
