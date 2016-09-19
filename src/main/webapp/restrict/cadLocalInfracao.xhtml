@@ -87,19 +87,20 @@
                             </p:panelGrid>
                             <p:tabView id="tbv2" dynamic="true" cache="true" >
 
-                                <p:tab title="Tipo Fiscalização" disabled="#{mbLocalInfracao.lg_novoRegistro}">
+                                <p:tab title="Tipo Fiscalização"> 
                                     <ui:include src="/restrict/cadLocalInfracao_tipoFiscalizacao.xhtml" />
                                 </p:tab>
                                 <p:tab title="Velocidade" disabled="#{mbLocalInfracao.lg_novoRegistro}">
                                     <ui:include src="/restrict/cadLocalInfracao_velocidade.xhtml" />
                                 </p:tab>
-                                <p:tab title="Localização" disabled="#{mbLocalInfracao.lg_novoRegistro}">
+                                <p:tab title="Localização" >
+                                    <ui:include src="/restrict/cadLocalInfracao_localizacao.xhtml"/>
                                 </p:tab>
                                 <p:tab title="Situações" disabled="#{mbLocalInfracao.lg_novoRegistro}">
                                 </p:tab>
                                 <p:tab title="Equipamentos" disabled="#{mbLocalInfracao.lg_novoRegistro}">
                                 </p:tab>
-                                <p:tab title="Faixas" disabled="#{mbLocalInfracao.lg_novoRegistro}">
+                                <p:tab title="Faixas">
                                 </p:tab>
                                 <p:tab title="Local Cliente" disabled="#{mbLocalInfracao.lg_novoRegistro}">
                                 </p:tab>

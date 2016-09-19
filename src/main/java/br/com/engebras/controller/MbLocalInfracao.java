@@ -34,79 +34,82 @@ import java.util.Date;
 
 @ManagedBean(name = "mbLocalInfracao")
 @SessionScoped
-public class MbLocalInfracao implements Serializable{
+public class MbLocalInfracao implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     private LocalInfracao localInfracao = new LocalInfracao();
-    private List<LocalInfracao> localInfracoes; 
+    private List<LocalInfracao> localInfracoes;
     private List tipoFixacaoRadares = new ArrayList<>();
     private List statusLocais = new ArrayList<>();
-    private String dc_codStatus; 
-    private boolean lg_ativo = true; 
+    private List municipios = new ArrayList<>();
+    private List ufs = new ArrayList<>();
+    private String dc_codStatus;
+    private boolean lg_ativo = true;
     private boolean lg_excessoVelocidade;
     private boolean lg_avancoSemaforo;
-    private boolean lg_rodizio; 
-    private boolean lg_paradaSobreFaixa; 
-    private boolean lg_faixaExclusiva; 
-    private boolean lg_zmrc; 
-    private boolean lg_faixaNaoDestinada; 
-    private boolean lg_transitarAcostamento; 
-    private boolean lg_retornoProibido; 
-    private boolean lg_conversaoProibida; 
-    private boolean lg_contraMao; 
-    private boolean lg_velocidadeAbaixoPermitida; 
-    private boolean lg_zmrf; 
+    private boolean lg_rodizio;
+    private boolean lg_paradaSobreFaixa;
+    private boolean lg_faixaExclusiva;
+    private boolean lg_zmrc;
+    private boolean lg_faixaNaoDestinada;
+    private boolean lg_transitarAcostamento;
+    private boolean lg_retornoProibido;
+    private boolean lg_conversaoProibida;
+    private boolean lg_contraMao;
+    private boolean lg_velocidadeAbaixoPermitida;
+    private boolean lg_zmrf;
     private boolean lg_localNaoPermitidoMoto;
     private boolean lg_novoRegistro;
-    private Date dt_atual;         
-            
-    public MbLocalInfracao(){
+    private Date dt_atual;
+
+    public MbLocalInfracao() {
         geraListaTipoFixacaoRadares();
         geraListaStatusLocais();
-
+        geraListaMunicipios();
+        geraListaUfs();
     }
 
-    public void init(){
+    public void init() {
         dc_codStatus = " ";
         lg_ativo = true;
         lg_excessoVelocidade = false;
         lg_avancoSemaforo = false;
-        lg_rodizio = false; 
-        lg_paradaSobreFaixa = false; 
-        lg_faixaExclusiva = false; 
-        lg_zmrc = false; 
-        lg_faixaNaoDestinada = false; 
-        lg_transitarAcostamento = false; 
-        lg_retornoProibido = false; 
-        lg_conversaoProibida = false; 
-        lg_contraMao = false; 
-        lg_velocidadeAbaixoPermitida = false; 
-        lg_zmrf = false; 
+        lg_rodizio = false;
+        lg_paradaSobreFaixa = false;
+        lg_faixaExclusiva = false;
+        lg_zmrc = false;
+        lg_faixaNaoDestinada = false;
+        lg_transitarAcostamento = false;
+        lg_retornoProibido = false;
+        lg_conversaoProibida = false;
+        lg_contraMao = false;
+        lg_velocidadeAbaixoPermitida = false;
+        lg_zmrf = false;
         lg_localNaoPermitidoMoto = false;
-        lg_novoRegistro = false;
+        lg_novoRegistro = true;
 
     }
-    
-    
-    private InterfaceDAO<LocalInfracao> localInfracaoDAO(){
+
+    private InterfaceDAO<LocalInfracao> localInfracaoDAO() {
         InterfaceDAO<LocalInfracao> localInfracaoDAO = new HibernateDAO<LocalInfracao>(LocalInfracao.class, FacesContextUtil.getRequestSession());
         return localInfracaoDAO;
     }
 
-    public String limpaLocalInfracao(){
-        localInfracao = new LocalInfracao(); 
-        return editLocalInfracao(); 
+    public String limpaLocalInfracao() {
+        localInfracao = new LocalInfracao();
+        return editLocalInfracao();
     }
 
-    public String editLocalInfracao(){
+    public String editLocalInfracao() {
         return "/restrict/cadLocalInfracao.xhtml";
     }
-    
-    public String editarLocalInfracao(Integer nr_codigo){
+
+    public String editarLocalInfracao(Integer nr_codigo) {
         this.localInfracao = porNr_codigo(nr_codigo);
-        return editLocalInfracao(); 
+        return editLocalInfracao();
     }
-    
+
     public void addLocalInfracao() {
         localInfracao.setDc_bairro("");
         localInfracao.setDc_ladoFaixa1("");
@@ -128,7 +131,6 @@ public class MbLocalInfracao implements Serializable{
         localInfracao.setNr_faixa2(0);
         localInfracao.setNr_qtdFaixas(1);
 
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Entrei na gravação...", ""));
         if (verificaDuplicidade(localInfracao.getDc_local()) == true) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Já existe um local infração cadastrado com o código:" + localInfracao.getNr_codigo() + ".", ""));
         } else if (localInfracao.getNr_codigo() == null || localInfracao.getNr_codigo() == 0) {
@@ -143,7 +145,7 @@ public class MbLocalInfracao implements Serializable{
         localInfracaoDAO().save(localInfracao);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso!!!", ""));
     }
-    
+
     public void updateLocalInfracao() {
         localInfracaoDAO().update(localInfracao);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso!!!", ""));
@@ -156,9 +158,10 @@ public class MbLocalInfracao implements Serializable{
 
         Session session = FacesContextUtil.getRequestSession();
         vlc_sql = "select a.nr_codigo, a.dc_local  from localInfracao a where a.dc_local = '" + dc_local + "' ";
-        if (localInfracao.getNr_codigo() != null && localInfracao.getNr_codigo() != 0)
+        if (localInfracao.getNr_codigo() != null && localInfracao.getNr_codigo() != 0) {
             vlc_sql = vlc_sql + "and a.nr_codigo <> " + localInfracao.getNr_codigo();
-        
+        }
+
         SQLQuery query = session.createSQLQuery(vlc_sql);
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
         consLocalInfracao = query.list();
@@ -211,7 +214,35 @@ public class MbLocalInfracao implements Serializable{
         this.statusLocais = listaSQL;
     }
 
-    
+    public void geraListaMunicipios() {
+        List listaSQL;
+        String vlc_sql;
+        vlc_sql = "select concat(a.dc_uf, ' | ', a.dc_municipio) as dc_municipio, a.nr_codigo, a.dc_uf ";
+        vlc_sql += "from municipio a ";
+        vlc_sql += "order by a.dc_uf, a.dc_municipio ";
+
+        Session session = FacesContextUtil.getRequestSession();
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+
+        this.municipios = listaSQL;
+    }
+
+    public void geraListaUfs() {
+        List listaSQL;
+        String vlc_sql;
+        vlc_sql = "select dc_uf, dc_descricao from uf order by dc_uf";
+
+        Session session = FacesContextUtil.getRequestSession();
+
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+
+        this.ufs = listaSQL;
+    }
+
     public LocalInfracao getLocalInfracao() {
         return localInfracao;
     }
@@ -380,6 +411,28 @@ public class MbLocalInfracao implements Serializable{
         this.statusLocais = statusLocais;
     }
 
+    public List getMunicipios() {
+        return municipios;
+    }
 
-    
+    public void setMunicipios(List municipios) {
+        this.municipios = municipios;
+    }
+
+    public Date getDt_atual() {
+        return dt_atual;
+    }
+
+    public void setDt_atual(Date dt_atual) {
+        this.dt_atual = dt_atual;
+    }
+
+    public List getUfs() {
+        return ufs;
+    }
+
+    public void setUfs(List ufs) {
+        this.ufs = ufs;
+    }
+
 }
