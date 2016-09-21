@@ -10,7 +10,7 @@
             <f:event listener="#{mbLocalVelocidade.inicializar(mbLocalInfracao.localInfracao.nr_codigo)}" type="preRenderView" />
 	</f:metadata>
     
-    <p:panelGrid columns="4" styleClass="panelGrid" id="grid2" >
+    <p:panelGrid columns="4" styleClass="panelGrid" id="grid5" >
 
         <p:outputLabel for="dt_inicio" value="Dt. início: "/>
         <p:calendar id="dt_inicio" size="10" pattern="dd/MM/yyyy" value="#{mbLocalVelocidade.localVelocidade.dt_inicio}" navigator="true" locale="pt"
@@ -22,7 +22,7 @@
 
     </p:panelGrid>     
 
-    <p:panelGrid columns="10" styleClass="panelGrid" style="margin-top: 20px" id="grid3">
+    <p:panelGrid columns="10" styleClass="panelGrid" style="margin-top: 20px" id="grid6">
         <p:outputLabel for="nr_velocidadePermitida" value="Vel. Permitida: "/>
         <p:inputMask id="nr_velocidadePermitida" size="3" maxlength="3" value="#{mbLocalVelocidade.localVelocidade.nr_velocidadePermitida}"
                      required="true" requiredMessage="O campo [Velocidade Permitida] é obrigatório..." mask="999"/>

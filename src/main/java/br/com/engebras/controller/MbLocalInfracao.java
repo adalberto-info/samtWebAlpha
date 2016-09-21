@@ -111,17 +111,14 @@ public class MbLocalInfracao implements Serializable {
     }
 
     public void addLocalInfracao() {
-        localInfracao.setDc_bairro("");
         localInfracao.setDc_ladoFaixa1("");
         localInfracao.setDc_ladoFaixa2("");
         localInfracao.setDc_latitude("");
         localInfracao.setDc_logitude("");
         localInfracao.setDc_sentido("");
-        localInfracao.setDc_uf("");
         dt_atual = new Date();
         localInfracao.setDt_ultimaAtualizacao(dt_atual);
         localInfracao.setLg_velocidadeDifPorte(0);
-        localInfracao.setNr_codMuncipio(0);
         localInfracao.setNr_codStatus(0);
         localInfracao.setNr_codTipoEquipamento(0);
         localInfracao.setNr_codTipoFixacao(0);
