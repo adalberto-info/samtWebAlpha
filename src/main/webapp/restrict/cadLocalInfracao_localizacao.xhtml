@@ -19,7 +19,7 @@
         </p:selectOneMenu>
 
         <p:outputLabel for="dc_uf" value="UF: "/>
-        <p:selectOneMenu id="dc_uf" value="#{mbLocalInfracao.localInfracao.dc_uf}" style="width:150px" required ="true" requiredMessage="O campo [UF] é obrigatório...">
+        <p:selectOneMenu id="dc_uf" value="#{mbLocalInfracao.localInfracao.dc_uf}" style="width:150px">
             <f:selectItem itemLabel="Selecione a UF" itemValue=" " />
             <f:selectItems value="#{mbLocalInfracao.ufs}" var="listaUfs" 
                            itemLabel="#{listaUfs.dc_uf}" itemValue="#{listaUfs.dc_uf}"/>
