@@ -9,7 +9,7 @@
     <p:panelGrid columns="4" styleClass="panelGrid" id="grid4" >
 
         <p:outputLabel for="dc_bairro" value="Bairro: "/>
-        <p:inputText id="dc_bairro" size="30" value="#{mbLocalInfracao.localInfracao.dc_bairro}" onkeyup="this.value = this.value.toUpperCase()"/>
+        <p:inputText id="dc_bairro" maxlength="30" size="30" value="#{mbLocalInfracao.localInfracao.dc_bairro}" onkeyup="this.value = this.value.toUpperCase()"/>
 
         <p:outputLabel for="dc_uf" value="UF: "/>
         <p:selectOneMenu id="dc_uf" value="#{mbLocalInfracao.localInfracao.dc_uf}" style="width:150px">
@@ -25,6 +25,14 @@
                            itemLabel="#{listaMunicipios.dc_municipio}" itemValue="#{listaMunicipios.nr_codigo.toString()}"/>
         </p:selectOneMenu>
 
+        <p:outputLabel/>
+        
+        <p:outputLabel for="dc_latitude" value="Latitude: "/>
+        <p:inputMask id="dc_latitude" maxlength="17" size="17" mask="99º 99' 99.999''" value="#{mbLocalInfracao.localInfracao.dc_latitude}"/>
+        
+        <p:outputLabel for="dc_longitude" value="Longitude: "/>
+        <p:inputMask id="dc_logitude" maxlength="17" size="17" mask="999º 99' 99.999''" value="#{mbLocalInfracao.localInfracao.dc_logitude}"/>
+        
 
     </p:panelGrid>     
 

@@ -10,6 +10,11 @@
             <f:event listener="#{mbLocalVelocidade.inicializar(mbLocalInfracao.localInfracao.nr_codigo)}" type="preRenderView" />
 	</f:metadata>
     
+    <p:panelGrid columns="1" id="grid7">
+        <p:outputLabel for="lg_velocidadeDifPorte" value="Velocidade Permitida Diferente por Porte ?"
+        <p:selectBooleanCheckbox id="lg_velocidadeDifPorte" value="#{mbLocalInfracao.lg_velocidadeDifPorte}"/>               
+    </p:panelGrid>
+    
     <p:panelGrid columns="4" styleClass="panelGrid" id="grid5" >
 
         <p:outputLabel for="dt_inicio" value="Dt. início: "/>

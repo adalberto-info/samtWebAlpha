@@ -61,6 +61,7 @@ public class MbLocalInfracao implements Serializable {
     private boolean lg_zmrf;
     private boolean lg_localNaoPermitidoMoto;
     private boolean lg_novoRegistro;
+    private boolean lg_velocidadeDifPorte;
     private Date dt_atual;
 
     public MbLocalInfracao() {
@@ -88,6 +89,7 @@ public class MbLocalInfracao implements Serializable {
         lg_zmrf = false;
         lg_localNaoPermitidoMoto = false;
         lg_novoRegistro = true;
+        lg_velocidadeDifPorte = false;
 
     }
 
@@ -433,4 +435,13 @@ public class MbLocalInfracao implements Serializable {
         this.ufs = ufs;
     }
 
+    public boolean isLg_velocidadeDifPorte() {
+        return lg_velocidadeDifPorte;
+    }
+
+    public void setLg_velocidadeDifPorte(boolean lg_velocidadeDifPorte) {
+        this.lg_velocidadeDifPorte = lg_velocidadeDifPorte;
+    }
+
+    
 }
