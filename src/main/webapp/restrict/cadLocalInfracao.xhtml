@@ -83,7 +83,13 @@
 
                                 <p:outputLabel for="lg_ativo" value="Ativo ? "/>
                                 <p:selectBooleanCheckbox id="lg_ativo" value="#{mbLocalInfracao.lg_ativo}"/>
+                                
+                                <p:outputLabel for="dt_inicio" value="Dt. início: "/>
+                                <p:calendar id="dt_inicio" size="10" pattern="dd/MM/yyyy" value="#{mbLocalInfracao.localInfracao.dt_inicio}" navigator="true" locale="pt"/>
 
+                                <p:outputLabel for="dt_ultimaAtualizacao" value="Dt. Atualização: "/>
+                                <p:inputText id="dt_ultimaAtualizacao" size="10" maxlength="10" value="#{mbLocalInfracao.localInfracao.dt_ultimaAtualizacao}" disabled="true"/>
+                                
                             </p:panelGrid>
                             <p:tabView id="tbv2" dynamic="true" cache="true" >
 

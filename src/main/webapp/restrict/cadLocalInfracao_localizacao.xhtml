@@ -11,19 +11,20 @@
         <p:outputLabel for="dc_bairro" value="Bairro: "/>
         <p:inputText id="dc_bairro" size="30" value="#{mbLocalInfracao.localInfracao.dc_bairro}" onkeyup="this.value = this.value.toUpperCase()"/>
 
-        <p:outputLabel for="nr_codMunicipio" value="Município: "/>
-        <p:selectOneMenu id="nr_codMunicipio" value="#{mbLocalInfracao.localInfracao.nr_codMuncipio}" style="width:300px">
-            <f:selectItem itemLabel="Selecione o Município" itemValue="0" />
-            <f:selectItems value="#{mbLocalInfracao.municipios}" var="listaMunicipios" 
-                           itemLabel="#{listaMunicipios.dc_municipio}" itemValue="#{listaMunicipios.nr_codigo.toString()}"/>
-        </p:selectOneMenu>
-
         <p:outputLabel for="dc_uf" value="UF: "/>
         <p:selectOneMenu id="dc_uf" value="#{mbLocalInfracao.localInfracao.dc_uf}" style="width:150px">
             <f:selectItem itemLabel="Selecione a UF" itemValue=" " />
             <f:selectItems value="#{mbLocalInfracao.ufs}" var="listaUfs" 
                            itemLabel="#{listaUfs.dc_uf}" itemValue="#{listaUfs.dc_uf}"/>
         </p:selectOneMenu>
+        
+        <p:outputLabel for="nr_codMunicipio" value="Município: "/>
+        <p:selectOneMenu id="nr_codMunicipio" value="#{mbLocalInfracao.localInfracao.nr_codMuncipio}" style="width:300px" >
+            <f:selectItem itemLabel="Selecione o Município" itemValue="0" />
+            <f:selectItems value="#{mbLocalInfracao.municipios}" var="listaMunicipios" 
+                           itemLabel="#{listaMunicipios.dc_municipio}" itemValue="#{listaMunicipios.nr_codigo.toString()}"/>
+        </p:selectOneMenu>
+
 
     </p:panelGrid>     
 
