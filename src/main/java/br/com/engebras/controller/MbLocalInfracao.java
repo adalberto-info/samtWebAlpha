@@ -113,6 +113,27 @@ public class MbLocalInfracao implements Serializable {
     }
 
     public void addLocalInfracao() {
+        
+        if (lg_excessoVelocidade == false &&
+            lg_avancoSemaforo == false &&
+            lg_rodizio == false &&
+            lg_paradaSobreFaixa == false &&
+            lg_faixaExclusiva == false &&
+            lg_zmrc == false &&
+            lg_faixaNaoDestinada == false &&
+            lg_transitarAcostamento == false &&
+            lg_retornoProibido == false &&
+            lg_conversaoProibida == false &&
+            lg_contraMao == false &&
+            lg_velocidadeAbaixoPermitida == false &&
+            lg_zmrf == false &&
+            lg_localNaoPermitidoMoto == false) {
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Selecione um tipo de fiscalização.", ""));
+            return;
+        }
+
+        
         localInfracao.setDc_ladoFaixa1("");
         localInfracao.setDc_ladoFaixa2("");
         localInfracao.setDc_latitude("");
@@ -128,6 +149,9 @@ public class MbLocalInfracao implements Serializable {
         localInfracao.setNr_faixa2(0);
         localInfracao.setNr_qtdFaixas(1);
         localInfracao.setNr_codStatus(1);
+
+
+
         if (verificaDuplicidade(localInfracao.getDc_local()) == true) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Já existe um local infração cadastrado com o código:" + localInfracao.getNr_codigo() + ".", ""));
         } else if (localInfracao.getNr_codigo() == null || localInfracao.getNr_codigo() == 0) {

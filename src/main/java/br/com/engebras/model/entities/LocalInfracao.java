@@ -60,7 +60,7 @@ public class LocalInfracao implements Serializable{
     @Column(name="dc_latitude", nullable=false, length=17)
     private String dc_latitude; 
     @Column(name="dc_longitude", nullable=false, length=17)
-    private String dc_logitude; 
+    private String dc_longitude; 
     @Column(name="dt_inicio", nullable=false)
     @Temporal(TemporalType.DATE)
     private Date dt_inicio; 
@@ -187,12 +187,12 @@ public class LocalInfracao implements Serializable{
         this.dc_latitude = dc_latitude;
     }
 
-    public String getDc_logitude() {
-        return dc_logitude;
+    public String getDc_longitude() {
+        return dc_longitude;
     }
 
-    public void setDc_logitude(String dc_logitude) {
-        this.dc_logitude = dc_logitude;
+    public void setDc_longitude(String dc_longitude) {
+        this.dc_longitude = dc_longitude;
     }
 
     public Date getDt_inicio() {

@@ -24,15 +24,14 @@
             <f:selectItems value="#{mbLocalInfracao.municipios}" var="listaMunicipios" 
                            itemLabel="#{listaMunicipios.dc_municipio}" itemValue="#{listaMunicipios.nr_codigo.toString()}"/>
         </p:selectOneMenu>
-
         <p:outputLabel/>
-        
+        <p:outputLabel/>
+
         <p:outputLabel for="dc_latitude" value="Latitude: "/>
         <p:inputMask id="dc_latitude" maxlength="17" size="17" mask="99º 99' 99.999''" value="#{mbLocalInfracao.localInfracao.dc_latitude}"/>
         
         <p:outputLabel for="dc_longitude" value="Longitude: "/>
-        <p:inputMask id="dc_logitude" maxlength="17" size="17" mask="999º 99' 99.999''" value="#{mbLocalInfracao.localInfracao.dc_logitude}"/>
-        
+        <p:inputMask id="dc_longitude" maxlength="17" size="17" mask="999º 99' 99.999''" value="#{mbLocalInfracao.localInfracao.dc_longitude}"/>
 
     </p:panelGrid>     
 
