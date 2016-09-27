@@ -136,21 +136,26 @@ public class MbLocalInfracao implements Serializable {
         
         localInfracao.setDc_ladoFaixa1("");
         localInfracao.setDc_ladoFaixa2("");
-        localInfracao.setDc_latitude("");
-        localInfracao.setDc_logitude("");
         localInfracao.setDc_sentido("");
-        dt_atual = new Date();
-        localInfracao.setDt_ultimaAtualizacao(dt_atual);
-        localInfracao.setLg_velocidadeDifPorte(0);
-        localInfracao.setNr_codStatus(0);
-        localInfracao.setDt_inicio(dt_atual);
-        localInfracao.setLg_ativo(0);
         localInfracao.setNr_faixa1(1);
         localInfracao.setNr_faixa2(0);
         localInfracao.setNr_qtdFaixas(1);
-        localInfracao.setNr_codStatus(1);
 
+        dt_atual = new Date();
+        localInfracao.setDt_ultimaAtualizacao(dt_atual);
 
+        if (lg_ativo == true){
+            localInfracao.setLg_ativo(1);
+        } else {
+            localInfracao.setLg_ativo(0);
+        }
+
+        if (lg_velocidadeDifPorte == true){
+            localInfracao.setLg_velocidadeDifPorte(1);
+        } else {
+            localInfracao.setLg_velocidadeDifPorte(0);
+        }
+        
 
         if (verificaDuplicidade(localInfracao.getDc_local()) == true) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Já existe um local infração cadastrado com o código:" + localInfracao.getNr_codigo() + ".", ""));

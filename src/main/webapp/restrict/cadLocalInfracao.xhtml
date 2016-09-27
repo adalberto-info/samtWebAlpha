@@ -90,7 +90,11 @@
                                 <p:outputLabel for="dt_ultimaAtualizacao" value="Dt. Atualização: "/>
                                 <p:inputText id="dt_ultimaAtualizacao" size="10" maxlength="10" value="#{mbLocalInfracao.localInfracao.dt_ultimaAtualizacao}" disabled="true"/>
                                 
+                                <p:outputLabel for="lg_velocidadeDifPorte" value="Velocidade Permitida Diferente por Porte ?"/>
+                                <p:selectBooleanCheckbox id="lg_velocidadeDifPorte" value="#{mbLocalInfracao.lg_velocidadeDifPorte}"/>               
+                                
                             </p:panelGrid>
+
                             <p:tabView id="tbv2" dynamic="true" cache="true" >
 
                                 <p:tab title="Tipo Fiscalização"> 
@@ -107,6 +111,7 @@
                                 <p:tab title="Equipamentos" disabled="#{mbLocalInfracao.lg_novoRegistro}">
                                 </p:tab>
                                 <p:tab title="Faixas">
+                                    <ui:include src="/restrict/cadLocalInfracao_faixa.xhtml"/>
                                 </p:tab>
                                 <p:tab title="Local Cliente" disabled="#{mbLocalInfracao.lg_novoRegistro}">
                                 </p:tab>
