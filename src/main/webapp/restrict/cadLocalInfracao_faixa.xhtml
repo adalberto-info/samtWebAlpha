@@ -19,8 +19,37 @@
             <f:selectItem itemLabel="2" itemValue="2"/>
         </p:selectOneMenu>
         
-        
+        <p:outputLabel for="nr_qtdFaixas" value="Qtd Faixas Monitoradas: "/>
+        <p:selectOneMenu id="nr_qtdFaixas" value="#{mbLocalInfracao.localInfracao.nr_qtdFaixas}" style="width:170px">
+            <f:selectItem itemLabel="Selecione a quantidade de faixas monitoradas" itemValue="0"/>
+            <f:selectItem itemLabel="1" itemValue="1"/>
+            <f:selectItem itemLabel="2" itemValue="2"/>
+        </p:selectOneMenu>
         
     </p:panelGrid>
 
+    <p:panelGrid columns="4" id="grid8">
+        
+        <p:outputLabel for="nr_faixa1" value="Faixa1: "/>
+        <p:inputText id="nr_faixa1" maxlength="1" size="1" value="#{mbLocalInfracao.localInfracao.nr_faixa1}"/>
+        
+        <p:outputLabel for="dc_ladoFaixa1" value="Lado1: "/>
+        <p:selectOneMenu id="dc_ladoFaixa1" value="#{mbLocalInfracao.localInfracao.dc_ladoFaixa1}" style="width:170px">
+            <f:selectItem itemLabel="Selecione o lado" itemValue=""/>
+            <f:selectItem itemLabel="Direita" itemValue="D"/>
+            <f:selectItem itemLabel="Esquerda" itemValue="E"/>
+        </p:selectOneMenu>
+        
+        <p:outputLabel for="nr_faixa2" value="Faixa2: "/>
+        <p:inputText id="nr_faixa2" maxlength="1" size="1" value="#{mbLocalInfracao.localInfracao.nr_faixa2}"/>
+
+        <p:outputLabel for="dc_ladoFaixa2" value="Lado2: "/>
+        <p:selectOneMenu id="dc_ladoFaixa2" value="#{mbLocalInfracao.localInfracao.dc_ladoFaixa2}" style="width:170px">
+            <f:selectItem itemLabel="Selecione o lado" itemValue=""/>
+            <f:selectItem itemLabel="Direita" itemValue="D"/>
+            <f:selectItem itemLabel="Esquerda" itemValue="E"/>
+        </p:selectOneMenu>
+        
+    </p:panelGrid>
+    
 </ui:composition>

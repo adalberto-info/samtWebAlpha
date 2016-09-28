@@ -133,14 +133,6 @@ public class MbLocalInfracao implements Serializable {
             return;
         }
 
-        
-        localInfracao.setDc_ladoFaixa1("");
-        localInfracao.setDc_ladoFaixa2("");
-        localInfracao.setDc_sentido("");
-        localInfracao.setNr_faixa1(1);
-        localInfracao.setNr_faixa2(0);
-        localInfracao.setNr_qtdFaixas(1);
-
         dt_atual = new Date();
         localInfracao.setDt_ultimaAtualizacao(dt_atual);
 
