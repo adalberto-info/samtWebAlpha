@@ -41,6 +41,7 @@ public class MbPesquisaLocalInfracao implements Serializable {
     public LocalInfracaoFilter filtro; 
     private List<LocalInfracao> localInfracaoFiltrados; 
     private LocalInfracao localInfracao = new LocalInfracao(); 
+    private LocalInfracao localInfracaoSelecionado;
     
     public MbPesquisaLocalInfracao(){
         filtro = new LocalInfracaoFilter();
@@ -67,6 +68,10 @@ public class MbPesquisaLocalInfracao implements Serializable {
         
         if (filtro.getNr_codigo() != null && filtro.getNr_codigo() >0 ){
             criteria.add(Restrictions.eq("nr_codigo", filtro.getNr_codigo()));
+        }
+        
+        if (StringUtils.isNotBlank(filtro.getDc_local())){
+            criteria.add(Restrictions.like("dc_local", filtro.getDc_local(), MatchMode.ANYWHERE));
         }
         
         return criteria.addOrder(Order.asc("nr_codigo")).list();
@@ -102,6 +107,14 @@ public class MbPesquisaLocalInfracao implements Serializable {
 
     public void setLocalInfracao(LocalInfracao localInfracao) {
         this.localInfracao = localInfracao;
+    }
+
+    public LocalInfracao getLocalInfracaoSelecionado() {
+        return localInfracaoSelecionado;
+    }
+
+    public void setLocalInfracaoSelecionado(LocalInfracao localInfracaoSelecionado) {
+        this.localInfracaoSelecionado = localInfracaoSelecionado;
     }
     
     

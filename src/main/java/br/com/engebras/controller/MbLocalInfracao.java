@@ -65,6 +65,7 @@ public class MbLocalInfracao implements Serializable {
     private Date dt_atual;
 
     public MbLocalInfracao() {
+        lg_novoRegistro = true;
         geraListaTipoFixacaoRadares();
         geraListaStatusLocais();
         geraListaMunicipios();
@@ -88,7 +89,6 @@ public class MbLocalInfracao implements Serializable {
         lg_velocidadeAbaixoPermitida = false;
         lg_zmrf = false;
         lg_localNaoPermitidoMoto = false;
-        lg_novoRegistro = true;
         lg_velocidadeDifPorte = false;
 
     }
@@ -100,6 +100,7 @@ public class MbLocalInfracao implements Serializable {
 
     public String limpaLocalInfracao() {
         localInfracao = new LocalInfracao();
+        lg_novoRegistro = true;
         return editLocalInfracao();
     }
 
@@ -109,6 +110,7 @@ public class MbLocalInfracao implements Serializable {
 
     public String editarLocalInfracao(Integer nr_codigo) {
         this.localInfracao = porNr_codigo(nr_codigo);
+        lg_novoRegistro = false;
         return editLocalInfracao();
     }
 
@@ -262,6 +264,10 @@ public class MbLocalInfracao implements Serializable {
         listaSQL = query.list();
 
         this.ufs = listaSQL;
+    }
+    
+    public void teste(){
+        this.lg_novoRegistro = false;
     }
 
     public LocalInfracao getLocalInfracao() {

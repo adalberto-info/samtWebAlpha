@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="/WEB-INF/templates/LayoutMaster.xhtml">
+
+    <ui:define name="content">
+        <style>
+            .ui-growl{
+                position:fixed;
+                top:70px;
+                right:5px;
+                width:301px;
+            }
+        </style>
+        <p:fieldset legend="Pesquisa Locais Infrações">
+            <br/>
+
+            <p:tabView id="tbv1" dynamic="true" cache="true">
+                <p:tab title="Pesquisa Local Infração" id="PesquisaLocalInfracao">
+                    <h:form prependId="false" id="formPesqLocalInfracao">
+                        <p:growl id="msg0" />
+
+                        <div class="ui-fluid">
+
+                            <p:toolbar style="margin-top: 20px">
+                                <p:toolbarGroup>
+                                    <p:commandButton value="Pesquisar" action="#{mbPesquisaLocalInfracao.pesquisar()}"
+                                                     update="@form :formtable" />
+                                </p:toolbarGroup>
+                                <p:toolbarGroup align="right">
+                                    <p:button value="Novo" outcome="/restrict/cadLocalInfracao.xhtml" icon="ui-icon-document"/>
+                                </p:toolbarGroup>
+                            </p:toolbar>
+
+                            <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
+                                <p:outputLabel for="nr_codigo" value="Código: "/>
+                                <p:inputText id="nr_codigo" size="5" maxlength="5" value="#{mbPesquisaLocalInfracao.filtro.nr_codigo}"/>
+                                <p:outputLabel for="dc_local" value="Descrição: "/>
+                                <p:inputText id="dc_local" size="80" maxlength="80" value="#{mbPesquisaLocalInfracao.filtro.dc_local}" onkeyup="this.value = this.value.toUpperCase()"/>
+                            </p:panelGrid>
+                        </div>
+                        <br/>
+                    </h:form>
+                </p:tab>
+            </p:tabView>    
+            
+            
+            <h:form id="formtable">
+                <p:growl id="msg1"/>
+
+                <p:dataTable id="idTabela" var="tabLocalInfracao" value="#{mbPesquisaLocalInfracao.localInfracaoFiltrados}" 
+                             paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15" paginatorPosition="bottom">
+
+                    <f:facet name="header">Lista de Locais Infrações</f:facet>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Código"/>
+                        </f:facet>
+                        <h:outputText value="#{tabLocalInfracao.nr_codigo}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Descrição"/>
+                        </f:facet>
+                        <h:outputText value="#{tabLocalInfracao.dc_local}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ações"/>
+                        </f:facet>
+
+                        <p:commandButton value="Editar" action="#{mbLocalInfracao.editarLocalInfracao(tabLocalInfracao.nr_codigo)}"
+                                         icon="ui-icon ui-icon-pencil">
+                            <f:setPropertyActionListener target="#{mbPesquisaLocalInfracao.localInfracao}" value="#{tabLocalInfracao}"/>
+                        </p:commandButton> 
+                        
+                        <p:commandButton value="Remover" action="#{mbPesquisaLocalInfracao.deleteLocalInfracao}"
+                                         icon="ui-icon ui-icon-close" update="@form :formtable">
+                            <f:setPropertyActionListener target="#{mbPesquisaLocalInfracao.localInfracao}"
+                                                         value="#{tabLocalInfracao}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+
+               	<p:confirmDialog header="Exclusão de local infração" 
+                                 message="Tem certeza que deseja excluir o local infração #{mbPesquisaLocalInfracao.localInfracaoSelecionado.dc_local}?"
+	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();"
+                                         action="#{mbPesquisaLocalInfracao.remover(tabLocalInfracao)}" process="@this"
+	    			update=":formtable:idTabela" />
+	    	</p:confirmDialog>
+            </h:form>
+
+        </p:fieldset>
+
+    </ui:define>
+
+</ui:composition>
+
