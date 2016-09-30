@@ -20,6 +20,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import br.com.engebras.util.FacesContextUtil;
 import br.com.engebras.util.HibernateUtil;
@@ -28,9 +31,6 @@ import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.LocalInfracao;
 import br.com.engebras.model.entities.TipoFixacaoRadar;
 import br.com.engebras.model.entities.StatusLocal;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 @ManagedBean(name = "mbLocalInfracao")
 @SessionScoped
@@ -158,7 +158,7 @@ public class MbLocalInfracao implements Serializable {
         } else {
             updateLocalInfracao();
         }
-        limpaLocalInfracao();
+        //limpaLocalInfracao();
     }
 
     public void insertLocalInfracao() {
