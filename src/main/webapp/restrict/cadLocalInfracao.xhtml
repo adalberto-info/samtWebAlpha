@@ -58,7 +58,7 @@
                             <p:toolbarGroup>
                                 <p:commandButton value="Salvar" icon="ui-icon ui-icon-disk" update="@form" process="@this tbv1:grid0 tbv1:tbv2:grid1 tbv1:tbv2:grid2 tbv1:tbv2:grid3 tbv1:tbv2:grid4 tbv1:tbv2:grid7 tbv1:tbv2:grid8"> 
                                                  <f:actionListener binding="#{mbLocalInfracao.addLocalInfracao()}"/> 
-                                                 <f:actionListener binding="#{mbLocal_tipoFiscalizacao.addLocal_tipoFiscalizacao()}"/>
+                                                 <f:actionListener binding="#{mbLocal_tipoFiscalizacao.addLocal_tipoFiscalizacao(mbLocalInfracao.localInfracao.nr_codigo)}"/>
                                 </p:commandButton>                 
                                                  
                                 <p:commandButton value="Cancelar" actionListener="#{mbLocalInfracao.limpaLocalInfracao}" icon="ui-icon ui-icon-close" update="@form" process="@this"/>

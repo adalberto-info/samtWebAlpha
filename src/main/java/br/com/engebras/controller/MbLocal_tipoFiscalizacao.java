@@ -44,10 +44,15 @@ public class MbLocal_tipoFiscalizacao implements Serializable {
         
     }
     
-    public void addLocal_tipoFiscalizacao(){
+    public void addLocal_tipoFiscalizacao(Integer nr_codLocal){
         
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Executei o metodo addLocal_tipoFiscalizacao...", ""));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Código local: " + nr_codLocal + ".", ""));
 
+        if (nr_codLocal == null || nr_codLocal == 0){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Código do local está zerado...", ""));
+            return;
+        }
     }
 
     public Local_tipoFiscalizacao getLocal_tipoFiscalizacao() {
