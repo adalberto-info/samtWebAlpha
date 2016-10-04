@@ -31,6 +31,7 @@ import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.LocalInfracao;
 import br.com.engebras.model.entities.TipoFixacaoRadar;
 import br.com.engebras.model.entities.StatusLocal;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean(name = "mbLocalInfracao")
 @SessionScoped
@@ -68,7 +69,6 @@ public class MbLocalInfracao implements Serializable {
         lg_novoRegistro = true;
         geraListaTipoFixacaoRadares();
         geraListaStatusLocais();
-        geraListaMunicipios();
         geraListaUfs();
     }
 
@@ -239,9 +239,9 @@ public class MbLocalInfracao implements Serializable {
         String vlc_sql;
         vlc_sql = "select concat(a.dc_uf, ' | ', a.dc_municipio) as dc_municipio, a.nr_codigo, a.dc_uf ";
         vlc_sql += "from municipio a ";
-//        if ( localInfracao.getDc_uf() != null && !localInfracao.getDc_uf().equals("") ){
-//            vlc_sql += "where a.dc_uf = '" + localInfracao.getDc_uf() + "' ";
-//        }
+        if ( localInfracao.getDc_uf() != null && !localInfracao.getDc_uf().equals("") ){
+            vlc_sql += "where a.dc_uf = '" + localInfracao.getDc_uf() + "' ";
+        }
         vlc_sql += "order by a.dc_uf, a.dc_municipio ";
 
         Session session = FacesContextUtil.getRequestSession();

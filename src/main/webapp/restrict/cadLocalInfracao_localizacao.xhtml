@@ -5,7 +5,10 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-
+    <f:metadata>
+    	<f:viewParam name="dummy" />
+    </f:metadata>
+    
     <p:panelGrid columns="4" styleClass="panelGrid" id="grid4" >
 
         <p:outputLabel for="dc_bairro" value="Bairro: "/>
@@ -13,14 +16,15 @@
 
         <p:outputLabel for="dc_uf" value="UF: "/>
         <p:selectOneMenu id="dc_uf" value="#{mbLocalInfracao.localInfracao.dc_uf}" style="width:150px">
-            <f:selectItem itemLabel="Selecione a UF" itemValue=" " />
+            <f:selectItem itemLabel="Selecione a UF" itemValue=" " noSelectionOption="true"/>
             <f:selectItems value="#{mbLocalInfracao.ufs}" var="listaUfs" 
                            itemLabel="#{listaUfs.dc_uf}" itemValue="#{listaUfs.dc_uf}"/>
+            <p:ajax listener="#{mbLocalInfracao.geraListaMunicipios}" update="nr_codMunicipio"/>    
         </p:selectOneMenu>
         
         <p:outputLabel for="nr_codMunicipio" value="Município: "/>
         <p:selectOneMenu id="nr_codMunicipio" value="#{mbLocalInfracao.localInfracao.nr_codMuncipio}" style="width:300px" >
-            <f:selectItem itemLabel="Selecione o Município" itemValue="0" />
+            <f:selectItem itemLabel="Selecione o Município" itemValue="0" noSelectionOption="true"/>
             <f:selectItems value="#{mbLocalInfracao.municipios}" var="listaMunicipios" 
                            itemLabel="#{listaMunicipios.dc_municipio}" itemValue="#{listaMunicipios.nr_codigo.toString()}"/>
         </p:selectOneMenu>
