@@ -266,9 +266,6 @@ public class MbLocalInfracao implements Serializable {
         this.ufs = listaSQL;
     }
     
-    public void teste(){
-        this.lg_novoRegistro = false;
-    }
 
     public LocalInfracao getLocalInfracao() {
         return localInfracao;
