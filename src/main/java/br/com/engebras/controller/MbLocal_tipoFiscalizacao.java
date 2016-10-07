@@ -87,6 +87,20 @@ public class MbLocal_tipoFiscalizacao implements Serializable {
     
     public void limpaLocal_tipoFiscalizacao(){
         local_tipoFiscalizacao = new Local_tipoFiscalizacao();
+        lg_excessoVelocidade = false;
+        lg_avancoSemaforo = false;
+        lg_rodizio = false;
+        lg_paradaSobreFaixa = false;
+        lg_faixaExclusiva = false;
+        lg_zmrc = false;
+        lg_faixaNaoDestinada = false;
+        lg_transitarAcostamento = false;
+        lg_retornoProibido = false;
+        lg_conversaoProibida = false;
+        lg_contraMao = false;
+        lg_velocidadeAbaixoPermitida = false;
+        lg_zmrf = false;
+        lg_localNaoPermitidoMoto = false;
         
     }
 
@@ -94,9 +108,6 @@ public class MbLocal_tipoFiscalizacao implements Serializable {
         String vlc_sql = "";
         int vln_nr_codTipoFiscalizacao = 0;
         List consLocal_tipoFiscalizacao;
-
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Executei o metodo editarLocal_tipoFiscalizacao...", ""));
-
         
         Session session = FacesContextUtil.getRequestSession();
         vlc_sql = "select a.nr_codLocal, a.nr_codTipoFiscalizacao from local_tipoFiscalizacao a where a.nr_codLocal = " + nr_codLocal + " ";
@@ -148,8 +159,12 @@ public class MbLocal_tipoFiscalizacao implements Serializable {
     
     public void addLocal_tipoFiscalizacao(Integer nr_codLocal){
         
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Executei o metodo addLocal_tipoFiscalizacao...", ""));
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Código local: " + nr_codLocal + ".", ""));
+        String vlc_sql; 
+        vlc_sql = "";
+        boolean vll_existe;
+        vll_existe = true;
+
+        List consLocal_tipoFiscalizacao;
 
         if (nr_codLocal == null || nr_codLocal == 0){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Código do local está zerado...", ""));
@@ -173,12 +188,48 @@ public class MbLocal_tipoFiscalizacao implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Selecione um tipo de fiscalização.", ""));
             return;
         }
-
         
+        Session session = FacesContextUtil.getRequestSession();
         vpn_nr_codLocal = nr_codLocal;
         
+        vlc_sql = "select a.* from local_tipoFiscalizacao a where a.nr_codLocal =  " + nr_codLocal + " and a.nr_codTipoFiscalizacao = 1 "; 
+        
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        consLocal_tipoFiscalizacao = query.list();
+        
+        vll_existe = (consLocal_tipoFiscalizacao.size() > 0);
+        
+        if (lg_excessoVelocidade == true){
+            if (vll_existe == false){
+                local_tipoFiscalizacao.setNr_codLocal(nr_codLocal);
+                local_tipoFiscalizacao.setNr_codTipoFiscalizacao(1);
+                insertLocal_tipoInfracao();
+            }
+        } else {
+            
+        }
+        
+        
+    }
+    
+    public void deleteLocalTipoFiscalizacao(){
+        local_tipoFiscalizacaoDAO().remove(local_tipoInfracao);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso!!!",""));
     }
 
+
+    public void insertLocal_tipoFiscalizacao() {
+        local_tipoFiscalizacaoDAO().save(local_tipoFiscalizacao);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso!!!", ""));
+    }
+
+    public void updateLocal_tipoFiscalizacao() {
+        local_tipoFiscalizacaoDAO().update(local_tipoFiscalizacao);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso!!!", ""));
+    }
+    
+    
     public Local_tipoFiscalizacao getLocal_tipoFiscalizacao() {
         return local_tipoFiscalizacao;
     }
@@ -306,6 +357,22 @@ public class MbLocal_tipoFiscalizacao implements Serializable {
 
     public void setLg_velocidadeAbaixoPermitida(boolean lg_velocidadeAbaixoPermitida) {
         this.lg_velocidadeAbaixoPermitida = lg_velocidadeAbaixoPermitida;
+    }
+
+    public boolean isLg_novoRegistro() {
+        return lg_novoRegistro;
+    }
+
+    public void setLg_novoRegistro(boolean lg_novoRegistro) {
+        this.lg_novoRegistro = lg_novoRegistro;
+    }
+
+    public boolean isLg_velocidadeDifPorte() {
+        return lg_velocidadeDifPorte;
+    }
+
+    public void setLg_velocidadeDifPorte(boolean lg_velocidadeDifPorte) {
+        this.lg_velocidadeDifPorte = lg_velocidadeDifPorte;
     }
     
     
