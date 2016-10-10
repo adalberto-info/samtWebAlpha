@@ -108,6 +108,8 @@ public class MbLocal_tipoFiscalizacao implements Serializable {
         String vlc_sql = "";
         int vln_nr_codTipoFiscalizacao = 0;
         List consLocal_tipoFiscalizacao;
+
+        limpaLocal_tipoFiscalizacao();
         
         Session session = FacesContextUtil.getRequestSession();
         vlc_sql = "select a.nr_codLocal, a.nr_codTipoFiscalizacao from local_tipoFiscalizacao a where a.nr_codLocal = " + nr_codLocal + " ";
@@ -189,32 +191,116 @@ public class MbLocal_tipoFiscalizacao implements Serializable {
             return;
         }
         
-        Session session = FacesContextUtil.getRequestSession();
-        vpn_nr_codLocal = nr_codLocal;
-        
-        vlc_sql = "select a.* from local_tipoFiscalizacao a where a.nr_codLocal =  " + nr_codLocal + " and a.nr_codTipoFiscalizacao = 1 "; 
-        
-        SQLQuery query = session.createSQLQuery(vlc_sql);
-        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-        consLocal_tipoFiscalizacao = query.list();
-        
-        vll_existe = (consLocal_tipoFiscalizacao.size() > 0);
-        
         if (lg_excessoVelocidade == true){
-            if (vll_existe == false){
-                local_tipoFiscalizacao.setNr_codLocal(nr_codLocal);
-                local_tipoFiscalizacao.setNr_codTipoFiscalizacao(1);
-                insertLocal_tipoInfracao();
-            }
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 1, true);
         } else {
-            
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 1, false);
+        }
+
+        if (lg_avancoSemaforo == true){
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 2, true);
+        } else {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 2, false);
+        }
+        
+        if (lg_rodizio == true){
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 3, true);
+        } else {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 3, false);
+        }
+        
+        if (lg_paradaSobreFaixa == true){
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 4, true);
+        } else {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 4, false);
+        }
+        
+        if (lg_faixaExclusiva == true) {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 5, true);
+        } else {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 5, false);
+        }
+        
+        if (lg_zmrc == true) {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 6, true);
+        } else {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 6, false);
+        }
+        
+        if (lg_faixaNaoDestinada == true) {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 7, true);
+        } else {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 7, false);
+        }
+        
+        if (lg_transitarAcostamento == true) {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 7, true);
+        } else {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 7, false);
+        }
+        
+        if (lg_retornoProibido == true) {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 8, true);
+        } else {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 8, false);
+        }
+        
+        if (lg_conversaoProibida == true) {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 9, true);
+        } else {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 9, false);
+        }
+        
+        if (lg_contraMao == true) {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 10, true);
+        } else {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 10, false);
+        }
+        
+        if (lg_velocidadeAbaixoPermitida == true){
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 11, true);
+        } else {
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 11, false);
         }
         
         
     }
     
+    public void addItemLocal_tipoFiscalizacao(Integer nr_codLocal, Integer nr_codTipoFiscalizacao, boolean vll_inserir){
+
+        Session session = FacesContextUtil.getRequestSession();
+        SQLQuery query;
+        String vlc_sql; 
+        boolean vll_existe;
+        vll_existe = true;
+        List consLocal_tipoFiscalizacao;
+
+        vlc_sql = "select a.* from local_tipoFiscalizacao a where a.nr_codLocal =  " + nr_codLocal + " and a.nr_codTipoFiscalizacao = " + nr_codTipoFiscalizacao + " " ; 
+        
+        query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        consLocal_tipoFiscalizacao = query.list();
+        
+        vll_existe = (consLocal_tipoFiscalizacao.size() > 0);
+        
+        if (vll_inserir == true){
+            if (vll_existe == false){
+                local_tipoFiscalizacao.setNr_codLocal(nr_codLocal);
+                local_tipoFiscalizacao.setNr_codTipoFiscalizacao(nr_codTipoFiscalizacao);
+                insertLocal_tipoFiscalizacao();
+            }
+        } else {
+           if (vll_existe == true){
+                local_tipoFiscalizacao.setNr_codLocal(nr_codLocal);
+                local_tipoFiscalizacao.setNr_codTipoFiscalizacao(nr_codTipoFiscalizacao);
+                deleteLocalTipoFiscalizacao();
+           } 
+        }
+        
+    }
+    
     public void deleteLocalTipoFiscalizacao(){
-        local_tipoFiscalizacaoDAO().remove(local_tipoInfracao);
+        local_tipoFiscalizacaoDAO().remove(local_tipoFiscalizacao);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso!!!",""));
     }
 
