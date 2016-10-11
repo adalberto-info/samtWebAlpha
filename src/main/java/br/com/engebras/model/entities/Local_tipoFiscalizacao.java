@@ -54,8 +54,9 @@ public class Local_tipoFiscalizacao implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.nr_codLocal);
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.nr_codLocal);
+        hash = 79 * hash + Objects.hashCode(this.nr_codTipoFiscalizacao);
         return hash;
     }
 
@@ -74,8 +75,12 @@ public class Local_tipoFiscalizacao implements Serializable {
         if (!Objects.equals(this.nr_codLocal, other.nr_codLocal)) {
             return false;
         }
+        if (!Objects.equals(this.nr_codTipoFiscalizacao, other.nr_codTipoFiscalizacao)) {
+            return false;
+        }
         return true;
     }
+
     
     
     

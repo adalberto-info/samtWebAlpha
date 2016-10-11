@@ -125,31 +125,44 @@ public class MbLocal_tipoFiscalizacao implements Serializable {
             
             if (vln_nr_codTipoFiscalizacao == 1){
                 lg_excessoVelocidade = true;
-            } else if(vln_nr_codTipoFiscalizacao == 2){
+            } 
+            if(vln_nr_codTipoFiscalizacao == 2){
                 lg_avancoSemaforo = true; 
-            } else if(vln_nr_codTipoFiscalizacao == 3){
+            } 
+            if(vln_nr_codTipoFiscalizacao == 3){
                 lg_rodizio = true; 
-            } else if(vln_nr_codTipoFiscalizacao == 4){
+            }
+            if(vln_nr_codTipoFiscalizacao == 4){
                 lg_paradaSobreFaixa = true; 
-            } else if(vln_nr_codTipoFiscalizacao == 5){
+            }
+            if(vln_nr_codTipoFiscalizacao == 5){
                 lg_faixaExclusiva = true; 
-            } else if(vln_nr_codTipoFiscalizacao == 6){
+            }
+            if(vln_nr_codTipoFiscalizacao == 6){
                 lg_zmrc = true; 
-            } else if(vln_nr_codTipoFiscalizacao == 7){
+            }
+            if(vln_nr_codTipoFiscalizacao == 7){
                 lg_faixaNaoDestinada = true; 
-            } else if(vln_nr_codTipoFiscalizacao == 8){
+            }
+            if(vln_nr_codTipoFiscalizacao == 8){
                 lg_transitarAcostamento = true; 
-            } else if(vln_nr_codTipoFiscalizacao == 9){
+            }
+            if(vln_nr_codTipoFiscalizacao == 9){
                 lg_retornoProibido = true; 
-            } else if(vln_nr_codTipoFiscalizacao == 10){
+            }
+            if(vln_nr_codTipoFiscalizacao == 10){
                 lg_conversaoProibida = true; 
-            } else if(vln_nr_codTipoFiscalizacao == 11){
+            }
+            if(vln_nr_codTipoFiscalizacao == 11){
                 lg_contraMao = true;
-            } else if(vln_nr_codTipoFiscalizacao == 12){
+            }
+            if(vln_nr_codTipoFiscalizacao == 12){
                 lg_velocidadeAbaixoPermitida = true;
-            } else if(vln_nr_codTipoFiscalizacao == 13){
+            }
+            if(vln_nr_codTipoFiscalizacao == 13){
                 lg_zmrf = true;
-            } else if(vln_nr_codTipoFiscalizacao == 14){
+            }
+            if(vln_nr_codTipoFiscalizacao == 14){
                 lg_localNaoPermitidoMoto = true;
             } 
         }
@@ -191,79 +204,20 @@ public class MbLocal_tipoFiscalizacao implements Serializable {
             return;
         }
         
-        if (lg_excessoVelocidade == true){
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 1, true);
-        } else {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 1, false);
-        }
-
-        if (lg_avancoSemaforo == true){
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 2, true);
-        } else {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 2, false);
-        }
-        
-        if (lg_rodizio == true){
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 3, true);
-        } else {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 3, false);
-        }
-        
-        if (lg_paradaSobreFaixa == true){
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 4, true);
-        } else {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 4, false);
-        }
-        
-        if (lg_faixaExclusiva == true) {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 5, true);
-        } else {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 5, false);
-        }
-        
-        if (lg_zmrc == true) {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 6, true);
-        } else {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 6, false);
-        }
-        
-        if (lg_faixaNaoDestinada == true) {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 7, true);
-        } else {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 7, false);
-        }
-        
-        if (lg_transitarAcostamento == true) {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 7, true);
-        } else {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 7, false);
-        }
-        
-        if (lg_retornoProibido == true) {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 8, true);
-        } else {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 8, false);
-        }
-        
-        if (lg_conversaoProibida == true) {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 9, true);
-        } else {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 9, false);
-        }
-        
-        if (lg_contraMao == true) {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 10, true);
-        } else {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 10, false);
-        }
-        
-        if (lg_velocidadeAbaixoPermitida == true){
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 11, true);
-        } else {
-            addItemLocal_tipoFiscalizacao(nr_codLocal, 11, false);
-        }
-        
-        
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 1, lg_excessoVelocidade);
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 2, lg_avancoSemaforo);
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 3, lg_rodizio);
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 4, lg_paradaSobreFaixa);
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 5, lg_faixaExclusiva);
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 6, lg_zmrc);
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 7, lg_faixaNaoDestinada);
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 8, lg_transitarAcostamento);
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 9, lg_retornoProibido);
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 10, lg_conversaoProibida);
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 11, lg_contraMao);
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 12, lg_velocidadeAbaixoPermitida);
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 13, lg_zmrf);
+            addItemLocal_tipoFiscalizacao(nr_codLocal, 14, lg_localNaoPermitidoMoto);
     }
     
     public void addItemLocal_tipoFiscalizacao(Integer nr_codLocal, Integer nr_codTipoFiscalizacao, boolean vll_inserir){
@@ -272,7 +226,7 @@ public class MbLocal_tipoFiscalizacao implements Serializable {
         SQLQuery query;
         String vlc_sql; 
         boolean vll_existe;
-        vll_existe = true;
+        vll_existe = false;
         List consLocal_tipoFiscalizacao;
 
         vlc_sql = "select a.* from local_tipoFiscalizacao a where a.nr_codLocal =  " + nr_codLocal + " and a.nr_codTipoFiscalizacao = " + nr_codTipoFiscalizacao + " " ; 
@@ -301,13 +255,12 @@ public class MbLocal_tipoFiscalizacao implements Serializable {
     
     public void deleteLocalTipoFiscalizacao(){
         local_tipoFiscalizacaoDAO().remove(local_tipoFiscalizacao);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso!!!",""));
-    }
+   }
 
 
     public void insertLocal_tipoFiscalizacao() {
         local_tipoFiscalizacaoDAO().save(local_tipoFiscalizacao);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso!!!", ""));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravado item:" + local_tipoFiscalizacao.getNr_codTipoFiscalizacao() + " com sucesso!!!", ""));
     }
 
     public void updateLocal_tipoFiscalizacao() {
