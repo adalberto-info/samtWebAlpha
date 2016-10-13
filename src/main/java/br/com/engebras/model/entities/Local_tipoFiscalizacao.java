@@ -30,11 +30,21 @@ public class Local_tipoFiscalizacao implements Serializable {
     private static final long serialVersionUID = 1L; 
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="nr_codigo", nullable=false, length=10)
+    private Integer nr_codigo; 
     @Column(name="nr_codLocal", nullable=false, length=5)
     private Integer nr_codLocal; 
-    @Id
     @Column(name="nr_codTipoFiscalizacao", nullable=false, length=10)
     private Integer nr_codTipoFiscalizacao; 
+
+    public Integer getNr_codigo() {
+        return nr_codigo;
+    }
+
+    public void setNr_codigo(Integer nr_codigo) {
+        this.nr_codigo = nr_codigo;
+    }
 
     public Integer getNr_codLocal() {
         return nr_codLocal;
@@ -54,9 +64,8 @@ public class Local_tipoFiscalizacao implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + Objects.hashCode(this.nr_codLocal);
-        hash = 79 * hash + Objects.hashCode(this.nr_codTipoFiscalizacao);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.nr_codigo);
         return hash;
     }
 
@@ -72,14 +81,12 @@ public class Local_tipoFiscalizacao implements Serializable {
             return false;
         }
         final Local_tipoFiscalizacao other = (Local_tipoFiscalizacao) obj;
-        if (!Objects.equals(this.nr_codLocal, other.nr_codLocal)) {
-            return false;
-        }
-        if (!Objects.equals(this.nr_codTipoFiscalizacao, other.nr_codTipoFiscalizacao)) {
+        if (!Objects.equals(this.nr_codigo, other.nr_codigo)) {
             return false;
         }
         return true;
     }
+
 
     
     

@@ -234,9 +234,18 @@ public class MbLocal_tipoFiscalizacao implements Serializable {
         query = session.createSQLQuery(vlc_sql);
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
         consLocal_tipoFiscalizacao = query.list();
+        local_tipoFiscalizacao = new Local_tipoFiscalizacao();
         
-        vll_existe = (consLocal_tipoFiscalizacao.size() > 0);
-        
+        if (consLocal_tipoFiscalizacao.size() > 0){
+            vll_existe = true;
+            for (Object oLocal_tipoFiscalizacao : consLocal_tipoFiscalizacao) {
+                Map row = (Map) oLocal_tipoFiscalizacao;
+                local_tipoFiscalizacao.setNr_codigo(Integer.parseInt(row.get("nr_codigo").toString()));
+            }
+        } else{
+            vll_existe = false; 
+        }
+    
         if (vll_inserir == true){
             if (vll_existe == false){
                 local_tipoFiscalizacao.setNr_codLocal(nr_codLocal);
@@ -260,12 +269,10 @@ public class MbLocal_tipoFiscalizacao implements Serializable {
 
     public void insertLocal_tipoFiscalizacao() {
         local_tipoFiscalizacaoDAO().save(local_tipoFiscalizacao);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravado item:" + local_tipoFiscalizacao.getNr_codTipoFiscalizacao() + " com sucesso!!!", ""));
     }
 
     public void updateLocal_tipoFiscalizacao() {
         local_tipoFiscalizacaoDAO().update(local_tipoFiscalizacao);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso!!!", ""));
     }
     
     
