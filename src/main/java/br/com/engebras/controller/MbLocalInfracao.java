@@ -103,7 +103,13 @@ public class MbLocalInfracao implements Serializable {
             localInfracao.setLg_velocidadeDifPorte(0);
         }
         
+        if (localInfracao.getNr_faixa1() == null)
+            localInfracao.setNr_faixa1(0);
 
+        if (localInfracao.getNr_faixa2() == null)
+            localInfracao.setNr_faixa2(0);
+        
+        
         if (verificaDuplicidade(localInfracao.getDc_local()) == true) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Já existe um local infração cadastrado com o código:" + localInfracao.getNr_codigo() + ".", ""));
         } else if (localInfracao.getNr_codigo() == null || localInfracao.getNr_codigo() == 0) {

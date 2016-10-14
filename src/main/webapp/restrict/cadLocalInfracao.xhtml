@@ -61,7 +61,9 @@
                                                  <f:actionListener binding="#{mbLocal_tipoFiscalizacao.addLocal_tipoFiscalizacao(mbLocalInfracao.localInfracao.nr_codigo)}"/>
                                 </p:commandButton>                 
                                                  
-                                <p:commandButton value="Cancelar" actionListener="#{mbLocalInfracao.limpaLocalInfracao}" icon="ui-icon ui-icon-close" update="@form" process="@this"/>
+                                <p:commandButton value="Cancelar" icon="ui-icon ui-icon-close" action="#{mbLocalInfracao.limpaLocalInfracao()}" update="@form" process="@this">
+                                    <f:actionListener binding="#{mbLocal_tipoFiscalizacao.limpaLocal_tipoFiscalizacao()}"/>
+                                </p:commandButton>
                             </p:toolbarGroup>
                             <p:toolbarGroup align="right">
                                 <p:button value="Pesquisa" outcome="/restrict/pesquisaLocalInfracao.xhtml" icon="ui-icon-search" />

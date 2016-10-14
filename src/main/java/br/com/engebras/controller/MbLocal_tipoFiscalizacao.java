@@ -251,6 +251,7 @@ public class MbLocal_tipoFiscalizacao implements Serializable {
                 local_tipoFiscalizacao.setNr_codLocal(nr_codLocal);
                 local_tipoFiscalizacao.setNr_codTipoFiscalizacao(nr_codTipoFiscalizacao);
                 insertLocal_tipoFiscalizacao();
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Inserido o tipo:" + nr_codTipoFiscalizacao + " local: " + nr_codLocal + " - código: " + local_tipoFiscalizacao.getNr_codigo()+ ".", ""));
             }
         } else {
            if (vll_existe == true){
