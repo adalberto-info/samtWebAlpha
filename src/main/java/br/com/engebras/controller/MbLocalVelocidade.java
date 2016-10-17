@@ -65,8 +65,9 @@ public class MbLocalVelocidade implements Serializable {
         return editLocalVelocidade();
     }
     
-    public void addLocalVelocidade(){
-        
+    public void addLocalVelocidade(Integer nr_codLocal){
+        vpn_nr_codLocal = nr_codLocal;
+        localVelocidade.setNr_codLocal(nr_codLocal);
         if (verificaDuplicidade(localVelocidade.getNr_velocidadePermitida()) == true){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Já existe uma velocidade permitida cadastrada com a velocidade: " + localVelocidade.getNr_velocidadePermitida() + ".",""));
         } else if(localVelocidade.getNr_codigo() == null || localVelocidade.getNr_codigo() == 0){
@@ -149,7 +150,6 @@ public class MbLocalVelocidade implements Serializable {
     
     public void inicializar(Integer nr_codLocal){
          vpn_nr_codLocal = nr_codLocal; 
-         
     }
     
     

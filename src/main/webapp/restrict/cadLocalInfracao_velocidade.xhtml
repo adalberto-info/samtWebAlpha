@@ -44,9 +44,8 @@
 
     <p:toolbar style="margin-top: 20px">
         <p:toolbarGroup>
-            <p:commandButton value="Novo" icon="ui-icon ui-icon-document" style="width: 100px"/>
-            <p:commandButton value="Salvar" icon="ui-icon ui-icon-disk" style="width: 100px"/>
-            <p:commandButton value="Cancelar" icon="ui-icon ui-icon-close" style="width: 100px"/>
+            <p:commandButton value="Salvar"   action="#{mbLocalVelocidade.addLocalVelocidade(mbLocalInfracao.localInfracao.nr_codigo)}" update="tbv1:tbv2:grid5 tbv1:tbv2:grid6 tbv1:tbv2:formtable" process="@this" icon="ui-icon ui-icon-disk" style="width: 100px"/>
+            <p:commandButton value="Cancelar" action="#{mbLocalVelocidade.limpaLocalVelocidade}" update="tbv1:tbv2:grid5 tbv1:tbv2:grid6" process="@this" icon="ui-icon ui-icon-close" style="width: 100px" />
         </p:toolbarGroup>
     </p:toolbar>
 
