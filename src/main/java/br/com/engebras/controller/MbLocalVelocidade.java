@@ -131,8 +131,10 @@ public class MbLocalVelocidade implements Serializable {
         return localVelocidadeDAO().getEntity(nr_codigo);
     }
 
-     public void pesquisar(){
-        localVelocidadeFiltrados = filtrados(filtro);
+     public void pesquisar(Integer nr_codLocal){
+
+         vpn_nr_codLocal = nr_codLocal;
+         localVelocidadeFiltrados = filtrados(filtro);
     }
 
     
@@ -141,8 +143,8 @@ public class MbLocalVelocidade implements Serializable {
         Session session = FacesContextUtil.getRequestSession();
         Criteria criteria = session.createCriteria(LocalVelocidade.class);
         
-        if (filtro.getNr_codLocal() != 0){
-            criteria.add(Restrictions.eq("nr_codLocal",filtro.getNr_codLocal()));
+        if (vpn_nr_codLocal != null && vpn_nr_codLocal != 0){
+            criteria.add(Restrictions.eq("nr_codLocal",vpn_nr_codLocal));
         }
      
         return criteria.addOrder(Order.asc("nr_codLocal")).list();

@@ -19,32 +19,32 @@
 
         <p:outputLabel for="nr_codPorteVeiculo" value="Porte Veículo: "/>
         <p:inputMask id="nr_codPorteVeiculo"  size="2" maxlength="2" value="#{mbLocalVelocidade.localVelocidade.nr_codPorteVeiculo}"
-                     required="true" requiredMessage="O campo [Porte Veículo] é obrigatório..." mask="99"/>
+                     required="true" requiredMessage="O campo [Porte Veículo] é obrigatório..." mask="9?9"/>
 
     </p:panelGrid>     
 
     <p:panelGrid columns="10" styleClass="panelGrid" style="margin-top: 20px" id="grid6">
         <p:outputLabel for="nr_velocidadePermitida" value="Vel. Permitida: "/>
         <p:inputMask id="nr_velocidadePermitida" size="3" maxlength="3" value="#{mbLocalVelocidade.localVelocidade.nr_velocidadePermitida}"
-                     required="true" requiredMessage="O campo [Velocidade Permitida] é obrigatório..." mask="999"/>
+                     required="true" requiredMessage="O campo [Velocidade Permitida] é obrigatório..." mask="9?99"/>
         <p:outputLabel for="nr_velocidadeTolerada" value="Vel. Tolerada: "/>
         <p:inputMask id="nr_velocidadeTolerada" size="8" maxlength="8" value="#{mbLocalVelocidade.localVelocidade.nr_velocidadeTolerada}"
-                     required="true" requiredMessage="O campo [Velocidade Tolerada] é obrigatório..." mask="999.9"/>
+                     required="true" requiredMessage="O campo [Velocidade Tolerada] é obrigatório..." mask="9?99.9"/>
         <p:outputLabel for="nr_velocidadeConsiderada" value="Vel. Considerada: "/>
         <p:inputMask id="nr_velocidadeConsiderada" size="8" maxlength="8" value="#{mbLocalVelocidade.localVelocidade.nr_velocidadeConsiderada}"
-                     required="true" requiredMessage="O campo [Velocidade Considerada] é obrigatório..." mask="999.9"/>
+                     required="true" requiredMessage="O campo [Velocidade Considerada] é obrigatório..." mask="9?99.9"/>
         <p:outputLabel for="nr_velocidadeGrave" value="Vel. Grave: "/>
         <p:inputMask id="nr_velocidadeGrave" size="3" maxlength="3" value="#{mbLocalVelocidade.localVelocidade.nr_velocidadeGrave}"
-                     required="true" requiredMessage="O campo [Velocidade Grave] é obrigatório..." mask="999"/>
+                     required="true" requiredMessage="O campo [Velocidade Grave] é obrigatório..." mask="9?99"/>
         <p:outputLabel for="nr_velocidadeGravissima" value="Vel. Gravíssima: "/>
         <p:inputMask id="nr_velocidadeGravissima" size="3" maxlength="3" value="#{mbLocalVelocidade.localVelocidade.nr_velocidadeGravissima}"
-                     required="true" requiredMessage="O campo [Velocidade Gravíssima] é obrigatório..." mask="999"/>
+                     required="true" requiredMessage="O campo [Velocidade Gravíssima] é obrigatório..." mask="9?99"/>
 
     </p:panelGrid>
 
     <p:toolbar style="margin-top: 20px">
         <p:toolbarGroup>
-            <p:commandButton value="Salvar"   action="#{mbLocalVelocidade.addLocalVelocidade(mbLocalInfracao.localInfracao.nr_codigo)}" update="tbv1:tbv2:grid5 tbv1:tbv2:grid6 tbv1:tbv2:formtable" process="@this" icon="ui-icon ui-icon-disk" style="width: 100px"/>
+            <p:commandButton value="Salvar"   action="#{mbLocalVelocidade.addLocalVelocidade(mbLocalInfracao.localInfracao.nr_codigo)}" update="tbv1:tbv2:grid5 tbv1:tbv2:grid6 tbv1:tbv2:formtable" icon="ui-icon ui-icon-disk" style="width: 100px"/>
             <p:commandButton value="Cancelar" action="#{mbLocalVelocidade.limpaLocalVelocidade}" update="tbv1:tbv2:grid5 tbv1:tbv2:grid6" process="@this" icon="ui-icon ui-icon-close" style="width: 100px" />
         </p:toolbarGroup>
     </p:toolbar>
@@ -65,22 +65,56 @@
                 </f:facet>
                 <h:outputText value="#{tabLocalVelocidade.nr_codPorteVeiculo}"/>
             </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Velocidade Permitida"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalVelocidade.nr_velocidadePermitida}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Velocidade Tolerada"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalVelocidade.nr_velocidadeTolerada}"/>
+            </p:column>
 
             <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Velocidade Considerada"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalVelocidade.nr_velocidadeConsiderada}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Velocidade Grave"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalVelocidade.nr_velocidadeGrave}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Velocidade Gravíssima"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalVelocidade.nr_velocidadeGravissima}"/>
+            </p:column>
+            
+            <p:column>
+                
                 <f:facet name="header">
                     <h:outputText value="Ações"/>
                 </f:facet>
 
+                <p:panelGrid columns="2">
                 <p:commandButton value="Editar" action="#{mbLocalVelocidade.editarLocalVelocidade(tabLocalVelocidade.nr_codigo)}"
-                                 icon="ui-icon ui-icon-pencil">
+                                 icon="ui-icon ui-icon-pencil" style="width: 80px">
                     <f:setPropertyActionListener target="#{mbLocalVelocidade.localVelocidade}" value="#{tabLocalVelocidade}"/>
                 </p:commandButton> 
 
                 <p:commandButton value="Remover" action="#{mbLocalVelocidade.deleteLocalVelocidade}"
-                                 icon="ui-icon ui-icon-close" update="@form :formtable">
+                                 icon="ui-icon ui-icon-close" style="width: 80px">
                     <f:setPropertyActionListener target="#{mbLocalVelocidade.localVelocidade}"
                                                  value="#{tabLocalVelocidade}"/>
                 </p:commandButton>
+                </p:panelGrid>    
             </p:column>
 
         </p:dataTable>
