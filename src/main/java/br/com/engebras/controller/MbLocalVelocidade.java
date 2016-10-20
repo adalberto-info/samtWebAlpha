@@ -61,6 +61,7 @@ public class MbLocalVelocidade implements Serializable {
     }
     
     public String editarLocalVelocidade(Integer nr_codigo){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Executei o método editar local velocidade...",""));
         this.localVelocidade = porNr_codigo(nr_codigo);
         return editLocalVelocidade();
     }
