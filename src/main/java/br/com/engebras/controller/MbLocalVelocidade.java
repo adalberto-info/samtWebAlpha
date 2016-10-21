@@ -61,7 +61,6 @@ public class MbLocalVelocidade implements Serializable {
     }
     
     public String editarLocalVelocidade(Integer nr_codigo){
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Executei o método editar local velocidade...",""));
         this.localVelocidade = porNr_codigo(nr_codigo);
         return editLocalVelocidade();
     }
@@ -77,6 +76,7 @@ public class MbLocalVelocidade implements Serializable {
             updateLocalVelocidade();
         }
         
+        pesquisar(vpn_nr_codLocal);
         limpaLocalVelocidade();
     }
     
@@ -90,8 +90,10 @@ public class MbLocalVelocidade implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso!!!", ""));
     }
     
-    public void deleteLocalVelocidade() {
+    public void deleteLocalVelocidade(Integer nr_codigo) {
+        this.localVelocidade = porNr_codigo(nr_codigo);
         localVelocidadeDAO().remove(localVelocidade);
+        pesquisar(vpn_nr_codLocal);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso!!!", ""));
     }
 
@@ -103,7 +105,7 @@ public class MbLocalVelocidade implements Serializable {
         Session session = FacesContextUtil.getRequestSession();
         vlc_sql = "select a.nr_velocidadePermitida from localVelocidade a ";
         vlc_sql += "where a.nr_velocidadePermitida = " + nr_velocidadePermitida + " ";
-        vlc_sql += "and a.nr_codLocal = " + vpn_nr_codLocal;
+        vlc_sql += "and a.nr_codLocal = " + vpn_nr_codLocal + " ";
         
         if (localVelocidade.getNr_codigo() != null && localVelocidade.getNr_codigo() != 0)
             vlc_sql = vlc_sql + "and a.nr_codigo <> " + localVelocidade.getNr_codigo();
