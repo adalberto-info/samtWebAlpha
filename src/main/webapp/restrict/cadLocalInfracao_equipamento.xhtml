@@ -1,0 +1,114 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<f:metadata>
+            <f:event listener="#{mbLocal_equipamento.inicializar(mbLocalInfracao.localInfracao.nr_codigo)}" type="preRenderView" />
+	</f:metadata>
+    
+    <p:panelGrid columns="4" styleClass="panelGrid" id="grid5" >
+
+        <p:outputLabel for="nr_codigo" value="Código: "/>
+        <p:inputText id="nr_codigo"  size="10" maxlength="10" value="#{mbLocal_equipamento.local_equipamento.nr_codigo}"
+                     disabled="true"/>
+        
+        <p:outputLabel for="dc_serieEquipamento" value="Série equipamento: "/>
+        <p:selectOneMenu id="dc_serieEquipamento" value="#{mbLocal_equipamento.local_equipamento.dc_serieEquipamento}" style="width:250px" required ="true" requiredMessage="O campo [Série equipamento] é obrigatório...">
+            <f:selectItem itemLabel="Selecione o equipamento" itemValue="" />
+            <f:selectItems value="#{mbLocal_equipamento.serieEquipamentos}" var="listaEquipamentos" 
+                           itemLabel="#{listaEquipamentos.dc_serieEquipamento}" itemValue="#{listaEquipamentos.nr_codigo}"/>
+        </p:selectOneMenu>
+        
+        <p:outputLabel for="dt_inicio" value="Dt. início: "/>
+        <p:calendar id="dt_inicio" size="10" pattern="dd/MM/yyyy" value="#{mbLocal_equipamento.local_equipamento.dt_inicio}" navigator="true" locale="pt"/>
+
+        <p:outputLabel for="dc_hr_inicio" value="Hr. início: "/>
+        <p:inputMask id="dc_hr_inicio" size="8" maxlength="8" value="#{mbLocal_equipamento.local_equipamento.dc_hr_inicio}" mask="99:99:99"/>
+        
+        <p:outputLabel for="dt_fim" value="Dt. fim: "/>
+        <p:calendar id="dt_fim" size="10" pattern="dd/MM/yyyy" value="#{mbLocal_equipamento.local_equipamento.dt_fim}" navigator="true" locale="pt"/>
+
+        <p:outputLabel for="dc_hr_fim" value="Hr. fim: "/>
+        <p:inputMask id="dc_hr_fim" size="8" maxlength="8" value="#{mbLocal_equipamento.local_equipamento.dc_hr_fim}" mask="99:99:99"/>
+        
+        
+    </p:panelGrid>     
+
+    <p:toolbar style="margin-top: 20px">
+        <p:toolbarGroup>
+            <p:commandButton value="Salvar"   action="#{mbLocalVelocidade.addLocalVelocidade(mbLocalInfracao.localInfracao.nr_codigo)}" update="tbv1:tbv2:grid5 tbv1:tbv2:grid6 tbv1:tbv2:formtable:idTabela" icon="ui-icon ui-icon-disk" style="width: 100px"/>
+            <p:commandButton value="Cancelar" action="#{mbLocalVelocidade.limpaLocalVelocidade}" update="tbv1:tbv2:grid5 tbv1:tbv2:grid6" process="@this" icon="ui-icon ui-icon-close" style="width: 100px" />
+        </p:toolbarGroup>
+    </p:toolbar>
+
+    <h:form id="formtable" style="margin-top: 40px">
+
+        <p:dataTable id="idTabela" var="tabLocalVelocidade" value="#{mbLocalVelocidade.localVelocidadeFiltrados}" 
+                     paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                     {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom">
+
+            <f:facet name="header">Lista de Velocidades</f:facet>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Porte Veículo"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalVelocidade.nr_codPorteVeiculo}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Velocidade Permitida"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalVelocidade.nr_velocidadePermitida}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Velocidade Considerada"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalVelocidade.nr_velocidadeConsiderada}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Velocidade Grave"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalVelocidade.nr_velocidadeGrave}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Velocidade Gravíssima"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalVelocidade.nr_velocidadeGravissima}"/>
+            </p:column>
+            
+            <p:column>
+                
+                <f:facet name="header">
+                    <h:outputText value="Ações"/>
+                </f:facet>
+                <p:panelGrid columns="2" >
+                
+                    <p:commandButton value="Editar" action="#{mbLocalVelocidade.editarLocalVelocidade(tabLocalVelocidade.nr_codigo)}"
+                                 icon="ui-icon ui-icon-pencil" update="tbv1:tbv2:grid5 tbv1:tbv2:grid6" process="@this" >
+                        <f:setPropertyActionListener target="#{mbLocalVelocidade.localVelocidade}" value="#{tabLocalVelocidade}"/>
+                    </p:commandButton> 
+
+                    <p:commandButton value="Remover" action="#{mbLocalVelocidade.deleteLocalVelocidade(tabLocalVelocidade.nr_codigo)}"
+                                 icon="ui-icon ui-icon-close" update="tbv1:tbv2:formtable:idTabela" process="@this">
+                        <f:setPropertyActionListener target="#{mbLocalVelocidade.localVelocidade}"
+                                                 value="#{tabLocalVelocidade}"/>
+                    </p:commandButton>
+                </p:panelGrid>
+            </p:column>
+
+        </p:dataTable>
+
+    </h:form>
+
+
+
+</ui:composition>

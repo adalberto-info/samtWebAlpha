@@ -30,6 +30,8 @@ import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.Local_equipamento;
 import br.com.engebras.filter.Local_equipamentoFilter; 
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 
 @ManagedBean(name="mbLocal_equipamento")
@@ -129,8 +131,8 @@ public class MbLocal_equipamento {
             vll_retorno = false;
         }
 
-        for (Object oLocalVelocidade : consLocal_equipamento) {
-            Map row = (Map) oLocalVelocidade;
+        for (Object oLocal_equipamento : consLocal_equipamento) {
+            Map row = (Map) oLocal_equipamento;
         }
 
         consLocal_equipamento = null;
@@ -138,5 +140,66 @@ public class MbLocal_equipamento {
         return vll_retorno;
     }
 
+    public void pesquisar(Integer nr_codLocal){
+
+         vpn_nr_codLocal = nr_codLocal;
+         local_equipamentoFiltrados = filtrados(filtro);
+    }
+
+    public List<Local_equipamento> filtrados(Local_equipamentoFilter filtro) {
+
+        Session session = FacesContextUtil.getRequestSession();
+        Criteria criteria = session.createCriteria(Local_equipamento.class);
+        
+        if (vpn_nr_codLocal != null && vpn_nr_codLocal != 0){
+            criteria.add(Restrictions.eq("nr_codLocal",vpn_nr_codLocal));
+        }
+     
+        return criteria.addOrder(Order.asc("nr_codLocal")).list();
+    }
+
+    public void inicializar(Integer nr_codLocal){
+         vpn_nr_codLocal = nr_codLocal; 
+    }
+
+    public Local_equipamento getLocal_equipamento() {
+        return local_equipamento;
+    }
+
+    public void setLocal_equipamento(Local_equipamento local_equipamento) {
+        this.local_equipamento = local_equipamento;
+    }
+
+    public Integer getVpn_nr_codLocal() {
+        return vpn_nr_codLocal;
+    }
+
+    public void setVpn_nr_codLocal(Integer vpn_nr_codLocal) {
+        this.vpn_nr_codLocal = vpn_nr_codLocal;
+    }
+
+    public List<Local_equipamento> getLocal_equipamentoFiltrados() {
+        return local_equipamentoFiltrados;
+    }
+
+    public void setLocal_equipamentoFiltrados(List<Local_equipamento> local_equipamentoFiltrados) {
+        this.local_equipamentoFiltrados = local_equipamentoFiltrados;
+    }
+
+    public Local_equipamento getLocal_equipamentoSelecionado() {
+        return local_equipamentoSelecionado;
+    }
+
+    public void setLocal_equipamentoSelecionado(Local_equipamento local_equipamentoSelecionado) {
+        this.local_equipamentoSelecionado = local_equipamentoSelecionado;
+    }
+
+    public Local_equipamentoFilter getFiltro() {
+        return filtro;
+    }
+
+    public void setFiltro(Local_equipamentoFilter filtro) {
+        this.filtro = filtro;
+    }
     
 }
