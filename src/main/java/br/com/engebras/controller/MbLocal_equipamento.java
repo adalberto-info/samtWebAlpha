@@ -23,6 +23,8 @@ import org.hibernate.SQLQuery;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import br.com.engebras.util.FacesContextUtil;
 import br.com.engebras.util.HibernateUtil;
@@ -30,9 +32,7 @@ import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.Local_equipamento;
 import br.com.engebras.filter.Local_equipamentoFilter; 
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
-
+import br.com.engebras.model.entities.Equipamento;
 
 @ManagedBean(name="mbLocal_equipamento")
 @SessionScoped
@@ -46,10 +46,11 @@ public class MbLocal_equipamento {
     private List<Local_equipamento> local_equipamentoFiltrados; 
     private Local_equipamento local_equipamentoSelecionado; 
     public Local_equipamentoFilter filtro; 
+    private List serieEquipamentos = new ArrayList<>();
     
     
     public MbLocal_equipamento(){
-        
+         geraListaEquipamentos();
     }
     
     private InterfaceDAO<Local_equipamento> local_equipamentoDAO() {
@@ -162,6 +163,21 @@ public class MbLocal_equipamento {
          vpn_nr_codLocal = nr_codLocal; 
     }
 
+    public void geraListaEquipamentos(){
+        List listaSQL; 
+        String vlc_sql; 
+        vlc_sql = "select a.dc_serieEquipamento ";
+        vlc_sql += "from equipamento a ";
+        vlc_sql += "order by a.dc_serieEquipamento ";
+        
+        Session session = FacesContextUtil.getRequestSession();
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+        
+        this.serieEquipamentos = listaSQL; 
+    }
+
     public Local_equipamento getLocal_equipamento() {
         return local_equipamento;
     }
@@ -200,6 +216,14 @@ public class MbLocal_equipamento {
 
     public void setFiltro(Local_equipamentoFilter filtro) {
         this.filtro = filtro;
+    }
+
+    public List getSerieEquipamentos() {
+        return serieEquipamentos;
+    }
+
+    public void setSerieEquipamentos(List serieEquipamentos) {
+        this.serieEquipamentos = serieEquipamentos;
     }
     
 }
