@@ -93,11 +93,13 @@ public class MbLocal_equipamento {
     }
 
    public void insertLocal_equipamento() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Executei o insertLocal_equipamento!!!", ""));
         local_equipamentoDAO().save(local_equipamento);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso!!!", ""));
     }
 
     public void updateLocal_equipamento() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Executei o updateLocal_equipamento!!!", ""));
         local_equipamentoDAO().update(local_equipamento);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso!!!", ""));
     }

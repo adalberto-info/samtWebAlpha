@@ -43,9 +43,9 @@ public class Local_equipamento implements Serializable{
     @Temporal(TemporalType.DATE)
     @Column(name="dt_fim", nullable=false)
     private Date dt_fim; 
-    @Column(name="dc_hr_inicio", nullable=false)
+    @Column(name="dc_hr_inicio", nullable=false, length=8)
     private String dc_hr_inicio; 
-    @Column(name="dc_hr_fim", nullable=false)
+    @Column(name="dc_hr_fim", nullable=false, length=8)
     private String dc_hr_fim; 
 
     public Integer getNr_codigo() {

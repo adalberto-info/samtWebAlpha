@@ -41,7 +41,7 @@
 
         <p:toolbar style="margin-top: 20px">
             <p:toolbarGroup>
-                <p:commandButton value="Salvar"   action="#{mbLocal_equipamento.addLocal_equipamento(mbLocalInfracao.localInfracao.nr_codigo)}" update="tbv1:tbv2:formLocalInfracao_equipamento:grid9 tbv1:tbv2:formtableEquipamento:idTabelaEquipamento" process="@this" icon="ui-icon ui-icon-disk" style="width: 100px"/>
+                <p:commandButton value="Salvar"   action="#{mbLocal_equipamento.addLocal_equipamento(mbLocalInfracao.localInfracao.nr_codigo)}" update="tbv1:tbv2:formLocalInfracao_equipamento:grid9 tbv1:tbv2:formtableEquipamento:idTabelaEquipamento" process="@this tbv1:tbv2:formLocalInfracao_equipamento:grid9" icon="ui-icon ui-icon-disk" style="width: 100px"/>
                 <p:commandButton value="Cancelar" action="#{mbLocal_equipamento.limpaLocal_equipamento}" update="tbv1:tbv2:formLocalInfracao_equipamento:grid9" process="@this" icon="ui-icon ui-icon-close" style="width: 100px" />
             </p:toolbarGroup>
         </p:toolbar>
