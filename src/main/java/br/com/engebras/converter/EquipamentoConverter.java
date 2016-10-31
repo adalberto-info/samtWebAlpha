@@ -13,7 +13,7 @@ import br.com.engebras.model.entities.Equipamento;
 
 
 @FacesConverter(forClass = Equipamento.class)
-public class EquipamentosConverter implements Converter {
+public class EquipamentoConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent uiComponent, String value) {

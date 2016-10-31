@@ -21,7 +21,7 @@
             <p:selectOneMenu id="dc_serieEquipamento" value="#{mbLocal_equipamento.local_equipamento.dc_serieEquipamento}" style="width:250px" required ="true" requiredMessage="O campo [Série equipamento] é obrigatório...">
                 <f:selectItem itemLabel="Selecione o equipamento" itemValue="" />
                 <f:selectItems value="#{mbLocal_equipamento.serieEquipamentos}" var="listaEquipamentos" 
-                               itemLabel="#{listaEquipamentos.dc_serieEquipamento}" itemValue="#{listaEquipamentos.nr_codigo}"/>
+                               itemLabel="#{listaEquipamentos.dc_serieEquipamento}" itemValue="#{listaEquipamentos.dc_serieEquipamento}"/>
             </p:selectOneMenu>
 
             <p:outputLabel for="dt_inicio" value="Dt. início: "/>
@@ -94,12 +94,12 @@
                 <p:panelGrid columns="2" >
                 
                     <p:commandButton value="Editar" action="#{mbLocal_equipamento.editarLocal_equipameto(tabLocal_equipamento.nr_codigo)}"
-                                 icon="ui-icon ui-icon-pencil" update="tbv1:tbv2:grid9" process="@this" >
+                                 icon="ui-icon ui-icon-pencil" update="tbv1:tbv2:formLocalInfracao_equipamento:grid9" process="@this" >
                                  <f:setPropertyActionListener target="#{mbLocal_equipamento.local_equipamento}" value="#{tabLocal_equipamento}"/>
                     </p:commandButton> 
 
                     <p:commandButton value="Remover" action="#{mbLocal_equipameto.deleteLocal_equipamento(tabLocal_equipamento.nr_codigo)}"
-                                 icon="ui-icon ui-icon-close" update="tbv1:tbv2:formtableEquipameto:idTabelaEquipamento" process="@this">
+                                 icon="ui-icon ui-icon-close" update="tbv1:tbv2:formtableEquipamento:idTabelaEquipamento" process="@this">
                         <f:setPropertyActionListener target="#{mbLocal_equipamento.local_equipamento}"
                                                  value="#{tabLocal_equipamento}"/>
                     </p:commandButton>

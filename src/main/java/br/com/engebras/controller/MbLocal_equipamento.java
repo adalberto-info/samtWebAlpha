@@ -48,7 +48,6 @@ public class MbLocal_equipamento {
     public Local_equipamentoFilter filtro; 
     private List serieEquipamentos = new ArrayList<>();
     
-    
     public MbLocal_equipamento(){
          geraListaEquipamentos();
     }
@@ -80,6 +79,7 @@ public class MbLocal_equipamento {
     public void addLocal_equipamento(Integer nr_codLocal){
         vpn_nr_codLocal = nr_codLocal;
         local_equipamento.setNr_codLocal(nr_codLocal);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Série equipamento: " + local_equipamento.getDc_serieEquipamento() + ".",""));
         if (verificaDuplicidade(local_equipamento.getDc_serieEquipamento()) == true){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Já existe um equipamento: " + local_equipamento.getDc_serieEquipamento() + " para o local: " + local_equipamento.getNr_codLocal() + ".",""));
         } else if(local_equipamento.getNr_codigo() == null || local_equipamento.getNr_codigo() == 0){
@@ -93,13 +93,11 @@ public class MbLocal_equipamento {
     }
 
    public void insertLocal_equipamento() {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Executei o insertLocal_equipamento!!!", ""));
         local_equipamentoDAO().save(local_equipamento);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso!!!", ""));
     }
 
     public void updateLocal_equipamento() {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Executei o updateLocal_equipamento!!!", ""));
         local_equipamentoDAO().update(local_equipamento);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso!!!", ""));
     }
@@ -118,7 +116,7 @@ public class MbLocal_equipamento {
 
         Session session = FacesContextUtil.getRequestSession();
         vlc_sql = "select a.nr_codigo, a.dc_serieEquipamento, a.nr_codLocal from local_equipamento a ";
-        vlc_sql += "where a.dc_serieEquipamento = " + dc_serieEquipamento + " ";
+        vlc_sql += "where a.dc_serieEquipamento = '" + dc_serieEquipamento + "' ";
         vlc_sql += "and a.nr_codLocal = " + vpn_nr_codLocal + " ";
         
         if (local_equipamento.getNr_codigo() != null && local_equipamento.getNr_codigo() != 0)
