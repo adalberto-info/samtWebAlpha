@@ -150,7 +150,7 @@ public class MbLocalVelocidade implements Serializable {
             criteria.add(Restrictions.eq("nr_codLocal",vpn_nr_codLocal));
         }
      
-        return criteria.addOrder(Order.asc("nr_codLocal")).list();
+        return criteria.addOrder(Order.asc("nr_codigo")).list();
     }
     
     public void inicializar(Integer nr_codLocal){

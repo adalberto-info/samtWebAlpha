@@ -49,6 +49,7 @@ public class MbLocal_equipamento {
     private List serieEquipamentos = new ArrayList<>();
     
     public MbLocal_equipamento(){
+         filtro = new Local_equipamentoFilter();
          geraListaEquipamentos();
     }
     
@@ -57,8 +58,9 @@ public class MbLocal_equipamento {
         return local_equipamentoDAO;
     }
 
-    public void limpaLocal_equipamento(){
+    public String limpaLocal_equipamento(){
         local_equipamento = new Local_equipamento();
+        return editLocal_equipamento();
     }
     
     public String editLocal_equipamento(){
@@ -79,7 +81,6 @@ public class MbLocal_equipamento {
     public void addLocal_equipamento(Integer nr_codLocal){
         vpn_nr_codLocal = nr_codLocal;
         local_equipamento.setNr_codLocal(nr_codLocal);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Série equipamento: " + local_equipamento.getDc_serieEquipamento() + ".",""));
         if (verificaDuplicidade(local_equipamento.getDc_serieEquipamento()) == true){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Já existe um equipamento: " + local_equipamento.getDc_serieEquipamento() + " para o local: " + local_equipamento.getNr_codLocal() + ".",""));
         } else if(local_equipamento.getNr_codigo() == null || local_equipamento.getNr_codigo() == 0){
@@ -156,7 +157,7 @@ public class MbLocal_equipamento {
             criteria.add(Restrictions.eq("nr_codLocal",vpn_nr_codLocal));
         }
      
-        return criteria.addOrder(Order.asc("nr_codLocal")).list();
+        return criteria.addOrder(Order.asc("dc_serieEquipamento")).list();
     }
 
     public void inicializar(Integer nr_codLocal){

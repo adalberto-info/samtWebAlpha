@@ -93,7 +93,7 @@
                 </f:facet>
                 <p:panelGrid columns="2" >
                 
-                    <p:commandButton value="Editar" action="#{mbLocal_equipamento.editarLocal_equipameto(tabLocal_equipamento.nr_codigo)}"
+                    <p:commandButton value="Editar" action="#{mbLocal_equipamento.editarLocal_equipamento(tabLocal_equipamento.nr_codigo)}"
                                  icon="ui-icon ui-icon-pencil" update="tbv1:tbv2:formLocalInfracao_equipamento:grid9" process="@this" >
                                  <f:setPropertyActionListener target="#{mbLocal_equipamento.local_equipamento}" value="#{tabLocal_equipamento}"/>
                     </p:commandButton> 
