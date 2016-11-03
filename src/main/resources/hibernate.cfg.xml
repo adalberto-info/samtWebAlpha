@@ -62,5 +62,6 @@ dt. criação: 23/03/2016
         <mapping class="br.com.engebras.model.entities.GrupoLocalItem"/>
         <mapping class="br.com.engebras.model.entities.SituacaoLocal"/>
         <mapping class="br.com.engebras.model.entities.Local_situacaoLocal"/>
+        <mapping class="br.com.engebras.model.entities.LocalCliente"/>
     </session-factory>
 </hibernate-configuration>

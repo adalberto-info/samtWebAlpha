@@ -98,7 +98,7 @@
                                  <f:setPropertyActionListener target="#{mbLocal_equipamento.local_equipamento}" value="#{tabLocal_equipamento}"/>
                     </p:commandButton> 
 
-                    <p:commandButton value="Remover" action="#{mbLocal_equipameto.deleteLocal_equipamento(tabLocal_equipamento.nr_codigo)}"
+                    <p:commandButton value="Remover" action="#{mbLocal_equipamento.deleteLocal_equipamento(tabLocal_equipamento.nr_codigo)}"
                                  icon="ui-icon ui-icon-close" update="tbv1:tbv2:formtableEquipamento:idTabelaEquipamento" process="@this">
                         <f:setPropertyActionListener target="#{mbLocal_equipamento.local_equipamento}"
                                                  value="#{tabLocal_equipamento}"/>

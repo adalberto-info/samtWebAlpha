@@ -1,0 +1,115 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<f:metadata>
+            <f:event listener="#{mbLocalCliente.inicializar(mbLocalInfracao.localInfracao.nr_codigo)}" type="preRenderView" />
+	</f:metadata>
+    
+    <p:panelGrid columns="4" styleClass="panelGrid" style="margin-top: 20px" id="grid10">
+
+        <p:outputLabel for="nr_codigo" value="Código: "/>
+        <p:inputText id="nr_codigo"  size="10" maxlength="10" value="#{mbLocalCliente.localCliente.nr_codigo}"
+                         disabled="true"/>
+
+        <p:outputLabel for="nr_codLocalCliente" value="Código Local Cliente: "/>
+        <p:inputMask id="nr_codLocalCliente" size="10" maxlength="10" value="#{mbLocalCliente.localCliente.nr_codLocalCliente}"
+                     required="true" requiredMessage="O campo [Código Local Cliente] é obrigatório..." mask="9?99999999"/>
+
+        <p:outputLabel for="nr_tipoFiscalizacao" value="Tipo Fiscalização: "/>
+        <p:selectOneMenu id="nr_tipoFiscalizacao" value="#{mbLocalCliente.localCliente.nr_tipoFiscalizacao}" style="width:250px" required ="true" requiredMessage="O campo [Tipo Fiscalização] é obrigatório...">
+            <f:selectItem itemLabel="Selecione o tipo fiscalização" itemValue="0" />
+            <f:selectItems value="#{mbLocalCliente.tipoFiscalizacoes}" var="listaTipoFiscalizacao" 
+                          itemLabel="#{listaTipoFiscalizacao.nr_codigo}" itemValue="#{listaTipoFiscalizacao.nr_codigo}"/>
+        </p:selectOneMenu>
+
+        <p:outputLabel for="nr_porteVeiculo" value="Porte Veículo: "/>
+        <p:inputMask id="nr_porteVeiculo" size="1" maxlength="1" value="#{mbLocalCliente.localCliente.nr_porteVeiculo}" 
+                     required="true" requiredMessage="O campo [Porte Veículo] é obrigatório..." mask="?"/>
+        
+        <p:outputLabel for="dt_inicioVigencia" value="Dt. Início Vigência: "/>
+        <p:calendar id="dt_inicioVigencia" size="10" pattern="dd/MM/yyyy" value="#{mbLocalCliente.localCliente.dt_inicioVigencia}" navigator="true" locale="pt"/>
+
+        <p:outputLabel for="dt_inclusao" value="Dt. Inclusão: "/>
+        <p:inputText id="dt_inclusao" size="10" maxlength="10" value="#{mbLocalCliente.localCliente.dt_inclusao}" disabled="true"/>
+        
+    </p:panelGrid>
+
+    <p:toolbar style="margin-top: 20px">
+        <p:toolbarGroup>
+            <p:commandButton value="Salvar"   action="#{mbLocalCliente.addLocalCliente(mbLocalCliente.localCliente.nr_codigo)}" update="tbv1:tbv2:grid10 tbv1:tbv2:formtableLocalCliente:idTabelaLocalCliente" process="@this tbv1:tbv2:grid10" icon="ui-icon ui-icon-disk" style="width: 100px"/>
+            <p:commandButton value="Cancelar" action="#{mbLocalCliente.limpaLocalCliente}" update="tbv1:tbv2:grid10" process="@this" icon="ui-icon ui-icon-close" style="width: 100px" />
+        </p:toolbarGroup>
+    </p:toolbar>
+
+    <h:form id="formtableLocalCliente" style="margin-top: 40px">
+
+        <p:dataTable id="idTabelaLocalCliente" var="tabLocalCliente" value="#{mbLocalCliente.localClienteFiltrados}" 
+                     paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                     {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom">
+
+            <f:facet name="header">Lista de Local Cliente</f:facet>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Nr. Código Local Cliente"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalCliente.nr_codLocalCliente}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Tipo Fiscalização"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalCliente.dc_tipoFiscalizacao}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Porte Veículo"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalCliente.nr_porteVeiculo}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Dt. Início Vigência"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalCliente.dt_inicioVigencia}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Dt. Inclusão"/>
+                </f:facet>
+                <h:outputText value="#{tabLocalCliente.dt_inclusao}"/>
+            </p:column>
+            
+            <p:column>
+                
+                <f:facet name="header">
+                    <h:outputText value="Ações"/>
+                </f:facet>
+                <p:panelGrid columns="2" >
+                
+                    <p:commandButton value="Editar" action="#{mbLocalCliente.editarLocalCliente(tabLocalCliente.nr_codigo)}"
+                                 icon="ui-icon ui-icon-pencil" update="tbv1:tbv2:grid10" process="@this" >
+                        <f:setPropertyActionListener target="#{mbLocalCliente.localCliente}" value="#{tabLocalCliente}"/>
+                    </p:commandButton> 
+
+                    <p:commandButton value="Remover" action="#{mbLocalCliente.deleteLocalCliente(tabLocalCliente.nr_codigo)}"
+                                 icon="ui-icon ui-icon-close" update="tbv1:tbv2:formtableLocalCliente:idTabelaLocalCliente" process="@this">
+                        <f:setPropertyActionListener target="#{mbLocalCliente.localCliente}"
+                                                 value="#{tabLocalCliente}"/>
+                    </p:commandButton>
+                </p:panelGrid>
+            </p:column>
+
+        </p:dataTable>
+
+    </h:form>
+
+
+
+</ui:composition>
