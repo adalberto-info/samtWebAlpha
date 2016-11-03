@@ -24,12 +24,12 @@
         <p:selectOneMenu id="nr_tipoFiscalizacao" value="#{mbLocalCliente.localCliente.nr_tipoFiscalizacao}" style="width:250px" required ="true" requiredMessage="O campo [Tipo Fiscalização] é obrigatório...">
             <f:selectItem itemLabel="Selecione o tipo fiscalização" itemValue="0" />
             <f:selectItems value="#{mbLocalCliente.tipoFiscalizacoes}" var="listaTipoFiscalizacao" 
-                          itemLabel="#{listaTipoFiscalizacao.nr_codigo}" itemValue="#{listaTipoFiscalizacao.nr_codigo}"/>
+                          itemLabel="#{listaTipoFiscalizacao.dc_descricao}" itemValue="#{listaTipoFiscalizacao.nr_codigo}"/>
         </p:selectOneMenu>
 
         <p:outputLabel for="nr_porteVeiculo" value="Porte Veículo: "/>
         <p:inputMask id="nr_porteVeiculo" size="1" maxlength="1" value="#{mbLocalCliente.localCliente.nr_porteVeiculo}" 
-                     required="true" requiredMessage="O campo [Porte Veículo] é obrigatório..." mask="?"/>
+                     required="true" requiredMessage="O campo [Porte Veículo] é obrigatório..." mask="9?"/>
         
         <p:outputLabel for="dt_inicioVigencia" value="Dt. Início Vigência: "/>
         <p:calendar id="dt_inicioVigencia" size="10" pattern="dd/MM/yyyy" value="#{mbLocalCliente.localCliente.dt_inicioVigencia}" navigator="true" locale="pt"/>

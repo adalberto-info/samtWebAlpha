@@ -41,11 +41,12 @@ public class MbLocalCliente implements Serializable {
     private Integer vpn_nr_codLocal; 
     private List<LocalCliente> localClientesFiltrados; 
     private LocalCliente localClienteSelecionado; 
+    private List tipoFiscalizacoes = new ArrayList<>();
     public LocalClienteFilter filtro; 
-    
     
     public MbLocalCliente(){
         filtro = new LocalClienteFilter(); 
+        geraListaTipoFiscalizacoes();
     }
     
     private InterfaceDAO<LocalCliente> localClienteDAO() {
@@ -158,6 +159,21 @@ public class MbLocalCliente implements Serializable {
          vpn_nr_codLocal = nr_codLocal; 
     }
 
+    public void geraListaTipoFiscalizacoes() {
+        List listaSQL;
+        String vlc_sql;
+        vlc_sql = "select nr_codigo, dc_descricao from tipoFiscalizacao order by dc_descricao";
+
+        Session session = FacesContextUtil.getRequestSession();
+
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+
+        this.tipoFiscalizacoes = listaSQL;
+    }
+    
+    
     public LocalCliente getLocalCliente() {
         return localCliente;
     }
@@ -196,6 +212,14 @@ public class MbLocalCliente implements Serializable {
 
     public void setFiltro(LocalClienteFilter filtro) {
         this.filtro = filtro;
+    }
+
+    public List getTipoFiscalizacoes() {
+        return tipoFiscalizacoes;
+    }
+
+    public void setTipoFiscalizacoes(List tipoFiscalizacoes) {
+        this.tipoFiscalizacoes = tipoFiscalizacoes;
     }
 
 }
