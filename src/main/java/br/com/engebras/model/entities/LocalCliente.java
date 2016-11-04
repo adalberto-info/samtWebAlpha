@@ -46,7 +46,7 @@ public class LocalCliente implements Serializable{
     private Date dt_inclusao; 
     @Temporal(TemporalType.DATE)
     @Column(name="dt_inicioVigencia", nullable=false)
-    private Date dt_inciioVigencia; 
+    private Date dt_inicioVigencia; 
     @Column(name="nr_porteVeiculo", nullable=false, length=1)
     private Integer nr_porteVeiculo;
 
@@ -98,12 +98,12 @@ public class LocalCliente implements Serializable{
         this.dt_inclusao = dt_inclusao;
     }
 
-    public Date getDt_inciioVigencia() {
-        return dt_inciioVigencia;
+    public Date getDt_inicioVigencia() {
+        return dt_inicioVigencia;
     }
 
-    public void setDt_inciioVigencia(Date dt_inciioVigencia) {
-        this.dt_inciioVigencia = dt_inciioVigencia;
+    public void setDt_inicioVigencia(Date dt_inciioVigencia) {
+        this.dt_inicioVigencia = dt_inciioVigencia;
     }
 
     public Integer getNr_porteVeiculo() {

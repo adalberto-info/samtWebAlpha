@@ -30,6 +30,7 @@ import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.LocalCliente;
 import br.com.engebras.filter.LocalClienteFilter;
 import br.com.engebras.model.entities.TipoFiscalizacao;
+import java.util.Date;
 
 @ManagedBean(name = "mbLocalCliente" )
 @SessionScoped
@@ -39,10 +40,11 @@ public class MbLocalCliente implements Serializable {
     
     private LocalCliente localCliente = new LocalCliente();
     private Integer vpn_nr_codLocal; 
-    private List<LocalCliente> localClientesFiltrados; 
+    private List<LocalCliente> localClienteFiltrados; 
     private LocalCliente localClienteSelecionado; 
     private List tipoFiscalizacoes = new ArrayList<>();
     public LocalClienteFilter filtro; 
+    private Date dt_atual;
     
     public MbLocalCliente(){
         filtro = new LocalClienteFilter(); 
@@ -68,8 +70,12 @@ public class MbLocalCliente implements Serializable {
         return editLocalCliente();
     }
 
-    public void addLocalVelocidade(Integer nr_codLocal){
+    public void addLocalCliente(Integer nr_codLocal){
         vpn_nr_codLocal = nr_codLocal;
+        localCliente.setNr_codLocal(nr_codLocal);
+        localCliente.setDc_infracao("");
+        dt_atual = new Date();
+        localCliente.setDt_inclusao(dt_atual);
         localCliente.setNr_codLocal(nr_codLocal);
         if (verificaDuplicidade(localCliente.getNr_codLocalCliente()) == true){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Já existe um local cliente: " + localCliente.getNr_codLocalCliente()+ ".",""));
@@ -140,7 +146,7 @@ public class MbLocalCliente implements Serializable {
     public void pesquisar(Integer nr_codLocal){
 
          vpn_nr_codLocal = nr_codLocal;
-         localClientesFiltrados = filtrados(filtro);
+         localClienteFiltrados = filtrados(filtro);
     }
     
     public List<LocalCliente> filtrados(LocalClienteFilter filtro) {
@@ -190,12 +196,12 @@ public class MbLocalCliente implements Serializable {
         this.vpn_nr_codLocal = vpn_nr_codLocal;
     }
 
-    public List<LocalCliente> getLocalClientesFiltrados() {
-        return localClientesFiltrados;
+    public List<LocalCliente> getLocalClienteFiltrados() {
+        return localClienteFiltrados;
     }
 
-    public void setLocalClientesFiltrados(List<LocalCliente> localClientesFiltrados) {
-        this.localClientesFiltrados = localClientesFiltrados;
+    public void setLocalClienteFiltrados(List<LocalCliente> localClientesFiltrados) {
+        this.localClienteFiltrados = localClientesFiltrados;
     }
 
     public LocalCliente getLocalClienteSelecionado() {
