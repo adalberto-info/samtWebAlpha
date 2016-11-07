@@ -153,14 +153,32 @@ public class MbLocalCliente implements Serializable {
     
     public List<LocalClienteFiltrados> filtrados(LocalClienteFilter filtro) {
 
-        Session session = FacesContextUtil.getRequestSession();
-        Criteria criteria = session.createCriteria(LocalCliente.class)
-                                   .createAlias("TipoFiscalizacao", "tipoFiscalizacao", JoinType.LEFT_OUTER_JOIN);
-        if (vpn_nr_codLocal != null && vpn_nr_codLocal != 0){
-            criteria.add(Restrictions.eq("nr_codLocal",vpn_nr_codLocal));
-        }
+//        Session session = FacesContextUtil.getRequestSession();
+//        Criteria criteria = session.createCriteria(LocalCliente.class)
+//                                   .createAlias("TipoFiscalizacao", "tipoFiscalizacao", JoinType.LEFT_OUTER_JOIN);
+//        if (vpn_nr_codLocal != null && vpn_nr_codLocal != 0){
+//            criteria.add(Restrictions.eq("nr_codLocal",vpn_nr_codLocal));
+//        }
      
-        return criteria.addOrder(Order.asc("nr_codigo")).list();
+//        return criteria.addOrder(Order.asc("nr_codigo")).list();
+
+        String vlc_sql = "";
+        List consLocalCliente;
+
+        Session session = FacesContextUtil.getRequestSession();
+        vlc_sql = "select a.*, b.dc_descricao as dc_tipoFiscalizacao from localCliente a ";
+        vlc_sql += "left outer join tipoFiscalizacao b ";
+        vlc_sql += "on a.nr_tipoFiscalizacao = b.nr_codigo ";
+        vlc_sql += "where a.nr_codLocal = " + vpn_nr_codLocal + " ";
+        vlc_sql += "order by a.nr_codigo "; 
+        
+        
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        consLocalCliente = query.list();
+
+        return consLocalCliente;
+
     }
     
     public void inicializar(Integer nr_codLocal){
