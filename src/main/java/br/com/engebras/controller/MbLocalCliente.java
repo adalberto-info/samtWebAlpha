@@ -28,9 +28,11 @@ import br.com.engebras.util.HibernateUtil;
 import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.LocalCliente;
+import br.com.engebras.model.entities.LocalClienteFiltrados;
 import br.com.engebras.filter.LocalClienteFilter;
 import br.com.engebras.model.entities.TipoFiscalizacao;
 import java.util.Date;
+import org.hibernate.sql.JoinType;
 
 @ManagedBean(name = "mbLocalCliente" )
 @SessionScoped
@@ -40,7 +42,7 @@ public class MbLocalCliente implements Serializable {
     
     private LocalCliente localCliente = new LocalCliente();
     private Integer vpn_nr_codLocal; 
-    private List<LocalCliente> localClienteFiltrados; 
+    private List<LocalClienteFiltrados> localClienteFiltrados; 
     private LocalCliente localClienteSelecionado; 
     private List tipoFiscalizacoes = new ArrayList<>();
     public LocalClienteFilter filtro; 
@@ -149,11 +151,11 @@ public class MbLocalCliente implements Serializable {
          localClienteFiltrados = filtrados(filtro);
     }
     
-    public List<LocalCliente> filtrados(LocalClienteFilter filtro) {
+    public List<LocalClienteFiltrados> filtrados(LocalClienteFilter filtro) {
 
         Session session = FacesContextUtil.getRequestSession();
-        Criteria criteria = session.createCriteria(LocalCliente.class);
-        
+        Criteria criteria = session.createCriteria(LocalCliente.class)
+                                   .createAlias("TipoFiscalizacao", "tipoFiscalizacao", JoinType.LEFT_OUTER_JOIN);
         if (vpn_nr_codLocal != null && vpn_nr_codLocal != 0){
             criteria.add(Restrictions.eq("nr_codLocal",vpn_nr_codLocal));
         }
@@ -196,11 +198,11 @@ public class MbLocalCliente implements Serializable {
         this.vpn_nr_codLocal = vpn_nr_codLocal;
     }
 
-    public List<LocalCliente> getLocalClienteFiltrados() {
+    public List<LocalClienteFiltrados> getLocalClienteFiltrados() {
         return localClienteFiltrados;
     }
 
-    public void setLocalClienteFiltrados(List<LocalCliente> localClientesFiltrados) {
+    public void setLocalClienteFiltrados(List<LocalClienteFiltrados> localClientesFiltrados) {
         this.localClienteFiltrados = localClientesFiltrados;
     }
 
