@@ -57,7 +57,7 @@ public class MbLocalVelocidade implements Serializable {
     }
     
     public String editLocalVelocidade(){
-        return "/restrict/cadlLocalInfracao_velocidade.xhtml";
+        return "/restrict/cadLocalInfracao_velocidade.xhtml";
     }
     
     public String editarLocalVelocidade(Integer nr_codigo){

@@ -7,6 +7,7 @@
 
 
 	<f:metadata>
+       	    <f:viewParam name="dummy" />
             <f:event listener="#{mbLocalCliente.inicializar(mbLocalInfracao.localInfracao.nr_codigo)}" type="preRenderView" />
 	</f:metadata>
     
@@ -92,15 +93,13 @@
                     <h:outputText value="Ações"/>
                 </f:facet>
                 <p:panelGrid columns="2" >
-                
                     <p:commandButton value="Editar" action="#{mbLocalCliente.editarLocalCliente(tabLocalCliente.nr_codigo)}"
-                                 icon="ui-icon ui-icon-pencil" update="tbv1:tbv2:grid10" process="@this" >
+                                 icon="ui-icon ui-icon-pencil" update="tbv1:tbv2:grid10" process="@this">
                     </p:commandButton> 
 
                     <p:commandButton value="Remover" action="#{mbLocalCliente.deleteLocalCliente(tabLocalCliente.nr_codigo)}"
                                  icon="ui-icon ui-icon-close" update="tbv1:tbv2:formtableLocalCliente:idTabelaLocalCliente" process="@this">
-                        <f:setPropertyActionListener target="#{mbLocalCliente.localCliente}"
-                                                 value="#{tabLocalCliente}"/>
+                        <f:setPropertyActionListener target="#{mbLocalCliente.localClienteFiltrados}" value="#{tabLocalCliente}"/>
                     </p:commandButton>
                 </p:panelGrid>
             </p:column>

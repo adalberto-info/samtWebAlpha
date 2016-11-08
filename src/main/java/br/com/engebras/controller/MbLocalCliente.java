@@ -64,7 +64,7 @@ public class MbLocalCliente implements Serializable {
     }
 
     public String editLocalCliente(){
-        return "/restrict/cadlLocalInfracao_LocalCliente.xhtml";
+        return "/restrict/cadLocalInfracao_LocalCliente.xhtml";
     }
 
     public String editarLocalCliente(Integer nr_codigo){
@@ -75,12 +75,9 @@ public class MbLocalCliente implements Serializable {
     public void addLocalCliente(Integer nr_codLocal){
         vpn_nr_codLocal = nr_codLocal;
         localCliente.setNr_codLocal(nr_codLocal);
-        dt_atual = new Date();
-        localCliente.setDt_inclusao(dt_atual);
-        localCliente.setNr_codLocal(nr_codLocal);
-        if (verificaDuplicidade(localCliente.getNr_codLocalCliente()) == true){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Já existe um local cliente: " + localCliente.getNr_codLocalCliente()+ ".",""));
-        } else if(localCliente.getNr_codigo() == null || localCliente.getNr_codigo() == 0){
+        if(localCliente.getNr_codigo() == null || localCliente.getNr_codigo() == 0){
+            dt_atual = new Date();
+            localCliente.setDt_inclusao(dt_atual);
             insertLocalCliente();
         } else {
             updateLocalCliente();
