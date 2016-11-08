@@ -224,12 +224,6 @@ CREATE TABLE grupoLocal (
   PRIMARY KEY(nr_codigo)
 );
 
-CREATE TABLE grupoLocal (
-  nr_codigo NUMERIC(5) NOT NULL AUTO_INCREMENT,
-  dc_grupo VARCHAR(30) NULL,
-  PRIMARY KEY(nr_codigo)
-);
-
 CREATE TABLE grupoLocalItem (
   nr_codigo NUMERIC(10) NOT NULL AUTO_INCREMENT,
   nr_codGrupoLocal NUMERIC(5) NULL,
@@ -466,7 +460,6 @@ CREATE TABLE localCliente (
   nr_codLocal NUMERIC(5) NULL,
   nr_codLocalCliente NUMERIC(10) NULL,
   nr_tipoFiscalizacao NUMERIC(2) NULL,
-  dc_infracao VARCHAR(30) NULL,
   dt_inclusao DATE NULL,
   dt_inicioVigencia DATE NULL,
   nr_porteVeiculo NUMERIC(1) NULL,
@@ -493,6 +486,7 @@ CREATE TABLE localInfracao (
   dt_ultimaAtualizacao DATE NULL,
   nr_codStatus NUMERIC(2) NULL,
   nr_codTipoFixacao NUMERIC(5) NULL,
+  nr_codTipoEquipamento NUMERIC(2) NULL,
   PRIMARY KEY(nr_codigo)
 );
 
@@ -505,23 +499,19 @@ CREATE TABLE localVelocidade (
   nr_velocidadeGrave NUMERIC(3) NULL,
   nr_velocidadeGravissima NUMERIC(3) NULL,
   nr_codPorteVeiculo NUMERIC(2) NULL,
+  dt_inicio DATE NULL,
   PRIMARY KEY(nr_codigo)
 );
 
 CREATE TABLE local_equipamento (
-  nr_codLocal NUMERIC(5) NOT NULL AUTO_INCREMENT,
-  dc_serieEquipamento CHAR(15) NULL,
-  dt_inicio DATE NULL,
-  dt_fim DATE NULL,
-  dc_hr_inicio CHAR(08)) NULL,
-  dc_hr_fim CHAR(08) NULL,
-  PRIMARY KEY(nr_codLocal)
-);
-
-CREATE TABLE local_grupoLocal (
-  nr_codGrupoLocal NUMERIC(5) NOT NULL AUTO_INCREMENT,
-  nr_codLocal NUMERIC(5) NULL,
-  PRIMARY KEY(nr_codGrupoLocal)
+  nr_codigo NUMERIC(10) NOT NULL AUTO_INCREMENT,
+  nr_codLocal NUMERIC(5) NOT NULL,
+  dc_serieEquipamento CHAR(15) NOT NULL,
+  dt_inicio DATE NOT NULL,
+  dt_fim DATE NOT NULL,
+  dc_hr_inicio CHAR(08)) NOT NULL,
+  dc_hr_fim CHAR(08) NOT NULL,
+  PRIMARY KEY(nr_codigo)
 );
 
 CREATE TABLE local_situacaoLocal (

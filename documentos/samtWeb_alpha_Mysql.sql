@@ -507,7 +507,6 @@ CREATE TABLE localCliente (
   nr_codLocal NUMERIC(5) NOT NULL DEFAULT 0,
   nr_codLocalCliente NUMERIC(10) NOT NULL DEFAULT 0,
   nr_tipoFiscalizacao NUMERIC(2) NOT NULL DEFAULT 0,
-  dc_infracao VARCHAR(30) NOT NULL DEFAULT '',
   dt_inclusao DATE NOT NULL DEFAULT '0000-00-00',
   dt_inicioVigencia DATE NOT NULL DEFAULT '0000-00-00',
   nr_porteVeiculo NUMERIC(1) NOT NULL DEFAULT 0,
@@ -518,7 +517,7 @@ CREATE INDEX ix_nr_codLocal on localCliente (nr_codLocal) ;
 CREATE INDEX ix_nr_codLocalCliente on localCliente (nr_codLocalCliente) ;
 
 CREATE TABLE localInfracao (
-  nr_codigo NUMERIC(5) NOT NULL DEFAULT 0,
+  nr_codigo INT(5) AUTO_INCREMENT,
   dc_local VARCHAR(80) NOT NULL DEFAULT '',
   dc_bairro VARCHAR(30) NOT NULL DEFAULT '',
   nr_codMunicipio NUMERIC(5) NOT NULL DEFAULT 0,
@@ -537,6 +536,7 @@ CREATE TABLE localInfracao (
   dt_ultimaAtualizacao DATE NOT NULL DEFAULT '0000-00-00',
   nr_codStatus NUMERIC(2) NOT NULL DEFAULT 0,
   nr_codTipoFixacao NUMERIC(5) NOT NULL DEFAULT 0,
+  nr_codTipoEquipamento NUMERIC(2) NOT NULL DEFAULT 0,
   PRIMARY KEY(nr_codigo)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -549,20 +549,27 @@ CREATE TABLE localVelocidade (
   nr_velocidadeGrave NUMERIC(3) NOT NULL DEFAULT 0,
   nr_velocidadeGravissima NUMERIC(3) NOT NULL DEFAULT 0,
   nr_codPorteVeiculo NUMERIC(2) NOT NULL DEFAULT 0,
+  dt_inicio DATE NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY(nr_codigo)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE INDEX ix_nr_codLocal on localVelocidade (nr_codLocal) ;
 
 CREATE TABLE local_equipamento (
+  nr_codigo INT(10) AUTO_INCREMENT,	
   nr_codLocal NUMERIC(5) NOT NULL DEFAULT 0,
   dc_serieEquipamento CHAR(15) NOT NULL DEFAULT '',
   dt_inicio DATE NOT NULL DEFAULT '0000-00-00',
   dt_fim DATE NOT NULL DEFAULT '0000-00-00',
   dc_hr_inicio CHAR(08) NOT NULL DEFAULT '',
   dc_hr_fim CHAR(08) NOT NULL DEFAULT '',
-  PRIMARY KEY(nr_codLocal, dc_serieEquipamento)
+  PRIMARY KEY(nr_codigo)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE INDEX ix_nr_codLocal on local_equipamento (nr_codLocal); 
+CREATE INDEX ix_dc_serieEquipamento on local_equipamento (dc_serieEquipamento); 
+
 
 CREATE TABLE local_grupoLocal (
   nr_codGrupoLocal NUMERIC(5) NOT NULL DEFAULT 0,

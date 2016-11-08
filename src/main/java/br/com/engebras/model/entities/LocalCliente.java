@@ -39,8 +39,6 @@ public class LocalCliente implements Serializable{
     private Integer nr_codLocalCliente; 
     @Column(name="nr_tipoFiscalizacao", nullable=false, length=2)
     private Integer nr_tipoFiscalizacao; 
-    @Column(name="dc_infracao", nullable=false, length=30)
-    private String dc_infracao; 
     @Temporal(TemporalType.DATE)
     @Column(name="dt_inclusao", nullable=false)
     private Date dt_inclusao; 
@@ -82,14 +80,6 @@ public class LocalCliente implements Serializable{
         this.nr_tipoFiscalizacao = nr_tipoFiscalizacao;
     }
 
-    public String getDc_infracao() {
-        return dc_infracao;
-    }
-
-    public void setDc_infracao(String dc_infracao) {
-        this.dc_infracao = dc_infracao;
-    }
-
     public Date getDt_inclusao() {
         return dt_inclusao;
     }
@@ -116,8 +106,8 @@ public class LocalCliente implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 13 * hash + Objects.hashCode(this.nr_codigo);
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.nr_codigo);
         return hash;
     }
 
@@ -138,6 +128,7 @@ public class LocalCliente implements Serializable{
         }
         return true;
     }
+
     
     
     

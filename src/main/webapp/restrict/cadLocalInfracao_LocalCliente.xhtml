@@ -95,7 +95,6 @@
                 
                     <p:commandButton value="Editar" action="#{mbLocalCliente.editarLocalCliente(tabLocalCliente.nr_codigo)}"
                                  icon="ui-icon ui-icon-pencil" update="tbv1:tbv2:grid10" process="@this" >
-                        <f:setPropertyActionListener target="#{mbLocalCliente.localCliente}" value="#{tabLocalCliente}"/>
                     </p:commandButton> 
 
                     <p:commandButton value="Remover" action="#{mbLocalCliente.deleteLocalCliente(tabLocalCliente.nr_codigo)}"

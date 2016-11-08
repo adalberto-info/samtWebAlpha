@@ -22,6 +22,8 @@ import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import java.util.Date;
+import org.hibernate.sql.JoinType;
 
 import br.com.engebras.util.FacesContextUtil;
 import br.com.engebras.util.HibernateUtil;
@@ -31,8 +33,6 @@ import br.com.engebras.model.entities.LocalCliente;
 import br.com.engebras.model.entities.LocalClienteFiltrados;
 import br.com.engebras.filter.LocalClienteFilter;
 import br.com.engebras.model.entities.TipoFiscalizacao;
-import java.util.Date;
-import org.hibernate.sql.JoinType;
 
 @ManagedBean(name = "mbLocalCliente" )
 @SessionScoped
@@ -64,7 +64,7 @@ public class MbLocalCliente implements Serializable {
     }
 
     public String editLocalCliente(){
-        return "/restrict/cadlLocalInfracao_velocidade.xhtml";
+        return "/restrict/cadlLocalInfracao_LocalCliente.xhtml";
     }
 
     public String editarLocalCliente(Integer nr_codigo){
@@ -75,7 +75,6 @@ public class MbLocalCliente implements Serializable {
     public void addLocalCliente(Integer nr_codLocal){
         vpn_nr_codLocal = nr_codLocal;
         localCliente.setNr_codLocal(nr_codLocal);
-        localCliente.setDc_infracao("");
         dt_atual = new Date();
         localCliente.setDt_inclusao(dt_atual);
         localCliente.setNr_codLocal(nr_codLocal);
@@ -139,6 +138,7 @@ public class MbLocalCliente implements Serializable {
 
         return vll_retorno;
     }
+
     public LocalCliente porNr_codigo(Integer nr_codigo) {
 
         return localClienteDAO().getEntity(nr_codigo);
@@ -153,15 +153,6 @@ public class MbLocalCliente implements Serializable {
     
     public List<LocalClienteFiltrados> filtrados(LocalClienteFilter filtro) {
 
-//        Session session = FacesContextUtil.getRequestSession();
-//        Criteria criteria = session.createCriteria(LocalCliente.class)
-//                                   .createAlias("TipoFiscalizacao", "tipoFiscalizacao", JoinType.LEFT_OUTER_JOIN);
-//        if (vpn_nr_codLocal != null && vpn_nr_codLocal != 0){
-//            criteria.add(Restrictions.eq("nr_codLocal",vpn_nr_codLocal));
-//        }
-     
-//        return criteria.addOrder(Order.asc("nr_codigo")).list();
-
         String vlc_sql = "";
         List consLocalCliente;
 
@@ -171,7 +162,6 @@ public class MbLocalCliente implements Serializable {
         vlc_sql += "on a.nr_tipoFiscalizacao = b.nr_codigo ";
         vlc_sql += "where a.nr_codLocal = " + vpn_nr_codLocal + " ";
         vlc_sql += "order by a.nr_codigo "; 
-        
         
         SQLQuery query = session.createSQLQuery(vlc_sql);
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
