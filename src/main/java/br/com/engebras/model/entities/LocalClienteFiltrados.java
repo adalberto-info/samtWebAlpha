@@ -97,6 +97,32 @@ public class LocalClienteFiltrados implements Serializable{
     public void setDc_tipoFiscalizacao(String dc_tipoFiscalizacao) {
         this.dc_tipoFiscalizacao = dc_tipoFiscalizacao;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.nr_codigo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final LocalClienteFiltrados other = (LocalClienteFiltrados) obj;
+        if (!Objects.equals(this.nr_codigo, other.nr_codigo)) {
+            return false;
+        }
+        return true;
+    }
+    
     
     
 }

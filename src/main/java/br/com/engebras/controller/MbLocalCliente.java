@@ -42,7 +42,8 @@ public class MbLocalCliente implements Serializable {
     
     private LocalCliente localCliente = new LocalCliente();
     private Integer vpn_nr_codLocal; 
-    private List<LocalClienteFiltrados> localClienteFiltrados; 
+    private LocalClienteFiltrados localClienteFiltrados = new LocalClienteFiltrados();
+    private List<LocalClienteFiltrados> localClienteFiltradosLista; 
     private LocalCliente localClienteSelecionado; 
     private List tipoFiscalizacoes = new ArrayList<>();
     public LocalClienteFilter filtro; 
@@ -64,8 +65,9 @@ public class MbLocalCliente implements Serializable {
     }
 
     public String editLocalCliente(){
+
         return "/restrict/cadLocalInfracao_LocalCliente.xhtml";
-    }
+   }
 
     public String editarLocalCliente(Integer nr_codigo){
         this.localCliente = porNr_codigo(nr_codigo);
@@ -145,7 +147,7 @@ public class MbLocalCliente implements Serializable {
     public void pesquisar(Integer nr_codLocal){
 
          vpn_nr_codLocal = nr_codLocal;
-         localClienteFiltrados = filtrados(filtro);
+         localClienteFiltradosLista = filtrados(filtro);
     }
     
     public List<LocalClienteFiltrados> filtrados(LocalClienteFilter filtro) {
@@ -203,13 +205,22 @@ public class MbLocalCliente implements Serializable {
         this.vpn_nr_codLocal = vpn_nr_codLocal;
     }
 
-    public List<LocalClienteFiltrados> getLocalClienteFiltrados() {
+    public LocalClienteFiltrados getLocalClienteFiltrados() {
         return localClienteFiltrados;
     }
 
-    public void setLocalClienteFiltrados(List<LocalClienteFiltrados> localClientesFiltrados) {
-        this.localClienteFiltrados = localClientesFiltrados;
+    public void setLocalClienteFiltrados(LocalClienteFiltrados localClienteFiltrados) {
+        this.localClienteFiltrados = localClienteFiltrados;
     }
+
+    public List<LocalClienteFiltrados> getLocalClienteFiltradosLista() {
+        return localClienteFiltradosLista;
+    }
+
+    public void setLocalClienteFiltradosLista(List<LocalClienteFiltrados> localClienteFiltradosLista) {
+        this.localClienteFiltradosLista = localClienteFiltradosLista;
+    }
+
 
     public LocalCliente getLocalClienteSelecionado() {
         return localClienteSelecionado;
