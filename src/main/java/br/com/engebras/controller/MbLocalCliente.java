@@ -30,7 +30,6 @@ import br.com.engebras.util.HibernateUtil;
 import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.LocalCliente;
-import br.com.engebras.model.entities.LocalClienteFiltrados;
 import br.com.engebras.filter.LocalClienteFilter;
 import br.com.engebras.model.entities.TipoFiscalizacao;
 
@@ -42,8 +41,7 @@ public class MbLocalCliente implements Serializable {
     
     private LocalCliente localCliente = new LocalCliente();
     private Integer vpn_nr_codLocal; 
-    private LocalClienteFiltrados localClienteFiltrados = new LocalClienteFiltrados();
-    private List<LocalClienteFiltrados> localClienteFiltradosLista; 
+    private List<LocalCliente> localClienteFiltrados; 
     private LocalCliente localClienteSelecionado; 
     private List tipoFiscalizacoes = new ArrayList<>();
     public LocalClienteFilter filtro; 
@@ -147,26 +145,19 @@ public class MbLocalCliente implements Serializable {
     public void pesquisar(Integer nr_codLocal){
 
          vpn_nr_codLocal = nr_codLocal;
-         localClienteFiltradosLista = filtrados(filtro);
+         localClienteFiltrados = filtrados(filtro);
     }
     
-    public List<LocalClienteFiltrados> filtrados(LocalClienteFilter filtro) {
-
-        String vlc_sql = "";
-        List consLocalCliente;
+    public List<LocalCliente> filtrados(LocalClienteFilter filtro) {
 
         Session session = FacesContextUtil.getRequestSession();
-        vlc_sql = "select a.*, b.dc_descricao as dc_tipoFiscalizacao from localCliente a ";
-        vlc_sql += "left outer join tipoFiscalizacao b ";
-        vlc_sql += "on a.nr_tipoFiscalizacao = b.nr_codigo ";
-        vlc_sql += "where a.nr_codLocal = " + vpn_nr_codLocal + " ";
-        vlc_sql += "order by a.nr_codigo "; 
+        Criteria criteria = session.createCriteria(LocalCliente.class);
         
-        SQLQuery query = session.createSQLQuery(vlc_sql);
-        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-        consLocalCliente = query.list();
-
-        return consLocalCliente;
+        if (vpn_nr_codLocal != null && vpn_nr_codLocal != 0){
+            criteria.add(Restrictions.eq("nr_codLocal",vpn_nr_codLocal));
+        }
+     
+        return criteria.addOrder(Order.asc("nr_codigo")).list();
 
     }
     
@@ -187,8 +178,7 @@ public class MbLocalCliente implements Serializable {
 
         this.tipoFiscalizacoes = listaSQL;
     }
-    
-    
+
     public LocalCliente getLocalCliente() {
         return localCliente;
     }
@@ -205,22 +195,13 @@ public class MbLocalCliente implements Serializable {
         this.vpn_nr_codLocal = vpn_nr_codLocal;
     }
 
-    public LocalClienteFiltrados getLocalClienteFiltrados() {
+    public List<LocalCliente> getLocalClienteFiltrados() {
         return localClienteFiltrados;
     }
 
-    public void setLocalClienteFiltrados(LocalClienteFiltrados localClienteFiltrados) {
+    public void setLocalClienteFiltrados(List<LocalCliente> localClienteFiltrados) {
         this.localClienteFiltrados = localClienteFiltrados;
     }
-
-    public List<LocalClienteFiltrados> getLocalClienteFiltradosLista() {
-        return localClienteFiltradosLista;
-    }
-
-    public void setLocalClienteFiltradosLista(List<LocalClienteFiltrados> localClienteFiltradosLista) {
-        this.localClienteFiltradosLista = localClienteFiltradosLista;
-    }
-
 
     public LocalCliente getLocalClienteSelecionado() {
         return localClienteSelecionado;
@@ -228,6 +209,14 @@ public class MbLocalCliente implements Serializable {
 
     public void setLocalClienteSelecionado(LocalCliente localClienteSelecionado) {
         this.localClienteSelecionado = localClienteSelecionado;
+    }
+
+    public List getTipoFiscalizacoes() {
+        return tipoFiscalizacoes;
+    }
+
+    public void setTipoFiscalizacoes(List tipoFiscalizacoes) {
+        this.tipoFiscalizacoes = tipoFiscalizacoes;
     }
 
     public LocalClienteFilter getFiltro() {
@@ -238,12 +227,14 @@ public class MbLocalCliente implements Serializable {
         this.filtro = filtro;
     }
 
-    public List getTipoFiscalizacoes() {
-        return tipoFiscalizacoes;
+    public Date getDt_atual() {
+        return dt_atual;
     }
 
-    public void setTipoFiscalizacoes(List tipoFiscalizacoes) {
-        this.tipoFiscalizacoes = tipoFiscalizacoes;
+    public void setDt_atual(Date dt_atual) {
+        this.dt_atual = dt_atual;
     }
+    
+    
 
 }

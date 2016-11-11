@@ -7,11 +7,11 @@
 
 
 	<f:metadata>
-       	    <f:viewParam name="dummy" />
             <f:event listener="#{mbLocalCliente.inicializar(mbLocalInfracao.localInfracao.nr_codigo)}" type="preRenderView" />
 	</f:metadata>
-    
-    <p:panelGrid columns="4" styleClass="panelGrid" style="margin-top: 20px" id="grid10">
+
+    <h:form id="formLocalInfracao_localCliente">
+    <p:panelGrid columns="4" styleClass="panelGrid"  id="grid10" >
 
         <p:outputLabel for="nr_codigo" value="Código: "/>
         <p:inputText id="nr_codigo"  size="10" maxlength="10" value="#{mbLocalCliente.localCliente.nr_codigo}"
@@ -42,14 +42,15 @@
 
     <p:toolbar style="margin-top: 20px">
         <p:toolbarGroup>
-            <p:commandButton value="Salvar"   actionListener="#{mbLocalCliente.addLocalCliente(mbLocalInfracao.localInfracao.nr_codigo)}" update="tbv1:tbv2:grid10 tbv1:tbv2:formtableLocalCliente:idTabelaLocalCliente" process="@this tbv1:tbv2:grid10" icon="ui-icon ui-icon-disk" style="width: 100px" />
-            <p:commandButton value="Cancelar" action="#{mbLocalCliente.limpaLocalCliente}" update="tbv1:tbv2:grid10" process="@this" icon="ui-icon ui-icon-close" style="width: 100px" />
+            <p:commandButton value="Salvar"   action="#{mbLocalCliente.addLocalCliente(mbLocalInfracao.localInfracao.nr_codigo)}" update="tbv1:tbv2:formLocalInfracao_localCliente:grid10 tbv1:tbv2:formtableLocalCliente:idTabelaLocalCliente" process="@this tbv1:tbv2:formLocalInfracao_localCliente:grid10" icon="ui-icon ui-icon-disk" style="width: 100px" />
+            <p:commandButton value="Cancelar" action="#{mbLocalCliente.limpaLocalCliente}" update="tbv1:tbv2:formLocalInfracao_localCliente:grid10" process="@this" icon="ui-icon ui-icon-close" style="width: 100px" />
         </p:toolbarGroup>
     </p:toolbar>
 
+    </h:form>     
     <h:form id="formtableLocalCliente" style="margin-top: 40px">
 
-        <p:dataTable id="idTabelaLocalCliente" var="tabLocalCliente" value="#{mbLocalCliente.localClienteFiltradosLista}" 
+        <p:dataTable id="idTabelaLocalCliente" var="tabLocalCliente" value="#{mbLocalCliente.localClienteFiltrados}" 
                      paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
                      {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -66,7 +67,7 @@
                 <f:facet name="header">
                     <h:outputText value="Tipo Fiscalização"/>
                 </f:facet>
-                <h:outputText value="#{tabLocalCliente.dc_tipoFiscalizacao}"/>
+                <h:outputText value="#{tabLocalCliente.nr_tipoFiscalizacao}"/>
             </p:column>
             <p:column>
                 <f:facet name="header">
@@ -94,11 +95,13 @@
                 </f:facet>
                 <p:panelGrid columns="2" >
                     <p:commandButton value="Editar" action="#{mbLocalCliente.editarLocalCliente(tabLocalCliente.nr_codigo)}"
-                                 icon="ui-icon ui-icon-pencil" update="tbv1:tbv2:grid10 tbv1:tbv2:formtableLocalCliente:idTabelaLocalCliente" process="@this">
+                                 icon="ui-icon ui-icon-pencil" update="tbv1:tbv2:formLocalInfracao_localCliente:grid10" process="@this" id="btn_editar">
+                        <f:setPropertyActionListener target="#{mbLocalCliente.localCliente}" value="#{tabLocalCliente}"/>
                     </p:commandButton> 
 
                     <p:commandButton value="Remover" action="#{mbLocalCliente.deleteLocalCliente(tabLocalCliente.nr_codigo)}"
-                                 icon="ui-icon ui-icon-close" update="tbv1:tbv2:formtableLocalCliente:idTabelaLocalCliente" process="@this">
+                                 icon="ui-icon ui-icon-close" update="tbv1:tbv2:formtableLocalCliente:idTabelaLocalCliente" process="@this" id="btn_remover">
+                        <f:setPropertyActionListener target="#{mbLocalCliente.localCliente}" value="#{tabLocalCliente}"/>
                     </p:commandButton>
                 </p:panelGrid>
             </p:column>
