@@ -64,7 +64,8 @@ public class MbLocal_equipamento {
     }
     
     public String editLocal_equipamento(){
-        return "/restrict/cadLocalInfracao_equipamento.xhtml";
+      return "";  
+    //    return "/restrict/cadLocalInfracao_equipamento.xhtml";
     }
 
 

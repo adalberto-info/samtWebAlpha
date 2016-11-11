@@ -64,7 +64,8 @@ public class MbLocalCliente implements Serializable {
 
     public String editLocalCliente(){
 
-        return "/restrict/cadLocalInfracao_LocalCliente.xhtml";
+        return "";
+//        return "/restrict/cadLocalInfracao_LocalCliente.xhtml";
    }
 
     public String editarLocalCliente(Integer nr_codigo){

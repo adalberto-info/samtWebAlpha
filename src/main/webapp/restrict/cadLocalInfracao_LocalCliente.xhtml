@@ -42,7 +42,7 @@
 
     <p:toolbar style="margin-top: 20px">
         <p:toolbarGroup>
-            <p:commandButton value="Salvar"   action="#{mbLocalCliente.addLocalCliente(mbLocalInfracao.localInfracao.nr_codigo)}" update="tbv1:tbv2:formLocalInfracao_localCliente:grid10 tbv1:tbv2:formtableLocalCliente:idTabelaLocalCliente" process="@this tbv1:tbv2:formLocalInfracao_localCliente:grid10" icon="ui-icon ui-icon-disk" style="width: 100px" />
+            <p:commandButton value="Salvar"   action="#{mbLocalCliente.addLocalCliente(mbLocalInfracao.localInfracao.nr_codigo)}" update="formLocalInfracao_localCliente:grid10 tbv1:tbv2:formtableLocalCliente:idTabelaLocalCliente" process="@this formLocalInfracao_localCliente:grid10" icon="ui-icon ui-icon-disk" style="width: 100px" />
             <p:commandButton value="Cancelar" action="#{mbLocalCliente.limpaLocalCliente}" update="tbv1:tbv2:formLocalInfracao_localCliente:grid10" process="@this" icon="ui-icon ui-icon-close" style="width: 100px" />
         </p:toolbarGroup>
     </p:toolbar>
