@@ -36,7 +36,7 @@ import br.com.engebras.model.entities.Equipamento;
 
 @ManagedBean(name="mbLocal_equipamento")
 @SessionScoped
-public class MbLocal_equipamento {
+public class MbLocal_equipamento implements Serializable {
 
     private static final long serialVersionUID = 1L; 
 

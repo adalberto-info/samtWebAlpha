@@ -37,7 +37,14 @@ public class Local_situacaoLocal implements Serializable{
     private Integer nr_codLocal; 
     @Column(name="dc_codSituacao", nullable=false, length=3)
     private String dc_codSituacao; 
-
+    @Column(name="dt_inicio", nullable=false)
+    @Temporal(TemporalType.DATE)
+    private Date dt_inicio; 
+    @Column(name="dt_fim", nullable=false)
+    @Temporal(TemporalType.DATE)
+    private Date dt_fim;
+    
+    
     public Integer getNr_codigo() {
         return nr_codigo;
     }
@@ -62,6 +69,24 @@ public class Local_situacaoLocal implements Serializable{
         this.dc_codSituacao = dc_codSituacao;
     }
 
+    public Date getDt_inicio() {
+        return dt_inicio;
+    }
+
+    public void setDt_inicio(Date dt_inicio) {
+        this.dt_inicio = dt_inicio;
+    }
+
+    public Date getDt_fim() {
+        return dt_fim;
+    }
+
+    public void setDt_fim(Date dt_fim) {
+        this.dt_fim = dt_fim;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 5;
