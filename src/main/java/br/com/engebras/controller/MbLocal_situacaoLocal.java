@@ -28,10 +28,11 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.engebras.util.FacesContextUtil;
 import br.com.engebras.util.HibernateUtil;
+import br.com.engebras.filter.Local_situacaoLocalFilter; 
 import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.Local_situacaoLocal;
-import br.com.engebras.filter.Local_situacaoLocalFilter; 
+import br.com.engebras.model.entities.SituacaoLocal;
 import br.com.engebras.model.entities.SituacaoLocal;
 
 @ManagedBean(name="mbLocal_situacaoLocal")
@@ -45,10 +46,11 @@ public class MbLocal_situacaoLocal implements Serializable {
     private List<Local_situacaoLocal> local_situacaoLocalFiltrados; 
     private Local_situacaoLocal local_situacaoLocalSelecionado; 
     private Local_situacaoLocalFilter filtro; 
-    private 
+    private List situacaoLocais = new ArrayList<>();
     
     public MbLocal_situacaoLocal(){
         filtro = new Local_situacaoLocalFilter(); 
+        geraListaSituacaoLocais();
     }
 
     private InterfaceDAO<Local_situacaoLocal> local_situacaoLocalDAO() {
@@ -160,6 +162,23 @@ public class MbLocal_situacaoLocal implements Serializable {
     public void inicializar(Integer nr_codLocal){
          vpn_nr_codLocal = nr_codLocal; 
     }
+    
+    private void geraListaSituacaoLocais(){
+        List listaSQL; 
+        String vlc_sql; 
+        vlc_sql = "select a.dc_codigo, a.dc_descricao ";
+        vlc_sql += "from situacaoLocal a ";
+        vlc_sql += "order by a.dc_codigo ";
+        
+        Session session = FacesContextUtil.getRequestSession();
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+        
+        this.situacaoLocais = listaSQL; 
+
+    }
+    
 
     public Local_situacaoLocal getLocal_situacaoLocal() {
         return local_situacaoLocal;
@@ -199,6 +218,14 @@ public class MbLocal_situacaoLocal implements Serializable {
 
     public void setFiltro(Local_situacaoLocalFilter filtro) {
         this.filtro = filtro;
+    }
+
+    public List getSituacaoLocais() {
+        return situacaoLocais;
+    }
+
+    public void setSituacaoLocais(List situacaoLocais) {
+        this.situacaoLocais = situacaoLocais;
     }
     
 
