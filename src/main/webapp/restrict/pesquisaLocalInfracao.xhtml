@@ -83,6 +83,7 @@
                             <f:actionListener binding="#{mbLocalVelocidade.pesquisar(tabLocalInfracao.nr_codigo)}"/>
                             <f:actionListener binding="#{mbLocal_equipamento.pesquisar(tabLocalInfracao.nr_codigo)}"/>
                             <f:actionListener binding="#{mbLocalCliente.pesquisar(tabLocalInfracao.nr_codigo)}"/>
+                            <f:actionListener binding="#{mbLocal_situacaoLocal.pesquisar(tabLocalInfracao.nr_codigo)}"/>
                             <f:setPropertyActionListener target="#{mbPesquisaLocalInfracao.localInfracao}" value="#{tabLocalInfracao}"/>
                         </p:commandButton> 
                         

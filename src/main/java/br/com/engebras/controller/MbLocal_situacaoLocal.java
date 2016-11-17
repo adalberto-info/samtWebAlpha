@@ -102,22 +102,24 @@ public class MbLocal_situacaoLocal implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso!!!", ""));
     }
    
-    public void deleteLocal_equipamento(Integer nr_codigo) {
+    public void deleteLocal_situacaoLocal(Integer nr_codigo) {
         this.local_situacaoLocal = porNr_codigo(nr_codigo);
         local_situacaoLocalDAO().remove(local_situacaoLocal);
         pesquisar(vpn_nr_codLocal);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro excluído com sucesso!!!", ""));
     }
 
-    private boolean verificaDuplicidade(String dc_serieEquipamento) {
+    private boolean verificaDuplicidade(String dc_codSituacao) {
         boolean vll_retorno = false;
         String vlc_sql = "";
         List consLocal_situacaoLocal;
 
         Session session = FacesContextUtil.getRequestSession();
-        vlc_sql = "select a.nr_codigo, a.dc_serieEquipamento, a.nr_codLocal from local_situacaoLocal a ";
-        vlc_sql += "where a.dc_serieEquipamento = '" + dc_serieEquipamento + "' ";
+        vlc_sql = "select a.nr_codigo, a.dc_codSituacao, a.nr_codLocal, a.dt_inicio, a.dt_fim from local_situacaoLocal a ";
+        vlc_sql += "where a.dc_codSituacao = '" + dc_codSituacao + "' ";
         vlc_sql += "and a.nr_codLocal = " + vpn_nr_codLocal + " ";
+        vlc_sql += "and a.dt_inicio <= '" + local_situacaoLocal.getDt_fim() + "' ";
+        vlc_sql += "and a.dt_fim >= '" + local_situacaoLocal.getDt_inicio() + "' ";
         
         if (local_situacaoLocal.getNr_codigo() != null && local_situacaoLocal.getNr_codigo() != 0)
             vlc_sql = vlc_sql + "and a.nr_codigo <> " + local_situacaoLocal.getNr_codigo();

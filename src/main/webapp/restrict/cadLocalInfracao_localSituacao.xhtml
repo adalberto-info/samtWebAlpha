@@ -21,7 +21,7 @@
             <p:selectOneMenu id="dc_codSituacao" value="#{mbLocal_situacaoLocal.local_situacaoLocal.dc_codSituacao}" style="width:250px" required ="true" requiredMessage="O campo [Situação] é obrigatório...">
                 <f:selectItem itemLabel="Selecione a situação" itemValue="" />
                 <f:selectItems value="#{mbLocal_situacaoLocal.situacaoLocais}" var="listaSituacaoLocal" 
-                               itemLabel="#{listaSituacaoLocal.dc_codSituacao}" itemValue="#{listaSituacaoLocal.dc_codSituacao}"/>
+                               itemLabel="#{listaSituacaoLocal.dc_descricao}" itemValue="#{listaSituacaoLocal.dc_codigo}"/>
             </p:selectOneMenu>
 
             <p:outputLabel for="dt_inicio" value="Dt. início: "/>
@@ -35,7 +35,7 @@
 
         <p:toolbar style="margin-top: 20px">
             <p:toolbarGroup>
-                <p:commandButton value="Salvar"   action="#{mbLocal_situacaoLocal.addLocal_situacaoLocal(mbLocalInfracao.localInfracao.nr_codigo)}" update="tbv1:tbv2:formLocalInfracao_situacaoLocal:grid11 tbv1:tbv2:formtable_situacaoLocal:idTabelaSituacaoLocal" process="@this tbv1:tbv2:formLocalInfracao_situacaoLocal:grid11" icon="ui-icon ui-icon-disk" style="width: 100px"/>
+                <p:commandButton value="Salvar"   action="#{mbLocal_situacaoLocal.addLocal_situacaoLocal(mbLocalInfracao.localInfracao.nr_codigo)}" update="tbv1:tbv2:formLocalInfracao_situacaoLocal:grid11 tbv1:tbv2:formtableSituacaoLocal:idTabelaSituacaoLocal" process="@this tbv1:tbv2:formLocalInfracao_situacaoLocal:grid11" icon="ui-icon ui-icon-disk" style="width: 100px"/>
                 <p:commandButton value="Cancelar" action="#{mbLocal_situacaoLocal.limpaLocal_situacaoLocal}" update="tbv1:tbv2:formLocalInfracao_situacaoLocal:grid11" process="@this" icon="ui-icon ui-icon-close" style="width: 100px" />
             </p:toolbarGroup>
         </p:toolbar>
@@ -76,7 +76,7 @@
                 <p:panelGrid columns="2" >
                 
                     <p:commandButton value="Editar" action="#{mbLocal_situacaoLocal.editarLocal_situacaoLocal(tabLocal_situacaoLocal.nr_codigo)}"
-                                 icon="ui-icon ui-icon-pencil" update="tbv1:tbv2:formLocalInfracao_equipamento:grid9" process="@this" >
+                                 icon="ui-icon ui-icon-pencil" update="tbv1:tbv2:formLocalInfracao_situacaoLocal:grid11" process="@this" >
                         <f:setPropertyActionListener target="#{mbLocal_situacaoLocal.local_situacaoLocal}" value="#{tabLocal_situacaoLocal}"/>
                     </p:commandButton> 
 
