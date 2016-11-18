@@ -23,12 +23,13 @@
                 <p:tab title="Inicializa Digitação" id="iniciaDigitacao">
                     <h:form prependId="false" id="formIniciaDigitacao">
                         <p:growl id="msg0" />
-                            <p:toolbar>
-                                <p:toolbarGroup>
-                                    <p:commandButton value="Processar" icon="ui-icon ui-icon-disk" update="@form"/>
-                                    <p:commandButton value="Cancelar" action="/Inicio.xhtml" icon="ui-icon ui-icon-close" process="@this"/>
-                                </p:toolbarGroup>
-                            </p:toolbar>
+                            <div align="center">
+                                <p:panel style="margin-top: 200px; margin-bottom: 200px">
+                                <p:commandButton value="Processar" icon="ui-icon ui-icon-disk" update="@form"/>
+                                <p:commandButton value="Cancelar" action="/Inicio.xhtml" icon="ui-icon ui-icon-close" process="@this"/>
+                                </p:panel>
+                            </div>    
+                                
                     </h:form>
                 </p:tab>
             </p:tabView>    
