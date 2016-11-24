@@ -78,6 +78,7 @@ public class MbInicializaDigitacao implements Serializable {
         vlc_sql += "nr_tamanhoVeiculo, dc_placaOCR, nr_codTipoFiscalizacao, dc_numeroLaudo, dt_validadeLaudo, ";
         vlc_sql += "dt_verificacaoLaudo, dc_tipoIsencao, lg_renainf, nr_imagem, nr_codPais, lg_uso, nr_codClassificacaoTamanho,";
         vlc_sql += "nr_tempoAferido, nr_tempoLimite, nr_status, dt_envio,dt_recebe) ";
+	vlc_sql += "values ('00000000000000001', '', 0, 0, 0,0,0,0,'', 0, 6942, '0001', 50, 61, 54, '20161120', '110346', '0001', 1, 0, 74550, 0,1111, 'EPZ8570', 1, '4444', '20171231', '20161124', '1', 0, 1, 1, 0, 1, 0,0,1,'','') "
         
         
         //inserindo registros na tabela autoInfracaoImagem... 
