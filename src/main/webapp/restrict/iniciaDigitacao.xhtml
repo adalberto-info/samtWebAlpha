@@ -31,7 +31,7 @@
                                     </p:panel>
 
                                     <p:panel style="margin-top: 200px; border: none">
-                                        <p:commandButton value="Processar" icon="ui-icon ui-icon-disk" update="@form"/>
+                                        <p:commandButton value="Processar" action="#{mbInicializaDigitacao.iniciaTabelasDigitacao}" icon="ui-icon ui-icon-disk" process="@this"/>
                                         <p:commandButton value="Cancelar" action="/Inicio.xhtml" icon="ui-icon ui-icon-close" process="@this"/>
                                     </p:panel>
                                 </p:panel>

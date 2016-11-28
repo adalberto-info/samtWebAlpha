@@ -29,7 +29,7 @@ import br.com.engebras.model.entities.AutoInfracao;
 import br.com.engebras.model.entities.AutoInfracaoImagem;
 import org.hibernate.Transaction;
 
-@ManagedBean(name="mbInicializaDigitacao")
+@ManagedBean(name = "mbInicializaDigitacao")
 @SessionScoped
 public class MbInicializaDigitacao implements Serializable {
  
@@ -39,33 +39,33 @@ public class MbInicializaDigitacao implements Serializable {
         
     }
     
-    public void IniciaTabelasDigitacao(){
+    public String iniciaTabelasDigitacao(){
         String vlc_sql = "";
 
         Session session = FacesContextUtil.getRequestSession();
-        Transaction transaction = session.beginTransaction();
+//        Transaction transaction = session.beginTransaction();
 
         //excluindo todos os registros da tabela autoInfracao... 
         try{
             vlc_sql = "delete from autoInfracao ";
             SQLQuery query = session.createSQLQuery(vlc_sql);
         
-            transaction.commit(); 
+//            transaction.commit(); 
         }
         catch(Throwable t){
-            transaction.rollback();
+//            transaction.rollback();
             throw t;
         }
         
         //excluindo todos os registros da tabela autoInfracaoImagem... 
-        transaction = session.beginTransaction();
+//        transaction = session.beginTransaction();
         try{
             vlc_sql = "delete from autoInfracaoImagem ";
             SQLQuery query = session.createSQLQuery(vlc_sql);
             
-            transaction.commit();
+//            transaction.commit();
         }catch(Throwable t){
-            transaction.rollback();
+//            transaction.rollback();
             throw t;
         }
         
@@ -80,10 +80,14 @@ public class MbInicializaDigitacao implements Serializable {
         vlc_sql += "nr_tempoAferido, nr_tempoLimite, nr_status, dt_envio,dt_recebe) ";
 	vlc_sql += "values ('000001012488718260', '', 0, 0, 0,0,0,0,'', 0, 6942, '0001', 50, 61, 54, '20161120', '110346', '0001', 1, 0, 74550, 0,1111, 'EPZ8570', 1, '4444', '20171231', '20161124', '1', 0, 1, 1, 0, 1, 0,0,1,'','') ";
         
-        
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.executeUpdate();
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro inserido com sucesso!!!", ""));
+
         //inserindo registros na tabela autoInfracaoImagem... 
         
-        
+        return "";
     }
     
 }
