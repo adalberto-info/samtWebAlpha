@@ -190,6 +190,77 @@ public class MbInicializaDigitacao implements Serializable {
         query = session.createSQLQuery(vlc_sql);
         vln_resultado = query.executeUpdate();
         
+
+        // inserindo na tabela autoInfracaoImagem...
+        //01
+        vlc_sql = "insert into autoInfracaoImagem (dc_nr_multa, nr_codTipoImagem, dc_nomeImagem, nr_tempoImagem) ";
+	vlc_sql += "values ('000001012488718260', 0,'000001012488718260_00.JPG',0) ";
+        
+        query = session.createSQLQuery(vlc_sql);
+        vln_resultado = query.executeUpdate();
+
+        //02
+        vlc_sql = "insert into autoInfracaoImagem (dc_nr_multa, nr_codTipoImagem, dc_nomeImagem, nr_tempoImagem) ";
+	vlc_sql += "values ('000001012488718500', 0,'000001012488718500_00.JPG',0) ";
+        
+        query = session.createSQLQuery(vlc_sql);
+        vln_resultado = query.executeUpdate();
+
+        //03
+        vlc_sql = "insert into autoInfracaoImagem (dc_nr_multa, nr_codTipoImagem, dc_nomeImagem, nr_tempoImagem) ";
+	vlc_sql += "values ('000001012488718950', 0,'000001012488718950_00.JPG',0) ";
+        
+        query = session.createSQLQuery(vlc_sql);
+        vln_resultado = query.executeUpdate();
+        
+        //04
+        vlc_sql = "insert into autoInfracaoImagem (dc_nr_multa, nr_codTipoImagem, dc_nomeImagem, nr_tempoImagem) ";
+	vlc_sql += "values ('000001012488719990', 0,'000001012488719990_00.JPG',0) ";
+        
+        query = session.createSQLQuery(vlc_sql);
+        vln_resultado = query.executeUpdate();
+        
+        //05
+        vlc_sql = "insert into autoInfracaoImagem (dc_nr_multa, nr_codTipoImagem, dc_nomeImagem, nr_tempoImagem) ";
+	vlc_sql += "values ('000001012488720040', 0,'000001012488720040_00.JPG',0) ";
+        
+        query = session.createSQLQuery(vlc_sql);
+        vln_resultado = query.executeUpdate();
+
+        //06
+        vlc_sql = "insert into autoInfracaoImagem (dc_nr_multa, nr_codTipoImagem, dc_nomeImagem, nr_tempoImagem) ";
+	vlc_sql += "values ('000001012488721150', 0,'000001012488721150_00.JPG',0) ";
+        
+        query = session.createSQLQuery(vlc_sql);
+        vln_resultado = query.executeUpdate();
+
+        //07
+        vlc_sql = "insert into autoInfracaoImagem (dc_nr_multa, nr_codTipoImagem, dc_nomeImagem, nr_tempoImagem) ";
+	vlc_sql += "values ('000001012488724190', 0,'000001012488724190_00.JPG',0) ";
+        
+        query = session.createSQLQuery(vlc_sql);
+        vln_resultado = query.executeUpdate();
+
+        //08
+        vlc_sql = "insert into autoInfracaoImagem (dc_nr_multa, nr_codTipoImagem, dc_nomeImagem, nr_tempoImagem) ";
+	vlc_sql += "values ('000001012488725980', 0,'000001012488725980_00.JPG',0) ";
+        
+        query = session.createSQLQuery(vlc_sql);
+        vln_resultado = query.executeUpdate();
+
+        //09
+        vlc_sql = "insert into autoInfracaoImagem (dc_nr_multa, nr_codTipoImagem, dc_nomeImagem, nr_tempoImagem) ";
+	vlc_sql += "values ('000001012488726590', 0,'000001012488726590_00.JPG',0) ";
+        
+        query = session.createSQLQuery(vlc_sql);
+        vln_resultado = query.executeUpdate();
+
+        //10
+        vlc_sql = "insert into autoInfracaoImagem (dc_nr_multa, nr_codTipoImagem, dc_nomeImagem, nr_tempoImagem) ";
+	vlc_sql += "values ('000001012488728920', 0,'000001012488728920_00.JPG',0) ";
+        
+        query = session.createSQLQuery(vlc_sql);
+        vln_resultado = query.executeUpdate();
         
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro inserido com sucesso!!!", ""));
 
