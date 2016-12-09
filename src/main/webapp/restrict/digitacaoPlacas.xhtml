@@ -17,29 +17,83 @@
                 width:301px;
             }
         </style>
+        <script>
+	PrimeFaces.locales['pt'] = {
+	    closeText: 'Fechar',
+	    prevText: 'Anterior',
+	    nextText: 'Próximo',
+	    currentText: 'Começo',
+	    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+	    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
+	    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+	    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+	    dayNamesMin: ['D','S','T','Q','Q','S','S'],
+	    weekHeader: 'Semana',
+	    firstDay: 0,
+	    isRTL: false,
+	    showMonthAfterYear: false,
+	    yearSuffix: '',
+	    timeOnlyTitle: 'Só Horas',
+	    timeText: 'Tempo',
+	    hourText: 'Hora',
+	    minuteText: 'Minuto',
+	    secondText: 'Segundo',
+	    ampm: false,
+	    month: 'Mês',
+	    week: 'Semana',
+	    day: 'Dia',
+	    allDayText : 'Todo o Dia'
+	};
+	</script>
+
         <p:fieldset legend="Digitação de Placas">
             <br/>
             <p:tabView id="tbv1" dynamic="true" cache="true">
                 <p:tab title="Digitação de Placas" id="digitacaoPlacas">
                     <h:form prependId="false" id="formDigitacaoPlacas">
                         <p:growl id="msg0" />
-                            <p:toolbar>
-                                <p:toolbarGroup>
-                                    <p:commandButton value="Salvar"  icon="ui-icon ui-icon-disk" update="@form"/>
-                                    <p:commandButton value="Cancelar" icon="ui-icon ui-icon-close" update="@form" process="@this"/>
-                                </p:toolbarGroup>
-                            </p:toolbar>
 
                         <div class="ui-fluid">
+                            <p:panelGrid columns="2" id="grid1">        
+                                <p:panelGrid columns="1" styleClass="panelGrid" id="grid0">
+                                    
+                                    <p:panelGrid columns="2">
+                                        <p:outputLabel for="dc_nr_multa" value="Nr. multa: "/>
+                                        <p:inputText id="dc_nr_multa" size="18" maxlength="18" value="" disabled="true"/>
 
-                            <p:panelGrid columns="2" styleClass="panelGrid" id="grid0">
-                                <p:outputLabel/>
-                                <h:inputHidden id="nr_codigo" value=""/>
+                                        <p:outputLabel for="dc_local" value="Local: "/>
+                                        <p:inputTextarea id="dc_local" value="" cols="91"/> 
+                                    </p:panelGrid>
+                                    
+                                    <p:panelGrid columns="6">
+                                        <p:outputLabel for="nr_faixa" value="Faixa: "/>
+                                        <p:inputText id="nr_faixa" size="2" maxlength="2" value=""/>
+                                
+                                        <p:outputLabel for="dc_serieEquipamento" value="Equipamento:"/>
+                                        <p:inputText id="dc_serieEquipamento" size="15" maxlength="15" value=""/>
+                                    
+                                        <p:outputLabel for="dt_validadeLaudo" value="Dt. certificado: "/>
+                                        <p:inputText id="dt_validadeLaudo" value=""/>
+                                
+                                    </p:panelGrid>
+                                    
+                                </p:panelGrid>
 
-                                <p:outputLabel for="dc_placa" value="Placa: "/>
-                                <p:inputText id="dc_placa" size="7" maxlength="7" value=""/> 
-
-                            </p:panelGrid>
+    
+                                <p:panelGrid columns="1">
+                                    <p:graphicImage value="/temp/000010102488718260_00.JPG" id="image" style="width:800px; height:600px"/>  
+                                    <p:toolbar>
+                                        <p:toolbarGroup>
+                                            <p:commandButton value="Proximo"  icon="ui-icon-arrow-1-e" update="@form" style="width: 100px"/>
+                                            <p:commandButton value="Obliterar" icon="ui-icon-circle-close" update="@form" process="@this" style="width: 100px"/>
+                                            <p:commandButton value="Zoom" icon="ui-icon-zoomin" style="width: 100px"/>
+                                            <p:commandButton value="Vídeo" icon="ui-icon-video" style="width: 100px"/>
+                                            <p:commandButton value="Consulta Placa" icon="ui-icon-search" style="width: 150px"/>
+                                            <p:commandButton value="Imprimir" icon="ui-icon-print" style="width: 100px"/>
+                                        </p:toolbarGroup>
+                                    </p:toolbar>
+                                </p:panelGrid>
+                           </p:panelGrid>     
                         </div>
                         <br/>
                     </h:form>
