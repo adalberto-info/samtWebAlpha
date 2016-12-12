@@ -55,9 +55,9 @@
 
                         <div class="ui-fluid">
                             <p:panelGrid columns="2" id="grid1">        
-                                <p:panelGrid columns="1" styleClass="panelGrid" id="grid0">
+                                <p:panelGrid columns="1" styleClass="ui-panelgrid-blank" id="grid0" >
                                     
-                                    <p:panelGrid columns="2">
+                                    <p:panelGrid columns="2"  styleClass="ui-panelgrid-blank">
                                         <p:outputLabel for="dc_nr_multa" value="Nr. multa: "/>
                                         <p:inputText id="dc_nr_multa" size="18" maxlength="18" value="" disabled="true"/>
 
@@ -65,7 +65,7 @@
                                         <p:inputTextarea id="dc_local" value="" cols="91"/> 
                                     </p:panelGrid>
                                     
-                                    <p:panelGrid columns="6">
+                                    <p:panelGrid columns="6" styleClass="ui-panelgrid-blank">
                                         <p:outputLabel for="nr_faixa" value="Faixa: "/>
                                         <p:inputText id="nr_faixa" size="2" maxlength="2" value=""/>
                                 
@@ -76,7 +76,23 @@
                                         <p:inputText id="dt_validadeLaudo" value=""/>
                                 
                                     </p:panelGrid>
+                                
+                                    <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+                                        <p:outputLabel for="nr_codEnquadramento" value="Enquadramento: "/>
+                                        <p:inputText id="nr_codEnquadramento" size="5" maxlength="5" value=""/>
+                                        
+                                        <p:outputLabel/>
+                                        <p:inputTextarea id="dc_enquadramento" value="" cols="85"/> 
+                                    </p:panelGrid>
                                     
+                                    <p:panelGrid columns="4" styleClass="ui-panelgrid-blank">
+                                        <p:outputLabel for="dt_infracao" value="Dt. Infração: "/>
+                                        <p:inputText id="dt_infracao" size="10" maxlength="10" value=""/>
+                                        
+                                        <p:outputLabel for="dc_hr_infracao" value="Hora Infração: "/>
+                                        <p:inputText id="dc_hr_infracao" size="8" maxlength="8" value=""/>
+                                        
+                                    </p:panelGrid>
                                 </p:panelGrid>
 
     
