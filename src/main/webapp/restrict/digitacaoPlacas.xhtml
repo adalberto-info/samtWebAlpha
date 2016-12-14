@@ -55,12 +55,15 @@
 
                         <div class="ui-fluid">
                             <p:panelGrid columns="2" id="grid1">        
-                                <p:panelGrid columns="1" styleClass="ui-panelgrid-blank" id="grid0" >
+
+                 		<p:panelGrid columns="1" styleClass="ui-panelgrid-blank" id="grid0" columnClasses="colunaTopo" >
                                     
                                     <p:panelGrid columns="2"  styleClass="ui-panelgrid-blank">
                                         <p:outputLabel for="dc_nr_multa" value="Nr. multa: "/>
                                         <p:inputText id="dc_nr_multa" size="18" maxlength="18" value="" disabled="true"/>
+                                    </p:panelGrid>
 
+                                    <p:panelGrid columns="2"  styleClass="ui-panelgrid-blank">
                                         <p:outputLabel for="dc_local" value="Local: "/>
                                         <p:inputTextarea id="dc_local" value="" cols="91"/> 
                                     </p:panelGrid>
@@ -80,8 +83,9 @@
                                     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
                                         <p:outputLabel for="nr_codEnquadramento" value="Enquadramento: "/>
                                         <p:inputText id="nr_codEnquadramento" size="5" maxlength="5" value=""/>
+                                    </p:panelGrid>
                                         
-                                        <p:outputLabel/>
+                                    <p:panelGrid columns="1" styleClass="ui-panelgrid-blank">
                                         <p:inputTextarea id="dc_enquadramento" value="" cols="85"/> 
                                     </p:panelGrid>
                                     
@@ -93,6 +97,42 @@
                                         <p:inputText id="dc_hr_infracao" size="8" maxlength="8" value=""/>
                                         
                                     </p:panelGrid>
+                                    
+                                    <p:panelGrid columns="6" styleClass="ui-panelgrid-blank">
+                                       <p:outputLabel for="nr_velocidadePermitida" value="Vel. Permit: "/>
+                                       <p:inputText id="nr_velocidadePermitida" size="3" maxlength="3" value=""/>
+                                       
+                                       <p:outputLabel for="nr_velocidadeAferida" value="Vel. Aferida: "/>
+                                       <p:inputText id="nr_velocidadeAferida" size="3" maxlength="3" value=""/>
+                                       
+                                       <p:outputLabel for="nr_velocidadeConsiderada" value="Vel. Consid.: "/>
+                                       <p:inputText id="nr_velocidadeConsiderada" size="3" maxlength="3" value=""/>
+                                    </p:panelGrid>
+                                    
+                                    <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+                                        <p:outputLabel for="dc_placa" value="Placa: "/>
+                                        <p:inputText id="dc_placa" size="7" maxlength="7" value=""/>
+                                    </p:panelGrid>
+                                        
+                                    <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+                                        <p:outputLabel for="dc_mensagem" value="Mensagem: "/>
+                                        <p:inputTextarea id="dc_mensagem" cols="85"/>
+                                    </p:panelGrid>
+ 
+                                   <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+                                        <p:outputLabel for="nr_codMarca" value="Marca/Mod. Denatran: "/>
+                                        <p:inputText id="nr_codMarca" size="6" maxlength="6" value=""/>
+                                   </p:panelGrid>
+                                    
+                                   <p:panelGrid columns="5" styleClass="ui-panelgrid-blank">
+                                       <p:outputLabel for="nr_codEspecie" value="Espécie: "/>
+                                       <p:inputText id="nr_codEspecie" size="3" maxlength="3" value=""/>
+                                       <p:inputText id="dc_especie" size="15" maxlength="15" value=""/>
+                                       <p:outputLabel for="nr_codCategoria" value="Categoria: "/>
+                                       <p:inputText id="nr_codCategoria" size="2" maxlength="2" value=""/>
+                                   </p:panelGrid>
+                                   <p:panelGrid columns="4" styleClass="ui-panelgrid-blank">
+                                   </p:panelGrid>
                                 </p:panelGrid>
 
     
