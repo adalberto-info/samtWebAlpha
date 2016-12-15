@@ -132,7 +132,39 @@
                                        <p:inputText id="nr_codCategoria" size="2" maxlength="2" value=""/>
                                    </p:panelGrid>
                                    <p:panelGrid columns="4" styleClass="ui-panelgrid-blank">
+                                       <p:outputLabel for="nr_codTipo" value="Tipo: "/>
+                                       <p:inputText id="nr_codTipo" size="2" maxlength="2" value=""/>
+                                       
+                                       <p:outputLabel for="nr_codCor" value="Cor: "/>
+                                       <p:inputText id="nr_codCor" size="3" maxlength="3" value=""/>
                                    </p:panelGrid>
+                                    
+                                   <p:panelGrid columns="6" styleClass="ui-panelgrid-blank">
+                                       <p:outputLabel for="nr_anoModelo" value="Ano: "/>
+                                       <p:inputText id="nr_anoModelo" size="4" maxlength="4" value=""/>
+                                       
+                                       <p:outputLabel for="nr_codMunicipio" value="Município: "/>
+                                       <p:inputText id="nr_codMunicipio" size="40" maxlength="40" value=""/>
+                                       
+                                       <p:outputLabel for="dc_uf" value="UF: "/>
+                                       <p:inputText id="dc_uf" size="2" maxlength="2" value=""/>
+                                   </p:panelGrid>
+
+                                   <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+                                       <p:outputLabel for="nr_codMarcaCET" value="Marca CET: "/>
+                                       <p:selectOneMenu id="nr_codMarcaCET" value="" style="width:250px" >
+                                          <f:selectItem itemLabel="Selecione a marca CET" itemValue="" />
+                                       </p:selectOneMenu>
+                                   </p:panelGrid>
+                                    
+                                   <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+                                       <p:outputLabel for="nr_codInconsistencia" value="Motivo Invalidação: "/>
+                                       <p:selectOneMenu id="nr_codInconsistencia" value="" style="width:250px" >
+                                          <f:selectItem itemLabel="Selecione o motivo inconsistência" itemValue="" />
+                                       </p:selectOneMenu>
+                                   </p:panelGrid>
+
+
                                 </p:panelGrid>
 
     
