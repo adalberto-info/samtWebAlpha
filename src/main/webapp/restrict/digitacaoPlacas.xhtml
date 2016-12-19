@@ -120,23 +120,22 @@
                                     </p:panelGrid>
  
                                    <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-                                        <p:outputLabel for="nr_codMarca" value="Marca/Mod. Denatran: "/>
-                                        <p:inputText id="nr_codMarca" size="6" maxlength="6" value=""/>
+                                        <p:outputLabel for="dc_marca" value="Marca/Mod. Denatran: "/>
+                                        <p:inputText id="dc_marca" size="35" maxlength="35" value=""/>
                                    </p:panelGrid>
                                     
-                                   <p:panelGrid columns="5" styleClass="ui-panelgrid-blank">
-                                       <p:outputLabel for="nr_codEspecie" value="Espécie: "/>
-                                       <p:inputText id="nr_codEspecie" size="3" maxlength="3" value=""/>
-                                       <p:inputText id="dc_especie" size="15" maxlength="15" value=""/>
-                                       <p:outputLabel for="nr_codCategoria" value="Categoria: "/>
-                                       <p:inputText id="nr_codCategoria" size="2" maxlength="2" value=""/>
+                                   <p:panelGrid columns="4" styleClass="ui-panelgrid-blank">
+                                       <p:outputLabel for="dc_especie" value="Espécie: "/>
+                                       <p:inputText id="dc_especie" size="20" maxlength="20" value=""/>
+                                       <p:outputLabel for="dc_categoria" value="Categoria: "/>
+                                       <p:inputText id="dc_categoria" size="35" maxlength="35" value=""/>
                                    </p:panelGrid>
                                    <p:panelGrid columns="4" styleClass="ui-panelgrid-blank">
-                                       <p:outputLabel for="nr_codTipo" value="Tipo: "/>
-                                       <p:inputText id="nr_codTipo" size="2" maxlength="2" value=""/>
+                                       <p:outputLabel for="dc_tipo" value="Tipo: "/>
+                                       <p:inputText id="dc_tipo" size="35" maxlength="35" value=""/>
                                        
-                                       <p:outputLabel for="nr_codCor" value="Cor: "/>
-                                       <p:inputText id="nr_codCor" size="3" maxlength="3" value=""/>
+                                       <p:outputLabel for="dc_cor" value="Cor: "/>
+                                       <p:inputText id="dc_cor" size="20" maxlength="20" value=""/>
                                    </p:panelGrid>
                                     
                                    <p:panelGrid columns="6" styleClass="ui-panelgrid-blank">
@@ -169,7 +168,12 @@
 
     
                                 <p:panelGrid columns="1">
-                                    <p:graphicImage value="/temp/000010102488718260_00.JPG" id="image" style="width:800px; height:600px"/>  
+<!--                                    <p:graphicImage value="/temp/000010102488718260_00.JPG" id="image" style="width:800px; height:600px"/>  -->
+
+                                    <p:galleria value="#{mbDigitacaoPlacas.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+                                        <p:graphicImage name="/temp/#{image}" alt="Imagem de infração #{image}" title="#{image}"/>
+                                    </p:galleria>
+
                                     <p:toolbar>
                                         <p:toolbarGroup>
                                             <p:commandButton value="Proximo"  icon="ui-icon-arrow-1-e" update="@form" style="width: 100px"/>
