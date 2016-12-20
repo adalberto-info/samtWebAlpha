@@ -26,6 +26,8 @@ import br.com.engebras.util.FacesContextUtil;
 import br.com.engebras.util.HibernateUtil;
 import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
+import br.com.engebras.model.entities.AutoInfracao;
+import br.com.engebras.model.entities.AutoInfracaoImagem;
 
 
 @ManagedBean(name = "mbDigitacaoPlacas")
@@ -48,6 +50,13 @@ private List<String> images;
         return images;
     }
 
-
+    public MbDigitacaoPlacas(){
     
+    }
+    
+    private InterfaceDAO<AutoInfracao> autoInfracaoDAO() {
+        InterfaceDAO<AutoInfracao> autoInfracaoDAO = new HibernateDAO<AutoInfracao>(AutoInfracao.class, FacesContextUtil.getRequestSession());
+        return autoInfracaoDAO;
+    }
+
 }
