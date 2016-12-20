@@ -46,10 +46,8 @@
 	};
 	</script>
 
-        <p:fieldset legend="Digitação de Placas">
+       <p:fieldset legend="Digitação de Placas">
             <br/>
-            <p:tabView id="tbv1" dynamic="true" cache="true">
-                <p:tab title="Digitação de Placas" id="digitacaoPlacas">
                     <h:form prependId="false" id="formDigitacaoPlacas">
                         <p:growl id="msg0" />
 
@@ -168,11 +166,9 @@
 
     
                                 <p:panelGrid columns="1">
-<!--                                    <p:graphicImage value="/temp/000010102488718260_00.JPG" id="image" style="width:800px; height:600px"/>  -->
-
-                                    <p:galleria value="#{mbDigitacaoPlacas.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
-                                        <p:graphicImage name="/temp/#{image}" alt="Imagem de infração #{image}" title="#{image}"/>
-                                    </p:galleria>
+                                    <p:galleria value="#{mbDigitacaoPlacas.images}" var="image" panelWidth="800" panelHeight="600" showCaption="false">
+                                        <p:graphicImage name="/temp/#{image}" alt="Imagem de infração #{image}" title="#{image}"/> 
+                                    </p:galleria> 
 
                                     <p:toolbar>
                                         <p:toolbarGroup>
@@ -189,11 +185,9 @@
                         </div>
                         <br/>
                     </h:form>
-                </p:tab>
-            </p:tabView>    
-
 
         </p:fieldset>
+
 
     </ui:define>
 </ui:composition>

@@ -40,8 +40,8 @@ private List<String> images;
     public void init() {
         images = new ArrayList<String>();
 
-        images.add("000010102488718260_00.JPG");
-        images.add("000010102488718260_01.JPG");
+        images.add("000010102488718260_00.jpg");
+        images.add("000010102488718260_01.jpg");
     }
  
     public List<String> getImages() {
