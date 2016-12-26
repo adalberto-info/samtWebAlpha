@@ -58,7 +58,7 @@
                                     
                                     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-12, ui-grid-col-18">
                                         <p:outputLabel for="dc_nr_multa" value="Nr. multa: "/>
-                                        <p:inputText id="dc_nr_multa" size="18" maxlength="18" value="" disabled="true"/>
+                                        <p:inputText id="dc_nr_multa" size="18" maxlength="18" value="#{mbDigitacaoPlacas.autoInfracao.dc_nr_multa}" disabled="true"/>
                                     </p:panelGrid>
 
                                     <p:panelGrid columns="2"  styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-12">
@@ -68,10 +68,10 @@
                                     
                                     <p:panelGrid columns="6" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-12">
                                         <p:outputLabel for="nr_faixa" value="Faixa: "/>
-                                        <p:inputText id="nr_faixa" size="2" maxlength="2" value=""/>
+                                        <p:inputText id="nr_faixa" size="2" maxlength="2" value="#{mbDigitacaoPlacas.autoInfracao.nr_faixa}"/>
                                 
                                         <p:outputLabel for="dc_serieEquipamento" value="Equipamento:"/>
-                                        <p:inputText id="dc_serieEquipamento" size="15" maxlength="15" value=""/>
+                                        <p:inputText id="dc_serieEquipamento" size="15" maxlength="15" value="#{mbDigitacaoPlacas.autoInfracao.dc_serieEquipamento}"/>
                                     
                                         <p:outputLabel for="dt_validadeLaudo" value="Dt. certificado: "/>
                                         <p:inputText id="dt_validadeLaudo" value=""/>
