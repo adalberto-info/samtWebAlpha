@@ -113,6 +113,16 @@ public class AutoInfracao implements Serializable {
     @Column(name="dt_recebe", nullable=false)
     @Temporal(TemporalType.DATE)
     private Date dt_recebe; 
+    @Column(name="nr_usuarioDigitacao", nullable=false, length=6)
+    private Integer nr_usuarioDigitacao; 
+    @Column(name="nr_usuarioConferencia", nullable=false, length=6)
+    private Integer nr_usuarioConferencia; 
+    @Column(name="dt_digitacao", nullable=false)
+    @Temporal(TemporalType.DATE)
+    private Date dt_digitacao; 
+    @Column(name="dt_conferencia", nullable=false)
+    @Temporal(TemporalType.DATE)
+    private Date dt_conferencia; 
 
     public String getDc_nr_multa() {
         return dc_nr_multa;
@@ -425,6 +435,40 @@ public class AutoInfracao implements Serializable {
     public void setDt_recebe(Date dt_recebe) {
         this.dt_recebe = dt_recebe;
     }
+
+    public Integer getNr_usuarioDigitacao() {
+        return nr_usuarioDigitacao;
+    }
+
+    public void setNr_usuarioDigitacao(Integer nr_usuarioDigitacao) {
+        this.nr_usuarioDigitacao = nr_usuarioDigitacao;
+    }
+
+    public Integer getNr_usuarioConferencia() {
+        return nr_usuarioConferencia;
+    }
+
+    public void setNr_usuarioConferencia(Integer nr_usuarioConferencia) {
+        this.nr_usuarioConferencia = nr_usuarioConferencia;
+    }
+
+    public Date getDt_digitacao() {
+        return dt_digitacao;
+    }
+
+    public void setDt_digitacao(Date dt_digitacao) {
+        this.dt_digitacao = dt_digitacao;
+    }
+
+    public Date getDt_conferencia() {
+        return dt_conferencia;
+    }
+
+    public void setDt_conferencia(Date dt_conferencia) {
+        this.dt_conferencia = dt_conferencia;
+    }
+    
+    
 
     @Override
     public int hashCode() {

@@ -80,9 +80,8 @@ public class MbDigitacaoPlacas implements Serializable{
         String dc_nr_multa = " ";
         List consInfracao;
         SQLQuery query;
-        
         Session session = FacesContextUtil.getRequestSession();
-        
+                
         vlc_sql = "update autoInfracao set lg_uso = 1, nr_usuarioDigitacao = 9000 where nr_status = 1 and lg_uso = 0 limit 1 ";
 
         query = session.createSQLQuery(vlc_sql);
