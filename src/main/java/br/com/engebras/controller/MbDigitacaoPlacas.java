@@ -28,10 +28,11 @@ import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.AutoInfracao;
 import br.com.engebras.model.entities.AutoInfracaoImagem;
+import javax.faces.bean.ViewScoped;
 
 
 @ManagedBean(name = "mbDigitacaoPlacas")
-@SessionScoped
+@ViewScoped
 public class MbDigitacaoPlacas implements Serializable{
 
     private static final long serialVersionUID = 1L; 
