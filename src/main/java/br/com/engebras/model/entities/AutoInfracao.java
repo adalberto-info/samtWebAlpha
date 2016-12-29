@@ -63,8 +63,8 @@ public class AutoInfracao implements Serializable {
     @Column(name="dt_infracao", nullable=false)
     @Temporal(TemporalType.DATE)
     private Date dt_infracao; 
-    @Column(name="dc_horaInfracao", nullable=false, length=8)
-    private String dc_horaInfracao; 
+    @Column(name="dc_hr_infracao", nullable=false, length=8)
+    private String dc_hr_infracao; 
     @Column(name="dc_codAgente", nullable=false, length=12)
     private String dc_codAgente; 
     @Column(name="nr_faixa", nullable=false, length=1)
@@ -252,12 +252,12 @@ public class AutoInfracao implements Serializable {
         this.dt_infracao = dt_infracao;
     }
 
-    public String getDc_horaInfracao() {
-        return dc_horaInfracao;
+    public String getDc_hr_infracao() {
+        return dc_hr_infracao;
     }
 
-    public void setDc_horaInfracao(String dc_horaInfracao) {
-        this.dc_horaInfracao = dc_horaInfracao;
+    public void setDc_hr_infracao(String dc_hr_infracao) {
+        this.dc_hr_infracao = dc_hr_infracao;
     }
 
     public String getDc_codAgente() {

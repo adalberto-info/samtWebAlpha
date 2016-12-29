@@ -63,5 +63,7 @@ dt. criação: 23/03/2016
         <mapping class="br.com.engebras.model.entities.SituacaoLocal"/>
         <mapping class="br.com.engebras.model.entities.Local_situacaoLocal"/>
         <mapping class="br.com.engebras.model.entities.LocalCliente"/>
+        <mapping class="br.com.engebras.model.entities.AutoInfracao"/>
+        <mapping class="br.com.engebras.model.entities.AutoInfracaoImagem"/>
     </session-factory>
 </hibernate-configuration>

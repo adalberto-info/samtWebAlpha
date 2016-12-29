@@ -28,19 +28,27 @@ import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.AutoInfracao;
 import br.com.engebras.model.entities.AutoInfracaoImagem;
-import javax.faces.bean.ViewScoped;
 
 
 @ManagedBean(name = "mbDigitacaoPlacas")
-@ViewScoped
+@SessionScoped
 public class MbDigitacaoPlacas implements Serializable{
 
     private static final long serialVersionUID = 1L; 
     
     private AutoInfracao autoInfracao = new  AutoInfracao(); 
-    
     private List<String> images;
-     
+
+    private String vpc_dc_mensagem; 
+    private String vpc_dc_local;
+    private String vpc_dc_enquadramento; 
+    private String vpc_dc_modelo; 
+    private String vpc_dc_especie; 
+    private String vpc_dc_categoria; 
+    private String vpc_dc_tipo; 
+    private String vpc_dc_cor; 
+    private String vpc_dc_municipio; 
+    
     @PostConstruct
     public void init() {
         images = new ArrayList<String>();
@@ -54,7 +62,8 @@ public class MbDigitacaoPlacas implements Serializable{
     }
 
     public MbDigitacaoPlacas(){
-        proximaInfracao();
+        boolean vll_retorno;
+        vll_retorno = proximaInfracao();
     }
     
     private InterfaceDAO<AutoInfracao> autoInfracaoDAO() {
@@ -102,6 +111,9 @@ public class MbDigitacaoPlacas implements Serializable{
         
         if (!dc_nr_multa.equals(" ")){
             autoInfracao = porDc_nr_multa(dc_nr_multa);
+            
+            atualizaTela(dc_nr_multa);
+            
             return true;
         }else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Não existe mais infrações para digitação...", ""));
@@ -113,6 +125,32 @@ public class MbDigitacaoPlacas implements Serializable{
     public AutoInfracao porDc_nr_multa(String dc_nr_multa) {
 
         return autoInfracaoDAO().getEntity(dc_nr_multa);
+    }
+
+
+    public void atualizaTela(String dc_nr_multa){
+
+        String vlc_sql = ""; 
+        List consulta;
+        SQLQuery query;
+        Session session = FacesContextUtil.getRequestSession();
+
+        if (!dc_nr_multa.isEmpty()){
+            vpc_dc_local = "";
+            vlc_sql = "select a.* from localInfracao a left outer join autoInfracao b on a.nr_codigo = b.nr_codLocal where b.dc_nr_multa = '" + dc_nr_multa + "' " ;
+        
+            query = session.createSQLQuery(vlc_sql);
+            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+            consulta = query.list();
+            for (Object oInfracao : consulta) {
+                Map row = (Map) oInfracao;
+            
+                vpc_dc_local = row.get("dc_local").toString();
+            }        
+            
+        }
+        
+        
     }
 
     public AutoInfracao getAutoInfracao() {
