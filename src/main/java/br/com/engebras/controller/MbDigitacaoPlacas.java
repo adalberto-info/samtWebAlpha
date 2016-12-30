@@ -137,7 +137,12 @@ public class MbDigitacaoPlacas implements Serializable{
 
         if (!dc_nr_multa.isEmpty()){
             vpc_dc_local = "";
-            vlc_sql = "select a.* from localInfracao a left outer join autoInfracao b on a.nr_codigo = b.nr_codLocal where b.dc_nr_multa = '" + dc_nr_multa + "' " ;
+            vlc_sql = "select ifnull(b.dc_local, space(80)) as dc_local, ifnull(c.dc_categoria, space(30)) as dc_categoria, ";
+            vlc_sql += "ifnull(d.dc_marca, space(35)) as dc_marca ";
+            vlc_sql += "from autoInfracao a left outer join localInfracao b on a.nr_codLocal = b.nr_codigo ";
+            vlc_sql += "left outer join veiculoCategoria c on a.nr_codCategoria = c.nr_codigo ";
+            vlc_sql += "left outer join veiculoMarcaDenatran d on a.nr_codMarca = d.nr_codigo ";
+            vlc_sql += "where b.dc_nr_multa = '" + dc_nr_multa + "' " ;
         
             query = session.createSQLQuery(vlc_sql);
             query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
