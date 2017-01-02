@@ -63,7 +63,7 @@
 
                                     <p:panelGrid columns="2"  styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-12">
                                         <p:outputLabel for="dc_local" value="Local: "/>
-                                        <p:inputTextarea id="dc_local" value="" cols="91" disabled="true"/> 
+                                        <p:inputTextarea id="dc_local" value="#{mbDigitacaoPlacas.vpc_dc_local}" cols="91" disabled="true"/> 
                                     </p:panelGrid>
                                     
                                     <p:panelGrid columns="6" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-12">
@@ -84,7 +84,7 @@
                                     </p:panelGrid>
                                         
                                     <p:panelGrid columns="1" styleClass="ui-panelgrid-blank">
-                                        <p:inputTextarea id="dc_enquadramento" value="" cols="85" disabled="true"/> 
+                                        <p:inputTextarea id="dc_enquadramento" value="#{mbDigitacaoPlacas.vpc_dc_enquadramento}" cols="85" disabled="true"/> 
                                     </p:panelGrid>
                                     
                                     <p:panelGrid columns="4" styleClass="ui-panelgrid-blank">
@@ -114,26 +114,26 @@
                                         
                                     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
                                         <p:outputLabel for="dc_mensagem" value="Mensagem: "/>
-                                        <p:inputTextarea id="dc_mensagem" cols="85" disabled="true"/>
+                                        <p:inputTextarea id="dc_mensagem" value = "#{mbDigitacaoPlacas.vpc_dc_mensagem}" cols="85" disabled="true"/>
                                     </p:panelGrid>
  
                                    <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
                                         <p:outputLabel for="dc_marca" value="Marca/Mod. Denatran: "/>
-                                        <p:inputText id="dc_marca" size="35" maxlength="35" value="" disabled="true"/>
+                                        <p:inputText id="dc_marca" size="35" maxlength="35" value="#{mbDigitacaoPlacas.vpc_dc_marca}" disabled="true"/>
                                    </p:panelGrid>
                                     
                                    <p:panelGrid columns="4" styleClass="ui-panelgrid-blank">
                                        <p:outputLabel for="dc_especie" value="Espécie: "/>
-                                       <p:inputText id="dc_especie" size="20" maxlength="20" value="" disabled="true"/>
+                                       <p:inputText id="dc_especie" size="20" maxlength="20" value="#{mbDigitacaoPlacas.vpc_dc_especie}" disabled="true"/>
                                        <p:outputLabel for="dc_categoria" value="Categoria: "/>
-                                       <p:inputText id="dc_categoria" size="35" maxlength="35" value="" disabled="true"/>
+                                       <p:inputText id="dc_categoria" size="35" maxlength="35" value="#{mbDigitacaoPlacas.vpc_dc_categoria}" disabled="true"/>
                                    </p:panelGrid>
                                    <p:panelGrid columns="4" styleClass="ui-panelgrid-blank">
                                        <p:outputLabel for="dc_tipo" value="Tipo: "/>
-                                       <p:inputText id="dc_tipo" size="35" maxlength="35" value="" disabled="true"/>
+                                       <p:inputText id="dc_tipo" size="35" maxlength="35" value="#{mbDigitacaoPlacas.vpc_dc_tipo}" disabled="true"/>
                                        
                                        <p:outputLabel for="dc_cor" value="Cor: "/>
-                                       <p:inputText id="dc_cor" size="20" maxlength="20" value="" disabled="true"/>
+                                       <p:inputText id="dc_cor" size="20" maxlength="20" value="#{mbDigitacaoPlacas.vpc_dc_cor}" disabled="true"/>
                                    </p:panelGrid>
                                     
                                    <p:panelGrid columns="6" styleClass="ui-panelgrid-blank">
