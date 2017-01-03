@@ -28,6 +28,7 @@ import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.AutoInfracao;
 import br.com.engebras.model.entities.AutoInfracaoImagem;
+import br.com.engebras.model.entities.VeiculoMarcaCET; 
 
 
 @ManagedBean(name = "mbDigitacaoPlacas")
@@ -48,6 +49,7 @@ public class MbDigitacaoPlacas implements Serializable{
     private String vpc_dc_tipo; 
     private String vpc_dc_cor; 
     private String vpc_dc_municipio; 
+    private List veiculoMarcaCETs = new ArrayList<>();
     
     @PostConstruct
     public void init() {
@@ -72,6 +74,8 @@ public class MbDigitacaoPlacas implements Serializable{
         vpc_dc_cor = ""; 
         vpc_dc_municipio = ""; 
 
+        geraListaVeiculoMarcaCET(); 
+        
         boolean vll_retorno;
         vll_retorno = proximaInfracao();
     }
@@ -185,6 +189,21 @@ public class MbDigitacaoPlacas implements Serializable{
         
     }
 
+    public void geraListaVeiculoMarcaCET() {
+        List listaSQL;
+        String vlc_sql;
+        vlc_sql = "select nr_codigo, nr_codigoDV, dc_marca from veiculoMarcaCET order by dc_marca";
+
+        Session session = FacesContextUtil.getRequestSession();
+
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+
+        this.veiculoMarcaCETs = listaSQL;
+    }
+
+    
     public AutoInfracao getAutoInfracao() {
         return autoInfracao;
     }
@@ -263,6 +282,14 @@ public class MbDigitacaoPlacas implements Serializable{
 
     public void setVpc_dc_municipio(String vpc_dc_municipio) {
         this.vpc_dc_municipio = vpc_dc_municipio;
+    }
+
+    public List getVeiculoMarcaCETs() {
+        return veiculoMarcaCETs;
+    }
+
+    public void setVeiculoMarcaCETs(List veiculoMarcaCETs) {
+        this.veiculoMarcaCETs = veiculoMarcaCETs;
     }
 
     

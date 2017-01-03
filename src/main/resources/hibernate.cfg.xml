@@ -65,5 +65,6 @@ dt. criação: 23/03/2016
         <mapping class="br.com.engebras.model.entities.LocalCliente"/>
         <mapping class="br.com.engebras.model.entities.AutoInfracao"/>
         <mapping class="br.com.engebras.model.entities.AutoInfracaoImagem"/>
+        <mapping class="br.com.engebras.model.entities.VeiculoMarcaCET"/>
     </session-factory>
 </hibernate-configuration>

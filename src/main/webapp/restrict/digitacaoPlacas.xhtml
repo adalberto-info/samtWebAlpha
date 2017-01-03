@@ -151,6 +151,9 @@
                                        <p:outputLabel for="nr_codMarcaCET" value="Marca CET: "/>
                                        <p:selectOneMenu id="nr_codMarcaCET" value="" style="width:250px" >
                                            <f:selectItem itemLabel="Selecione a marca CET" itemValue="" />
+                                           <f:selectItems value="#{mbDigitacaoPlacas.veiculoMarcaCETs}" var="listaVeiculoMarcaCETs" 
+                                                         itemLabel="#{listaVeiculoMarcaCETs.dc_marca}" itemValue="#{listaVeiculoMarcaCETs.nr_codigo}"/>
+
                                        </p:selectOneMenu>
                                    </p:panelGrid>
                                     
