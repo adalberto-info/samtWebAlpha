@@ -29,6 +29,7 @@ import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.AutoInfracao;
 import br.com.engebras.model.entities.AutoInfracaoImagem;
 import br.com.engebras.model.entities.VeiculoMarcaCET; 
+import br.com.engebras.model.entities.MotivoInconsistenciaImagem;
 
 
 @ManagedBean(name = "mbDigitacaoPlacas")
@@ -50,6 +51,7 @@ public class MbDigitacaoPlacas implements Serializable{
     private String vpc_dc_cor; 
     private String vpc_dc_municipio; 
     private List veiculoMarcaCETs = new ArrayList<>();
+    private List motivoInconsistenciaImagens = new ArrayList<>();
     
     @PostConstruct
     public void init() {
@@ -75,6 +77,7 @@ public class MbDigitacaoPlacas implements Serializable{
         vpc_dc_municipio = ""; 
 
         geraListaVeiculoMarcaCET(); 
+        geraListaMotivoInconsistenciaImagem();
         
         boolean vll_retorno;
         vll_retorno = proximaInfracao();
@@ -203,6 +206,19 @@ public class MbDigitacaoPlacas implements Serializable{
         this.veiculoMarcaCETs = listaSQL;
     }
 
+    public void geraListaMotivoInconsistenciaImagem() {
+        List listaSQL;
+        String vlc_sql;
+        vlc_sql = "select a.nr_codigo, a.dc_inconsistencia from motivoInconsistenciaImagem a order by a.dc_inconsistencia";
+
+        Session session = FacesContextUtil.getRequestSession();
+
+        SQLQuery query = session.createSQLQuery(vlc_sql);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        listaSQL = query.list();
+
+        this.motivoInconsistenciaImagens = listaSQL;
+    }
     
     public AutoInfracao getAutoInfracao() {
         return autoInfracao;
@@ -291,6 +307,15 @@ public class MbDigitacaoPlacas implements Serializable{
     public void setVeiculoMarcaCETs(List veiculoMarcaCETs) {
         this.veiculoMarcaCETs = veiculoMarcaCETs;
     }
+
+    public List getMotivoInconsistenciaImagens() {
+        return motivoInconsistenciaImagens;
+    }
+
+    public void setMotivoInconsistenciaImagens(List motivoInconsistenciaImagens) {
+        this.motivoInconsistenciaImagens = motivoInconsistenciaImagens;
+    }
+
 
     
 }
