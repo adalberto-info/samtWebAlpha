@@ -18,179 +18,180 @@
             }
         </style>
         <script>
-	PrimeFaces.locales['pt'] = {
-	    closeText: 'Fechar',
-	    prevText: 'Anterior',
-	    nextText: 'Próximo',
-	    currentText: 'Começo',
-	    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-	    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
-	    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
-	    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
-	    dayNamesMin: ['D','S','T','Q','Q','S','S'],
-	    weekHeader: 'Semana',
-	    firstDay: 0,
-	    isRTL: false,
-	    showMonthAfterYear: false,
-	    yearSuffix: '',
-	    timeOnlyTitle: 'Só Horas',
-	    timeText: 'Tempo',
-	    hourText: 'Hora',
-	    minuteText: 'Minuto',
-	    secondText: 'Segundo',
-	    ampm: false,
-	    month: 'Mês',
-	    week: 'Semana',
-	    day: 'Dia',
-	    allDayText : 'Todo o Dia'
-	};
-	</script>
+            PrimeFaces.locales['pt'] = {
+                closeText: 'Fechar',
+                prevText: 'Anterior',
+                nextText: 'Próximo',
+                currentText: 'Começo',
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Só Horas',
+                timeText: 'Tempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                ampm: false,
+                month: 'Mês',
+                week: 'Semana',
+                day: 'Dia',
+                allDayText: 'Todo o Dia'
+            };
+        </script>
 
-       <p:fieldset legend="Digitação de Placas">
+        <p:fieldset legend="Digitação de Placas">
             <br/>
-                    <h:form prependId="false" id="formDigitacaoPlacas">
-                        <p:growl id="msg0" />
+            <h:form prependId="false" id="formDigitacaoPlacas">
+                <p:growl id="msg0" />
 
-                        <div class="ui-fluid">
-                            <p:panelGrid columns="2" id="grid1">        
+                <div class="ui-fluid">
+                    <p:panelGrid columns="2" id="grid1">        
 
-                 		<p:panelGrid columns="1"  styleClass="ui-panelgrid-blank" id="grid0" >
-                                    
-                                    <p:panelGrid columns="2" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-12, ui-grid-col-18">
-                                        <p:outputLabel for="dc_nr_multa" value="Nr. multa: "/>
-                                        <p:inputText id="dc_nr_multa" size="25" maxlength="18" value="#{mbDigitacaoPlacas.autoInfracao.dc_nr_multa}" disabled="true"/>
-                                    </p:panelGrid>
+                        <p:panelGrid columns="1"  styleClass="ui-panelgrid-blank" id="grid0" >
 
-                                    <p:panelGrid columns="2"  styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-12">
-                                        <p:outputLabel for="dc_local" value="Local: "/>
-                                        <p:inputTextarea id="dc_local" value="#{mbDigitacaoPlacas.vpc_dc_local}" cols="91" disabled="true"/> 
-                                    </p:panelGrid>
-                                    
-                                    <p:panelGrid columns="6" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-12">
-                                        <p:outputLabel for="nr_faixa" value="Faixa: "/>
-                                        <p:inputText id="nr_faixa" size="2" maxlength="2" value="#{mbDigitacaoPlacas.autoInfracao.nr_faixa}" disabled="true"/>
-                                
-                                        <p:outputLabel for="dc_serieEquipamento" value="Equipamento:"/>
-                                        <p:inputText id="dc_serieEquipamento" size="15" maxlength="15" value="#{mbDigitacaoPlacas.autoInfracao.dc_serieEquipamento}" disabled="true"/>
-                                    
-                                        <p:outputLabel for="dt_validadeLaudo" value="Dt. certificado: "/>
-                                        <p:inputText id="dt_validadeLaudo" value="#{mbDigitacaoPlacas.autoInfracao.dt_validadeLaudo}" disabled="true"/>
-                                
-                                    </p:panelGrid>
-                                
-                                    <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-                                        <p:outputLabel for="nr_codEnquadramento" value="Enquadramento: "/>
-                                        <p:inputText id="nr_codEnquadramento" size="5" maxlength="5" value="#{mbDigitacaoPlacas.autoInfracao.nr_codEnquadramento}" disabled="true"/>
-                                    </p:panelGrid>
-                                        
-                                    <p:panelGrid columns="1" styleClass="ui-panelgrid-blank">
-                                        <p:inputTextarea id="dc_enquadramento" value="#{mbDigitacaoPlacas.vpc_dc_enquadramento}" cols="85" disabled="true"/> 
-                                    </p:panelGrid>
-                                    
-                                    <p:panelGrid columns="4" styleClass="ui-panelgrid-blank">
-                                        <p:outputLabel for="dt_infracao" value="Dt. Infração: "/>
-                                        <p:inputText id="dt_infracao" size="10" maxlength="10" value="#{mbDigitacaoPlacas.autoInfracao.dt_infracao}" disabled="true"/>
-                                        
-                                        <p:outputLabel for="dc_hr_infracao" value="Hora Infração: "/>
-                                        <p:inputText id="dc_hr_infracao" size="8" maxlength="8" value="#{mbDigitacaoPlacas.autoInfracao.dc_hr_infracao}" disabled="true"/>
-                                        
-                                    </p:panelGrid>
-                                    
-                                    <p:panelGrid columns="6" styleClass="ui-panelgrid-blank">
-                                       <p:outputLabel for="nr_velocidadePermitida" value="Vel. Permit: "/>
-                                       <p:inputText id="nr_velocidadePermitida" size="3" maxlength="3" value="#{mbDigitacaoPlacas.autoInfracao.nr_velocidadePermitida}" disabled="true"/>
-                                       
-                                       <p:outputLabel for="nr_velocidadeAferida" value="Vel. Aferida: "/>
-                                       <p:inputText id="nr_velocidadeAferida" size="3" maxlength="3" value="#{mbDigitacaoPlacas.autoInfracao.nr_velocidadeAferida}" disabled="true"/>
-                                       
-                                       <p:outputLabel for="nr_velocidadeConsiderada" value="Vel. Consid.: "/>
-                                       <p:inputText id="nr_velocidadeConsiderada" size="3" maxlength="3" value="#{mbDigitacaoPlacas.autoInfracao.nr_velocidadeConsiderada}" disabled="true"/>
-                                    </p:panelGrid>
-                                    
-                                    <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-                                        <p:outputLabel for="dc_placa" value="Placa: "/>
-                                        <p:inputText id="dc_placa" size="7" maxlength="7" value="#{mbDigitacaoPlacas.autoInfracao.dc_placa}"/>
-                                    </p:panelGrid>
-                                        
-                                    <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-                                        <p:outputLabel for="dc_mensagem" value="Mensagem: "/>
-                                        <p:inputTextarea id="dc_mensagem" value = "#{mbDigitacaoPlacas.vpc_dc_mensagem}" cols="85" disabled="true"/>
-                                    </p:panelGrid>
- 
-                                   <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-                                        <p:outputLabel for="dc_marca" value="Marca/Mod. Denatran: "/>
-                                        <p:inputText id="dc_marca" size="35" maxlength="35" value="#{mbDigitacaoPlacas.vpc_dc_marca}" disabled="true"/>
-                                   </p:panelGrid>
-                                    
-                                   <p:panelGrid columns="4" styleClass="ui-panelgrid-blank">
-                                       <p:outputLabel for="dc_especie" value="Espécie: "/>
-                                       <p:inputText id="dc_especie" size="20" maxlength="20" value="#{mbDigitacaoPlacas.vpc_dc_especie}" disabled="true"/>
-                                       <p:outputLabel for="dc_categoria" value="Categoria: "/>
-                                       <p:inputText id="dc_categoria" size="35" maxlength="35" value="#{mbDigitacaoPlacas.vpc_dc_categoria}" disabled="true"/>
-                                   </p:panelGrid>
-                                   <p:panelGrid columns="4" styleClass="ui-panelgrid-blank">
-                                       <p:outputLabel for="dc_tipo" value="Tipo: "/>
-                                       <p:inputText id="dc_tipo" size="35" maxlength="35" value="#{mbDigitacaoPlacas.vpc_dc_tipo}" disabled="true"/>
-                                       
-                                       <p:outputLabel for="dc_cor" value="Cor: "/>
-                                       <p:inputText id="dc_cor" size="20" maxlength="20" value="#{mbDigitacaoPlacas.vpc_dc_cor}" disabled="true"/>
-                                   </p:panelGrid>
-                                    
-                                   <p:panelGrid columns="6" styleClass="ui-panelgrid-blank">
-                                       <p:outputLabel for="nr_anoModelo" value="Ano: "/>
-                                       <p:inputText id="nr_anoModelo" size="4" maxlength="4" value="#{mbDigitacaoPlacas.autoInfracao.nr_anoModelo}" disabled="true"/>
-                                       
-                                       <p:outputLabel for="nr_codMunicipio" value="Município: "/>
-                                       <p:inputText id="nr_codMunicipio" size="40" maxlength="40" value="#{mbDigitacaoPlacas.autoInfracao.nr_codMunicipio}" disabled="true"/>
-                                       
-                                       <p:outputLabel for="dc_uf" value="UF: "/>
-                                       <p:inputText id="dc_uf" size="2" maxlength="2" value="#{mbDigitacaoPlacas.autoInfracao.dc_uf}" disabled="true"/>
-                                   </p:panelGrid>
+                            <p:panelGrid columns="2" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-12, ui-grid-col-18">
+                                <p:outputLabel for="dc_nr_multa" value="Nr. multa: "/>
+                                <p:inputText id="dc_nr_multa" size="25" maxlength="18" value="#{mbDigitacaoPlacas.autoInfracao.dc_nr_multa}" disabled="true"/>
+                            </p:panelGrid>
 
-                                   <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-                                       <p:outputLabel for="nr_codMarcaCET" value="Marca CET: "/>
-                                       <p:selectOneMenu id="nr_codMarcaCET" value="" style="width:250px" >
-                                           <f:selectItem itemLabel="Selecione a marca CET" itemValue="" />
-                                           <f:selectItems value="#{mbDigitacaoPlacas.veiculoMarcaCETs}" var="listaVeiculoMarcaCETs" 
-                                                         itemLabel="#{listaVeiculoMarcaCETs.dc_marca}" itemValue="#{listaVeiculoMarcaCETs.nr_codigo}"/>
+                            <p:panelGrid columns="2"  styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-12">
+                                <p:outputLabel for="dc_local" value="Local: "/>
+                                <p:inputTextarea id="dc_local" value="#{mbDigitacaoPlacas.vpc_dc_local}" cols="91" disabled="true"/> 
+                            </p:panelGrid>
 
-                                       </p:selectOneMenu>
-                                   </p:panelGrid>
-                                    
-                                   <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-                                       <p:outputLabel for="nr_codInconsistencia" value="Motivo Invalidação: "/>
-                                       <p:selectOneMenu id="nr_codInconsistencia" value="" style="width:550px" >
-                                           <f:selectItem itemLabel="Selecione o motivo inconsistência" itemValue="" />
-                                           <f:selectItems value="#{mbDigitacaoPlacas.motivoInconsistenciaImagens}" var="listaMotivoInconsistenciaImagens" 
-                                                         itemLabel="#{listaMotivoInconsistenciaImagens.dc_inconsistencia}" itemValue="#{listaMotivoInconsistenciaImagens.nr_codigo}"/>
+                            <p:panelGrid columns="6" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-12">
+                                <p:outputLabel for="nr_faixa" value="Faixa: "/>
+                                <p:inputText id="nr_faixa" size="2" maxlength="2" value="#{mbDigitacaoPlacas.autoInfracao.nr_faixa}" disabled="true"/>
 
-                                       </p:selectOneMenu>
-                                   </p:panelGrid>
+                                <p:outputLabel for="dc_serieEquipamento" value="Equipamento:"/>
+                                <p:inputText id="dc_serieEquipamento" size="15" maxlength="15" value="#{mbDigitacaoPlacas.autoInfracao.dc_serieEquipamento}" disabled="true"/>
+
+                                <p:outputLabel for="dt_validadeLaudo" value="Dt. certificado: "/>
+                                <p:inputText id="dt_validadeLaudo" value="#{mbDigitacaoPlacas.autoInfracao.dt_validadeLaudo}" disabled="true"/>
+
+                            </p:panelGrid>
+
+                            <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+                                <p:outputLabel for="nr_codEnquadramento" value="Enquadramento: "/>
+                                <p:inputText id="nr_codEnquadramento" size="5" maxlength="5" value="#{mbDigitacaoPlacas.autoInfracao.nr_codEnquadramento}" disabled="true"/>
+                            </p:panelGrid>
+
+                            <p:panelGrid columns="1" styleClass="ui-panelgrid-blank">
+                                <p:inputTextarea id="dc_enquadramento" value="#{mbDigitacaoPlacas.vpc_dc_enquadramento}" cols="85" disabled="true"/> 
+                            </p:panelGrid>
+
+                            <p:panelGrid columns="4" styleClass="ui-panelgrid-blank">
+                                <p:outputLabel for="dt_infracao" value="Dt. Infração: "/>
+                                <p:inputText id="dt_infracao" size="10" maxlength="10" value="#{mbDigitacaoPlacas.autoInfracao.dt_infracao}" disabled="true"/>
+
+                                <p:outputLabel for="dc_hr_infracao" value="Hora Infração: "/>
+                                <p:inputText id="dc_hr_infracao" size="8" maxlength="8" value="#{mbDigitacaoPlacas.autoInfracao.dc_hr_infracao}" disabled="true"/>
+
+                            </p:panelGrid>
+
+                            <p:panelGrid columns="6" styleClass="ui-panelgrid-blank">
+                                <p:outputLabel for="nr_velocidadePermitida" value="Vel. Permit: "/>
+                                <p:inputText id="nr_velocidadePermitida" size="3" maxlength="3" value="#{mbDigitacaoPlacas.autoInfracao.nr_velocidadePermitida}" disabled="true"/>
+
+                                <p:outputLabel for="nr_velocidadeAferida" value="Vel. Aferida: "/>
+                                <p:inputText id="nr_velocidadeAferida" size="3" maxlength="3" value="#{mbDigitacaoPlacas.autoInfracao.nr_velocidadeAferida}" disabled="true"/>
+
+                                <p:outputLabel for="nr_velocidadeConsiderada" value="Vel. Consid.: "/>
+                                <p:inputText id="nr_velocidadeConsiderada" size="3" maxlength="3" value="#{mbDigitacaoPlacas.autoInfracao.nr_velocidadeConsiderada}" disabled="true"/>
+                            </p:panelGrid>
+
+                            <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+                                <p:outputLabel for="dc_placa" value="Placa: "/>
+                                <p:inputText id="dc_placa" size="7" maxlength="7" value="#{mbDigitacaoPlacas.autoInfracao.dc_placa}" onkeyup="this.value = this.value.toUpperCase()">
+                                    <p:ajax event="blur" update="@form" listener="#{mbDigitacaoPlacas.consultaPlaca(mbDigitacaoPlacas.autoInfracao.dc_placa)}" />
+                                </p:inputText>
+                            </p:panelGrid>
+
+                            <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+                                <p:outputLabel for="dc_mensagem" value="Mensagem: "/>
+                                <p:inputTextarea id="dc_mensagem" value = "#{mbDigitacaoPlacas.vpc_dc_mensagem}" cols="85" disabled="true"/>
+                            </p:panelGrid>
+
+                            <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+                                <p:outputLabel for="dc_marca" value="Marca/Mod. Denatran: "/>
+                                <p:inputText id="dc_marca" size="35" maxlength="35" value="#{mbDigitacaoPlacas.vpc_dc_marca}" disabled="true"/>
+                            </p:panelGrid>
+
+                            <p:panelGrid columns="4" styleClass="ui-panelgrid-blank">
+                                <p:outputLabel for="dc_especie" value="Espécie: "/>
+                                <p:inputText id="dc_especie" size="20" maxlength="20" value="#{mbDigitacaoPlacas.vpc_dc_especie}" disabled="true"/>
+                                <p:outputLabel for="dc_categoria" value="Categoria: "/>
+                                <p:inputText id="dc_categoria" size="35" maxlength="35" value="#{mbDigitacaoPlacas.vpc_dc_categoria}" disabled="true"/>
+                            </p:panelGrid>
+                            <p:panelGrid columns="4" styleClass="ui-panelgrid-blank">
+                                <p:outputLabel for="dc_tipo" value="Tipo: "/>
+                                <p:inputText id="dc_tipo" size="35" maxlength="35" value="#{mbDigitacaoPlacas.vpc_dc_tipo}" disabled="true"/>
+
+                                <p:outputLabel for="dc_cor" value="Cor: "/>
+                                <p:inputText id="dc_cor" size="20" maxlength="20" value="#{mbDigitacaoPlacas.vpc_dc_cor}" disabled="true"/>
+                            </p:panelGrid>
+
+                            <p:panelGrid columns="6" styleClass="ui-panelgrid-blank">
+                                <p:outputLabel for="nr_anoModelo" value="Ano: "/>
+                                <p:inputText id="nr_anoModelo" size="4" maxlength="4" value="#{mbDigitacaoPlacas.autoInfracao.nr_anoModelo}" disabled="true"/>
+
+                                <p:outputLabel for="nr_codMunicipio" value="Município: "/>
+                                <p:inputText id="nr_codMunicipio" size="40" maxlength="40" value="#{mbDigitacaoPlacas.autoInfracao.nr_codMunicipio}" disabled="true"/>
+
+                                <p:outputLabel for="dc_uf" value="UF: "/>
+                                <p:inputText id="dc_uf" size="2" maxlength="2" value="#{mbDigitacaoPlacas.autoInfracao.dc_uf}" disabled="true"/>
+                            </p:panelGrid>
+
+                            <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+                                <p:outputLabel for="nr_codMarcaCET" value="Marca CET: "/>
+                                <p:selectOneMenu id="nr_codMarcaCET" value="" style="width:250px" >
+                                    <f:selectItem itemLabel="Selecione a marca CET" itemValue="" />
+                                    <f:selectItems value="#{mbDigitacaoPlacas.veiculoMarcaCETs}" var="listaVeiculoMarcaCETs" 
+                                                   itemLabel="#{listaVeiculoMarcaCETs.dc_marca}" itemValue="#{listaVeiculoMarcaCETs.nr_codigo}"/>
+
+                                </p:selectOneMenu>
+                            </p:panelGrid>
+
+                            <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+                                <p:outputLabel for="nr_codInconsistencia" value="Motivo Invalidação: "/>
+                                <p:selectOneMenu id="nr_codInconsistencia" value="" style="width:550px" >
+                                    <f:selectItem itemLabel="Selecione o motivo inconsistência" itemValue="" />
+                                    <f:selectItems value="#{mbDigitacaoPlacas.motivoInconsistenciaImagens}" var="listaMotivoInconsistenciaImagens" 
+                                                   itemLabel="#{listaMotivoInconsistenciaImagens.dc_inconsistencia}" itemValue="#{listaMotivoInconsistenciaImagens.nr_codigo}"/>
+
+                                </p:selectOneMenu>
+                            </p:panelGrid>
+
+                        </p:panelGrid>
 
 
-                                </p:panelGrid>
+                        <p:panelGrid columns="1">
+                            <p:galleria value="#{mbDigitacaoPlacas.images}" var="image" panelWidth="800" panelHeight="600" showCaption="false">
+                                <p:graphicImage name="/temp/#{image}" alt="Imagem de infração #{image}" title="#{image}"/> 
+                            </p:galleria> 
 
-    
-                                <p:panelGrid columns="1">
-                                    <p:galleria value="#{mbDigitacaoPlacas.images}" var="image" panelWidth="800" panelHeight="600" showCaption="false">
-                                        <p:graphicImage name="/temp/#{image}" alt="Imagem de infração #{image}" title="#{image}"/> 
-                                    </p:galleria> 
-
-                                    <p:toolbar>
-                                        <p:toolbarGroup>
-                                            <p:commandButton value="Proximo"  icon="ui-icon-arrow-1-e" update="@form" style="width: 100px"/>
-                                            <p:commandButton value="Obliterar" icon="ui-icon-circle-close" update="@form" process="@this" style="width: 100px"/>
-                                            <p:commandButton value="Zoom" icon="ui-icon-zoomin" style="width: 100px"/>
-                                            <p:commandButton value="Vídeo" icon="ui-icon-video" style="width: 100px"/>
-                                            <p:commandButton value="Consulta Placa" icon="ui-icon-search" style="width: 150px"/>
-                                            <p:commandButton value="Imprimir" icon="ui-icon-print" style="width: 100px"/>
-                                        </p:toolbarGroup>
-                                    </p:toolbar>
-                                </p:panelGrid>
-                           </p:panelGrid>     
-                        </div>
-                        <br/>
-                    </h:form>
+                            <p:toolbar>
+                                <p:toolbarGroup>
+                                    <p:commandButton value="Proximo"  icon="ui-icon-arrow-1-e" update="@form" style="width: 100px"/>
+                                    <p:commandButton value="Obliterar" icon="ui-icon-circle-close" update="@form" process="@this" style="width: 100px"/>
+                                    <p:commandButton value="Zoom" icon="ui-icon-zoomin" style="width: 100px"/>
+                                    <p:commandButton value="Vídeo" icon="ui-icon-video" style="width: 100px"/>
+                                    <p:commandButton value="Consulta Placa" icon="ui-icon-search" style="width: 150px"/>
+                                    <p:commandButton value="Imprimir" icon="ui-icon-print" style="width: 100px"/>
+                                </p:toolbarGroup>
+                            </p:toolbar>
+                        </p:panelGrid>
+                    </p:panelGrid>     
+                </div>
+                <br/>
+            </h:form>
 
         </p:fieldset>
 

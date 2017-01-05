@@ -209,7 +209,7 @@ public class MbDigitacaoPlacas implements Serializable{
     public void geraListaMotivoInconsistenciaImagem() {
         List listaSQL;
         String vlc_sql;
-        vlc_sql = "select a.nr_codigo, a.dc_inconsistencia from motivoInconsistenciaImagem a order by a.dc_inconsistencia";
+        vlc_sql = "select a.nr_codigo, a.dc_inconsistencia from motivoInconsistenciaImagem a order by a.nr_codigo";
 
         Session session = FacesContextUtil.getRequestSession();
 
@@ -218,6 +218,48 @@ public class MbDigitacaoPlacas implements Serializable{
         listaSQL = query.list();
 
         this.motivoInconsistenciaImagens = listaSQL;
+    }
+    
+    public void consultaPlaca(String dc_placa){
+        String vlc_sql = ""; 
+        List consulta;
+        SQLQuery query;
+        Session session = FacesContextUtil.getRequestSession();
+
+        if (!dc_placa.isEmpty()){
+            vpc_dc_local = "";
+            vlc_sql = "select ifnull(b.dc_categoria, space(30)) as dc_categoria, ";
+            vlc_sql += "ifnull(c.dc_marca, space(35)) as dc_marca, ";
+            vlc_sql += "ifnull(d.dc_especie, space(15)) as dc_especie, ";
+            vlc_sql += "ifnull(e.dc_municipio, space(40)) as dc_municipio, ";
+            vlc_sql += "ifnull(f.dc_cor, space(15)) as dc_cor, ";
+            vlc_sql += "ifnull(g.dc_descricao, space(30)) as dc_tipo ";
+            vlc_sql += "from veiculo a left outer join veiculoCategoria b on a.nr_codCategoria = b.nr_codigo ";
+            vlc_sql += "left outer join veiculoMarcaDenatran c on a.nr_codMarcaDenatran = c.nr_codigo ";
+            vlc_sql += "left outer join veiculoEspecie d on a.nr_codEspecie = d.nr_codigo ";
+            vlc_sql += "left outer join municipio e on a.nr_codMunicipio = e.nr_codigo ";
+            vlc_sql += "left outer join veiculoCor f on a.nr_codCor = f.nr_codigo ";
+            vlc_sql += "left outer join veiculoTipoDenatran g on a.nr_codTipoDenatran = g.nr_codigo ";
+            vlc_sql += "where a.dc_placa = '" + dc_placa + "' " ;
+        
+            query = session.createSQLQuery(vlc_sql);
+            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+            consulta = query.list();
+            for (Object oInfracao : consulta) {
+                Map row = (Map) oInfracao;
+            
+                vpc_dc_marca = row.get("dc_marca").toString(); 
+                vpc_dc_especie = row.get("dc_especie").toString(); 
+                vpc_dc_categoria = row.get("dc_categoria").toString(); 
+                vpc_dc_tipo = row.get("dc_tipo").toString(); 
+                vpc_dc_cor = row.get("dc_cor").toString(); 
+                vpc_dc_municipio = row.get("dc_municipio").toString(); 
+                
+            }        
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Consulta de Placa realizada com sucesso...", ""));
+        }
+        
+        
     }
     
     public AutoInfracao getAutoInfracao() {
