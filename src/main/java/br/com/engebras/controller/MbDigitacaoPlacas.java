@@ -209,7 +209,7 @@ public class MbDigitacaoPlacas implements Serializable{
     public void geraListaMotivoInconsistenciaImagem() {
         List listaSQL;
         String vlc_sql;
-        vlc_sql = "select a.nr_codigo, a.dc_inconsistencia from motivoInconsistenciaImagem a order by a.nr_codigo";
+        vlc_sql = "select a.nr_codigo, a.dc_inconsistencia from motivoInconsistenciaImagem a order by a.dc_inconsistencia";
 
         Session session = FacesContextUtil.getRequestSession();
 
@@ -233,7 +233,8 @@ public class MbDigitacaoPlacas implements Serializable{
             vlc_sql += "ifnull(d.dc_especie, space(15)) as dc_especie, ";
             vlc_sql += "ifnull(e.dc_municipio, space(40)) as dc_municipio, ";
             vlc_sql += "ifnull(f.dc_cor, space(15)) as dc_cor, ";
-            vlc_sql += "ifnull(g.dc_descricao, space(30)) as dc_tipo ";
+            vlc_sql += "ifnull(g.dc_descricao, space(30)) as dc_tipo, ";
+            vlc_sql += "a.nr_anoModelo, e.dc_uf ";
             vlc_sql += "from veiculo a left outer join veiculoCategoria b on a.nr_codCategoria = b.nr_codigo ";
             vlc_sql += "left outer join veiculoMarcaDenatran c on a.nr_codMarcaDenatran = c.nr_codigo ";
             vlc_sql += "left outer join veiculoEspecie d on a.nr_codEspecie = d.nr_codigo ";
@@ -255,6 +256,8 @@ public class MbDigitacaoPlacas implements Serializable{
                 vpc_dc_cor = row.get("dc_cor").toString(); 
                 vpc_dc_municipio = row.get("dc_municipio").toString(); 
                 
+                autoInfracao.setNr_anoModelo(Integer.parseInt(row.get("nr_anoModelo").toString()));
+                autoInfracao.setDc_uf(row.get("dc_uf").toString());
             }        
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Consulta de Placa realizada com sucesso...", ""));
         }
