@@ -234,6 +234,8 @@ public class MbDigitacaoPlacas implements Serializable{
             vlc_sql += "ifnull(e.dc_municipio, space(40)) as dc_municipio, ";
             vlc_sql += "ifnull(f.dc_cor, space(15)) as dc_cor, ";
             vlc_sql += "ifnull(g.dc_descricao, space(30)) as dc_tipo, ";
+            vlc_sql += "a.nr_codCategoria, a.nr_codMarcaDenatran, a.nr_codEspecie, a.nr_codMunicipio,";
+            vlc_sql += "a.nr_codCor, a.nr_codTipoDenatran, ";
             vlc_sql += "a.nr_anoModelo, e.dc_uf ";
             vlc_sql += "from veiculo a left outer join veiculoCategoria b on a.nr_codCategoria = b.nr_codigo ";
             vlc_sql += "left outer join veiculoMarcaDenatran c on a.nr_codMarcaDenatran = c.nr_codigo ";
@@ -246,19 +248,48 @@ public class MbDigitacaoPlacas implements Serializable{
             query = session.createSQLQuery(vlc_sql);
             query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
             consulta = query.list();
-            for (Object oInfracao : consulta) {
-                Map row = (Map) oInfracao;
             
-                vpc_dc_marca = row.get("dc_marca").toString(); 
-                vpc_dc_especie = row.get("dc_especie").toString(); 
-                vpc_dc_categoria = row.get("dc_categoria").toString(); 
-                vpc_dc_tipo = row.get("dc_tipo").toString(); 
-                vpc_dc_cor = row.get("dc_cor").toString(); 
-                vpc_dc_municipio = row.get("dc_municipio").toString(); 
+            if (consulta.size() > 0){
+            
+                for (Object oInfracao : consulta) {
+                    Map row = (Map) oInfracao;
+            
+                    vpc_dc_marca = row.get("dc_marca").toString(); 
+                    vpc_dc_especie = row.get("dc_especie").toString(); 
+                    vpc_dc_categoria = row.get("dc_categoria").toString(); 
+                    vpc_dc_tipo = row.get("dc_tipo").toString(); 
+                    vpc_dc_cor = row.get("dc_cor").toString(); 
+                    vpc_dc_municipio = row.get("dc_municipio").toString(); 
                 
-                autoInfracao.setNr_anoModelo(Integer.parseInt(row.get("nr_anoModelo").toString()));
-                autoInfracao.setDc_uf(row.get("dc_uf").toString());
-            }        
+                    autoInfracao.setNr_codCategoria(Integer.parseInt(row.get("nr_codCategoria").toString()));
+                    autoInfracao.setNr_codMarca(Integer.parseInt(row.get("nr_codMarcaDenatran").toString()));
+                    autoInfracao.setNr_codEspecie(Integer.parseInt(row.get("nr_codEspecie").toString()));
+                    autoInfracao.setNr_codMunicipio(Integer.parseInt(row.get("nr_codMunicipio").toString()));
+                    autoInfracao.setNr_codCor(Integer.parseInt(row.get("nr_codCor").toString()));
+                    autoInfracao.setNr_codTipo(Integer.parseInt(row.get("nr_codTipoDenatran").toString()));
+                    autoInfracao.setNr_anoModelo(Integer.parseInt(row.get("nr_anoModelo").toString()));
+                    autoInfracao.setDc_uf(row.get("dc_uf").toString());
+                }        
+            } else{
+                vpc_dc_mensagem = "Placa não encontrada no cadastro de veículos.";
+                vpc_dc_marca = ""; 
+                vpc_dc_especie = ""; 
+                vpc_dc_categoria = ""; 
+                vpc_dc_tipo = ""; 
+                vpc_dc_cor = ""; 
+                vpc_dc_municipio = ""; 
+                
+                autoInfracao.setNr_codCategoria(0);
+                autoInfracao.setNr_codMarca(0);
+                autoInfracao.setNr_codEspecie(0);
+                autoInfracao.setNr_codMunicipio(0);
+                autoInfracao.setNr_codCor(0);
+                autoInfracao.setNr_codTipo(0);
+                autoInfracao.setNr_anoModelo(0);
+                autoInfracao.setDc_uf("");
+
+            }
+            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Consulta de Placa realizada com sucesso...", ""));
         }
         
