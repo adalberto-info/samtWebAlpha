@@ -151,7 +151,7 @@
 
                             <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
                                 <p:outputLabel for="nr_codMarcaCET" value="Marca CET: "/>
-                                <p:selectOneMenu id="nr_codMarcaCET" value="" style="width:250px" >
+                                <p:selectOneMenu id="nr_codMarcaCET" value="#{mbDigitacaoPlacas.autoInfracao.nr_codMarcaCET}" style="width:250px" >
                                     <f:selectItem itemLabel="Selecione a marca CET" itemValue="" />
                                     <f:selectItems value="#{mbDigitacaoPlacas.veiculoMarcaCETs}" var="listaVeiculoMarcaCETs" 
                                                    itemLabel="#{listaVeiculoMarcaCETs.dc_marca}" itemValue="#{listaVeiculoMarcaCETs.nr_codigo}"/>
@@ -161,7 +161,7 @@
 
                             <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
                                 <p:outputLabel for="nr_codInconsistencia" value="Motivo Invalidação: "/>
-                                <p:selectOneMenu id="nr_codInconsistencia" value="" style="width:550px" >
+                                <p:selectOneMenu id="nr_codInconsistencia" value="#{mbDigitacaoPlacas.autoInfracao.nr_codMarcaCET}" style="width:550px" >
                                     <f:selectItem itemLabel="Selecione o motivo inconsistência" itemValue="" />
                                     <f:selectItems value="#{mbDigitacaoPlacas.motivoInconsistenciaImagens}" var="listaMotivoInconsistenciaImagens" 
                                                    itemLabel="#{listaMotivoInconsistenciaImagens.dc_inconsistencia}" itemValue="#{listaMotivoInconsistenciaImagens.nr_codigo}"/>

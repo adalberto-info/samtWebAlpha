@@ -224,6 +224,11 @@ public class MbDigitacaoPlacas implements Serializable{
         String vlc_sql = ""; 
         List consulta;
         SQLQuery query;
+        
+        if (validaPlaca(dc_placa) == false) {
+            return;
+        }
+        
         Session session = FacesContextUtil.getRequestSession();
 
         if (!dc_placa.isEmpty()){
@@ -235,7 +240,7 @@ public class MbDigitacaoPlacas implements Serializable{
             vlc_sql += "ifnull(f.dc_cor, space(15)) as dc_cor, ";
             vlc_sql += "ifnull(g.dc_descricao, space(30)) as dc_tipo, ";
             vlc_sql += "a.nr_codCategoria, a.nr_codMarcaDenatran, a.nr_codEspecie, a.nr_codMunicipio,";
-            vlc_sql += "a.nr_codCor, a.nr_codTipoDenatran, ";
+            vlc_sql += "a.nr_codCor, a.nr_codTipoDenatran, a.nr_codMarcaCET, ";
             vlc_sql += "a.nr_anoModelo, e.dc_uf ";
             vlc_sql += "from veiculo a left outer join veiculoCategoria b on a.nr_codCategoria = b.nr_codigo ";
             vlc_sql += "left outer join veiculoMarcaDenatran c on a.nr_codMarcaDenatran = c.nr_codigo ";
@@ -268,6 +273,7 @@ public class MbDigitacaoPlacas implements Serializable{
                     autoInfracao.setNr_codCor(Integer.parseInt(row.get("nr_codCor").toString()));
                     autoInfracao.setNr_codTipo(Integer.parseInt(row.get("nr_codTipoDenatran").toString()));
                     autoInfracao.setNr_anoModelo(Integer.parseInt(row.get("nr_anoModelo").toString()));
+                    autoInfracao.setNr_codMarcaCET(Integer.parseInt(row.get("nr_codMarcaCET").toString()));
                     autoInfracao.setDc_uf(row.get("dc_uf").toString());
                 }        
             } else{
@@ -286,6 +292,7 @@ public class MbDigitacaoPlacas implements Serializable{
                 autoInfracao.setNr_codCor(0);
                 autoInfracao.setNr_codTipo(0);
                 autoInfracao.setNr_anoModelo(0);
+                autoInfracao.setNr_codMarcaCET(0);
                 autoInfracao.setDc_uf("");
 
             }
@@ -295,6 +302,25 @@ public class MbDigitacaoPlacas implements Serializable{
         
         
     }
+
+    public boolean validaPlaca(String dc_placa){
+
+        boolean vll_retorno = false; 
+        char vlc_char;
+        
+        for (int vln_i = 0; vln_i < dc_placa.length(); vln_i ++){
+            if (vln_i <= 2){
+                vlc_char = dc_placa.charAt(vln_i);
+                
+            }
+        }
+        
+        
+        
+        return vll_retorno;
+        
+    }
+
     
     public AutoInfracao getAutoInfracao() {
         return autoInfracao;

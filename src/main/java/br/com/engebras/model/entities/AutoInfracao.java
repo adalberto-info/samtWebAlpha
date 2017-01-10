@@ -122,7 +122,9 @@ public class AutoInfracao implements Serializable {
     private Date dt_digitacao; 
     @Column(name="dt_conferencia", nullable=false)
     @Temporal(TemporalType.DATE)
-    private Date dt_conferencia; 
+    private Date dt_conferencia;
+    @Column(name="nr_codMarcaCET", nullable=false, length=5)
+    private Integer nr_codMarcaCET;
 
     public String getDc_nr_multa() {
         return dc_nr_multa;
@@ -466,6 +468,14 @@ public class AutoInfracao implements Serializable {
 
     public void setDt_conferencia(Date dt_conferencia) {
         this.dt_conferencia = dt_conferencia;
+    }
+
+    public Integer getNr_codMarcaCET() {
+        return nr_codMarcaCET;
+    }
+
+    public void setNr_codMarcaCET(Integer nr_codMarcaCET) {
+        this.nr_codMarcaCET = nr_codMarcaCET;
     }
     
     
