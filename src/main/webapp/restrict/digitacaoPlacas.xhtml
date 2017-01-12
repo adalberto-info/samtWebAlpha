@@ -50,10 +50,11 @@
             <br/>
             <h:form prependId="false" id="formDigitacaoPlacas">
                 <p:growl id="msg0" />
+<!--                                                     <p:focus id="focusToPlaca" for="dc_placa" /> -->
 
                 <div class="ui-fluid">
                     <p:panelGrid columns="2" id="grid1">        
-
+ 
                         <p:panelGrid columns="1"  styleClass="ui-panelgrid-blank" id="grid0" >
 
                             <p:panelGrid columns="2" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-12, ui-grid-col-18">
@@ -107,8 +108,7 @@
                                 <p:inputText id="nr_velocidadeConsiderada" size="3" maxlength="3" value="#{mbDigitacaoPlacas.autoInfracao.nr_velocidadeConsiderada}" disabled="true"/>
                             </p:panelGrid>
 
-                            <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-                                <p:outputLabel for="dc_placa" value="Placa: "/>
+                            <p:panelGrid columns="2" styleClass="ui-panelgrid-blank" id="grid2">
                                 <p:inputText id="dc_placa" size="7" maxlength="7" value="#{mbDigitacaoPlacas.autoInfracao.dc_placa}" onkeyup="this.value = this.value.toUpperCase()">
                                     <p:ajax event="blur" update="@form" listener="#{mbDigitacaoPlacas.consultaPlaca(mbDigitacaoPlacas.autoInfracao.dc_placa)}" />
                                 </p:inputText>
@@ -179,7 +179,9 @@
 
                             <p:toolbar>
                                 <p:toolbarGroup>
-                                    <p:commandButton value="Proximo"  icon="ui-icon-arrow-1-e" update="formDigitacaoPlacas.grid1.grid0.dc_placa" style="width: 100px" />
+                                    <p:commandButton value="Proximo"  icon="ui-icon-arrow-1-e" update="@form" style="width: 100px"> 
+                                        <p:ajax event="click" oncomplete="document.getElementById('dc_placa').focus()"/>
+                                    </p:commandButton>
                                     <p:commandButton value="Obliterar" icon="ui-icon-circle-close" update="@form" process="@this" style="width: 100px"/>
                                     <p:commandButton value="Zoom" icon="ui-icon-zoomin" style="width: 100px"/>
                                     <p:commandButton value="Vídeo" icon="ui-icon-video" style="width: 100px"/>
