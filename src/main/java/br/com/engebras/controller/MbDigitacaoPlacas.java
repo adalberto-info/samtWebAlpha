@@ -49,6 +49,8 @@ public class MbDigitacaoPlacas implements Serializable {
     private String vpc_dc_tipo;
     private String vpc_dc_cor;
     private String vpc_dc_municipio;
+    private String vpc_dc_placa; 
+    private Integer vpn_nr_codInconsistencia;
     private List veiculoMarcaCETs = new ArrayList<>();
     private List motivoInconsistenciaImagens = new ArrayList<>();
 
@@ -350,6 +352,27 @@ public class MbDigitacaoPlacas implements Serializable {
 
     }
 
+    public void proximoRegistro(){
+        
+    vpc_dc_placa = autoInfracao.getDc_placa(); 
+    vpn_nr_codInconsistencia = autoInfracao.getNr_codInconsistencia(); 
+        
+    if (vpc_dc_placa.isEmpty() && vpn_nr_codInconsistencia == 0){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informe a Placa !", ""));
+        return;
+    }    
+
+    if (!vpc_dc_placa.equals(" ") && vpn_nr_codInconsistencia == 0){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Para este motivo de inconsistência a placa deve estar em branco !", ""));
+        return;
+    }
+    
+
+    
+    }
+    
+    
+    
     public AutoInfracao getAutoInfracao() {
         return autoInfracao;
     }
