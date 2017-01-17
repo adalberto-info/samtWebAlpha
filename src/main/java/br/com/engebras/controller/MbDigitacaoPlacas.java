@@ -225,8 +225,14 @@ public class MbDigitacaoPlacas implements Serializable {
         List consulta;
         SQLQuery query;
 
-        if (validaPlaca(dc_placa) == false) {
-            vpc_dc_mensagem = "Placa inválida.";
+        
+        
+        if (dc_placa.isEmpty() || validaPlaca(dc_placa) == false) {
+            if (dc_placa.isEmpty()){
+                vpc_dc_mensagem = "";
+            }else{
+                vpc_dc_mensagem = "Placa inválida.";
+            }
             vpc_dc_marca = "";
             vpc_dc_especie = "";
             vpc_dc_categoria = "";
@@ -356,7 +362,7 @@ public class MbDigitacaoPlacas implements Serializable {
         
     vpc_dc_placa = autoInfracao.getDc_placa(); 
     vpn_nr_codInconsistencia = autoInfracao.getNr_codInconsistencia(); 
-        
+
     if (vpc_dc_placa.isEmpty() && vpn_nr_codInconsistencia == 0){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informe a Placa !", ""));
         return;
