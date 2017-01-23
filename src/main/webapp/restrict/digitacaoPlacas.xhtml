@@ -109,6 +109,7 @@
                             </p:panelGrid>
 
                             <p:panelGrid columns="2" styleClass="ui-panelgrid-blank" id="grid2">
+                                <p:outputLabel for="dc_placa" value="Placa: "/>
                                 <p:inputText id="dc_placa" size="7" maxlength="7" value="#{mbDigitacaoPlacas.autoInfracao.dc_placa}" onkeyup="this.value = this.value.toUpperCase()">
                                     <p:ajax event="blur" update="@form" listener="#{mbDigitacaoPlacas.consultaPlaca(mbDigitacaoPlacas.autoInfracao.dc_placa)}" />
                                 </p:inputText>
@@ -179,8 +180,9 @@
 
                             <p:toolbar>
                                 <p:toolbarGroup>
-                                    <p:commandButton value="Proximo" action="#{mbDigitacaoPlacas.proximoRegistro}" icon="ui-icon-arrow-1-e" update="@form" style="width: 100px"> 
-                                        <p:ajax event="click" oncomplete="document.getElementById('dc_placa').focus()"/>
+                                    <p:commandButton value="Proximo" icon="ui-icon-arrow-1-e" update="@form" process="@this" style="width: 100px"> 
+                                        <f:actionListener binding="#{mbDigitacaoPlacas.proximoRegistro()}"/>
+                                         <p:ajax event="click" oncomplete="document.getElementById('dc_placa').focus()"/> 
                                     </p:commandButton>
                                     <p:commandButton value="Obliterar" icon="ui-icon-circle-close" update="@form" process="@this" style="width: 100px"/>
                                     <p:commandButton value="Zoom" icon="ui-icon-zoomin" style="width: 100px"/>

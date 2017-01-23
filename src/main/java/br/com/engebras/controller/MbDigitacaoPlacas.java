@@ -21,6 +21,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import javax.annotation.PostConstruct;
+import java.sql.SQLException;
 
 import br.com.engebras.util.FacesContextUtil;
 import br.com.engebras.util.HibernateUtil;
@@ -50,6 +51,7 @@ public class MbDigitacaoPlacas implements Serializable {
     private String vpc_dc_cor;
     private String vpc_dc_municipio;
     private String vpc_dc_placa; 
+    private String vpc_dc_nr_multa;
     private Integer vpn_nr_codInconsistencia;
     private List veiculoMarcaCETs = new ArrayList<>();
     private List motivoInconsistenciaImagens = new ArrayList<>();
@@ -76,6 +78,7 @@ public class MbDigitacaoPlacas implements Serializable {
         vpc_dc_tipo = "";
         vpc_dc_cor = "";
         vpc_dc_municipio = "";
+        vpc_dc_nr_multa = "";
 
         geraListaVeiculoMarcaCET();
         geraListaMotivoInconsistenciaImagem();
@@ -224,10 +227,9 @@ public class MbDigitacaoPlacas implements Serializable {
         String vlc_sql = "";
         List consulta;
         SQLQuery query;
-
-        
         
         if (dc_placa.isEmpty() || validaPlaca(dc_placa) == false) {
+
             if (dc_placa.isEmpty()){
                 vpc_dc_mensagem = "";
             }else{
@@ -359,10 +361,19 @@ public class MbDigitacaoPlacas implements Serializable {
     }
 
     public void proximoRegistro(){
+
+    String vlc_sql = "";
+    Integer vln_resultado = 0;
+
+    List consulta;
+    SQLQuery query;
         
+    vpc_dc_mensagem = "";
     vpc_dc_placa = autoInfracao.getDc_placa(); 
     vpn_nr_codInconsistencia = autoInfracao.getNr_codInconsistencia(); 
+    vpc_dc_nr_multa = autoInfracao.getDc_nr_multa();
 
+ 
     if (vpc_dc_placa.isEmpty() && vpn_nr_codInconsistencia == 0){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informe a Placa !", ""));
         return;
@@ -372,12 +383,20 @@ public class MbDigitacaoPlacas implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Para este motivo de inconsistência a placa deve estar em branco !", ""));
         return;
     }
-    
 
-    
+    Session session = FacesContextUtil.getRequestSession();
+
+    try{
+        vlc_sql = "update autoInfracao set nr_codInconsistencia = " + vpn_nr_codInconsistencia + ", lg_uso = 0  where dc_nr_multa = '" + vpc_dc_nr_multa + "' ";
+        query = session.createSQLQuery(vlc_sql);
+        vln_resultado = query.executeUpdate();
+    }catch(Exception erro){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro a tentar atualizar a tabela autoInfracao !", ""));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: " + erro + ".", ""));
+        return;
     }
     
-    
+    }
     
     public AutoInfracao getAutoInfracao() {
         return autoInfracao;
