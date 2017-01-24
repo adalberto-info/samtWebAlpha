@@ -31,6 +31,7 @@ import br.com.engebras.model.entities.AutoInfracao;
 import br.com.engebras.model.entities.AutoInfracaoImagem;
 import br.com.engebras.model.entities.VeiculoMarcaCET;
 import br.com.engebras.model.entities.MotivoInconsistenciaImagem;
+import java.util.Date;
 
 @ManagedBean(name = "mbDigitacaoPlacas")
 @SessionScoped
@@ -55,7 +56,8 @@ public class MbDigitacaoPlacas implements Serializable {
     private Integer vpn_nr_codInconsistencia;
     private List veiculoMarcaCETs = new ArrayList<>();
     private List motivoInconsistenciaImagens = new ArrayList<>();
-
+    private Date dt_atual;
+    
     @PostConstruct
     public void init() {
         images = new ArrayList<String>();
@@ -79,6 +81,7 @@ public class MbDigitacaoPlacas implements Serializable {
         vpc_dc_cor = "";
         vpc_dc_municipio = "";
         vpc_dc_nr_multa = "";
+        dt_atual = new Date();
 
         geraListaVeiculoMarcaCET();
         geraListaMotivoInconsistenciaImagem();
@@ -379,7 +382,7 @@ public class MbDigitacaoPlacas implements Serializable {
         return;
     }    
 
-    if (!vpc_dc_placa.equals(" ") && vpn_nr_codInconsistencia == 0){
+    if (!vpc_dc_placa.equals(" ") && vpn_nr_codInconsistencia != 0){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Para este motivo de inconsistência a placa deve estar em branco !", ""));
         return;
     }
@@ -387,7 +390,8 @@ public class MbDigitacaoPlacas implements Serializable {
     Session session = FacesContextUtil.getRequestSession();
 
     try{
-        vlc_sql = "update autoInfracao set nr_codInconsistencia = " + vpn_nr_codInconsistencia + ", lg_uso = 0  where dc_nr_multa = '" + vpc_dc_nr_multa + "' ";
+        vlc_sql = "update autoInfracao set dc_placa = '" + vpc_dc_placa +  "', nr_codInconsistencia = " + vpn_nr_codInconsistencia;
+        vlc_sql += ", lg_uso = 0, nr_status = 2, nr_usuarioDigitacao = 9000, dt_digitacao = '" + dt_atual + "'  where dc_nr_multa = '" + vpc_dc_nr_multa + "' ";
         query = session.createSQLQuery(vlc_sql);
         vln_resultado = query.executeUpdate();
     }catch(Exception erro){
@@ -395,7 +399,7 @@ public class MbDigitacaoPlacas implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: " + erro + ".", ""));
         return;
     }
-    
+    proximaInfracao();
     }
     
     public AutoInfracao getAutoInfracao() {
