@@ -31,6 +31,7 @@ import br.com.engebras.model.entities.AutoInfracao;
 import br.com.engebras.model.entities.AutoInfracaoImagem;
 import br.com.engebras.model.entities.VeiculoMarcaCET;
 import br.com.engebras.model.entities.MotivoInconsistenciaImagem;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @ManagedBean(name = "mbDigitacaoPlacas")
@@ -53,10 +54,12 @@ public class MbDigitacaoPlacas implements Serializable {
     private String vpc_dc_municipio;
     private String vpc_dc_placa; 
     private String vpc_dc_nr_multa;
+    private String vlc_data; 
     private Integer vpn_nr_codInconsistencia;
     private List veiculoMarcaCETs = new ArrayList<>();
     private List motivoInconsistenciaImagens = new ArrayList<>();
     private Date dt_atual;
+    
     
     @PostConstruct
     public void init() {
@@ -81,7 +84,6 @@ public class MbDigitacaoPlacas implements Serializable {
         vpc_dc_cor = "";
         vpc_dc_municipio = "";
         vpc_dc_nr_multa = "";
-        dt_atual = new Date();
 
         geraListaVeiculoMarcaCET();
         geraListaMotivoInconsistenciaImagem();
@@ -376,6 +378,11 @@ public class MbDigitacaoPlacas implements Serializable {
     vpn_nr_codInconsistencia = autoInfracao.getNr_codInconsistencia(); 
     vpc_dc_nr_multa = autoInfracao.getDc_nr_multa();
 
+    dt_atual = new Date();
+
+    String data_formato = "yyyyMMdd";
+    SimpleDateFormat data_formatada = new SimpleDateFormat(data_formato);
+    vlc_data = data_formatada.format(dt_atual);
  
     if (vpc_dc_placa.isEmpty() && vpn_nr_codInconsistencia == 0){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informe a Placa !", ""));
@@ -391,7 +398,7 @@ public class MbDigitacaoPlacas implements Serializable {
 
     try{
         vlc_sql = "update autoInfracao set dc_placa = '" + vpc_dc_placa +  "', nr_codInconsistencia = " + vpn_nr_codInconsistencia;
-        vlc_sql += ", lg_uso = 0, nr_status = 2, nr_usuarioDigitacao = 9000, dt_digitacao = '" + dt_atual + "'  where dc_nr_multa = '" + vpc_dc_nr_multa + "' ";
+        vlc_sql += ", lg_uso = 0, nr_status = 2, nr_usuarioDigitacao = 9000, dt_digitacao = '" + vlc_data + "'  where dc_nr_multa = '" + vpc_dc_nr_multa + "' ";
         query = session.createSQLQuery(vlc_sql);
         vln_resultado = query.executeUpdate();
     }catch(Exception erro){
