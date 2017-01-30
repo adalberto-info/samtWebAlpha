@@ -172,12 +172,28 @@
 
                         </p:panelGrid>
 
+                        <p:panelGrid columns="1">    
 
-                        <p:panelGrid columns="1">
-                            <p:galleria value="#{mbDigitacaoPlacas.images}" var="image" panelWidth="800" panelHeight="600" showCaption="false">
-                                <p:graphicImage name="/temp/#{image}" alt="Imagem de infração #{image}" title="#{image}"/> 
-                            </p:galleria> 
+                            <p:panelGrid columns="3">
+    <!--                            <p:galleria value="#//{mbDigitacaoPlacas.images}" var="image" panelWidth="800" panelHeight="600" showCaption="false">
+                                    <p:graphicImage name="/temp/#//{image}" alt="Imagem de infração #//{image}" title="#//{image}"/> 
+                                </p:galleria> 
+    -->
+                                <p:commandButton type="button" onclick="PF('switcher').previous();"
+                                    icon="ui-icon-circle-triangle-w" id="imagem_anterior"/>
+                                <p:commandButton type="button" onclick="PF('switcher').next();"
+                                    icon="ui-icon-circle-triangle-e" id="imagem_proximo"/>
+                            </p:panelGrid>
+                            <p:panelGrid>
+                                <p:imageSwitch effect="wipe" widgetVar="switcher" id="manuelSwitcher" slideshowAuto="false">
+                                    <ui:repeat value="#{mbDigitacaoPlacas.images}" var="image" id="manuelSwitcherImages" >
+                                        <p:graphicImage name="/temp/#{image}" id="image" height="600" width="800"/>
+                                    </ui:repeat>
+                                </p:imageSwitch>
 
+                            </p:panelGrid>    
+                            
+                            
                             <p:toolbar>
                                 <p:toolbarGroup>
                                     <p:commandButton value="Proximo" icon="ui-icon-arrow-1-e" update="@form" process="@this" style="width: 100px"> 
