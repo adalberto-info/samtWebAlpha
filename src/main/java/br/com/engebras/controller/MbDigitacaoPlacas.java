@@ -31,8 +31,15 @@ import br.com.engebras.model.entities.AutoInfracao;
 import br.com.engebras.model.entities.AutoInfracaoImagem;
 import br.com.engebras.model.entities.VeiculoMarcaCET;
 import br.com.engebras.model.entities.MotivoInconsistenciaImagem;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 @ManagedBean(name = "mbDigitacaoPlacas")
 @SessionScoped
@@ -59,14 +66,27 @@ public class MbDigitacaoPlacas implements Serializable {
     private List veiculoMarcaCETs = new ArrayList<>();
     private List motivoInconsistenciaImagens = new ArrayList<>();
     private Date dt_atual;
-    
-    
+    /**
+     *
+     * @throws FileNotFoundException
+     */
     @PostConstruct
     public void init() {
-        images = new ArrayList<String>();
+        try{
+            images = new ArrayList<String>();
 
-        images.add("000010102488718260_00.jpg");
-        images.add("000010102488718260_01.jpg");
+
+            carregaImagens("000010102488718260_00.jpg");
+            carregaImagens("000010102488718260_01.jpg");        
+
+
+//        images.add("000010102488718260_00.jpg");
+//        images.add("000010102488718260_01.jpg");
+
+
+        }catch(Exception erro){
+            
+        }
     }
 
     public List<String> getImages() {
@@ -90,6 +110,8 @@ public class MbDigitacaoPlacas implements Serializable {
 
         boolean vll_retorno;
         vll_retorno = proximaInfracao();
+        
+
     }
 
     private InterfaceDAO<AutoInfracao> autoInfracaoDAO() {
@@ -407,6 +429,27 @@ public class MbDigitacaoPlacas implements Serializable {
         return;
     }
     proximaInfracao();
+    }
+    
+    public void carregaImagens(String nomeImagem) throws FileNotFoundException{
+        String arquivo; 
+        arquivo = "c:/SAMT/SP/" + nomeImagem;
+       
+		try
+		{
+                    StreamedContent imagem = null;
+               	    File chartFile = new File("c:\\SAMT\\SP\\"  + nomeImagem );
+		    try
+			{
+		            imagem = new DefaultStreamedContent(new FileInputStream(chartFile));
+			} catch (FileNotFoundException e) {
+			    e.printStackTrace();
+			}
+			images.add(imagem.toString());
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+
     }
     
     public AutoInfracao getAutoInfracao() {

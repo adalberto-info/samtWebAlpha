@@ -178,8 +178,12 @@
                                     <p:graphicImage name="/temp/#//{image}" alt="Imagem de infração #//{image}" title="#//{image}"/> 
                                 </p:galleria> 
     -->
-    
-    <!-- type="button" -->
+
+                            <p:imageSwitch effect="wipe" widgetVar="switcher" id="manuelSwitcher" slideshowAuto="false">
+                                <ui:repeat value="#{mbDigitacaoPlacas.images}" var="image" id="manuelSwitcherImages" >
+                                    <p:graphicImage name="#{image}" id="image" height="600" width="800"/>
+                                </ui:repeat>
+                            </p:imageSwitch>
                             
                             <p:toolbar>
                                 <p:toolbarGroup>
@@ -187,17 +191,6 @@
                                 <p:commandButton  onclick="PF('switcher').next();" icon="ui-icon-circle-triangle-e" id="imagem_proximo" style="width: 100px"/>
                                 </p:toolbarGroup>
                             </p:toolbar>
-
-
-                            <p:panelGrid columns="1">
-                                <p:imageSwitch effect="wipe" widgetVar="switcher" id="manuelSwitcher" slideshowAuto="false">
-                                    <ui:repeat value="#{mbDigitacaoPlacas.images}" var="image" id="manuelSwitcherImages" >
-                                        <p:graphicImage name="/temp/#{image}" id="image" height="600" width="800"/>
-                                    </ui:repeat>
-                                </p:imageSwitch>
-
-                            </p:panelGrid>    
-                            
                             
                             <p:toolbar>
                                 <p:toolbarGroup>
