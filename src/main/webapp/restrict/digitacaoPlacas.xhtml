@@ -179,6 +179,8 @@
                                 </p:galleria> 
     -->
 
+                            
+    
                             <p:imageSwitch effect="wipe" widgetVar="switcher" id="manuelSwitcher" slideshowAuto="false">
                                 <ui:repeat value="#{mbDigitacaoPlacas.images}" var="image" id="manuelSwitcherImages" >
                                     <p:graphicImage name="#{image}" id="image" height="600" width="800"/>
@@ -192,6 +194,13 @@
                                 </p:toolbarGroup>
                             </p:toolbar>
                             
+                            <p:panelGrid columns="2">
+        
+                                <p:outputLabel for="dc_imagem" value="Nome imagem: "/>
+                                <p:inputText id="dc_imagem" size="100" value="#{mbDigitacaoPlacas.vpc_dc_imagem}" />
+        
+                            </p:panelGrid>        
+    
                             <p:toolbar>
                                 <p:toolbarGroup>
                                     <p:commandButton value="Proximo" icon="ui-icon-arrow-1-e" update="@form" process="@this" style="width: 100px"> 

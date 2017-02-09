@@ -31,12 +31,20 @@ import br.com.engebras.model.entities.AutoInfracao;
 import br.com.engebras.model.entities.AutoInfracaoImagem;
 import br.com.engebras.model.entities.VeiculoMarcaCET;
 import br.com.engebras.model.entities.MotivoInconsistenciaImagem;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.faces.event.PhaseId;
+import javax.imageio.ImageIO;
+import static org.apache.log4j.LogSF.log;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -48,8 +56,8 @@ public class MbDigitacaoPlacas implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private AutoInfracao autoInfracao = new AutoInfracao();
-    private List<String> images;
-
+//    private List<String> images;
+    private List<StreamedContent> images;
     private String vpc_dc_mensagem;
     private String vpc_dc_local;
     private String vpc_dc_enquadramento;
@@ -59,9 +67,10 @@ public class MbDigitacaoPlacas implements Serializable {
     private String vpc_dc_tipo;
     private String vpc_dc_cor;
     private String vpc_dc_municipio;
-    private String vpc_dc_placa; 
+    private String vpc_dc_placa;
     private String vpc_dc_nr_multa;
-    private String vlc_data; 
+    private String vlc_data;
+    private String vpc_dc_imagem;
     private Integer vpn_nr_codInconsistencia;
     private List veiculoMarcaCETs = new ArrayList<>();
     private List motivoInconsistenciaImagens = new ArrayList<>();
@@ -73,23 +82,26 @@ public class MbDigitacaoPlacas implements Serializable {
     @PostConstruct
     public void init() {
         try{
-            images = new ArrayList<String>();
+//            images = new ArrayList<String>();
+            images = new ArrayList<StreamedContent>();
+            
+        images.add(carregaImagens2());
+        vpc_dc_imagem = images.get(0).toString();
 
-
-            carregaImagens("000010102488718260_00.jpg");
-            carregaImagens("000010102488718260_01.jpg");        
-
+//            carregaImagens("000010102488718260_00.jpg");
+//            carregaImagens("000010102488718260_01.jpg");
+            
 
 //        images.add("000010102488718260_00.jpg");
 //        images.add("000010102488718260_01.jpg");
 
 
         }catch(Exception erro){
-            
+
         }
     }
 
-    public List<String> getImages() {
+    public List<StreamedContent> getImages() {
         return images;
     }
 
@@ -110,7 +122,7 @@ public class MbDigitacaoPlacas implements Serializable {
 
         boolean vll_retorno;
         vll_retorno = proximaInfracao();
-        
+
 
     }
 
@@ -254,7 +266,7 @@ public class MbDigitacaoPlacas implements Serializable {
         String vlc_sql = "";
         List consulta;
         SQLQuery query;
-        
+
         if (dc_placa.isEmpty() || validaPlaca(dc_placa) == false) {
 
             if (dc_placa.isEmpty()){
@@ -310,7 +322,7 @@ public class MbDigitacaoPlacas implements Serializable {
                 for (Object oInfracao : consulta) {
                     Map row = (Map) oInfracao;
 
-                    vpc_dc_mensagem = "";    
+                    vpc_dc_mensagem = "";
                     vpc_dc_marca = row.get("dc_marca").toString();
                     vpc_dc_especie = row.get("dc_especie").toString();
                     vpc_dc_categoria = row.get("dc_categoria").toString();
@@ -394,10 +406,10 @@ public class MbDigitacaoPlacas implements Serializable {
 
     List consulta;
     SQLQuery query;
-        
+
     vpc_dc_mensagem = "";
-    vpc_dc_placa = autoInfracao.getDc_placa(); 
-    vpn_nr_codInconsistencia = autoInfracao.getNr_codInconsistencia(); 
+    vpc_dc_placa = autoInfracao.getDc_placa();
+    vpn_nr_codInconsistencia = autoInfracao.getNr_codInconsistencia();
     vpc_dc_nr_multa = autoInfracao.getDc_nr_multa();
 
     dt_atual = new Date();
@@ -405,11 +417,11 @@ public class MbDigitacaoPlacas implements Serializable {
     String data_formato = "yyyyMMdd";
     SimpleDateFormat data_formatada = new SimpleDateFormat(data_formato);
     vlc_data = data_formatada.format(dt_atual);
- 
+
     if (vpc_dc_placa.isEmpty() && vpn_nr_codInconsistencia == 0){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informe a Placa !", ""));
         return;
-    }    
+    }
 
     if (!vpc_dc_placa.equals(" ") && vpn_nr_codInconsistencia != 0){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Para este motivo de inconsistência a placa deve estar em branco !", ""));
@@ -430,28 +442,44 @@ public class MbDigitacaoPlacas implements Serializable {
     }
     proximaInfracao();
     }
-    
+
     public void carregaImagens(String nomeImagem) throws FileNotFoundException{
-        String arquivo; 
+        String arquivo;
         arquivo = "c:/SAMT/SP/" + nomeImagem;
-       
+
 		try
 		{
                     StreamedContent imagem = null;
                	    File chartFile = new File("c:\\SAMT\\SP\\"  + nomeImagem );
 		    try
 			{
-		            imagem = new DefaultStreamedContent(new FileInputStream(chartFile));
-			} catch (FileNotFoundException e) {
+		            imagem = new DefaultStreamedContent(new FileInputStream(chartFile),"temp/jpeg",nomeImagem);
+//                            imagem = new DefaultStreamedContent(new  ByteArrayInputStream(chartFile.toByteArray()));
+                        } catch (FileNotFoundException e) {
 			    e.printStackTrace();
 			}
-			images.add(imagem.toString());
+			images.add(imagem);
+
 		} catch (Exception e){
 			e.printStackTrace();
 		}
 
     }
-    
+
+    public StreamedContent carregaImagens2(){
+    File foto=new File("c:\\SAMT\\SP\\000010102488718260_00.jpg");
+    DefaultStreamedContent content=null;
+    try{
+        BufferedInputStream in=new BufferedInputStream(new FileInputStream(foto));
+        byte[] bytes=new byte[in.available()];
+        in.read(bytes);
+        in.close();
+        content=new DefaultStreamedContent(new ByteArrayInputStream(bytes),"image/jpeg");
+    }catch(Exception e){
+        ;
+    }
+    return content;
+}    
     public AutoInfracao getAutoInfracao() {
         return autoInfracao;
     }
@@ -546,6 +574,54 @@ public class MbDigitacaoPlacas implements Serializable {
 
     public void setMotivoInconsistenciaImagens(List motivoInconsistenciaImagens) {
         this.motivoInconsistenciaImagens = motivoInconsistenciaImagens;
+    }
+
+    public String getVpc_dc_placa() {
+        return vpc_dc_placa;
+    }
+
+    public void setVpc_dc_placa(String vpc_dc_placa) {
+        this.vpc_dc_placa = vpc_dc_placa;
+    }
+
+    public String getVpc_dc_nr_multa() {
+        return vpc_dc_nr_multa;
+    }
+
+    public void setVpc_dc_nr_multa(String vpc_dc_nr_multa) {
+        this.vpc_dc_nr_multa = vpc_dc_nr_multa;
+    }
+
+    public String getVpc_dc_imagem() {
+        return vpc_dc_imagem;
+    }
+
+    public void setVpc_dc_imagem(String vpc_dc_imagem) {
+        this.vpc_dc_imagem = vpc_dc_imagem;
+    }
+
+    public Integer getVpn_nr_codInconsistencia() {
+        return vpn_nr_codInconsistencia;
+    }
+
+    public void setVpn_nr_codInconsistencia(Integer vpn_nr_codInconsistencia) {
+        this.vpn_nr_codInconsistencia = vpn_nr_codInconsistencia;
+    }
+
+    public String getVlc_data() {
+        return vlc_data;
+    }
+
+    public void setVlc_data(String vlc_data) {
+        this.vlc_data = vlc_data;
+    }
+
+    public Date getDt_atual() {
+        return dt_atual;
+    }
+
+    public void setDt_atual(Date dt_atual) {
+        this.dt_atual = dt_atual;
     }
 
 }
