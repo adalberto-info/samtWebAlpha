@@ -75,6 +75,7 @@ public class MbDigitacaoPlacas implements Serializable {
     private List veiculoMarcaCETs = new ArrayList<>();
     private List motivoInconsistenciaImagens = new ArrayList<>();
     private Date dt_atual;
+    private StreamedContent imagemInfracao;
     /**
      *
      * @throws FileNotFoundException
@@ -86,11 +87,11 @@ public class MbDigitacaoPlacas implements Serializable {
             images = new ArrayList<StreamedContent>();
             
         images.add(carregaImagens2());
-        vpc_dc_imagem = images.get(0).toString();
 
 //            carregaImagens("000010102488718260_00.jpg");
 //            carregaImagens("000010102488718260_01.jpg");
             
+//        vpc_dc_imagem = images.get(0).toString();
 
 //        images.add("000010102488718260_00.jpg");
 //        images.add("000010102488718260_01.jpg");
@@ -453,7 +454,7 @@ public class MbDigitacaoPlacas implements Serializable {
                	    File chartFile = new File("c:\\SAMT\\SP\\"  + nomeImagem );
 		    try
 			{
-		            imagem = new DefaultStreamedContent(new FileInputStream(chartFile),"temp/jpeg",nomeImagem);
+		            imagem = new DefaultStreamedContent(new FileInputStream(chartFile),"image/jpeg",nomeImagem);
 //                            imagem = new DefaultStreamedContent(new  ByteArrayInputStream(chartFile.toByteArray()));
                         } catch (FileNotFoundException e) {
 			    e.printStackTrace();
@@ -479,7 +480,29 @@ public class MbDigitacaoPlacas implements Serializable {
         ;
     }
     return content;
-}    
+    }
+
+    public StreamedContent getImagemInfracao() {
+        File foto=new File("c:\\SAMT\\SP\\000010102488718260_00.jpg");
+        DefaultStreamedContent content=null;
+        try{
+            BufferedInputStream in=new BufferedInputStream(new FileInputStream(foto));
+            byte[] bytes=new byte[in.available()];
+            in.read(bytes);
+            in.close();
+            content=new DefaultStreamedContent(new ByteArrayInputStream(bytes),"image/jpeg");
+        }catch(Exception e){
+            ;
+        }
+        return content;
+    }
+
+    public void setImagemInfracao(StreamedContent imagemInfracao) {
+        this.imagemInfracao = imagemInfracao;
+    }
+
+
+    
     public AutoInfracao getAutoInfracao() {
         return autoInfracao;
     }

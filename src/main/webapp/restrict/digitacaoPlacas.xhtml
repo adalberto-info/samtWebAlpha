@@ -183,10 +183,13 @@
     
                             <p:imageSwitch effect="wipe" widgetVar="switcher" id="manuelSwitcher" slideshowAuto="false">
                                 <ui:repeat value="#{mbDigitacaoPlacas.images}" var="image" id="manuelSwitcherImages" >
-                                    <p:graphicImage name="#{image}" id="image" height="600" width="800"/>
+                                    <p:graphicImage value="#{image}" id="image" height="600" width="800"/>
                                 </ui:repeat>
                             </p:imageSwitch>
                             
+
+    <!--                        <p:graphicImage value="#//{mbDigitacaoPlacas.imagemInfracao}" id="imageInfracao" height="600" width="800"/>
+    -->
                             <p:toolbar>
                                 <p:toolbarGroup>
                                 <p:commandButton  onclick="PF('switcher').previous();" icon="ui-icon-circle-triangle-w" id="imagem_anterior" style="width: 100px"/>
