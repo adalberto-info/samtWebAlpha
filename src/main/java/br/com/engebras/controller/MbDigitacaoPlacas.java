@@ -70,7 +70,6 @@ public class MbDigitacaoPlacas implements Serializable {
     private String vpc_dc_placa;
     private String vpc_dc_nr_multa;
     private String vlc_data;
-    private String vpc_dc_imagem;
     private Integer vpn_nr_codInconsistencia;
     private List veiculoMarcaCETs = new ArrayList<>();
     private List motivoInconsistenciaImagens = new ArrayList<>();
@@ -84,17 +83,12 @@ public class MbDigitacaoPlacas implements Serializable {
     public void init() {
         try{
 //            images = new ArrayList<String>();
-            images = new ArrayList<StreamedContent>();
+//            images = new ArrayList<StreamedContent>();
             
-        images.add(carregaImagens2());
-
 //            carregaImagens("000010102488718260_00.jpg");
 //            carregaImagens("000010102488718260_01.jpg");
             
-//        vpc_dc_imagem = images.get(0).toString();
 
-//        images.add("000010102488718260_00.jpg");
-//        images.add("000010102488718260_01.jpg");
 
 
         }catch(Exception erro){
@@ -455,7 +449,6 @@ public class MbDigitacaoPlacas implements Serializable {
 		    try
 			{
 		            imagem = new DefaultStreamedContent(new FileInputStream(chartFile),"image/jpeg",nomeImagem);
-//                            imagem = new DefaultStreamedContent(new  ByteArrayInputStream(chartFile.toByteArray()));
                         } catch (FileNotFoundException e) {
 			    e.printStackTrace();
 			}
@@ -467,20 +460,6 @@ public class MbDigitacaoPlacas implements Serializable {
 
     }
 
-    public StreamedContent carregaImagens2(){
-    File foto=new File("c:\\SAMT\\SP\\000010102488718260_00.jpg");
-    DefaultStreamedContent content=null;
-    try{
-        BufferedInputStream in=new BufferedInputStream(new FileInputStream(foto));
-        byte[] bytes=new byte[in.available()];
-        in.read(bytes);
-        in.close();
-        content=new DefaultStreamedContent(new ByteArrayInputStream(bytes),"image/jpeg");
-    }catch(Exception e){
-        ;
-    }
-    return content;
-    }
 
     public StreamedContent getImagemInfracao() {
         File foto=new File("c:\\SAMT\\SP\\000010102488718260_00.jpg");
@@ -500,8 +479,6 @@ public class MbDigitacaoPlacas implements Serializable {
     public void setImagemInfracao(StreamedContent imagemInfracao) {
         this.imagemInfracao = imagemInfracao;
     }
-
-
     
     public AutoInfracao getAutoInfracao() {
         return autoInfracao;
@@ -615,13 +592,6 @@ public class MbDigitacaoPlacas implements Serializable {
         this.vpc_dc_nr_multa = vpc_dc_nr_multa;
     }
 
-    public String getVpc_dc_imagem() {
-        return vpc_dc_imagem;
-    }
-
-    public void setVpc_dc_imagem(String vpc_dc_imagem) {
-        this.vpc_dc_imagem = vpc_dc_imagem;
-    }
 
     public Integer getVpn_nr_codInconsistencia() {
         return vpn_nr_codInconsistencia;
