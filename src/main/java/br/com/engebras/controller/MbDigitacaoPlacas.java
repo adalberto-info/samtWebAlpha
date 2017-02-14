@@ -56,8 +56,7 @@ public class MbDigitacaoPlacas implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private AutoInfracao autoInfracao = new AutoInfracao();
-//    private List<String> images;
-    private List<StreamedContent> images;
+    private List<String> images;
     private String vpc_dc_mensagem;
     private String vpc_dc_local;
     private String vpc_dc_enquadramento;
@@ -71,6 +70,7 @@ public class MbDigitacaoPlacas implements Serializable {
     private String vpc_dc_nr_multa;
     private String vlc_data;
     private Integer vpn_nr_codInconsistencia;
+    private Integer vpn_ptn_images;
     private List veiculoMarcaCETs = new ArrayList<>();
     private List motivoInconsistenciaImagens = new ArrayList<>();
     private Date dt_atual;
@@ -82,21 +82,18 @@ public class MbDigitacaoPlacas implements Serializable {
     @PostConstruct
     public void init() {
         try{
-//            images = new ArrayList<String>();
-//            images = new ArrayList<StreamedContent>();
+            vpn_ptn_images = 0;
+            images = new ArrayList<String>();
             
-//            carregaImagens("000010102488718260_00.jpg");
-//            carregaImagens("000010102488718260_01.jpg");
-            
-
-
+            images.add("000010102488718260_00.jpg");
+            images.add("000010102488718260_01.jpg");
 
         }catch(Exception erro){
 
         }
     }
 
-    public List<StreamedContent> getImages() {
+    public List<String> getImages() {
         return images;
     }
 
@@ -438,30 +435,9 @@ public class MbDigitacaoPlacas implements Serializable {
     proximaInfracao();
     }
 
-    public void carregaImagens(String nomeImagem) throws FileNotFoundException{
-        String arquivo;
-        arquivo = "c:/SAMT/SP/" + nomeImagem;
-
-		try
-		{
-                    StreamedContent imagem = null;
-               	    File chartFile = new File("c:\\SAMT\\SP\\"  + nomeImagem );
-		    try
-			{
-		            imagem = new DefaultStreamedContent(new FileInputStream(chartFile),"image/jpeg",nomeImagem);
-                        } catch (FileNotFoundException e) {
-			    e.printStackTrace();
-			}
-			images.add(imagem);
-
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-
-    }
-
 
     public StreamedContent getImagemInfracao() {
+
         File foto=new File("c:\\SAMT\\SP\\000010102488718260_00.jpg");
         DefaultStreamedContent content=null;
         try{
@@ -476,6 +452,23 @@ public class MbDigitacaoPlacas implements Serializable {
         return content;
     }
 
+    public void navegaImagem(String direcao){
+        
+        if (direcao.equals("proximo")){
+            if (vpn_ptn_images >= images.size()){
+                vpn_ptn_images = images.size();
+            }else  {
+                vpn_ptn_images ++;
+            }
+                
+        }else if (direcao.equals("anterior")){
+            if (vpn_ptn_images > 0){
+                vpn_ptn_images --;
+            }
+        }
+    }
+    
+    
     public void setImagemInfracao(StreamedContent imagemInfracao) {
         this.imagemInfracao = imagemInfracao;
     }
