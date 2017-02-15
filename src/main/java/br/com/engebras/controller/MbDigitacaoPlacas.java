@@ -438,7 +438,13 @@ public class MbDigitacaoPlacas implements Serializable {
 
     public StreamedContent getImagemInfracao() {
 
-        File foto=new File("c:\\SAMT\\SP\\000010102488718260_00.jpg");
+//        File foto=new File("c:\\SAMT\\SP\\000010102488718260_00.jpg");
+        File foto = new File("c:\\SAMT\\SP\\" + images.get(vpn_ptn_images));
+
+        if (!foto.exists()){
+            foto = new File("c:\\SAMT\\SP\\BRANCO.jpg");
+        }
+        
         DefaultStreamedContent content=null;
         try{
             BufferedInputStream in=new BufferedInputStream(new FileInputStream(foto));
@@ -454,18 +460,21 @@ public class MbDigitacaoPlacas implements Serializable {
 
     public void navegaImagem(String direcao){
         
-        if (direcao.equals("proximo")){
+        if (direcao.equals("PROXIMO")){
             if (vpn_ptn_images >= images.size()){
                 vpn_ptn_images = images.size();
             }else  {
                 vpn_ptn_images ++;
             }
                 
-        }else if (direcao.equals("anterior")){
+        }else if (direcao.equals("ANTERIOR")){
             if (vpn_ptn_images > 0){
                 vpn_ptn_images --;
             }
         }
+        
+        getImagemInfracao();
+        
     }
     
     
