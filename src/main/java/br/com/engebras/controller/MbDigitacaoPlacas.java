@@ -440,6 +440,7 @@ public class MbDigitacaoPlacas implements Serializable {
 
 //        File foto=new File("c:\\SAMT\\SP\\000010102488718260_00.jpg");
         File foto = new File("c:\\SAMT\\SP\\" + images.get(vpn_ptn_images));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "imagem: " + images.get(vpn_ptn_images) + ".", ""));
 
         if (!foto.exists()){
             foto = new File("c:\\SAMT\\SP\\BRANCO.jpg");
@@ -617,6 +618,14 @@ public class MbDigitacaoPlacas implements Serializable {
 
     public void setDt_atual(Date dt_atual) {
         this.dt_atual = dt_atual;
+    }
+
+    public Integer getVpn_ptn_images() {
+        return vpn_ptn_images;
+    }
+
+    public void setVpn_ptn_images(Integer vpn_ptn_images) {
+        this.vpn_ptn_images = vpn_ptn_images;
     }
 
 }
