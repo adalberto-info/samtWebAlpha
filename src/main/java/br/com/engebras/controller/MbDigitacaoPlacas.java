@@ -403,7 +403,8 @@ public class MbDigitacaoPlacas implements Serializable {
     vpc_dc_placa = autoInfracao.getDc_placa();
     vpn_nr_codInconsistencia = autoInfracao.getNr_codInconsistencia();
     vpc_dc_nr_multa = autoInfracao.getDc_nr_multa();
-
+    vpn_ptn_images = 0;
+    
     dt_atual = new Date();
 
     String data_formato = "yyyyMMdd";
@@ -462,8 +463,8 @@ public class MbDigitacaoPlacas implements Serializable {
     public void navegaImagem(String direcao){
         
         if (direcao.equals("PROXIMO")){
-            if (vpn_ptn_images >= images.size()){
-                vpn_ptn_images = images.size();
+            if (vpn_ptn_images >= (images.size()-1)){
+                vpn_ptn_images = (images.size()-1);
             }else  {
                 vpn_ptn_images ++;
             }
