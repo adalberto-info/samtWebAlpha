@@ -178,8 +178,6 @@
                                     <p:graphicImage name="/temp/#//{image}" alt="Imagem de infração #//{image}" title="#//{image}"/> 
                                 </p:galleria> 
     -->
-
-                            
     
     <!--                        <p:imageSwitch effect="wipe" widgetVar="switcher" id="manuelSwitcher" slideshowAuto="false">
                                 <ui:repeat value="#//{mbDigitacaoPlacas.images}" var="image" id="manuelSwitcherImages" >
@@ -188,12 +186,12 @@
                             </p:imageSwitch>
     -->                        
 
-                            <p:graphicImage value="#{mbDigitacaoPlacas.imagemInfracao}" id="imageInfracao" height="600" width="800"/>
+                            <p:graphicImage value="#{mbDigitacaoPlacas.imagemInfracao}" id="imageInfracao" cache="false" height="600" width="800"/>
     
                             <p:toolbar>
                                 <p:toolbarGroup>
-                                    <p:commandButton  icon="ui-icon-circle-triangle-w" id="imagem_anterior" actionListener="#{mbDigitacaoPlacas.navegaImagem('ANTERIOR')}" process="@this" update="imageInfracao" style="width: 100px"/>
-                                    <p:commandButton  icon="ui-icon-circle-triangle-e" id="imagem_proximo" actionListener="#{mbDigitacaoPlacas.navegaImagem('PROXIMO')}" process="@this" update="imageInfracao" style="width: 100px"/>
+                                    <p:commandButton  icon="ui-icon-circle-triangle-w" id="imagem_anterior" actionListener="#{mbDigitacaoPlacas.navegaImagem('ANTERIOR')}" process="@this" update=":imageInfracao" style="width: 100px"/>
+                                    <p:commandButton  icon="ui-icon-circle-triangle-e" id="imagem_proximo" actionListener="#{mbDigitacaoPlacas.navegaImagem('PROXIMO')}" process="@this" update=":imageInfracao" style="width: 100px"/>
                                 </p:toolbarGroup>
                             </p:toolbar>
     
