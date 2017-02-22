@@ -1,3 +1,4 @@
+
 /*
  *
  *  Autor: Adalberto Kamida
@@ -434,6 +435,7 @@ public class MbDigitacaoPlacas implements Serializable {
         return;
     }
     proximaInfracao();
+    atualizaListaImagem();
     }
 
 
@@ -478,6 +480,23 @@ public class MbDigitacaoPlacas implements Serializable {
         getImagemInfracao();
         
     }
+    
+    public void atualizaListaImagem(){
+
+        String vlc_nomeImagem;
+        
+        vlc_nomeImagem = vpc_dc_nr_multa + "_00.jpg";
+                
+        images.clear();
+        if (vpc_dc_nr_multa.isEmpty()){
+            images.add("BRANCO.jpg");    
+        }else {
+        
+            images.add("000010102488718260_00.jpg");
+            images.add("000010102488718260_01.jpg");
+        }    
+    }
+    
     
     
     public void setImagemInfracao(StreamedContent imagemInfracao) {
