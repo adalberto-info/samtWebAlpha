@@ -82,12 +82,11 @@ public class MbDigitacaoPlacas implements Serializable {
      */
     @PostConstruct
     public void init() {
+        boolean vll_retorno;
         try{
             vpn_ptn_images = 0;
             images = new ArrayList<String>();
-            
-            images.add("000010102488718260_00.jpg");
-            images.add("000010102488718260_01.jpg");
+            vll_retorno = proximaInfracao();
 
         }catch(Exception erro){
 
@@ -99,6 +98,7 @@ public class MbDigitacaoPlacas implements Serializable {
     }
 
     public MbDigitacaoPlacas() {
+//        boolean vll_retorno;
         vpc_dc_mensagem = "";
         vpc_dc_local = "";
         vpc_dc_enquadramento = "";
@@ -113,8 +113,7 @@ public class MbDigitacaoPlacas implements Serializable {
         geraListaVeiculoMarcaCET();
         geraListaMotivoInconsistenciaImagem();
 
-        boolean vll_retorno;
-        vll_retorno = proximaInfracao();
+ //       vll_retorno = proximaInfracao();
 
 
     }
@@ -483,18 +482,33 @@ public class MbDigitacaoPlacas implements Serializable {
     
     public void atualizaListaImagem(){
 
-        String vlc_nomeImagem;
-        
-        vlc_nomeImagem = vpc_dc_nr_multa + "_00.jpg";
+        String vlc_sql = "";
+        List consulta;
+        SQLQuery query;
+        Session session = FacesContextUtil.getRequestSession();
                 
         images.clear();
         if (vpc_dc_nr_multa.isEmpty()){
             images.add("BRANCO.jpg");    
         }else {
-        
-            images.add("000010102488718260_00.jpg");
-            images.add("000010102488718260_01.jpg");
+ 
+            vpc_dc_local = "";
+            vlc_sql = "select a.dc_nr_multa, a.dc_nomeImagem ";
+            vlc_sql += "from autoInfracaoImagem a ";
+            vlc_sql += "where a.dc_nr_multa = '" + vpc_dc_nr_multa + "' ";
+
+            query = session.createSQLQuery(vlc_sql);
+            query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+            consulta = query.list();
+            for (Object oInfracao : consulta) {
+                Map row = (Map) oInfracao;
+
+                images.add(row.get("dc_nomeImagem").toString());
+
+            }
+ 
         }    
+
     }
     
     
