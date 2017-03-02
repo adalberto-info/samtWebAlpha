@@ -160,15 +160,16 @@ public class MbDigitacaoPlacas implements Serializable {
 
             dc_nr_multa = row.get("dc_nr_multa").toString();
         }
-
+        
         if (!dc_nr_multa.equals(" ")) {
             autoInfracao = porDc_nr_multa(dc_nr_multa);
-
+            vpc_dc_nr_multa = dc_nr_multa;
             atualizaTela(dc_nr_multa);
 
             return true;
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Não existe mais infrações para digitação...", ""));
+            vpc_dc_nr_multa = "";    
             return false;
         }
 
@@ -224,6 +225,7 @@ public class MbDigitacaoPlacas implements Serializable {
 
         }
 
+        
     }
 
     public void geraListaVeiculoMarcaCET() {
@@ -238,6 +240,7 @@ public class MbDigitacaoPlacas implements Serializable {
         listaSQL = query.list();
 
         this.veiculoMarcaCETs = listaSQL;
+        
     }
 
     public void geraListaMotivoInconsistenciaImagem() {
@@ -252,6 +255,7 @@ public class MbDigitacaoPlacas implements Serializable {
         listaSQL = query.list();
 
         this.motivoInconsistenciaImagens = listaSQL;
+        
     }
 
     public void consultaPlaca(String dc_placa) {
@@ -355,7 +359,6 @@ public class MbDigitacaoPlacas implements Serializable {
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Consulta de Placa realizada com sucesso...", ""));
         }
-
     }
 
     public boolean validaPlaca(String dc_placa) {
@@ -433,6 +436,7 @@ public class MbDigitacaoPlacas implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: " + erro + ".", ""));
         return;
     }
+    
     proximaInfracao();
     atualizaListaImagem();
     }
@@ -441,8 +445,14 @@ public class MbDigitacaoPlacas implements Serializable {
     public StreamedContent getImagemInfracao() {
 
 //        File foto=new File("c:\\SAMT\\SP\\000010102488718260_00.jpg");
-        File foto = new File("c:\\SAMT\\SP\\" + images.get(vpn_ptn_images));
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "imagem: " + images.get(vpn_ptn_images) + ".", ""));
+        File foto; 
+        if (images.size() == 0){
+            foto = new File("c:\\SAMT\\SP\\BRANCO.jpg");
+        }else {
+            foto = new File("c:\\SAMT\\SP\\" + images.get(vpn_ptn_images));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "imagem: " + images.get(vpn_ptn_images) + ".", ""));
+        }
+        
 
         if (!foto.exists()){
             foto = new File("c:\\SAMT\\SP\\BRANCO.jpg");
@@ -500,15 +510,21 @@ public class MbDigitacaoPlacas implements Serializable {
             query = session.createSQLQuery(vlc_sql);
             query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
             consulta = query.list();
-            for (Object oInfracao : consulta) {
-                Map row = (Map) oInfracao;
+            
+            if (consulta.size() == 0){
+                images.add("BRANCO.jpg");
+            }else {
+                for (Object oInfracao : consulta) {
+                    Map row = (Map) oInfracao;
 
-                images.add(row.get("dc_nomeImagem").toString());
+                    images.add(row.get("dc_nomeImagem").toString());
 
+                }
             }
  
         }    
-
+        consulta =  null;
+        
     }
     
     
