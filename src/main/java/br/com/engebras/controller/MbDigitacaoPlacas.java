@@ -87,7 +87,9 @@ public class MbDigitacaoPlacas implements Serializable {
             vpn_ptn_images = 0;
             images = new ArrayList<String>();
             vll_retorno = proximaInfracao();
-
+            atualizaTela(vpc_dc_nr_multa);
+            atualizaListaImagem();
+            getImagemInfracao();
         }catch(Exception erro){
 
         }
@@ -188,7 +190,6 @@ public class MbDigitacaoPlacas implements Serializable {
         Session session = FacesContextUtil.getRequestSession();
 
         if (!dc_nr_multa.isEmpty()) {
-            vpc_dc_local = "";
             vlc_sql = "select ifnull(b.dc_local, space(80)) as dc_local, ifnull(c.dc_categoria, space(30)) as dc_categoria, ";
             vlc_sql += "ifnull(d.dc_marca, space(35)) as dc_marca, ";
             vlc_sql += "ifnull(e.dc_especie, space(15)) as dc_especie, ";
@@ -212,7 +213,7 @@ public class MbDigitacaoPlacas implements Serializable {
             for (Object oInfracao : consulta) {
                 Map row = (Map) oInfracao;
 
-                vpc_dc_local = row.get("dc_local").toString();
+                vpc_dc_local = row.get("dc_local").toString().trim();
                 vpc_dc_enquadramento = row.get("dc_enquadramento").toString();
                 vpc_dc_marca = row.get("dc_marca").toString();
                 vpc_dc_especie = row.get("dc_especie").toString();
@@ -224,8 +225,6 @@ public class MbDigitacaoPlacas implements Serializable {
             }
 
         }
-
-        
     }
 
     public void geraListaVeiculoMarcaCET() {
@@ -291,8 +290,7 @@ public class MbDigitacaoPlacas implements Serializable {
         Session session = FacesContextUtil.getRequestSession();
 
         if (!dc_placa.isEmpty()) {
-            vpc_dc_local = "";
-            vlc_sql = "select ifnull(b.dc_categoria, space(30)) as dc_categoria, ";
+             vlc_sql = "select ifnull(b.dc_categoria, space(30)) as dc_categoria, ";
             vlc_sql += "ifnull(c.dc_marca, space(35)) as dc_marca, ";
             vlc_sql += "ifnull(d.dc_especie, space(15)) as dc_especie, ";
             vlc_sql += "ifnull(e.dc_municipio, space(40)) as dc_municipio, ";
@@ -502,7 +500,6 @@ public class MbDigitacaoPlacas implements Serializable {
             images.add("BRANCO.jpg");    
         }else {
  
-            vpc_dc_local = "";
             vlc_sql = "select a.dc_nr_multa, a.dc_nomeImagem ";
             vlc_sql += "from autoInfracaoImagem a ";
             vlc_sql += "where a.dc_nr_multa = '" + vpc_dc_nr_multa + "' ";
@@ -553,9 +550,10 @@ public class MbDigitacaoPlacas implements Serializable {
         return vpc_dc_local;
     }
 
-    public void setVpc_dc_local(String vpc_dc_local) {
-        this.vpc_dc_local = vpc_dc_local;
+    public void setVpc_dc_local(String vpc_dc_local2) {
+        this.vpc_dc_local = vpc_dc_local2;
     }
+
 
     public String getVpc_dc_enquadramento() {
         return vpc_dc_enquadramento;
