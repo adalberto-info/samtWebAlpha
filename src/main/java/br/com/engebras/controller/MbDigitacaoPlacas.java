@@ -412,6 +412,11 @@ public class MbDigitacaoPlacas implements Serializable {
     SimpleDateFormat data_formatada = new SimpleDateFormat(data_formato);
     vlc_data = data_formatada.format(dt_atual);
 
+    if (vpn_nr_codInconsistencia == 99){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informe o Motivo Invalidação !", ""));
+        return;
+    }
+    
     if (vpc_dc_placa.isEmpty() && vpn_nr_codInconsistencia == 0){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informe a Placa !", ""));
         return;
