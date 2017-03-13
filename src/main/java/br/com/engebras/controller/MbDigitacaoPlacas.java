@@ -70,6 +70,7 @@ public class MbDigitacaoPlacas implements Serializable {
     private String vpc_dc_placa;
     private String vpc_dc_nr_multa;
     private String vlc_data;
+    private String vpc_nr_codInconsistencia;
     private Integer vpn_nr_codInconsistencia;
     private Integer vpn_ptn_images;
     private List veiculoMarcaCETs = new ArrayList<>();
@@ -111,6 +112,8 @@ public class MbDigitacaoPlacas implements Serializable {
         vpc_dc_cor = "";
         vpc_dc_municipio = "";
         vpc_dc_nr_multa = "";
+        vpc_nr_codInconsistencia = "";
+        vpn_nr_codInconsistencia = 0;
 
         geraListaVeiculoMarcaCET();
         geraListaMotivoInconsistenciaImagem();
@@ -355,7 +358,6 @@ public class MbDigitacaoPlacas implements Serializable {
 
             }
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Consulta de Placa realizada com sucesso...", ""));
         }
     }
 
@@ -402,7 +404,7 @@ public class MbDigitacaoPlacas implements Serializable {
 
     vpc_dc_mensagem = "";
     vpc_dc_placa = autoInfracao.getDc_placa();
-    vpn_nr_codInconsistencia = autoInfracao.getNr_codInconsistencia();
+   // vpn_nr_codInconsistencia = autoInfracao.getNr_codInconsistencia();
     vpc_dc_nr_multa = autoInfracao.getDc_nr_multa();
     vpn_ptn_images = 0;
     
@@ -412,8 +414,14 @@ public class MbDigitacaoPlacas implements Serializable {
     SimpleDateFormat data_formatada = new SimpleDateFormat(data_formato);
     vlc_data = data_formatada.format(dt_atual);
 
+    if (vpn_nr_codInconsistencia == null){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Código inconsistência: null.", ""));
+    }else{
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Código inconsistência: " + vpn_nr_codInconsistencia + ".", ""));
+    }
+    
     if (vpn_nr_codInconsistencia == 99){
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informe o Motivo Invalidação !", ""));
+//        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informe o Motivo Invalidação !", ""));
         return;
     }
     
@@ -679,6 +687,14 @@ public class MbDigitacaoPlacas implements Serializable {
 
     public void setVpn_ptn_images(Integer vpn_ptn_images) {
         this.vpn_ptn_images = vpn_ptn_images;
+    }
+
+    public String getVpc_nr_codInconsistencia() {
+        return vpc_nr_codInconsistencia;
+    }
+
+    public void setVpc_nr_codInconsistencia(String vpc_nr_codInconsistencia) {
+        this.vpc_nr_codInconsistencia = vpc_nr_codInconsistencia;
     }
 
 }

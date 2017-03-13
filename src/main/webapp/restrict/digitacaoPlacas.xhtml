@@ -162,9 +162,9 @@
 
                             <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
                                 <p:outputLabel for="nr_codInconsistencia" value="Motivo Invalidação: "/>
-                                <p:selectOneMenu id="nr_codInconsistencia" value="#{mbDigitacaoPlacas.autoInfracao.nr_codInconsistencia}" style="width:550px" >
+                                <p:selectOneMenu id="nr_codInconsistencia" value="#{mbDigitacaoPlacas.vpn_nr_codInconsistencia}" style="width:550px" >
                                     <f:selectItem itemLabel="Selecione o motivo inconsistência" itemValue="99" />
-                                    <f:selectItem itemLabel="Imagem Válida" itemValue="0" />
+                                    <f:selectItem itemLabel="Imagem Válida" itemValue="00" />
                                     <f:selectItems value="#{mbDigitacaoPlacas.motivoInconsistenciaImagens}" var="listaMotivoInconsistenciaImagens" 
                                                    itemLabel="#{listaMotivoInconsistenciaImagens.dc_inconsistencia}" itemValue="#{listaMotivoInconsistenciaImagens.nr_codigo}"/>
 
