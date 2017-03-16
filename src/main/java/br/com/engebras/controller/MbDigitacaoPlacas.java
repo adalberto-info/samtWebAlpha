@@ -44,6 +44,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.faces.event.PhaseId;
+import javax.faces.event.ValueChangeEvent;
 import javax.imageio.ImageIO;
 import static org.apache.log4j.LogSF.log;
 import org.primefaces.event.FileUploadEvent;
@@ -70,8 +71,6 @@ public class MbDigitacaoPlacas implements Serializable {
     private String vpc_dc_placa;
     private String vpc_dc_nr_multa;
     private String vlc_data;
-    private String vpc_nr_codInconsistencia;
-    private Integer vpn_nr_codInconsistencia;
     private Integer vpn_ptn_images;
     private List veiculoMarcaCETs = new ArrayList<>();
     private List motivoInconsistenciaImagens = new ArrayList<>();
@@ -101,7 +100,6 @@ public class MbDigitacaoPlacas implements Serializable {
     }
 
     public MbDigitacaoPlacas() {
-//        boolean vll_retorno;
         vpc_dc_mensagem = "";
         vpc_dc_local = "";
         vpc_dc_enquadramento = "";
@@ -112,14 +110,9 @@ public class MbDigitacaoPlacas implements Serializable {
         vpc_dc_cor = "";
         vpc_dc_municipio = "";
         vpc_dc_nr_multa = "";
-        vpc_nr_codInconsistencia = "";
-        vpn_nr_codInconsistencia = 0;
 
         geraListaVeiculoMarcaCET();
         geraListaMotivoInconsistenciaImagem();
-
- //       vll_retorno = proximaInfracao();
-
 
     }
 
@@ -248,7 +241,7 @@ public class MbDigitacaoPlacas implements Serializable {
     public void geraListaMotivoInconsistenciaImagem() {
         List listaSQL;
         String vlc_sql;
-        vlc_sql = "select a.nr_codigo, a.dc_inconsistencia from motivoInconsistenciaImagem a order by a.dc_inconsistencia";
+        vlc_sql = "select a.dc_inconsistencia, a.nr_codigo from motivoInconsistenciaImagem a order by a.dc_inconsistencia";
 
         Session session = FacesContextUtil.getRequestSession();
 
@@ -404,7 +397,6 @@ public class MbDigitacaoPlacas implements Serializable {
 
     vpc_dc_mensagem = "";
     vpc_dc_placa = autoInfracao.getDc_placa();
-   // vpn_nr_codInconsistencia = autoInfracao.getNr_codInconsistencia();
     vpc_dc_nr_multa = autoInfracao.getDc_nr_multa();
     vpn_ptn_images = 0;
     
@@ -414,23 +406,23 @@ public class MbDigitacaoPlacas implements Serializable {
     SimpleDateFormat data_formatada = new SimpleDateFormat(data_formato);
     vlc_data = data_formatada.format(dt_atual);
 
-    if (vpn_nr_codInconsistencia == null){
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Código inconsistência: null.", ""));
-    }else{
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Código inconsistência: " + vpn_nr_codInconsistencia + ".", ""));
-    }
     
-    if (vpn_nr_codInconsistencia == 99){
-//        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informe o Motivo Invalidação !", ""));
+    if (autoInfracao.getNr_codInconsistencia() == null){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Código inconsistência: null.", ""));
         return;
     }
     
-    if (vpc_dc_placa.isEmpty() && vpn_nr_codInconsistencia == 0){
+    if (autoInfracao.getNr_codInconsistencia() == 99){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informe o Motivo Invalidação !", ""));
+        return;
+    }
+    
+    if (vpc_dc_placa.isEmpty() && autoInfracao.getNr_codInconsistencia() == 0){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informe a Placa !", ""));
         return;
     }
 
-    if (!vpc_dc_placa.equals(" ") && vpn_nr_codInconsistencia != 0){
+    if (!vpc_dc_placa.equals(" ") && autoInfracao.getNr_codInconsistencia() != 0){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Para este motivo de inconsistência a placa deve estar em branco !", ""));
         return;
     }
@@ -438,7 +430,7 @@ public class MbDigitacaoPlacas implements Serializable {
     Session session = FacesContextUtil.getRequestSession();
 
     try{
-        vlc_sql = "update autoInfracao set dc_placa = '" + vpc_dc_placa +  "', nr_codInconsistencia = " + vpn_nr_codInconsistencia;
+        vlc_sql = "update autoInfracao set dc_placa = '" + vpc_dc_placa +  "', nr_codInconsistencia = " + autoInfracao.getNr_codInconsistencia();
         vlc_sql += ", lg_uso = 0, nr_status = 2, nr_usuarioDigitacao = 9000, dt_digitacao = '" + vlc_data + "'  where dc_nr_multa = '" + vpc_dc_nr_multa + "' ";
         query = session.createSQLQuery(vlc_sql);
         vln_resultado = query.executeUpdate();
@@ -537,7 +529,9 @@ public class MbDigitacaoPlacas implements Serializable {
         
     }
     
-    
+    public void changeNr_codInconsistencia(ValueChangeEvent event){
+		autoInfracao.setNr_codInconsistencia(Integer.parseInt(event.getNewValue().toString()));
+	}
     
     public void setImagemInfracao(StreamedContent imagemInfracao) {
         this.imagemInfracao = imagemInfracao;
@@ -656,15 +650,6 @@ public class MbDigitacaoPlacas implements Serializable {
         this.vpc_dc_nr_multa = vpc_dc_nr_multa;
     }
 
-
-    public Integer getVpn_nr_codInconsistencia() {
-        return vpn_nr_codInconsistencia;
-    }
-
-    public void setVpn_nr_codInconsistencia(Integer vpn_nr_codInconsistencia) {
-        this.vpn_nr_codInconsistencia = vpn_nr_codInconsistencia;
-    }
-
     public String getVlc_data() {
         return vlc_data;
     }
@@ -689,12 +674,5 @@ public class MbDigitacaoPlacas implements Serializable {
         this.vpn_ptn_images = vpn_ptn_images;
     }
 
-    public String getVpc_nr_codInconsistencia() {
-        return vpc_nr_codInconsistencia;
-    }
-
-    public void setVpc_nr_codInconsistencia(String vpc_nr_codInconsistencia) {
-        this.vpc_nr_codInconsistencia = vpc_nr_codInconsistencia;
-    }
 
 }

@@ -193,7 +193,7 @@ public class MotivoInconsistenciaImagem implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.nr_codigo);
+        hash = 79 * hash + Objects.hashCode(this.nr_codigo);
         return hash;
     }
 
@@ -214,6 +214,7 @@ public class MotivoInconsistenciaImagem implements Serializable {
         }
         return true;
     }
+
 
     
     
