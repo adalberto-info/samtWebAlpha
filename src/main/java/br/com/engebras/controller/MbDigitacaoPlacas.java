@@ -110,7 +110,6 @@ public class MbDigitacaoPlacas implements Serializable {
         vpc_dc_cor = "";
         vpc_dc_municipio = "";
         vpc_dc_nr_multa = "";
-
         geraListaVeiculoMarcaCET();
         geraListaMotivoInconsistenciaImagem();
 
@@ -405,7 +404,6 @@ public class MbDigitacaoPlacas implements Serializable {
     String data_formato = "yyyyMMdd";
     SimpleDateFormat data_formatada = new SimpleDateFormat(data_formato);
     vlc_data = data_formatada.format(dt_atual);
-
     
     if (autoInfracao.getNr_codInconsistencia() == null){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Código inconsistência: null.", ""));
@@ -421,8 +419,8 @@ public class MbDigitacaoPlacas implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informe a Placa !", ""));
         return;
     }
-
-    if (!vpc_dc_placa.equals(" ") && autoInfracao.getNr_codInconsistencia() != 0){
+    
+    if (!vpc_dc_placa.isEmpty() && autoInfracao.getNr_codInconsistencia() > 0){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Para este motivo de inconsistência a placa deve estar em branco !", ""));
         return;
     }
@@ -529,9 +527,6 @@ public class MbDigitacaoPlacas implements Serializable {
         
     }
     
-    public void changeNr_codInconsistencia(ValueChangeEvent event){
-		autoInfracao.setNr_codInconsistencia(Integer.parseInt(event.getNewValue().toString()));
-	}
     
     public void setImagemInfracao(StreamedContent imagemInfracao) {
         this.imagemInfracao = imagemInfracao;

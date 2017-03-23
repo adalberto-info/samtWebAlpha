@@ -162,15 +162,14 @@
 
                             <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
                                 <p:outputLabel for="nr_codInconsistencia" value="Motivo Invalidação: "/>
-                                <p:selectOneMenu id="nr_codInconsistencia" value="#{mbDigitacaoPlacas.autoInfracao.nr_codInconsistencia}" style="width:550px" 
-                                    valueChangeListener="#{mbDigitacaoPlacas.changeNr_codInconsistencia}">  
-                                    <f:selectItem itemLabel="[99] Selecione o motivo inconsistência" itemValue="99" />
-                                    <f:selectItem itemLabel="[00] Imagem Válida" itemValue="00" />
+                                <p:selectOneMenu id="nr_codInconsistencia" value="#{mbDigitacaoPlacas.autoInfracao.nr_codInconsistencia}" style="width:550px"> 
+                                    <f:selectItem itemLabel="Selecione o motivo inconsistência" itemValue="99" />
+                                    <f:selectItem itemLabel="Imagem Válida" itemValue="00" />
                                     <f:selectItems value="#{mbDigitacaoPlacas.motivoInconsistenciaImagens}" var="listaMotivoInconsistenciaImagens" 
                                                    itemLabel="#{listaMotivoInconsistenciaImagens.dc_inconsistencia}" itemValue="#{listaMotivoInconsistenciaImagens.nr_codigo.toString()}"/>
                                 </p:selectOneMenu>
                             </p:panelGrid>
-
+                            
                         </p:panelGrid>
 
                         <p:panelGrid columns="1">    
@@ -198,11 +197,11 @@
     
                             <p:toolbar>
                                 <p:toolbarGroup>
-                                    <p:commandButton value="Proximo" icon="ui-icon-arrow-1-e" update="@form" process="@this" style="width: 100px"> 
-                                        <f:actionListener binding="#{mbDigitacaoPlacas.proximoRegistro()}"/> 
+                                    <p:commandButton value="Proximo" icon="ui-icon-arrow-1-e" action="#{mbDigitacaoPlacas.proximoRegistro()}" update="@form" style="width: 100px"> 
+<!--                                        <f:actionListener binding="#\\{mbDigitacaoPlacas.proximoRegistro()}"/> -->
                                         <p:ajax event="click" oncomplete="document.getElementById('dc_placa').focus()"/>     
                                     </p:commandButton>
-                                    <p:commandButton value="Obliterar" icon="ui-icon-circle-close" update="@form" process="@this" style="width: 100px"/>
+                                    <p:commandButton value="Obliterar" icon="ui-icon-circle-close" action="/restrict/obliteraImagem.xhtml" style="width: 100px"/>
                                     <p:commandButton value="Zoom" icon="ui-icon-zoomin" style="width: 100px"/>
                                     <p:commandButton value="Vídeo" icon="ui-icon-video" style="width: 100px"/>
                                     <p:commandButton value="Consulta Placa" icon="ui-icon-search" style="width: 150px"/>
