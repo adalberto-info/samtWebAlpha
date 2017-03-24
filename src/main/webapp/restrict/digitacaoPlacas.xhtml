@@ -201,7 +201,7 @@
 <!--                                        <f:actionListener binding="#\\{mbDigitacaoPlacas.proximoRegistro()}"/> -->
                                         <p:ajax event="click" oncomplete="document.getElementById('dc_placa').focus()"/>     
                                     </p:commandButton>
-                                    <p:commandButton value="Obliterar" icon="ui-icon-circle-close" action="/restrict/obliteraImagem.xhtml" style="width: 100px"/>
+                                    <p:commandButton value="Obliterar" icon="ui-icon-circle-close" onclick="PF('dial_obliteraImagem').show();" type="button" style="width: 100px"/>
                                     <p:commandButton value="Zoom" icon="ui-icon-zoomin" style="width: 100px"/>
                                     <p:commandButton value="Vídeo" icon="ui-icon-video" style="width: 100px"/>
                                     <p:commandButton value="Consulta Placa" icon="ui-icon-search" style="width: 150px"/>
@@ -212,6 +212,25 @@
                     </p:panelGrid>     
                 </div>
                 <br/>
+                
+                
+                <p:dialog header="Obliteração de Imagem" widgetVar="dial_obliteraImagem" modal="true" height="600" width="800">
+                    <h:outputText value="Imagem:" />
+                    <p:panelGrid columns="1" style="height: 550px">
+                        
+                        
+                    </p:panelGrid>
+                    
+                    
+                    <p:toolbar>
+                        <p:toolbarGroup align="center">
+                                <div align="center">
+                                <p:commandButton value="Obliterar" icon="ui-icon-tag" style="width: 100px"/>
+                                <p:commandButton value="Voltar" icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
+                                </div>    
+                        </p:toolbarGroup>
+                    </p:toolbar>
+                </p:dialog>   
             </h:form>
 
         </p:fieldset>
