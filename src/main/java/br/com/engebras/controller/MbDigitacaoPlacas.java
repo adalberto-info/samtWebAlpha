@@ -32,7 +32,9 @@ import br.com.engebras.model.entities.AutoInfracao;
 import br.com.engebras.model.entities.AutoInfracaoImagem;
 import br.com.engebras.model.entities.VeiculoMarcaCET;
 import br.com.engebras.model.entities.MotivoInconsistenciaImagem;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -46,8 +48,10 @@ import java.util.Date;
 import javax.faces.event.PhaseId;
 import javax.faces.event.ValueChangeEvent;
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import static org.apache.log4j.LogSF.log;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.CroppedImage;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -76,6 +80,14 @@ public class MbDigitacaoPlacas implements Serializable {
     private List motivoInconsistenciaImagens = new ArrayList<>();
     private Date dt_atual;
     private StreamedContent imagemInfracao;
+    private CroppedImage croppedImage;
+    
+    private String imagemVeiculo;
+    private String imagemOriginal;
+    private String imagemAtual;
+    private String imagemNova;
+
+ 
     /**
      *
      * @throws FileNotFoundException
@@ -451,7 +463,6 @@ public class MbDigitacaoPlacas implements Serializable {
             foto = new File("c:\\SAMT\\SP\\BRANCO.jpg");
         }else {
             foto = new File("c:\\SAMT\\SP\\" + images.get(vpn_ptn_images));
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "imagem: " + images.get(vpn_ptn_images) + ".", ""));
         }
         
 
@@ -527,7 +538,39 @@ public class MbDigitacaoPlacas implements Serializable {
         
     }
     
+    public String crop() throws IOException{
+        if(croppedImage == null){
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "croppedImage está null... ",""));
+        return null;
+        }
+       ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+
+       geraNovaImagem();
+       BufferedImage image = ImageIO.read(new File(servletContext.getRealPath("") + File.separator + "temp" + File.separator + imagemAtual));
+
+       Graphics2D graphics = image.createGraphics();
+       graphics.setColor(Color.BLACK);
+       graphics.fillRect(croppedImage.getLeft(), croppedImage.getTop(), croppedImage.getWidth(), croppedImage.getHeight());
+       graphics.dispose();
+       File ImagemDestino = new File(servletContext.getRealPath("") + File.separator + "temp" + File.separator + imagemNova);
+       ImageIO.write(image, "jpg", ImagemDestino);
+//       imagemVeiculo = servletContext.getRealPath("") + File.separator + "temp" + File.separator + imagemNova;
+       ImagemDestino = new File(servletContext.getRealPath("") + File.separator + "temp" + File.separator + imagemOriginal + ".jpg");
+       ImageIO.write(image, "jpg", ImagemDestino);
+       setImagemVeiculo("/temp/" + imagemNova);
+       setImagemAtual(imagemNova);
+       return null;
+    }
     
+    private void geraNovaImagem() {
+        imagemNova = imagemOriginal + getNumeroRandomico() + ".jpg";
+    }
+
+    private String getNumeroRandomico() {
+      int i = (int) (Math.random() * 10000);
+      return String.valueOf(i);
+    }
+
     public void setImagemInfracao(StreamedContent imagemInfracao) {
         this.imagemInfracao = imagemInfracao;
     }
@@ -667,6 +710,46 @@ public class MbDigitacaoPlacas implements Serializable {
 
     public void setVpn_ptn_images(Integer vpn_ptn_images) {
         this.vpn_ptn_images = vpn_ptn_images;
+    }
+
+    public CroppedImage getCroppedImage() {
+        return croppedImage;
+    }
+
+    public void setCroppedImage(CroppedImage croppedImage) {
+        this.croppedImage = croppedImage;
+    }
+
+    public String getImagemVeiculo() {
+        return imagemVeiculo;
+    }
+
+    public void setImagemVeiculo(String imagemVeiculo) {
+        this.imagemVeiculo = imagemVeiculo;
+    }
+
+    public String getImagemOriginal() {
+        return imagemOriginal;
+    }
+
+    public void setImagemOriginal(String imagemOriginal) {
+        this.imagemOriginal = imagemOriginal;
+    }
+
+    public String getImagemAtual() {
+        return imagemAtual;
+    }
+
+    public void setImagemAtual(String imagemAtual) {
+        this.imagemAtual = imagemAtual;
+    }
+
+    public String getImagemNova() {
+        return imagemNova;
+    }
+
+    public void setImagemNova(String imagemNova) {
+        this.imagemNova = imagemNova;
     }
 
 
