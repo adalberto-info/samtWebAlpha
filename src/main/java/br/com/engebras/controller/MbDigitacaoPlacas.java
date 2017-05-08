@@ -482,6 +482,12 @@ public class MbDigitacaoPlacas implements Serializable {
         }
         return content;
     }
+    
+    public void salvaPastaPublica(){
+        
+        File outputFile = new File("//resources//image_temp//imagem.jpg");
+        ImageIO.write(imagemInfracao, "JPG", outputFile);
+    }
 
     public void navegaImagem(String direcao){
         
