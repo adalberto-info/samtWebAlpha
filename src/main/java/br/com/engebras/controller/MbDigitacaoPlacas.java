@@ -42,7 +42,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.faces.event.PhaseId;
@@ -54,6 +56,7 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.CroppedImage;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
 
 @ManagedBean(name = "mbDigitacaoPlacas")
 @SessionScoped
@@ -122,11 +125,13 @@ public class MbDigitacaoPlacas implements Serializable {
         vpc_dc_cor = "";
         vpc_dc_municipio = "";
         vpc_dc_nr_multa = "";
+
         geraListaVeiculoMarcaCET();
         geraListaMotivoInconsistenciaImagem();
 
     }
 
+    
     private InterfaceDAO<AutoInfracao> autoInfracaoDAO() {
         InterfaceDAO<AutoInfracao> autoInfracaoDAO = new HibernateDAO<AutoInfracao>(AutoInfracao.class, FacesContextUtil.getRequestSession());
         return autoInfracaoDAO;
@@ -483,12 +488,78 @@ public class MbDigitacaoPlacas implements Serializable {
         return content;
     }
     
-    public void salvaPastaPublica(){
+    public void uploadImagem(FileUploadEvent event) {
+
+        File arqOrigem = new File(vpc_dirVeiculos + plc_nomeArq);
+        File arqDestino = new File(vpc_dirTemporario + plc_nomeArq);
+
+        if (copiaArquivos(arqOrigem, arqDestino) == false) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + plc_nomeArq + " para o diretorio temporário. Arquivo não foi atualizado !", ""));
+            return;
+        };
+
         
-        File outputFile = new File("//resources//image_temp//imagem.jpg");
-        ImageIO.write(imagemInfracao, "JPG", outputFile);
+        // Do what you want with the file        
+        try {
+//            byte[] foto = event.getFile().getContents();
+            File arqImagem = new File("c:\\samt\\sp\\000010102488718260_00.jpg");
+            byte[] foto = arqImagem.getContents();
+            String nomeArquivo = "000010102488718260_00.jpg";  
+            FacesContext facesContext = FacesContext.getCurrentInstance();  
+            ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();  
+            String arquivo = scontext.getRealPath("/resources/upload/" + nomeArquivo);
+//            String arquivo = scontext.getContextPath()+"/uploadis/" + nomeArquivo;
+            File f=new File(arquivo);
+            if(!f.getParentFile().exists())f.getParentFile().mkdirs();
+            if(!f.exists())f.createNewFile();
+            System.out.println(f.getAbsolutePath());
+            FileOutputStream fos=new FileOutputStream(arquivo);
+            fos.write(foto);
+            fos.flush();
+            fos.close();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Imagem enviada com sucesso !", ""));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }    
+
+    public boolean copiaArquivos(File arqOrigem, File arqDestino) throws IOException{
+        boolean retorno = true; 
+        
+        if (arqDestino.exists())
+        {
+            arqDestino.delete();
+        }
+        
+        FileChannel origemChannel = null; 
+        FileChannel destinoChannel = null; 
+        
+        try 
+        {
+            origemChannel = new FileInputStream(arqOrigem).getChannel(); 
+            destinoChannel = new FileOutputStream(arqDestino).getChannel();
+            origemChannel.transferTo(0, origemChannel.size(), destinoChannel);
+        }catch(Exception erro)
+        {
+            System.out.println("Erro ao tentar copiar o arquivo: " + arqOrigem.toString() + ". Erro: " + erro);
+            retorno = false;
+        }
+        finally {
+            if (origemChannel != null && origemChannel.isOpen())
+            {
+                origemChannel.close();
+            }
+            if (destinoChannel != null && destinoChannel.isOpen())
+            {
+                destinoChannel.close();
+            }
+        }
+        
+        return retorno; 
+        
     }
 
+    
     public void navegaImagem(String direcao){
         
         if (direcao.equals("PROXIMO")){
