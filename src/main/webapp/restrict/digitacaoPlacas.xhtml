@@ -201,7 +201,16 @@
 <!--                                        <f:actionListener binding="#\\{mbDigitacaoPlacas.proximoRegistro()}"/> -->
                                         <p:ajax event="click" oncomplete="document.getElementById('dc_placa').focus()"/>     
                                     </p:commandButton>
-                                    <p:commandButton value="Obliterar" icon="ui-icon-circle-close" onclick="PF('dial_obliteraImagem').show();" type="button" style="width: 100px"/>
+
+                                    <p:commandButton value="Obliterar" icon="ui-icon-circle-close" onclick="PF('dial_obliteraImagem').show();" style="width: 100px">
+                                         <f:actionListener binding="#{mbDigitacaoPlacas.uploadImagem()}"/>
+                                    </p:commandButton>     
+
+                                    
+<!--                                    <p:commandButton value="Obliterar" icon="ui-icon-circle-close" onclick="PF('dial_obliteraImagem').show();" style="width: 100px">
+                                         <f:actionListener binding="#\\{mbDigitacaoPlacas.uploadImagem()}"/>
+                                    </p:commandButton>     
+-->
                                     <p:commandButton value="Zoom" icon="ui-icon-zoomin" style="width: 100px"/>
                                     <p:commandButton value="Vídeo" icon="ui-icon-video" style="width: 100px"/>
                                     <p:commandButton value="Consulta Placa" icon="ui-icon-search" style="width: 150px"/>

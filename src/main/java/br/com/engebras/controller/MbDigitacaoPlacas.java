@@ -490,6 +490,8 @@ public class MbDigitacaoPlacas implements Serializable {
     
     public void uploadImagem() {
 
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Executei o método uploadImagem...", ""));
+
         String nomeArquivo = "000010102488718260_00.jpg";  
         File arqOrigem = new File("c:\\samt\\sp\\000010102488718260_00.jpg");
 
