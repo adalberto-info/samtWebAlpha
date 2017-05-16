@@ -495,7 +495,7 @@ public class MbDigitacaoPlacas implements Serializable {
 
         FacesContext facesContext = FacesContext.getCurrentInstance();  
         ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();  
-        String destino = scontext.getRealPath("/resources/upload/" + nomeArquivo);
+        String destino = scontext.getRealPath("/resources/upload/") + "/" + nomeArquivo;
         File arqDestino = new File(destino);
 
         try{
@@ -509,38 +509,9 @@ public class MbDigitacaoPlacas implements Serializable {
 
         
     }    
-
-//    public void uploadImagem2() {
-        
-        // Do what you want with the file        
-//        try {
-//            byte[] foto = event.getFile().getContents();
-//            File arqImagem = new File("c:\\samt\\sp\\000010102488718260_00.jpg");
-//            byte[] foto = arqImagem.getContents();
-//            String nomeArquivo = "000010102488718260_00.jpg";  
-//            FacesContext facesContext = FacesContext.getCurrentInstance();  
-//            ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();  
-//            String arquivo = scontext.getRealPath("/resources/upload/" + nomeArquivo);
-//            String arquivo = scontext.getContextPath()+"/uploadis/" + nomeArquivo;
-//            File f=new File(arquivo);
-//            if(!f.getParentFile().exists())f.getParentFile().mkdirs();
-//            if(!f.exists())f.createNewFile();
-//            System.out.println(f.getAbsolutePath());
-//            FileOutputStream fos=new FileOutputStream(arquivo);
-//            fos.write(foto);
-//            fos.flush();
-//            fos.close();
-//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Imagem enviada com sucesso !", ""));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }    
-    
     
     public boolean copiaArquivos(File arqOrigem, File arqDestino) throws IOException{
         boolean retorno = true; 
-
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Entrei no método copiaArquivos.", ""));
         
         if (arqDestino.exists())
         {
