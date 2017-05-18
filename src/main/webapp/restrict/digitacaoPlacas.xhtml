@@ -202,7 +202,7 @@
                                         <p:ajax event="click" oncomplete="document.getElementById('dc_placa').focus()"/>     
                                     </p:commandButton>
 
-                                    <p:commandButton value="Obliterar" icon="ui-icon-circle-close" onclick="PF('dial_obliteraImagem').show();" style="width: 100px">
+                                    <p:commandButton value="Obliterar" icon="ui-icon-circle-close" onclick="PF('dial_obliteraImagem').show();" style="width: 100px" update="imageCropper">
                                          <f:actionListener binding="#{mbDigitacaoPlacas.uploadImagem()}"/>
                                     </p:commandButton>     
 
@@ -215,7 +215,6 @@
                                     <p:commandButton value="Vídeo" icon="ui-icon-video" style="width: 100px"/>
                                     <p:commandButton value="Consulta Placa" icon="ui-icon-search" style="width: 150px"/>
                                     <p:commandButton value="Imprimir" icon="ui-icon-print" style="width: 100px"/>
-                                    <p:commandButton value="teste" icon="ui-icon-star" action="#{mbDigitacaoPlacas.uploadImagem()}" style="width: 100px"/>
                                 </p:toolbarGroup>
                             </p:toolbar>
                         </p:panelGrid>
@@ -224,15 +223,15 @@
                 <br/>
                 
                 
-                <p:dialog header="Obliteração de Imagem" widgetVar="dial_obliteraImagem" modal="true" height="700" width="800">
+                <p:dialog header="Obliteração de Imagem" id="dialogObliteracao" widgetVar="dial_obliteraImagem" modal="true" height="700" width="800">
                     <h:outputText value="Imagem:" />
                     
                         <p:growl id="msg1" showDetail="true" />
                         <h:panelGrid columns="1" id="panelImagemObliterar" style="height: 550px">
 <!--                            <p:imageCropper immediate="true" value="#//{mbDigitacaoPlacas.croppedImage}" image="#//{mbDigitacaoPlacas.imagemInfracao}" initialCoords="225,75,300,125" id="imageCropper" />  -->
 
-                            <p:imageCropper immediate="true" value="#{mbDigitacaoPlacas.croppedImage}" image="/resources/temp/000010102488718260_00.jpg" initialCoords="225,75,300,125" id="imageCropper"/> 
-<!--                        <p:graphicImage id="localCroppedImage" value="/resources/temp/000010102488718260_00.jpg" cache="false"/>   -->
+                            <p:imageCropper immediate="true" value="#{mbDigitacaoPlacas.croppedImage}" image="/resources/upload/000010102488718260_00.jpg" initialCoords="225,75,300,125" id="imageCropper"/> 
+                            <!--                        <p:graphicImage id="localCroppedImage" value="/resources/temp/000010102488718260_00.jpg" cache="false"/>   -->
                         </h:panelGrid>    
 
                     
@@ -240,7 +239,7 @@
                     <p:toolbar>
                         <p:toolbarGroup align="center">
                                 <div align="center">
-                                <p:commandButton value="Obliterar" actionListener="#{mbDigitacaoPlacas.crop()}" update="" rendered="true"  icon="ui-icon-tag" style="width: 100px"/>
+                                <p:commandButton value="Obliterar" actionListener="#{mbDigitacaoPlacas.crop()}" update="imageCropper" rendered="true"  icon="ui-icon-tag" style="width: 100px"/>
                                 <p:commandButton value="Voltar" onclick="PF('dial_obliteraImagem').hide();" icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
                                 </div>    
                         </p:toolbarGroup>

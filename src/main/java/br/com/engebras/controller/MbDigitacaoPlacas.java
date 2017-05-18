@@ -89,7 +89,8 @@ public class MbDigitacaoPlacas implements Serializable {
     private String imagemOriginal;
     private String imagemAtual;
     private String imagemNova;
-
+    private String vpc_dirUpload;
+    private String vpc_dirImagens;
  
     /**
      *
@@ -126,9 +127,9 @@ public class MbDigitacaoPlacas implements Serializable {
         vpc_dc_municipio = "";
         vpc_dc_nr_multa = "";
 
+        iniciaVariaveis();
         geraListaVeiculoMarcaCET();
         geraListaMotivoInconsistenciaImagem();
-
     }
 
     
@@ -466,13 +467,16 @@ public class MbDigitacaoPlacas implements Serializable {
         File foto; 
         if (images.size() == 0){
             foto = new File("c:\\SAMT\\SP\\BRANCO.jpg");
+            imagemVeiculo = "";
         }else {
             foto = new File("c:\\SAMT\\SP\\" + images.get(vpn_ptn_images));
+            imagemVeiculo = images.get(vpn_ptn_images);
         }
-        
+       
 
         if (!foto.exists()){
             foto = new File("c:\\SAMT\\SP\\BRANCO.jpg");
+            imagemVeiculo = "";
         }
         
         DefaultStreamedContent content=null;
@@ -490,15 +494,14 @@ public class MbDigitacaoPlacas implements Serializable {
     
     public void uploadImagem() {
 
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Executei o método uploadImagem...", ""));
-
         String nomeArquivo = "000010102488718260_00.jpg";  
-        File arqOrigem = new File("c:\\samt\\sp\\000010102488718260_00.jpg");
+        File arqOrigem = new File(vpc_dirImagens + "000010102488718260_00.jpg");
 
-        FacesContext facesContext = FacesContext.getCurrentInstance();  
-        ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();  
-        String destino = scontext.getRealPath("/resources/upload/") + "/" + nomeArquivo;
-        File arqDestino = new File(destino);
+//        FacesContext facesContext = FacesContext.getCurrentInstance();  
+//        ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();  
+//        String destino = scontext.getRealPath("/resources/upload/") + "/" + nomeArquivo;
+          String destino = vpc_dirUpload + nomeArquivo;  
+          File arqDestino = new File(destino);
 
         try{
         if (copiaArquivos(arqOrigem, arqDestino) == false) {
@@ -635,6 +638,13 @@ public class MbDigitacaoPlacas implements Serializable {
     private String getNumeroRandomico() {
       int i = (int) (Math.random() * 10000);
       return String.valueOf(i);
+    }
+
+    private void iniciaVariaveis(){
+        FacesContext facesContext = FacesContext.getCurrentInstance();  
+        ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();  
+        vpc_dirUpload = scontext.getRealPath("/resources/upload/") + "/" ;
+        vpc_dirImagens = "c:\\samt\\sp\\";
     }
 
     public void setImagemInfracao(StreamedContent imagemInfracao) {
