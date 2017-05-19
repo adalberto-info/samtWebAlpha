@@ -91,7 +91,8 @@ public class MbDigitacaoPlacas implements Serializable {
     private String imagemNova;
     private String vpc_dirUpload;
     private String vpc_dirImagens;
- 
+    private String imagemObliteracao;
+    
     /**
      *
      * @throws FileNotFoundException
@@ -466,18 +467,20 @@ public class MbDigitacaoPlacas implements Serializable {
 //        File foto=new File("c:\\SAMT\\SP\\000010102488718260_00.jpg");
         File foto; 
         if (images.size() == 0){
-            foto = new File("c:\\SAMT\\SP\\BRANCO.jpg");
+            foto = new File(vpc_dirImagens + "BRANCO.jpg");
             imagemVeiculo = "";
         }else {
-            foto = new File("c:\\SAMT\\SP\\" + images.get(vpn_ptn_images));
+            foto = new File(vpc_dirImagens + images.get(vpn_ptn_images));
             imagemVeiculo = images.get(vpn_ptn_images);
         }
        
 
         if (!foto.exists()){
-            foto = new File("c:\\SAMT\\SP\\BRANCO.jpg");
+            foto = new File(vpc_dirImagens + "BRANCO.jpg");
             imagemVeiculo = "";
         }
+
+        imagemObliteracao = vpc_dirImagens + imagemVeiculo;
         
         DefaultStreamedContent content=null;
         try{
@@ -494,18 +497,17 @@ public class MbDigitacaoPlacas implements Serializable {
     
     public void uploadImagem() {
 
-        String nomeArquivo = "000010102488718260_00.jpg";  
-        File arqOrigem = new File(vpc_dirImagens + "000010102488718260_00.jpg");
+        File arqOrigem = new File(vpc_dirImagens + imagemVeiculo);
 
 //        FacesContext facesContext = FacesContext.getCurrentInstance();  
 //        ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();  
 //        String destino = scontext.getRealPath("/resources/upload/") + "/" + nomeArquivo;
-          String destino = vpc_dirUpload + nomeArquivo;  
+          String destino = vpc_dirUpload + imagemVeiculo;  
           File arqDestino = new File(destino);
 
         try{
         if (copiaArquivos(arqOrigem, arqDestino) == false) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + nomeArquivo + " para o diretorio temporário. Arquivo não foi atualizado !", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o diretorio temporário. Arquivo não foi atualizado !", ""));
             return;
         };
         } catch(Exception erro){
