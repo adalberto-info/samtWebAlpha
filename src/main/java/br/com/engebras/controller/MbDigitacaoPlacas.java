@@ -480,7 +480,7 @@ public class MbDigitacaoPlacas implements Serializable {
             imagemVeiculo = "";
         }
 
-        imagemObliteracao = vpc_dirImagens + imagemVeiculo;
+        imagemObliteracao = vpc_dirUpload + imagemVeiculo;
         
         DefaultStreamedContent content=null;
         try{
@@ -645,7 +645,7 @@ public class MbDigitacaoPlacas implements Serializable {
     private void iniciaVariaveis(){
         FacesContext facesContext = FacesContext.getCurrentInstance();  
         ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();  
-        vpc_dirUpload = scontext.getRealPath("/resources/upload/") + "/" ;
+        vpc_dirUpload = scontext.getRealPath("/resources/upload/") + "\\" ;
         vpc_dirImagens = "c:\\samt\\sp\\";
     }
 
@@ -828,6 +828,30 @@ public class MbDigitacaoPlacas implements Serializable {
 
     public void setImagemNova(String imagemNova) {
         this.imagemNova = imagemNova;
+    }
+
+    public String getVpc_dirUpload() {
+        return vpc_dirUpload;
+    }
+
+    public void setVpc_dirUpload(String vpc_dirUpload) {
+        this.vpc_dirUpload = vpc_dirUpload;
+    }
+
+    public String getVpc_dirImagens() {
+        return vpc_dirImagens;
+    }
+
+    public void setVpc_dirImagens(String vpc_dirImagens) {
+        this.vpc_dirImagens = vpc_dirImagens;
+    }
+
+    public String getImagemObliteracao() {
+        return imagemObliteracao;
+    }
+
+    public void setImagemObliteracao(String imagemObliteracao) {
+        this.imagemObliteracao = imagemObliteracao;
     }
 
 
