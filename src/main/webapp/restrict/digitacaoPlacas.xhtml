@@ -223,18 +223,18 @@
                 <br/>
                 
                 
-                <p:dialog header="Obliteração de Imagem" id="dialogObliteracao" widgetVar="dial_obliteraImagem" modal="true" height="700" width="800">
+                <p:dialog header="Obliteração de Imagem" id="dialogObliteracao" widgetVar="dial_obliteraImagem" modal="true" height="670" width="685">
                     <h:outputText value="Imagem:" />
                     
                         <p:growl id="msg1" showDetail="true" />
                         <h:panelGrid columns="1" id="panelImagemObliterar" style="height: 550px">
-                            <p:imageCropper immediate="true" value="#{mbDigitacaoPlacas.croppedImage}" image="#{mbDigitacaoPlacas.imagemObliteracao}" initialCoords="225,75,300,125" id="imageCropper" />  
+                            <p:imageCropper immediate="true" value="#{mbDigitacaoPlacas.croppedImage}" image="#{mbDigitacaoPlacas.imagemObliteracao}" initialCoords="100,50,300,100" id="imageCropper" />  
 
 <!--                            <p:imageCropper immediate="true" value="#//{mbDigitacaoPlacas.croppedImage}" image="/resources/upload/000010102488718260_00.jpg" initialCoords="225,75,300,125" id="imageCropper"/> -->
                         </h:panelGrid>    
                         <p:panelGrid columns="2" id="panelDescricaoImagem">
                             <p:outputLabel for="imagemObliteracao" value="Imagem: "/>
-                            <p:inputText id="imagemObliteracao" value="#{mbDigitacaoPlacas.imagemObliteracao}" size="130"/>
+                            <p:inputText id="imagemObliteracao" value="#{mbDigitacaoPlacas.imagemObliteracao}" size="86"/>
                         </p:panelGrid>
                     
                     

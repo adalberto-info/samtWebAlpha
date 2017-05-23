@@ -480,7 +480,8 @@ public class MbDigitacaoPlacas implements Serializable {
             imagemVeiculo = "";
         }
 
-        imagemObliteracao = vpc_dirUpload + imagemVeiculo;
+//        imagemObliteracao = vpc_dirUpload + imagemVeiculo;
+        imagemObliteracao = "/resources/upload/" + imagemVeiculo;
         
         DefaultStreamedContent content=null;
         try{
