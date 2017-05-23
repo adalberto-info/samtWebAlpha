@@ -480,8 +480,7 @@ public class MbDigitacaoPlacas implements Serializable {
             imagemVeiculo = "";
         }
 
-//        imagemObliteracao = vpc_dirUpload + imagemVeiculo;
-        imagemObliteracao = "/resources/upload/" + imagemVeiculo;
+        imagemObliteracao = vpc_dirUpload + imagemVeiculo;
         
         DefaultStreamedContent content=null;
         try{
@@ -500,11 +499,11 @@ public class MbDigitacaoPlacas implements Serializable {
 
         File arqOrigem = new File(vpc_dirImagens + imagemVeiculo);
 
-//        FacesContext facesContext = FacesContext.getCurrentInstance();  
-//        ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();  
+        FacesContext facesContext = FacesContext.getCurrentInstance();  
+        ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();  
 //        String destino = scontext.getRealPath("/resources/upload/") + "/" + nomeArquivo;
-          String destino = vpc_dirUpload + imagemVeiculo;  
-          File arqDestino = new File(destino);
+        String destino = scontext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo;  
+        File arqDestino = new File(destino);
 
         try{
         if (copiaArquivos(arqOrigem, arqDestino) == false) {
@@ -644,9 +643,7 @@ public class MbDigitacaoPlacas implements Serializable {
     }
 
     private void iniciaVariaveis(){
-        FacesContext facesContext = FacesContext.getCurrentInstance();  
-        ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();  
-        vpc_dirUpload = scontext.getRealPath("/resources/upload/") + "\\" ;
+        vpc_dirUpload = "/resources/upload/" ;
         vpc_dirImagens = "c:\\samt\\sp\\";
     }
 
