@@ -452,7 +452,7 @@ public class MbDigitacaoPlacas implements Serializable {
         query = session.createSQLQuery(vlc_sql);
         vln_resultado = query.executeUpdate();
     }catch(Exception erro){
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro a tentar atualizar a tabela autoInfracao !", ""));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao tentar atualizar a tabela autoInfracao !", ""));
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: " + erro + ".", ""));
         return;
     }
@@ -615,20 +615,21 @@ public class MbDigitacaoPlacas implements Serializable {
         return null;
         }
        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-
+       imagemOriginal = imagemVeiculo;
+       imagemAtual = imagemVeiculo;
        geraNovaImagem();
-       BufferedImage image = ImageIO.read(new File(servletContext.getRealPath("") + File.separator + "temp" + File.separator + imagemAtual));
+       BufferedImage image = ImageIO.read(new File(servletContext.getRealPath("") + File.separator + "upload" + File.separator + imagemAtual));
 
        Graphics2D graphics = image.createGraphics();
        graphics.setColor(Color.BLACK);
        graphics.fillRect(croppedImage.getLeft(), croppedImage.getTop(), croppedImage.getWidth(), croppedImage.getHeight());
        graphics.dispose();
-       File ImagemDestino = new File(servletContext.getRealPath("") + File.separator + "temp" + File.separator + imagemNova);
+       File ImagemDestino = new File(servletContext.getRealPath("") + File.separator + "upload" + File.separator + imagemNova);
        ImageIO.write(image, "jpg", ImagemDestino);
 //       imagemVeiculo = servletContext.getRealPath("") + File.separator + "temp" + File.separator + imagemNova;
-       ImagemDestino = new File(servletContext.getRealPath("") + File.separator + "temp" + File.separator + imagemOriginal + ".jpg");
+       ImagemDestino = new File(servletContext.getRealPath("") + File.separator + "upload" + File.separator + imagemVeiculo);
        ImageIO.write(image, "jpg", ImagemDestino);
-       setImagemVeiculo("/temp/" + imagemNova);
+       setImagemVeiculo("/upload/" + imagemNova);
        setImagemAtual(imagemNova);
        return null;
     }
@@ -642,6 +643,9 @@ public class MbDigitacaoPlacas implements Serializable {
       return String.valueOf(i);
     }
 
+    
+    
+    
     private void iniciaVariaveis(){
         vpc_dirUpload = "/resources/upload/" ;
         vpc_dirImagens = "c:\\samt\\sp\\";
