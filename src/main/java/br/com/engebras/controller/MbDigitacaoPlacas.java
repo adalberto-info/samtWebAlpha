@@ -636,6 +636,7 @@ public class MbDigitacaoPlacas implements Serializable {
        ImageIO.write(image, "jpg", ImagemDestino);
        setImagemVeiculo("/upload/" + imagemNova);
        setImagemAtual(imagemNova);
+       setImagemObliteracao(vpc_dirUpload + imagemNova);
        return null;
     }
     
