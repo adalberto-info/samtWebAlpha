@@ -618,16 +618,21 @@ public class MbDigitacaoPlacas implements Serializable {
        imagemOriginal = imagemVeiculo;
        imagemAtual = imagemVeiculo;
        geraNovaImagem();
-       BufferedImage image = ImageIO.read(new File(servletContext.getRealPath("") + File.separator + "upload" + File.separator + imagemAtual));
+       BufferedImage image = ImageIO.read(new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemAtual));
+        FacesContext facesContext = FacesContext.getCurrentInstance();  
 
+       
+       
        Graphics2D graphics = image.createGraphics();
        graphics.setColor(Color.BLACK);
        graphics.fillRect(croppedImage.getLeft(), croppedImage.getTop(), croppedImage.getWidth(), croppedImage.getHeight());
        graphics.dispose();
-       File ImagemDestino = new File(servletContext.getRealPath("") + File.separator + "upload" + File.separator + imagemNova);
+//       File ImagemDestino = new File(servletContext.getRealPath("") + File.separator + "upload" + File.separator + imagemNova);
+       File ImagemDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemNova);
        ImageIO.write(image, "jpg", ImagemDestino);
 //       imagemVeiculo = servletContext.getRealPath("") + File.separator + "temp" + File.separator + imagemNova;
-       ImagemDestino = new File(servletContext.getRealPath("") + File.separator + "upload" + File.separator + imagemVeiculo);
+//       ImagemDestino = new File(servletContext.getRealPath("") + File.separator + "upload" + File.separator + imagemVeiculo);
+       ImagemDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo);
        ImageIO.write(image, "jpg", ImagemDestino);
        setImagemVeiculo("/upload/" + imagemNova);
        setImagemAtual(imagemNova);
@@ -635,12 +640,34 @@ public class MbDigitacaoPlacas implements Serializable {
     }
     
     private void geraNovaImagem() {
-        imagemNova = imagemOriginal + getNumeroRandomico() + ".jpg";
+        imagemNova = getFileName(imagemOriginal) + getNumeroRandomico() + ".jpg";
     }
 
     private String getNumeroRandomico() {
       int i = (int) (Math.random() * 10000);
       return String.valueOf(i);
+    }
+
+
+    public static String getFileName(String fileName) {
+		if(fileName == null) {
+			return null;
+		}
+		if(fileName.equals("")) {
+			return "";
+		}
+		String[] valores = fileName.split("\\.");
+
+		if(valores.length == 1) {
+			return fileName;
+		}
+		StringBuffer sbResult = new StringBuffer();
+		for(int i=0;i<valores.length -1;i++){
+		    if(i!=0)
+		        sbResult.append(".");
+		    sbResult.append(valores[i]);
+		}		
+		return sbResult.toString();
     }
 
     
