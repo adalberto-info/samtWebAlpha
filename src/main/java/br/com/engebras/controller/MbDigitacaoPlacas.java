@@ -609,10 +609,9 @@ public class MbDigitacaoPlacas implements Serializable {
         
     }
     
-    public String crop() throws IOException{
+    public void crop() throws IOException{
         if(croppedImage == null){
            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "croppedImage está null... ",""));
-        return null;
         }
        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
        imagemOriginal = imagemVeiculo;
@@ -637,7 +636,6 @@ public class MbDigitacaoPlacas implements Serializable {
        setImagemVeiculo("/upload/" + imagemNova);
        setImagemAtual(imagemNova);
        setImagemObliteracao(vpc_dirUpload + imagemNova);
-       return null;
     }
     
     private void geraNovaImagem() {
