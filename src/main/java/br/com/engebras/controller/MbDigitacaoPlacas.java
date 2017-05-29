@@ -616,7 +616,8 @@ public class MbDigitacaoPlacas implements Serializable {
        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
        imagemOriginal = imagemVeiculo;
        imagemAtual = imagemVeiculo;
-       geraNovaImagem();
+       //geraNovaImagem();
+       imagemNova = getFileName(imagemOriginal) + "_obl.jpg";
        BufferedImage image = ImageIO.read(new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemAtual));
         FacesContext facesContext = FacesContext.getCurrentInstance();  
 
@@ -633,7 +634,7 @@ public class MbDigitacaoPlacas implements Serializable {
 //       ImagemDestino = new File(servletContext.getRealPath("") + File.separator + "upload" + File.separator + imagemVeiculo);
        ImagemDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo);
        ImageIO.write(image, "jpg", ImagemDestino);
-       setImagemVeiculo("/upload/" + imagemNova);
+       setImagemVeiculo(imagemNova);
        setImagemAtual(imagemNova);
        setImagemObliteracao(vpc_dirUpload + imagemNova);
     }

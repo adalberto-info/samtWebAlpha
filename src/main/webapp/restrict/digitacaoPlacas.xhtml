@@ -186,12 +186,12 @@
                             </p:imageSwitch>
     -->                        
 
-                            <p:graphicImage value="#{mbDigitacaoPlacas.imagemInfracao}" id="imageInfracao" cache="false" height="600" width="800"/>
+                            <p:graphicImage value="#{mbDigitacaoPlacas.imagemInfracao}" id="imagemInfracao" cache="false" height="600" width="800"/>
     
                             <p:toolbar>
                                 <p:toolbarGroup>
-                                    <p:commandButton  icon="ui-icon-circle-triangle-w" id="imagem_anterior" actionListener="#{mbDigitacaoPlacas.navegaImagem('ANTERIOR')}" process="@this" update=":imageInfracao" style="width: 100px"/>
-                                    <p:commandButton  icon="ui-icon-circle-triangle-e" id="imagem_proximo" actionListener="#{mbDigitacaoPlacas.navegaImagem('PROXIMO')}" process="@this" update=":imageInfracao" style="width: 100px"/>
+                                    <p:commandButton  icon="ui-icon-circle-triangle-w" id="imagem_anterior" actionListener="#{mbDigitacaoPlacas.navegaImagem('ANTERIOR')}" process="@this" update=":imagemInfracao" style="width: 100px"/>
+                                    <p:commandButton  icon="ui-icon-circle-triangle-e" id="imagem_proximo" actionListener="#{mbDigitacaoPlacas.navegaImagem('PROXIMO')}" process="@this" update=":imagemInfracao" style="width: 100px"/>
                                 </p:toolbarGroup>
                             </p:toolbar>
     
@@ -242,7 +242,7 @@
                         <p:toolbarGroup align="center">
                                 <div align="center">
                                 <p:commandButton value="Obliterar" actionListener="#{mbDigitacaoPlacas.crop()}" update="imageCropper" rendered="true"  icon="ui-icon-tag" style="width: 100px"/>
-                                <p:commandButton value="Voltar" onclick="PF('dial_obliteraImagem').hide();" icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
+                                <p:commandButton value="Voltar" onclick="PF('dial_obliteraImagem').hide();" update="imagemInfracao" icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
                                 </div>    
                         </p:toolbarGroup>
                     </p:toolbar>
