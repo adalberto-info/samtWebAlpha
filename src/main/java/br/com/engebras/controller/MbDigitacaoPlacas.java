@@ -619,24 +619,24 @@ public class MbDigitacaoPlacas implements Serializable {
        //geraNovaImagem();
        imagemNova = getFileName(imagemOriginal) + "_obl.jpg";
        BufferedImage image = ImageIO.read(new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemAtual));
-        FacesContext facesContext = FacesContext.getCurrentInstance();  
-
-       
-       
+       FacesContext facesContext = FacesContext.getCurrentInstance();  
+ 
        Graphics2D graphics = image.createGraphics();
        graphics.setColor(Color.BLACK);
        graphics.fillRect(croppedImage.getLeft(), croppedImage.getTop(), croppedImage.getWidth(), croppedImage.getHeight());
        graphics.dispose();
 //       File ImagemDestino = new File(servletContext.getRealPath("") + File.separator + "upload" + File.separator + imagemNova);
-       File ImagemDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemNova);
-       ImageIO.write(image, "jpg", ImagemDestino);
+       File ImagemNova = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemNova);
+       ImageIO.write(image, "jpg", ImagemNova);
 //       imagemVeiculo = servletContext.getRealPath("") + File.separator + "temp" + File.separator + imagemNova;
 //       ImagemDestino = new File(servletContext.getRealPath("") + File.separator + "upload" + File.separator + imagemVeiculo);
-       ImagemDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo);
+       File ImagemDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo);
        ImageIO.write(image, "jpg", ImagemDestino);
-       setImagemVeiculo(imagemNova);
-       setImagemAtual(imagemNova);
-       setImagemObliteracao(vpc_dirUpload + imagemNova);
+//       setImagemVeiculo(imagemNova);
+//       setImagemAtual(imagemNova);
+//       setImagemObliteracao(vpc_dirUpload + imagemNova);
+       ImagemNova.delete();
+       
     }
     
     private void geraNovaImagem() {
@@ -647,7 +647,6 @@ public class MbDigitacaoPlacas implements Serializable {
       int i = (int) (Math.random() * 10000);
       return String.valueOf(i);
     }
-
 
     public static String getFileName(String fileName) {
 		if(fileName == null) {
@@ -670,7 +669,10 @@ public class MbDigitacaoPlacas implements Serializable {
 		return sbResult.toString();
     }
 
-    
+    public void atualizaObliteracao(){
+        
+    }
+
     
     
     private void iniciaVariaveis(){
