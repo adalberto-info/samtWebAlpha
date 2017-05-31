@@ -635,8 +635,17 @@ public class MbDigitacaoPlacas implements Serializable {
 //       setImagemVeiculo(imagemNova);
 //       setImagemAtual(imagemNova);
 //       setImagemObliteracao(vpc_dirUpload + imagemNova);
+       File arqDestino = new File(vpc_dirImagens + imagemVeiculo);
+        try{
+        if (copiaArquivos(ImagemNova, arqDestino) == false) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o repositório. Arquivo não foi atualizado !", ""));
+            return;
+        };
+        } catch(Exception erro){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: " + erro + ",", ""));
+        }
+
        ImagemNova.delete();
-       
     }
     
     private void geraNovaImagem() {
