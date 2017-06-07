@@ -8,6 +8,9 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 template="/WEB-INF/templates/LayoutMaster.xhtml">
 
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+    response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+    response.setDateHeader("Expires", 0); // Proxies.
     <ui:define name="content">
         <style>
             .ui-growl{
@@ -241,7 +244,7 @@
                     <p:toolbar>
                         <p:toolbarGroup align="center">
                                 <div align="center">
-                                <p:commandButton value="Obliterar" actionListener="#{mbDigitacaoPlacas.crop()}" update="imageCropper" rendered="true"  icon="ui-icon-tag" style="width: 100px"/>
+                                <p:commandButton value="Obliterar" actionListener="#{mbDigitacaoPlacas.crop()}" update="imageCropper" icon="ui-icon-tag" style="width: 100px"/>
                                 <p:commandButton value="Voltar" onclick="PF('dial_obliteraImagem').hide();" update="imagemInfracao" icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
                                 </div>    
                         </p:toolbarGroup>

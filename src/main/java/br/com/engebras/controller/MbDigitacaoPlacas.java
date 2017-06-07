@@ -92,6 +92,7 @@ public class MbDigitacaoPlacas implements Serializable {
     private String vpc_dirUpload;
     private String vpc_dirImagens;
     private String imagemObliteracao;
+    private Boolean vll_controle;
     
     /**
      *
@@ -127,7 +128,6 @@ public class MbDigitacaoPlacas implements Serializable {
         vpc_dc_cor = "";
         vpc_dc_municipio = "";
         vpc_dc_nr_multa = "";
-
         iniciaVariaveis();
         geraListaVeiculoMarcaCET();
         geraListaMotivoInconsistenciaImagem();
@@ -645,7 +645,17 @@ public class MbDigitacaoPlacas implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: " + erro + ",", ""));
         }
 
-       ImagemNova.delete();
+//       ImagemNova.delete();
+       if (vll_controle == true){
+           setImagemObliteracao(vpc_dirUpload + imagemNova);
+           vll_controle = false;
+       } else {
+           setImagemObliteracao(vpc_dirUpload + imagemVeiculo);
+           vll_controle = true;
+       }
+//       imagemVeiculo = imagemAtual;
+//       setImagemObliteracao(vpc_dirUpload + imagemVeiculo);
+       
     }
     
     private void geraNovaImagem() {
@@ -687,6 +697,8 @@ public class MbDigitacaoPlacas implements Serializable {
     private void iniciaVariaveis(){
         vpc_dirUpload = "/resources/upload/" ;
         vpc_dirImagens = "c:\\samt\\sp\\";
+        vll_controle = true;
+
     }
 
     public void setImagemInfracao(StreamedContent imagemInfracao) {
