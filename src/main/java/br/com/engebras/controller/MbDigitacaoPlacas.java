@@ -57,6 +57,8 @@ import org.primefaces.model.CroppedImage;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
+import com.sun.jna.Library;
+import com.sun.jna.Native;
 
 @ManagedBean(name = "mbDigitacaoPlacas")
 @SessionScoped
@@ -86,13 +88,11 @@ public class MbDigitacaoPlacas implements Serializable {
     private CroppedImage croppedImage;
     
     private String imagemVeiculo;
-    private String imagemOriginal;
-    private String imagemAtual;
     private String imagemNova;
     private String vpc_dirUpload;
     private String vpc_dirImagens;
     private String imagemObliteracao;
-    private Boolean vll_controle;
+    private Integer vln_controle;
     
     /**
      *
@@ -101,6 +101,7 @@ public class MbDigitacaoPlacas implements Serializable {
     @PostConstruct
     public void init() {
         boolean vll_retorno;
+        vln_controle = 0;
         try{
             vpn_ptn_images = 0;
             images = new ArrayList<String>();
@@ -131,6 +132,7 @@ public class MbDigitacaoPlacas implements Serializable {
         iniciaVariaveis();
         geraListaVeiculoMarcaCET();
         geraListaMotivoInconsistenciaImagem();
+        Libegb lib = (Libegb) Native.loadLibrary("c:\\dirlib\\libegb", Libegb.class);
     }
 
     
@@ -608,33 +610,25 @@ public class MbDigitacaoPlacas implements Serializable {
         consulta =  null;
         
     }
-    
+
     public void crop() throws IOException{
         if(croppedImage == null){
            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "croppedImage está null... ",""));
         }
        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-       imagemOriginal = imagemVeiculo;
-       imagemAtual = imagemVeiculo;
-       //geraNovaImagem();
-       imagemNova = getFileName(imagemOriginal) + "_obl.jpg";
-       BufferedImage image = ImageIO.read(new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemAtual));
+       vln_controle++;
+       imagemNova = getFileName(imagemVeiculo) + "_" + vln_controle + ".jpg";
+       BufferedImage image = ImageIO.read(new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo));
        FacesContext facesContext = FacesContext.getCurrentInstance();  
  
        Graphics2D graphics = image.createGraphics();
        graphics.setColor(Color.BLACK);
        graphics.fillRect(croppedImage.getLeft(), croppedImage.getTop(), croppedImage.getWidth(), croppedImage.getHeight());
        graphics.dispose();
-//       File ImagemDestino = new File(servletContext.getRealPath("") + File.separator + "upload" + File.separator + imagemNova);
        File ImagemNova = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemNova);
        ImageIO.write(image, "jpg", ImagemNova);
-//       imagemVeiculo = servletContext.getRealPath("") + File.separator + "temp" + File.separator + imagemNova;
-//       ImagemDestino = new File(servletContext.getRealPath("") + File.separator + "upload" + File.separator + imagemVeiculo);
        File ImagemDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo);
        ImageIO.write(image, "jpg", ImagemDestino);
-//       setImagemVeiculo(imagemNova);
-//       setImagemAtual(imagemNova);
-//       setImagemObliteracao(vpc_dirUpload + imagemNova);
        File arqDestino = new File(vpc_dirImagens + imagemVeiculo);
         try{
         if (copiaArquivos(ImagemNova, arqDestino) == false) {
@@ -645,21 +639,46 @@ public class MbDigitacaoPlacas implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: " + erro + ",", ""));
         }
 
-//       ImagemNova.delete();
-       if (vll_controle == true){
-           setImagemObliteracao(vpc_dirUpload + imagemNova);
-           vll_controle = false;
-       } else {
-           setImagemObliteracao(vpc_dirUpload + imagemVeiculo);
-           vll_controle = true;
-       }
-//       imagemVeiculo = imagemAtual;
-//       setImagemObliteracao(vpc_dirUpload + imagemVeiculo);
+         setImagemObliteracao(vpc_dirUpload + imagemNova);
+       
+    }
+
+    
+    public void crop_retanguloPreto() throws IOException{
+        if(croppedImage == null){
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "croppedImage está null... ",""));
+        }
+       ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+       //geraNovaImagem();
+       vln_controle++;
+       imagemNova = getFileName(imagemVeiculo) + "_" + vln_controle + ".jpg";
+       BufferedImage image = ImageIO.read(new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo));
+       FacesContext facesContext = FacesContext.getCurrentInstance();  
+ 
+       Graphics2D graphics = image.createGraphics();
+       graphics.setColor(Color.BLACK);
+       graphics.fillRect(croppedImage.getLeft(), croppedImage.getTop(), croppedImage.getWidth(), croppedImage.getHeight());
+       graphics.dispose();
+       File ImagemNova = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemNova);
+       ImageIO.write(image, "jpg", ImagemNova);
+       File ImagemDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo);
+       ImageIO.write(image, "jpg", ImagemDestino);
+       File arqDestino = new File(vpc_dirImagens + imagemVeiculo);
+        try{
+        if (copiaArquivos(ImagemNova, arqDestino) == false) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o repositório. Arquivo não foi atualizado !", ""));
+            return;
+        };
+        } catch(Exception erro){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: " + erro + ",", ""));
+        }
+
+         setImagemObliteracao(vpc_dirUpload + imagemNova);
        
     }
     
     private void geraNovaImagem() {
-        imagemNova = getFileName(imagemOriginal) + getNumeroRandomico() + ".jpg";
+        imagemNova = getFileName(imagemVeiculo) + getNumeroRandomico() + ".jpg";
     }
 
     private String getNumeroRandomico() {
@@ -697,7 +716,6 @@ public class MbDigitacaoPlacas implements Serializable {
     private void iniciaVariaveis(){
         vpc_dirUpload = "/resources/upload/" ;
         vpc_dirImagens = "c:\\samt\\sp\\";
-        vll_controle = true;
 
     }
 
@@ -856,22 +874,6 @@ public class MbDigitacaoPlacas implements Serializable {
 
     public void setImagemVeiculo(String imagemVeiculo) {
         this.imagemVeiculo = imagemVeiculo;
-    }
-
-    public String getImagemOriginal() {
-        return imagemOriginal;
-    }
-
-    public void setImagemOriginal(String imagemOriginal) {
-        this.imagemOriginal = imagemOriginal;
-    }
-
-    public String getImagemAtual() {
-        return imagemAtual;
-    }
-
-    public void setImagemAtual(String imagemAtual) {
-        this.imagemAtual = imagemAtual;
     }
 
     public String getImagemNova() {
