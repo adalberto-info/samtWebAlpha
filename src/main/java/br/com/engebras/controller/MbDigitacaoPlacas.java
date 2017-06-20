@@ -718,6 +718,13 @@ public class MbDigitacaoPlacas implements Serializable {
         vpc_dirImagens = "c:\\samt\\sp\\";
 
     }
+    
+    public interface Libegb extends Library {
+        public int egb_win_versao_egblib();
+        public int egb_win_get_dados_multa_file(String filename,  byte[] st_dados2);
+	public void egb_win_converte_data_jul(int data_jul, int data_base, byte[] sDadosImagem3);
+
+    }
 
     public void setImagemInfracao(StreamedContent imagemInfracao) {
         this.imagemInfracao = imagemInfracao;
