@@ -132,7 +132,7 @@ public class MbDigitacaoPlacas implements Serializable {
         iniciaVariaveis();
         geraListaVeiculoMarcaCET();
         geraListaMotivoInconsistenciaImagem();
-        Libegb lib = (Libegb) Native.loadLibrary("c:\\dirlib\\libegb", Libegb.class);
+        Libegb lib = (Libegb) Native.loadLibrary("c:\\dirlib\\libegb.dll", Libegb.class);
     }
 
     
