@@ -132,7 +132,6 @@ public class MbDigitacaoPlacas implements Serializable {
         iniciaVariaveis();
         geraListaVeiculoMarcaCET();
         geraListaMotivoInconsistenciaImagem();
-        Libegb lib = (Libegb) Native.loadLibrary("c:\\dirlib\\libegb.dll", Libegb.class);
     }
 
     
@@ -716,6 +715,13 @@ public class MbDigitacaoPlacas implements Serializable {
     private void iniciaVariaveis(){
         vpc_dirUpload = "/resources/upload/" ;
         vpc_dirImagens = "c:\\samt\\sp\\";
+//        try {
+//            System.load("C:/dirlib/libegb.dll");
+//        } catch (UnsatisfiedLinkError e) {
+//            System.err.println("Native code library falhou ao ler.\n" + e);
+//            System.exit(1);
+//        }
+//        Libegb lib = (Libegb) Native.loadLibrary("c:/dirlib/libegb.dll", Libegb.class);
 
     }
     
