@@ -59,6 +59,8 @@ import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
+import javax.imageio.stream.FileImageOutputStream;
+import javax.faces.context.ExternalContext;
 
 @ManagedBean(name = "mbDigitacaoPlacas")
 @SessionScoped
@@ -93,6 +95,7 @@ public class MbDigitacaoPlacas implements Serializable {
     private String vpc_dirImagens;
     private String imagemObliteracao;
     private Integer vln_controle;
+    private String newImageName;
     
     /**
      *
@@ -614,6 +617,21 @@ public class MbDigitacaoPlacas implements Serializable {
         if(croppedImage == null){
            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "croppedImage está null... ",""));
         }
+ 
+        setNewImageName(getNumeroRandomico());
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        String newFileName = vpc_dirUpload + getNewImageName() + ".jpg";        
+        FileImageOutputStream imageOutput;
+        try {
+            imageOutput = new FileImageOutputStream(new File(newFileName));
+            imageOutput.write(croppedImage.getBytes(), 0, croppedImage.getBytes().length);
+            imageOutput.close();
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Ocorreu um erro ao recortar."));
+            return;
+        }
+        
+        
        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
        vln_controle++;
        imagemNova = getFileName(imagemVeiculo) + "_" + vln_controle + ".jpg";
@@ -675,6 +693,7 @@ public class MbDigitacaoPlacas implements Serializable {
          setImagemObliteracao(vpc_dirUpload + imagemNova);
        
     }
+
     
     private void geraNovaImagem() {
         imagemNova = getFileName(imagemVeiculo) + getNumeroRandomico() + ".jpg";
@@ -721,7 +740,7 @@ public class MbDigitacaoPlacas implements Serializable {
 //            System.err.println("Native code library falhou ao ler.\n" + e);
 //            System.exit(1);
 //        }
-//        Libegb lib = (Libegb) Native.loadLibrary("c:/dirlib/libegb.dll", Libegb.class);
+        Libegb lib = (Libegb) Native.loadLibrary("c:/dirlib/libegb.dll", Libegb.class);
 
     }
     
@@ -732,6 +751,7 @@ public class MbDigitacaoPlacas implements Serializable {
 
     }
 
+    
     public void setImagemInfracao(StreamedContent imagemInfracao) {
         this.imagemInfracao = imagemInfracao;
     }
@@ -919,6 +939,14 @@ public class MbDigitacaoPlacas implements Serializable {
 
     public void setImagemObliteracao(String imagemObliteracao) {
         this.imagemObliteracao = imagemObliteracao;
+    }
+
+    public String getNewImageName() {
+        return newImageName;
+    }
+
+    public void setNewImageName(String newImageName) {
+        this.newImageName = newImageName;
     }
 
 
