@@ -618,18 +618,18 @@ public class MbDigitacaoPlacas implements Serializable {
            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "croppedImage está null... ",""));
         }
  
-        setNewImageName(getNumeroRandomico());
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        String newFileName = vpc_dirUpload + getNewImageName() + ".jpg";        
-        FileImageOutputStream imageOutput;
-        try {
-            imageOutput = new FileImageOutputStream(new File(newFileName));
-            imageOutput.write(croppedImage.getBytes(), 0, croppedImage.getBytes().length);
-            imageOutput.close();
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Ocorreu um erro ao recortar."));
-            return;
-        }
+ //       setNewImageName(getNumeroRandomico());
+ //       ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+ //       String newFileName = vpc_dirUpload + getNewImageName() + ".jpg";        
+ //       FileImageOutputStream imageOutput;
+ //       try {
+ //           imageOutput = new FileImageOutputStream(new File(newFileName));
+ //           imageOutput.write(croppedImage.getBytes(), 0, croppedImage.getBytes().length);
+ //           imageOutput.close();
+ //       } catch (Exception e) {
+ //           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Ocorreu um erro ao recortar."));
+ //           return;
+ //       }
         
         
        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
@@ -740,7 +740,7 @@ public class MbDigitacaoPlacas implements Serializable {
 //            System.err.println("Native code library falhou ao ler.\n" + e);
 //            System.exit(1);
 //        }
-        Libegb lib = (Libegb) Native.loadLibrary("c:/dirlib/libegb.dll", Libegb.class);
+//        Libegb lib = (Libegb) Native.loadLibrary("c:/dirlib/libegb.dll", Libegb.class);
 
     }
     
