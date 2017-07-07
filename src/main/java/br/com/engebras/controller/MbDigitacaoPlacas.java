@@ -500,7 +500,7 @@ public class MbDigitacaoPlacas implements Serializable {
     }
     
     public void uploadImagem() {
-
+        
         File arqOrigem = new File(vpc_dirImagens + imagemVeiculo);
 
         FacesContext facesContext = FacesContext.getCurrentInstance();  
