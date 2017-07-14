@@ -7,6 +7,8 @@
 
 package br.com.engebras.controller;
 
+import br.com.engebras.util.FacesContextUtil;
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.File;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
@@ -20,24 +22,26 @@ import javax.servlet.ServletContext;
 public class MbInicio implements Serializable{
     private static final long serialVersionUID = 1L;
 
-
-
     public MbInicio(){
         
     }
 
+    
     public void iniciaAplicacao(){
-        //Criando os diretórios do sistema... 
 
         FacesContext facesContext = FacesContext.getCurrentInstance();  
         ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();  
-        String destino = scontext.getRealPath("/resources/upload/");
+        String destino = scontext.getRealPath("\\");
+        destino += "\\resources\\upload\\";
         
         File dirUpload = new File(destino); 
-        if (!dirUpload.isDirectory()){
+        if (!dirUpload.exists()){
             dirUpload.mkdirs();
         }
+        
     }
+
+
 }
 
 
