@@ -618,22 +618,23 @@ public class MbDigitacaoPlacas implements Serializable {
            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "croppedImage está null... ",""));
         }
  
- //       setNewImageName(getNumeroRandomico());
- //       ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
- //       String newFileName = vpc_dirUpload + getNewImageName() + ".jpg";        
- //       FileImageOutputStream imageOutput;
- //       try {
- //           imageOutput = new FileImageOutputStream(new File(newFileName));
- //           imageOutput.write(croppedImage.getBytes(), 0, croppedImage.getBytes().length);
- //           imageOutput.close();
- //       } catch (Exception e) {
- //           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Ocorreu um erro ao recortar."));
- //           return;
- //       }
+        vln_controle++;
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        
+        setNewImageName(getFileName(imagemVeiculo) + "_" + vln_controle + "_cut");
+        String newFileName = externalContext.getRealPath(vpc_dirUpload) + File.separator + getNewImageName() + ".jpg";        
+        FileImageOutputStream imageOutput;
+        try {
+            imageOutput = new FileImageOutputStream(new File(newFileName));
+            imageOutput.write(croppedImage.getBytes(), 0, croppedImage.getBytes().length);
+            imageOutput.close();
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Ocorreu um erro ao recortar a imagem."));
+            return;
+        }
         
         
        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-       vln_controle++;
        imagemNova = getFileName(imagemVeiculo) + "_" + vln_controle + ".jpg";
        BufferedImage image = ImageIO.read(new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo));
        FacesContext facesContext = FacesContext.getCurrentInstance();  
