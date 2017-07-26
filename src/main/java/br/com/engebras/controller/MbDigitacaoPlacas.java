@@ -96,7 +96,7 @@ public class MbDigitacaoPlacas implements Serializable {
     private String imagemObliteracao;
     private Integer vln_controle;
     private String newImageName;
-    
+    private Libegb lib;     
     /**
      *
      * @throws FileNotFoundException
@@ -658,8 +658,12 @@ public class MbDigitacaoPlacas implements Serializable {
         vln_h_bottom = croppedImage.getLeft() + croppedImage.getWidth();
         vln_v_bottom = croppedImage.getTop() + croppedImage.getHeight() ;
 
-	vln_retornoOblitera = egb_win_oblitera_imagem(imagemObliteracao, imagemNova, vln_h_top, vln_v_top, vln_h_bottom, vln_v_bottom, 0, 0, 0, 0, 0, 0, 0, 0, 2);
+	vln_retornoOblitera = lib.egb_win_oblitera_imagem(imagemObliteracao, imagemNova, vln_h_top, vln_v_top, vln_h_bottom, vln_v_bottom, 0, 0, 0, 0, 0, 0, 0, 0, 2);
 
+        if (vln_retornoOblitera != 0){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para obliterar imagem !", ""));
+        }
+        
        File ImagemNova = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemNova);
        ImageIO.write(image, "jpg", ImagemNova);
        File ImagemDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo);
@@ -770,7 +774,7 @@ public class MbDigitacaoPlacas implements Serializable {
 //            System.err.println("Native code library falhou ao ler.\n" + e);
 //            System.exit(1);
 //        }
-        Libegb lib = (Libegb) Native.loadLibrary("c:/dirlib/libegb.dll", Libegb.class);
+        lib = (Libegb) Native.loadLibrary("c:/dirlib/libegb.dll", Libegb.class);
 
     }
     
@@ -778,7 +782,7 @@ public class MbDigitacaoPlacas implements Serializable {
         public int egb_win_versao_egblib();
         public int egb_win_get_dados_multa_file(String filename,  byte[] st_dados2);
 	public void egb_win_converte_data_jul(int data_jul, int data_base, byte[] sDadosImagem3);
-        public int egb_win_oblitera_imagem(String arqOrigem, String arqDestino, int Xinicio1, int Yinicio1, int Xfim1, int Yfim1, int Xinicio2, int Yinicio2, int Xfim2, int Yfim2, int Xinicio3, int Yinicio3, int Xfim3, int Yfim3, int oblit_mode) ;
+        public int egb_win_oblitera_imagem(String arqOrigem,  String arqDestino, int Xinicio1, int Yinicio1, int Xfim1, int Yfim1, int Xinicio2, int Yinicio2, int Xfim2, int Yfim2, int Xinicio3, int Yinicio3, int Xfim3, int Yfim3, int oblit_mode) ;
         public int egb_win_desoblitera_imagem(String arqOrigem, String arqDestino);
                 
     }
