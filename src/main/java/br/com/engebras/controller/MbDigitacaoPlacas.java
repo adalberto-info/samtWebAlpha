@@ -614,6 +614,15 @@ public class MbDigitacaoPlacas implements Serializable {
     }
 
     public void crop() throws IOException{
+
+        int vln_retornoOblitera; 
+        vln_retornoOblitera = 0;
+        int vln_h_top, vln_v_top, vln_h_bottom, vln_v_bottom; 
+        vln_h_top = 0;
+        vln_v_top = 0;
+        vln_h_bottom = 0;
+        vln_v_bottom = 0;
+        
         if(croppedImage == null){
            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "croppedImage está null... ",""));
         }
@@ -639,10 +648,18 @@ public class MbDigitacaoPlacas implements Serializable {
        BufferedImage image = ImageIO.read(new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo));
        FacesContext facesContext = FacesContext.getCurrentInstance();  
  
-       Graphics2D graphics = image.createGraphics();
-       graphics.setColor(Color.BLACK);
-       graphics.fillRect(croppedImage.getLeft(), croppedImage.getTop(), croppedImage.getWidth(), croppedImage.getHeight());
-       graphics.dispose();
+//       Graphics2D graphics = image.createGraphics();
+//       graphics.setColor(Color.BLACK);
+//       graphics.fillRect(croppedImage.getLeft(), croppedImage.getTop(), croppedImage.getWidth(), croppedImage.getHeight());
+//       graphics.dispose();
+
+        vln_h_top = croppedImage.getLeft();
+        vln_v_top = croppedImage.getTop();
+        vln_h_bottom = croppedImage.getLeft() + croppedImage.getWidth();
+        vln_v_bottom = croppedImage.getTop() + croppedImage.getHeight() ;
+
+	vln_retornoOblitera = egb_win_oblitera_imagem(imagemObliteracao, imagemNova, vln_h_top, vln_v_top, vln_h_bottom, vln_v_bottom, 0, 0, 0, 0, 0, 0, 0, 0, 2);
+
        File ImagemNova = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemNova);
        ImageIO.write(image, "jpg", ImagemNova);
        File ImagemDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo);
@@ -666,9 +683,24 @@ public class MbDigitacaoPlacas implements Serializable {
         if(croppedImage == null){
            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "croppedImage está null... ",""));
         }
+ 
+        vln_controle++;
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        
+        setNewImageName(getFileName(imagemVeiculo) + "_" + vln_controle + "_cut");
+        String newFileName = externalContext.getRealPath(vpc_dirUpload) + File.separator + getNewImageName() + ".jpg";        
+        FileImageOutputStream imageOutput;
+        try {
+            imageOutput = new FileImageOutputStream(new File(newFileName));
+            imageOutput.write(croppedImage.getBytes(), 0, croppedImage.getBytes().length);
+            imageOutput.close();
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Ocorreu um erro ao recortar a imagem."));
+            return;
+        }
+        
+        
        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-       //geraNovaImagem();
-       vln_controle++;
        imagemNova = getFileName(imagemVeiculo) + "_" + vln_controle + ".jpg";
        BufferedImage image = ImageIO.read(new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo));
        FacesContext facesContext = FacesContext.getCurrentInstance();  
@@ -726,9 +758,6 @@ public class MbDigitacaoPlacas implements Serializable {
 		return sbResult.toString();
     }
 
-    public void atualizaObliteracao(){
-        
-    }
 
     
     
@@ -741,7 +770,7 @@ public class MbDigitacaoPlacas implements Serializable {
 //            System.err.println("Native code library falhou ao ler.\n" + e);
 //            System.exit(1);
 //        }
-//        Libegb lib = (Libegb) Native.loadLibrary("c:/dirlib/libegb.dll", Libegb.class);
+        Libegb lib = (Libegb) Native.loadLibrary("c:/dirlib/libegb.dll", Libegb.class);
 
     }
     
@@ -749,7 +778,9 @@ public class MbDigitacaoPlacas implements Serializable {
         public int egb_win_versao_egblib();
         public int egb_win_get_dados_multa_file(String filename,  byte[] st_dados2);
 	public void egb_win_converte_data_jul(int data_jul, int data_base, byte[] sDadosImagem3);
-
+        public int egb_win_oblitera_imagem(String arqOrigem, String arqDestino, int Xinicio1, int Yinicio1, int Xfim1, int Yfim1, int Xinicio2, int Yinicio2, int Xfim2, int Yfim2, int Xinicio3, int Yinicio3, int Xfim3, int Yfim3, int oblit_mode) ;
+        public int egb_win_desoblitera_imagem(String arqOrigem, String arqDestino);
+                
     }
 
     
