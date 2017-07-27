@@ -96,7 +96,8 @@ public class MbDigitacaoPlacas implements Serializable {
     private String imagemObliteracao;
     private Integer vln_controle;
     private String newImageName;
-    private Libegb lib;     
+    private Libegb lib;
+    private String mensagemObliteracao;
     /**
      *
      * @throws FileNotFoundException
@@ -682,6 +683,21 @@ public class MbDigitacaoPlacas implements Serializable {
        
     }
 
+
+    public void testeObliteracao(){
+        int vln_retornoOblitera; 
+        vln_retornoOblitera = 0;
+
+        String imagemOri; 
+        String imagemDes;
+
+        imagemOri = "C:\\TEMP_PESSOAL\\imagem001.jpg";
+        imagemDes = "C:\\TEMP_PESSOAL\\imagem001_obl.jpg";
+        
+	vln_retornoOblitera = lib.egb_win_oblitera_imagem(imagemOri, imagemDes, 10, 20, 150, 200, 0, 0, 0, 0, 0, 0, 0, 0, 2);
+
+        mensagemObliteracao = "Resultado teste Obliteração: " + vln_retornoOblitera + "...";
+    }
     
     public void crop_retanguloPreto() throws IOException{
         if(croppedImage == null){
@@ -775,7 +791,7 @@ public class MbDigitacaoPlacas implements Serializable {
 //            System.exit(1);
 //        }
         lib = (Libegb) Native.loadLibrary("c:/dirlib/libegb.dll", Libegb.class);
-
+        mensagemObliteracao = "Mensagem...";
     }
     
     public interface Libegb extends Library {
@@ -985,5 +1001,14 @@ public class MbDigitacaoPlacas implements Serializable {
         this.newImageName = newImageName;
     }
 
+    public String getMensagemObliteracao() {
+        return mensagemObliteracao;
+    }
+
+    public void setMensagemObliteracao(String mensagemObliteracao) {
+        this.mensagemObliteracao = mensagemObliteracao;
+    }
+
+    
 
 }

@@ -238,6 +238,7 @@
                         <p:panelGrid columns="2" id="panelDescricaoImagem">
                             <p:outputLabel for="imagemObliteracao" value="Imagem: "/>
                             <p:inputText id="imagemObliteracao" value="#{mbDigitacaoPlacas.imagemObliteracao}" size="86" disabled="true"/>
+                            <p:inputText id="mensagemObliteracao" value="#{mbDigitacaoPlacas.mensagemObliteracao}" size="86" disabled="true"/>
                         </p:panelGrid>
                     
                     
@@ -246,6 +247,7 @@
                                 <div align="center">
                                 <p:commandButton value="Obliterar" actionListener="#{mbDigitacaoPlacas.crop()}" update="imageCropper imagemObliteracao" icon="ui-icon-tag" style="width: 100px"/>
                                 <p:commandButton value="Voltar" onclick="PF('dial_obliteraImagem').hide();" update="imagemInfracao" icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
+                                <p:commandButton value="Teste" actionListener="#{mbDigitacaoPlacas.testeObliteracao()}" update="mensagemObliteracao" icon="ui-icon-image" style="width: 100px"/>
                                 </div>    
                         </p:toolbarGroup>
                     </p:toolbar>
