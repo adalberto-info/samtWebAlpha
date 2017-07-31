@@ -659,17 +659,27 @@ public class MbDigitacaoPlacas implements Serializable {
         vln_h_bottom = croppedImage.getLeft() + croppedImage.getWidth();
         vln_v_bottom = croppedImage.getTop() + croppedImage.getHeight() ;
 
-	vln_retornoOblitera = lib.egb_win_oblitera_imagem(imagemObliteracao, imagemNova, vln_h_top, vln_v_top, vln_h_bottom, vln_v_bottom, 0, 0, 0, 0, 0, 0, 0, 0, 2);
-
-        if (vln_retornoOblitera != 0){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para obliterar imagem !", ""));
-        }
+        String imgOrigem = externalContext.getRealPath(vpc_dirUpload) + File.separator +  imagemVeiculo;
+        String imgDestino = externalContext.getRealPath(vpc_dirUpload) + File.separator + imagemNova;
         
+	vln_retornoOblitera = lib.egb_win_oblitera_imagem(imgOrigem, imgDestino, vln_h_top, vln_v_top, vln_h_bottom, vln_v_bottom, 0, 0, 0, 0, 0, 0, 0, 0, 2);
+
+       mensagemObliteracao = "Resultado teste Obliteração: " + vln_retornoOblitera + "...";        
        File ImagemNova = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemNova);
-       ImageIO.write(image, "jpg", ImagemNova);
+//       ImageIO.write(image, "jpg", ImagemNova);
        File ImagemDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo);
-       ImageIO.write(image, "jpg", ImagemDestino);
-       File arqDestino = new File(vpc_dirImagens + imagemVeiculo);
+//       ImageIO.write(image, "jpg", ImagemDestino);
+
+        try{
+            if (copiaArquivos(ImagemNova, ImagemDestino) == false){
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o diretório upload !",""));
+                return;
+            };
+        } catch(Exception erro){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o diretório upload !",""));
+        }
+
+        File arqDestino = new File(vpc_dirImagens + imagemVeiculo);
         try{
         if (copiaArquivos(ImagemNova, arqDestino) == false) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o repositório. Arquivo não foi atualizado !", ""));
@@ -691,10 +701,10 @@ public class MbDigitacaoPlacas implements Serializable {
         String imagemOri; 
         String imagemDes;
 
-        imagemOri = "C:\\TEMP_PESSOAL\\imagem001.jpg";
-        imagemDes = "C:\\TEMP_PESSOAL\\imagem001_obl.jpg";
+        imagemOri = "C:\\TEMP_PESSOAL\\obliteracao\\imagem001.jpg";
+        imagemDes = "C:\\TEMP_PESSOAL\\obliteracao\\imagem001_obl.jpg";
         
-	vln_retornoOblitera = lib.egb_win_oblitera_imagem(imagemOri, imagemDes, 10, 20, 150, 200, 0, 0, 0, 0, 0, 0, 0, 0, 2);
+	vln_retornoOblitera = lib.egb_win_oblitera_imagem(imagemOri, imagemDes, 200, 80, 400, 200, 0, 0, 0, 0, 0, 0, 0, 0, 2);
 
         mensagemObliteracao = "Resultado teste Obliteração: " + vln_retornoOblitera + "...";
     }
