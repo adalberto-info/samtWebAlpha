@@ -502,6 +502,7 @@ public class MbDigitacaoPlacas implements Serializable {
 
     public void uploadImagem() {
 
+        vpn_nr_obliteracao = 0;
         File arqOrigem = new File(vpc_dirImagens + imagemVeiculo);
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -518,7 +519,6 @@ public class MbDigitacaoPlacas implements Serializable {
         } catch (Exception erro) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: " + erro + ",", ""));
         }
-        vpn_nr_obliteracao = 0;
     }
 
     public boolean copiaArquivos(File arqOrigem, File arqDestino) throws IOException {
