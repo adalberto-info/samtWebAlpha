@@ -246,9 +246,9 @@
                     <p:toolbar>
                         <p:toolbarGroup align="center">
                                 <div align="center">
-                                <p:commandButton value="Limpar" icon="ui-icon-cancel" style="width: 100px"/>
-                                <p:commandButton value="Obliterar" actionListener="#{mbDigitacaoPlacas.crop()}" update="imageCropper imagemObliteracao" icon="ui-icon-tag" style="width: 100px"/>
-                                <p:commandButton value="Finalizar" icon="ui-icon-image" style="width: 100px"/>
+                                <p:commandButton value="Limpar" icon="ui-icon-cancel" update="mensagemObliteracao" style="width: 100px"/>
+                                <p:commandButton value="Obliterar" actionListener="#{mbDigitacaoPlacas.crop()}" update="imageCropper imagemObliteracao mensagemObliteracao" icon="ui-icon-tag" style="width: 100px"/>
+                                <p:commandButton value="Finalizar" icon="ui-icon-image" update="mensagemObliteracao" style="width: 100px"/>
                                 <p:commandButton value="Voltar" onclick="PF('dial_obliteraImagem').hide();" update="imagemInfracao" icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
                                 </div>    
                         </p:toolbarGroup>
