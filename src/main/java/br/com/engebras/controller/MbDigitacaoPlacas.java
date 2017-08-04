@@ -100,6 +100,22 @@ public class MbDigitacaoPlacas implements Serializable {
     private Libegb lib;
     private String mensagemObliteracao;
 
+    private Integer vpn_X1_top;
+    private Integer vpn_Y1_top; 
+    private Integer vpn_X1_bottom;
+    private Integer vpn_Y1_bottom; 
+    
+    private Integer vpn_X2_top;
+    private Integer vpn_Y2_top; 
+    private Integer vpn_X2_bottom;
+    private Integer vpn_Y2_bottom;
+    
+    private Integer vpn_X3_top;
+    private Integer vpn_Y3_top;
+    private Integer vpn_X3_bottom;
+    private Integer vpn_Y3_bottom;
+    
+    
     /**
      *
      * @throws FileNotFoundException
@@ -680,7 +696,6 @@ public class MbDigitacaoPlacas implements Serializable {
             mensagemObliteracao = "Número máximo de áreas de obliteração é 3.";
             return;
         }
-        
         vln_controle++;
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 
@@ -712,11 +727,43 @@ public class MbDigitacaoPlacas implements Serializable {
         }
 
         vpn_nr_obliteracao++;
+
+        switch (vpn_nr_obliteracao) {
+            case 1:
+                vpn_X1_top = croppedImage.getLeft();
+                vpn_Y1_top = croppedImage.getTop();
+                vpn_X1_bottom = croppedImage.getLeft() + croppedImage.getWidth();
+                vpn_Y1_bottom = croppedImage.getTop() + croppedImage.getHeight();
+                break;
+            case 2:
+                vpn_X2_top = croppedImage.getLeft();
+                vpn_Y2_top = croppedImage.getTop();
+                vpn_X2_bottom = croppedImage.getLeft() + croppedImage.getWidth();
+                vpn_Y2_bottom = croppedImage.getTop() + croppedImage.getHeight();
+                break;
+            case 3:
+                vpn_X3_top = croppedImage.getLeft();
+                vpn_Y3_top = croppedImage.getTop();
+                vpn_X3_bottom = croppedImage.getLeft() + croppedImage.getWidth();
+                vpn_Y3_bottom = croppedImage.getTop() + croppedImage.getHeight();
+                break;   
+        }
+
         
         setImagemObliteracao(vpc_dirUpload + imagemNova);
 
     }
 
+    public void finalizaObliteracao(){
+        
+    }
+    
+    public void limpaObliteracao(){
+        
+        
+    }
+    
+    
     public void crop_retanguloPreto() throws IOException {
         if (croppedImage == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "croppedImage está null... ", ""));
@@ -804,6 +851,22 @@ public class MbDigitacaoPlacas implements Serializable {
 //            System.err.println("Native code library falhou ao ler.\n" + e);
 //            System.exit(1);
 //        }
+
+        vpn_X1_top = 0;
+        vpn_Y1_top = 0;
+        vpn_X1_bottom = 0;
+        vpn_Y1_bottom = 0;
+        
+        vpn_X2_top = 0;
+        vpn_Y2_top = 0;
+        vpn_X2_bottom = 0;
+        vpn_Y2_bottom = 0; 
+        
+        vpn_X3_top = 0;
+        vpn_Y3_top = 0;
+        vpn_X3_bottom = 0;
+        vpn_Y3_bottom = 0;
+    
         lib = (Libegb) Native.loadLibrary("c:/dirlib/libegb.dll", Libegb.class);
         mensagemObliteracao = "Mensagem...";
     }
@@ -1034,4 +1097,101 @@ public class MbDigitacaoPlacas implements Serializable {
         this.vpn_nr_obliteracao = vpn_nr_obliteracao;
     }
 
+    public Integer getVpn_X1_top() {
+        return vpn_X1_top;
+    }
+
+    public void setVpn_X1_top(Integer vpn_X1_top) {
+        this.vpn_X1_top = vpn_X1_top;
+    }
+
+    public Integer getVpn_Y1_top() {
+        return vpn_Y1_top;
+    }
+
+    public void setVpn_Y1_top(Integer vpn_Y1_top) {
+        this.vpn_Y1_top = vpn_Y1_top;
+    }
+
+    public Integer getVpn_X1_bottom() {
+        return vpn_X1_bottom;
+    }
+
+    public void setVpn_X1_bottom(Integer vpn_X1_bottom) {
+        this.vpn_X1_bottom = vpn_X1_bottom;
+    }
+
+    public Integer getVpn_Y1_bottom() {
+        return vpn_Y1_bottom;
+    }
+
+    public void setVpn_Y1_bottom(Integer vpn_Y1_bottom) {
+        this.vpn_Y1_bottom = vpn_Y1_bottom;
+    }
+
+    public Integer getVpn_X2_top() {
+        return vpn_X2_top;
+    }
+
+    public void setVpn_X2_top(Integer vpn_X2_top) {
+        this.vpn_X2_top = vpn_X2_top;
+    }
+
+    public Integer getVpn_Y2_top() {
+        return vpn_Y2_top;
+    }
+
+    public void setVpn_Y2_top(Integer vpn_Y2_top) {
+        this.vpn_Y2_top = vpn_Y2_top;
+    }
+
+    public Integer getVpn_X2_bottom() {
+        return vpn_X2_bottom;
+    }
+
+    public void setVpn_X2_bottom(Integer vpn_X2_bottom) {
+        this.vpn_X2_bottom = vpn_X2_bottom;
+    }
+
+    public Integer getVpn_Y2_bottom() {
+        return vpn_Y2_bottom;
+    }
+
+    public void setVpn_Y2_bottom(Integer vpn_Y2_bottom) {
+        this.vpn_Y2_bottom = vpn_Y2_bottom;
+    }
+
+    public Integer getVpn_X3_top() {
+        return vpn_X3_top;
+    }
+
+    public void setVpn_X3_top(Integer vpn_X3_top) {
+        this.vpn_X3_top = vpn_X3_top;
+    }
+
+    public Integer getVpn_Y3_top() {
+        return vpn_Y3_top;
+    }
+
+    public void setVpn_Y3_top(Integer vpn_Y3_top) {
+        this.vpn_Y3_top = vpn_Y3_top;
+    }
+
+    public Integer getVpn_X3_bottom() {
+        return vpn_X3_bottom;
+    }
+
+    public void setVpn_X3_bottom(Integer vpn_X3_bottom) {
+        this.vpn_X3_bottom = vpn_X3_bottom;
+    }
+
+    public Integer getVpn_Y3_bottom() {
+        return vpn_Y3_bottom;
+    }
+
+    public void setVpn_Y3_bottom(Integer vpn_Y3_bottom) {
+        this.vpn_Y3_bottom = vpn_Y3_bottom;
+    }
+
+    
 }
