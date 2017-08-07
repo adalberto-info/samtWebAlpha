@@ -755,7 +755,53 @@ public class MbDigitacaoPlacas implements Serializable {
     }
 
     public void finalizaObliteracao(){
-        
+    
+        int vln_retornoOblitera; 
+        vln_retornoOblitera = 0;
+
+        vln_controle++;
+
+        mensagemObliteracao = "Finalizando obliteração...";
+
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+
+        imagemNova = getFileName(imagemVeiculo) + "_" + vln_controle + ".jpg";
+        String imgOrigem = externalContext.getRealPath(vpc_dirUpload) + File.separator + imagemVeiculo;
+        String imgDestino = externalContext.getRealPath(vpc_dirUpload) + File.separator + imagemNova;
+
+
+        if (vpn_X1_bottom > 0 && vpn_Y1_bottom > 0){
+            vln_retornoOblitera = lib.egb_win_oblitera_imagem(imgOrigem, imgDestino, vpn_X1_top, vpn_Y1_top, vpn_X1_bottom, vpn_Y1_bottom, vpn_X2_top, vpn_Y2_top, vpn_X2_bottom, vpn_Y2_bottom, vpn_X3_top, vpn_Y3_top, vpn_X3_bottom, vpn_Y3_bottom,2);
+        } else{
+            mensagemObliteracao = "Nenhuma área selecionada para obliteração!";
+            return;
+        }
+
+        File ImagemNova = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemNova);
+        File ImagemDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo);
+
+        try {
+            if (copiaArquivos(ImagemNova, ImagemDestino) == false) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o diretório upload !", ""));
+                return;
+            };
+        } catch (Exception erro) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o diretório upload !", ""));
+        }
+
+        File arqDestino = new File(vpc_dirImagens + imagemVeiculo);
+        try {
+            if (copiaArquivos(ImagemNova, arqDestino) == false) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o repositório. Arquivo não foi atualizado !", ""));
+                return;
+            };
+        } catch (Exception erro) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: " + erro + ",", ""));
+        }
+
+        setImagemObliteracao(vpc_dirUpload + imagemNova);
+
     }
     
     public void limpaObliteracao(){
