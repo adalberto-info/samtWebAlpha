@@ -520,6 +520,20 @@ public class MbDigitacaoPlacas implements Serializable {
     public void uploadImagem() {
 
         vpn_nr_obliteracao = 0;
+        vpn_X1_top = 0;
+        vpn_Y1_top = 0;
+        vpn_X1_bottom = 0;
+        vpn_Y1_bottom = 0;
+        
+        vpn_X2_top = 0;
+        vpn_Y2_top = 0;
+        vpn_X2_bottom = 0;
+        vpn_Y2_bottom = 0; 
+        
+        vpn_X3_top = 0;
+        vpn_Y3_top = 0;
+        vpn_X3_bottom = 0;
+        vpn_Y3_bottom = 0;
         File arqOrigem = new File(vpc_dirImagens + imagemVeiculo);
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
