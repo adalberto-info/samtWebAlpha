@@ -95,6 +95,7 @@ public class MbDigitacaoPlacas implements Serializable {
     private String vpc_dirUpload;
     private String vpc_dirImagens;
     private String imagemObliteracao;
+    private String imagemOrigem;
     private Integer vln_controle;
     private String newImageName;
     private Libegb lib;
@@ -535,6 +536,20 @@ public class MbDigitacaoPlacas implements Serializable {
         } catch (Exception erro) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: " + erro + ",", ""));
         }
+        
+        imagemOrigem = getFileName(imagemVeiculo) + "_origem.jpg";
+        destino = scontext.getRealPath(vpc_dirUpload) + "/" + imagemOrigem;
+        arqDestino = new File(destino);
+        try {
+            if (copiaArquivos(arqOrigem, arqDestino) == false) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemOrigem + " para o diretorio temporário. Arquivo não foi atualizado !", ""));
+                return;
+            };
+        } catch (Exception erro) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: " + erro + ",", ""));
+        }
+        
+        
     }
 
     public boolean copiaArquivos(File arqOrigem, File arqDestino) throws IOException {
@@ -767,7 +782,7 @@ public class MbDigitacaoPlacas implements Serializable {
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 
         imagemNova = getFileName(imagemVeiculo) + "_" + vln_controle + ".jpg";
-        String imgOrigem = externalContext.getRealPath(vpc_dirUpload) + File.separator + imagemVeiculo;
+        String imgOrigem = externalContext.getRealPath(vpc_dirUpload) + File.separator + imagemOrigem;
         String imgDestino = externalContext.getRealPath(vpc_dirUpload) + File.separator + imagemNova;
 
 
@@ -891,6 +906,7 @@ public class MbDigitacaoPlacas implements Serializable {
     private void iniciaVariaveis() {
         vpc_dirUpload = "/resources/upload/";
         vpc_dirImagens = "c:\\samt\\sp\\";
+        imagemOrigem = "";
 //        try {
 //            System.load("C:/dirlib/libegb.dll");
 //        } catch (UnsatisfiedLinkError e) {
