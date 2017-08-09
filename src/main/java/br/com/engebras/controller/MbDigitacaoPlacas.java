@@ -535,6 +535,7 @@ public class MbDigitacaoPlacas implements Serializable {
         vpn_X3_bottom = 0;
         vpn_Y3_bottom = 0;
         File arqOrigem = new File(vpc_dirImagens + imagemVeiculo);
+        mensagemObliteracao = "Mensagem...";
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
@@ -802,6 +803,7 @@ public class MbDigitacaoPlacas implements Serializable {
 
         if (vpn_X1_bottom > 0 && vpn_Y1_bottom > 0){
             vln_retornoOblitera = lib.egb_win_oblitera_imagem(imgOrigem, imgDestino, vpn_X1_top, vpn_Y1_top, vpn_X1_bottom, vpn_Y1_bottom, vpn_X2_top, vpn_Y2_top, vpn_X2_bottom, vpn_Y2_bottom, vpn_X3_top, vpn_Y3_top, vpn_X3_bottom, vpn_Y3_bottom,2);
+            mensagemObliteracao = "Retorno da obliteração: " + vln_retornoOblitera + ".";
         } else{
             mensagemObliteracao = "Nenhuma área selecionada para obliteração!";
             return;
