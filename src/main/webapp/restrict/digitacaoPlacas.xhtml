@@ -205,7 +205,7 @@
                                         <p:ajax event="click" oncomplete="document.getElementById('dc_placa').focus()"/>     
                                     </p:commandButton>
 
-                                    <p:commandButton value="Obliterar" icon="ui-icon-circle-close" onclick="PF('dial_obliteraImagem').show();" style="width: 100px" update="imageCropper">
+                                    <p:commandButton value="Obliterar" icon="ui-icon-circle-close" onclick="PF('dial_obliteraImagem').show();" style="width: 100px" update="imageCropper mensagemObliteracao imagemObliteracao">
                                          <f:actionListener binding="#{mbDigitacaoPlacas.uploadImagem()}"/>
                                     </p:commandButton>     
 
