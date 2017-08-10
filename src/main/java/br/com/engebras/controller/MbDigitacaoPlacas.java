@@ -133,6 +133,7 @@ public class MbDigitacaoPlacas implements Serializable {
             atualizaTela(vpc_dc_nr_multa);
             atualizaListaImagem();
             getImagemInfracao();
+            uploadImagem();
         } catch (Exception erro) {
 
         }
@@ -483,6 +484,9 @@ public class MbDigitacaoPlacas implements Serializable {
 
         proximaInfracao();
         atualizaListaImagem();
+        uploadImagem();
+        
+        
     }
 
     public StreamedContent getImagemInfracao() {
@@ -516,9 +520,8 @@ public class MbDigitacaoPlacas implements Serializable {
         }
         return content;
     }
-
-    public void uploadImagem() {
-
+    
+    public void iniciaObliteracao(){
         vpn_nr_obliteracao = 0;
         vpn_X1_top = 0;
         vpn_Y1_top = 0;
@@ -534,8 +537,13 @@ public class MbDigitacaoPlacas implements Serializable {
         vpn_Y3_top = 0;
         vpn_X3_bottom = 0;
         vpn_Y3_bottom = 0;
-        File arqOrigem = new File(vpc_dirImagens + imagemVeiculo);
         mensagemObliteracao = "Mensagem...";
+        
+    }
+
+    public void uploadImagem() {
+
+        File arqOrigem = new File(vpc_dirImagens + imagemVeiculo);
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
