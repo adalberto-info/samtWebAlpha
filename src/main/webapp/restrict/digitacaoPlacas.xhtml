@@ -11,6 +11,12 @@
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
     response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
     response.setDateHeader("Expires", 0); // Proxies.
+
+    <f:metadata>
+        <f:event listener="#{mbDigitacaoPlacas.uploadImagem()}" type="preRenderView" />
+    </f:metadata>
+
+
     <ui:define name="content">
         <style>
             .ui-growl{
@@ -226,7 +232,7 @@
                 <br/>
                 
                 
-                <p:dialog header="Obliteração de Imagem" id="dialogObliteracao" widgetVar="dial_obliteraImagem" modal="true" height="680" width="700">
+                <p:dialog header="Obliteração de Imagem" id="dialogObliteracao" widgetVar="dial_obliteraImagem" modal="true" height="750" width="790">
                     <h:outputText value="Imagem:" />
                     
                         <p:growl id="msg1" showDetail="true" />

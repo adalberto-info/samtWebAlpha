@@ -133,7 +133,6 @@ public class MbDigitacaoPlacas implements Serializable {
             atualizaTela(vpc_dc_nr_multa);
             atualizaListaImagem();
             getImagemInfracao();
-            uploadImagem();
         } catch (Exception erro) {
 
         }
