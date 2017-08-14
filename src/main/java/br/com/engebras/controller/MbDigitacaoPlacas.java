@@ -483,8 +483,6 @@ public class MbDigitacaoPlacas implements Serializable {
 
         proximaInfracao();
         atualizaListaImagem();
-        uploadImagem();
-        
         
     }
 
@@ -537,13 +535,13 @@ public class MbDigitacaoPlacas implements Serializable {
         vpn_X3_bottom = 0;
         vpn_Y3_bottom = 0;
         mensagemObliteracao = "Mensagem...";
+        uploadImagem();
         
     }
 
     public void uploadImagem() {
 
         File arqOrigem = new File(vpc_dirImagens + imagemVeiculo);
-
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
 //        String destino = scontext.getRealPath("/resources/upload/") + "/" + nomeArquivo;
@@ -735,12 +733,8 @@ public class MbDigitacaoPlacas implements Serializable {
         }
         vln_controle++;
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-
-        setNewImageName(getFileName(imagemVeiculo) + "_" + vln_controle + "_cut");
-        String newFileName = externalContext.getRealPath(vpc_dirUpload) + File.separator + getNewImageName() + ".jpg";
-        FileImageOutputStream imageOutput;
-
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        File imagemAnterior = new File(servletContext.getRealPath(vpc_dirUpload)+ "/" + imagemVeiculo);
         imagemNova = getFileName(imagemVeiculo) + "_" + vln_controle + ".jpg";
         BufferedImage image = ImageIO.read(new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo));
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -757,8 +751,11 @@ public class MbDigitacaoPlacas implements Serializable {
         try {
             if (copiaArquivos(ImagemNova, arqDestino) == false) {
                 mensagemObliteracao = "Problemas para copiar o arquivo: " + imagemVeiculo + " para o repositório. Arquivo não foi atualizado !";
-                return;
-            };
+                return; 
+            }
+            else {
+                imagemAnterior.delete();
+            }
         } catch (Exception erro) {
             mensagemObliteracao = "Erro: " + erro + ".";
         }

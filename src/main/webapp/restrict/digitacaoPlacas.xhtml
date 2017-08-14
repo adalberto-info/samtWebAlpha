@@ -12,10 +12,6 @@
     response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
     response.setDateHeader("Expires", 0); // Proxies.
 
-    <f:metadata>
-        <f:event listener="#{mbDigitacaoPlacas.uploadImagem()}" type="preRenderView" />
-    </f:metadata>
-
 
     <ui:define name="content">
         <style>
