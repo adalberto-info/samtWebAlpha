@@ -92,6 +92,7 @@ public class MbDigitacaoPlacas implements Serializable {
 
     private String imagemVeiculo;
     private String imagemNova;
+    private String imagemAnterior;
     private String vpc_dirUpload;
     private String vpc_dirImagens;
     private String imagemObliteracao;
@@ -504,6 +505,7 @@ public class MbDigitacaoPlacas implements Serializable {
         }
 
         imagemObliteracao = vpc_dirUpload + imagemVeiculo;
+        imagemAnterior = imagemVeiculo;
 
         DefaultStreamedContent content = null;
         try {
@@ -734,7 +736,7 @@ public class MbDigitacaoPlacas implements Serializable {
         vln_controle++;
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        File imagemAnterior = new File(servletContext.getRealPath(vpc_dirUpload)+ "/" + imagemVeiculo);
+        File arqImagemAnterior = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemAnterior);
         imagemNova = getFileName(imagemVeiculo) + "_" + vln_controle + ".jpg";
         BufferedImage image = ImageIO.read(new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo));
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -754,10 +756,11 @@ public class MbDigitacaoPlacas implements Serializable {
                 return; 
             }
             else {
-                imagemAnterior.delete();
+                arqImagemAnterior.delete();
             }
         } catch (Exception erro) {
             mensagemObliteracao = "Erro: " + erro + ".";
+            return;
         }
 
         vpn_nr_obliteracao++;
@@ -785,7 +788,7 @@ public class MbDigitacaoPlacas implements Serializable {
 
         
         setImagemObliteracao(vpc_dirUpload + imagemNova);
-
+        imagemAnterior = imagemNova;
     }
 
     public void finalizaObliteracao(){
@@ -813,6 +816,7 @@ public class MbDigitacaoPlacas implements Serializable {
             return;
         }
 
+        File arqImagemAnterior = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemAnterior);
         File ImagemNova = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemNova);
         File ImagemDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo);
 
@@ -830,6 +834,8 @@ public class MbDigitacaoPlacas implements Serializable {
             if (copiaArquivos(ImagemNova, arqDestino) == false) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o repositório. Arquivo não foi atualizado !", ""));
                 return;
+            }else {
+                arqImagemAnterior.delete();
             };
         } catch (Exception erro) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: " + erro + ",", ""));
@@ -927,6 +933,7 @@ public class MbDigitacaoPlacas implements Serializable {
         vpc_dirUpload = "/resources/upload/";
         vpc_dirImagens = "c:\\samt\\sp\\";
         imagemOrigem = "";
+        imagemAnterior = "";
 //        try {
 //            System.load("C:/dirlib/libegb.dll");
 //        } catch (UnsatisfiedLinkError e) {
@@ -1273,6 +1280,22 @@ public class MbDigitacaoPlacas implements Serializable {
 
     public void setVpn_Y3_bottom(Integer vpn_Y3_bottom) {
         this.vpn_Y3_bottom = vpn_Y3_bottom;
+    }
+
+    public String getImagemAnterior() {
+        return imagemAnterior;
+    }
+
+    public void setImagemAnterior(String imagemAnterior) {
+        this.imagemAnterior = imagemAnterior;
+    }
+
+    public String getImagemOrigem() {
+        return imagemOrigem;
+    }
+
+    public void setImagemOrigem(String imagemOrigem) {
+        this.imagemOrigem = imagemOrigem;
     }
 
     
