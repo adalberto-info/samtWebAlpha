@@ -251,7 +251,7 @@
                                 <p:commandButton value="Limpar" actionListener="#{mbDigitacaoPlacas.limpaObliteracao()}" update="mensagemObliteracao" icon="ui-icon-cancel" style="width: 100px"/>
                                 <p:commandButton value="Obliterar" actionListener="#{mbDigitacaoPlacas.crop()}" update="imageCropper imagemObliteracao mensagemObliteracao" icon="ui-icon-tag" style="width: 100px"/>
                                 <p:commandButton value="Finalizar" actionListener="#{mbDigitacaoPlacas.finalizaObliteracao()}" update="imageCropper imagemObliteracao mensagemObliteracao" icon="ui-icon-image" style="width: 100px"/>
-                                <p:commandButton value="Voltar" onclick="PF('dial_obliteraImagem').hide();" update="imagemInfracao" icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
+                                <p:commandButton value="Voltar" actionListener="#{mbDigitacaoPlacas.voltarObliteracao()}" onclick="PF('dial_obliteraImagem').hide();" update="imagemInfracao mensagemObliteracao" icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
                                 </div>    
                         </p:toolbarGroup>
                     </p:toolbar>
