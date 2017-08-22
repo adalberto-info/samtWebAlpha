@@ -837,6 +837,18 @@ public class MbDigitacaoPlacas implements Serializable {
 
     public void voltarObliteracao(){
         mensagemObliteracao = "Executei o voltarObliteracao...";
+
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        
+        for (int i = 1; i <= vln_controle; i++){
+            imagemNova = getFileName(imagemVeiculo) + "_" + i + ".jpg";
+            
+            File imgTemp = new File(externalContext.getRealPath(vpc_dirUpload) + File.separator + imagemNova);
+            if (imgTemp.exists()){
+                imgTemp.delete();
+            }
+        }    
     }
     
     public void limpaObliteracao(){
