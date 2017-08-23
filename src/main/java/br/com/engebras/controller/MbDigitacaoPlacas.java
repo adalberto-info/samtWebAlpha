@@ -781,6 +781,7 @@ public class MbDigitacaoPlacas implements Serializable {
         }
 
 
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Área selecionada para obliteração com sucesso... ", ""));
         setImagemObliteracao(vpc_dirUpload + imagemNova);
     }
 
