@@ -810,30 +810,38 @@ public class MbDigitacaoPlacas implements Serializable {
             return;
         }
 
-        File ImagemNova = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemNova);
-        File ImagemDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo);
+        switch (vln_retornoOblitera) {
+            case 0:
+                File ImagemNova = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemNova);
+                File ImagemDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo);
 
-        try {
-            if (copiaArquivos(ImagemNova, ImagemDestino) == false) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o diretório upload !", ""));
-                return;
-            };
-        } catch (Exception erro) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o diretório upload !", ""));
-        }
+                try {
+                    if (copiaArquivos(ImagemNova, ImagemDestino) == false) {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o diretório upload !", ""));
+                        return;
+                    };
+                } catch (Exception erro) {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o diretório upload !", ""));
+                }
 
-        File arqDestino = new File(vpc_dirImagens + imagemVeiculo);
-        try {
-            if (copiaArquivos(ImagemNova, arqDestino) == false) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o repositório. Arquivo não foi atualizado !", ""));
-                return;
-            }
-        } catch (Exception erro) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: " + erro + ",", ""));
-        }
+                File arqDestino = new File(vpc_dirImagens + imagemVeiculo);
+                try {
+                    if (copiaArquivos(ImagemNova, arqDestino) == false) {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o repositório. Arquivo não foi atualizado !", ""));
+                        return;
+                    }
+                } catch (Exception erro) {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro: " + erro + ",", ""));
+                }
 
-        setImagemObliteracao(vpc_dirUpload + imagemNova);
-
+                setImagemObliteracao(vpc_dirUpload + imagemNova);
+                break;
+            case -3:
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Imagem já está obliterada!", ""));
+                break;
+            default:
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao tentar obliterar a imagem!", ""));
+        }    
     }
 
     public void voltarObliteracao(){
