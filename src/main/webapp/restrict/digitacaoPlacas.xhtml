@@ -12,7 +12,6 @@
     response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
     response.setDateHeader("Expires", 0); // Proxies.
 
-
     <ui:define name="content">
         <style>
             .ui-growl{
@@ -50,7 +49,7 @@
                 allDayText: 'Todo o Dia'
             };
         </script>
-
+        
         <p:fieldset legend="Digitação de Placas">
             <br/>
             <h:form prependId="false" id="formDigitacaoPlacas">
@@ -210,13 +209,7 @@
                                     <p:commandButton value="Obliterar" icon="ui-icon-circle-close" onclick="PF('dial_obliteraImagem').show();" style="width: 100px" update="imageCropper mensagemObliteracao imagemObliteracao">
                                         <f:actionListener binding="#{mbDigitacaoPlacas.iniciaObliteracao()}"/>
                                     </p:commandButton>     
-
-                                    
-<!--                                    <p:commandButton value="Obliterar" icon="ui-icon-circle-close" onclick="PF('dial_obliteraImagem').show();" style="width: 100px">
-                                         <f:actionListener binding="#\\{mbDigitacaoPlacas.uploadImagem()}"/>
-                                    </p:commandButton>     
--->
-                                    <p:commandButton value="Zoom" icon="ui-icon-zoomin" style="width: 100px"/>
+                                    <p:commandButton value="Zoom" icon="ui-icon-zoomin" onclick="PF('dial_ZoomImagem').show();" style="width: 100px"/>
                                     <p:commandButton value="Vídeo" icon="ui-icon-video" style="width: 100px"/>
                                     <p:commandButton value="Consulta Placa" icon="ui-icon-search" style="width: 150px"/>
                                     <p:commandButton value="Imprimir" icon="ui-icon-print" style="width: 100px"/>
@@ -256,6 +249,29 @@
                         </p:toolbarGroup>
                     </p:toolbar>
                 </p:dialog>   
+
+                <p:dialog header="Zoom da Imagem" id="dialogZoomImagem" widgetVar="dial_ZoomImagem" modal="true" height="750" width="790">
+                    <h:outputText value="Imagem:" />
+                    
+                        <p:growl id="msg2" showDetail="true" />
+                        <h:panelGrid columns="1" id="panelZoomImagem" style="height: 550px">
+                            <img id="zoom_lente" src="/samtWebAlpha/resources/upload/image_teste.jpg" data-zoom-image="/samtWebAlpha/resources/upload/image_lente.jpg"/>  
+                        </h:panelGrid>    
+                        <p:panelGrid columns="2" id="panelDescricaoZoomImagem">
+                            <p:outputLabel for="imagemZoom" value="Imagem: "/>
+                            <p:inputText id="imagemZoom" value="#{mbDigitacaoPlacas.imagemInfracao}" size="86" disabled="true"/>
+                        </p:panelGrid>
+                    
+                    <p:toolbar>
+                        <p:toolbarGroup align="center">
+                                <div align="center">
+                                <p:commandButton value="Voltar"  onclick="PF('dial_ZoomImagem').hide();" update="imagemInfracao msg2" icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
+                                </div>    
+                        </p:toolbarGroup>
+                    </p:toolbar>
+                </p:dialog>   
+
+
             </h:form>
 
         </p:fieldset>
