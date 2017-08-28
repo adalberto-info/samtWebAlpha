@@ -50,10 +50,9 @@
                 allDayText: 'Todo o Dia'
             };
         </script>
-        
-	<title>jQuery elevateZoom Demo</title>
-	<script src="/samtWebAlpha/resources/engebras/javascripts/jquery-1.8.3.min.js"></script>  
-	<script src="/samtWebAlpha/resources/engebras/javascripts/jquery.elevatezoom.js"></script>  
+       
+ <!--   <script src="/samtWebAlpha/resources/engebras/javascripts/jquery-1.8.3.min.js"></script>  -->  
+        <script src="/samtWebAlpha/resources/engebras/javascripts/jquery.elevatezoom.js"></script>  
         <script>
             $("#zoom_lente").elevateZoom({
             zoomType: "lens",
@@ -263,11 +262,13 @@
                 </p:dialog>   
 
                 <p:dialog header="Zoom da Imagem" id="dialogZoomImagem" widgetVar="dial_ZoomImagem" modal="true" height="750" width="790">
+
+
                     <h:outputText value="Imagem:" />
                     
                         <p:growl id="msg2" showDetail="true" />
                         <h:panelGrid columns="1" id="panelZoomImagem" style="height: 550px">
-                            <img id="zoom_lente" src="/samtWebAlpha/resources/upload/image_teste.JPG" data-zoom-image="/samtWebAlpha/resources/upload/image_zoom.JPG"/>  
+                            <img id="zoom_lente" src='/samtWebAlpha/resources/upload/image_teste.JPG' data-zoom-image="/samtWebAlpha/resources/upload/image_zoom.JPG"/>  
                         </h:panelGrid>    
                         <p:panelGrid columns="2" id="panelDescricaoZoomImagem">
                             <p:outputLabel for="imagemZoom" value="Imagem: "/>
