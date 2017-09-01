@@ -8,6 +8,17 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 template="/WEB-INF/templates/LayoutMaster.xhtml">
 
+    <ui:define name="head">
+        <style type="text/css">
+            span {
+                cursor:pointer;
+            }
+
+            span:hover {
+                color:#FF9900;
+            }
+        </style>
+    </ui:define>
 
     <ui:define name="content">
         <style>
@@ -18,41 +29,29 @@
                 width:301px;
             }
         </style>
-<!--        <script src="/samtWebAlpha/resources/engebras/javascripts/jquery-1.8.3.min.js"></script>    -->
-        <script src="/samtWebAlpha/resources/engebras/javascripts/jquery.elevatezoom.js"></script>  
-        <script>
-            $("#zoom_lente").elevateZoom({
-            zoomType: "lens",
-            lensShape: "round",
-            lensSize: 200
-            });
-        </script>    
-        
-       <p:fieldset legend="Teste - Zoom da Imagem">
+
+        <p:fieldset legend="Teste - Zoom da Imagem">
             <br/>
             <h:form prependId="false" id="formTesteZoomImagem">
                 <p:growl id="msg0" />
-                   
-                        <h:panelGrid columns="1" id="panelZoomImagem" style="height: 550px">
-                            <img id="zoom_lente" src='/samtWebAlpha/resources/upload/image_teste.JPG' data-zoom-image="/samtWebAlpha/resources/upload/image_zoom.JPG"/>  
-                </h:panelGrid>    
-                        <p:panelGrid columns="2" id="panelDescricaoZoomImagem">
-                            <p:outputLabel for="imagemZoom" value="Imagem: "/>
-                            <p:inputText id="imagemZoom" value="/samtWebAlpha/resources/upload/image_teste.JPG" size="86" disabled="true"/>
-                        </p:panelGrid>
-                    
-                    <p:toolbar>
-                        <p:toolbarGroup align="center">
-                                <div align="center">
-                                <p:commandButton value="Início" action="/Inicio.xthml"   icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
-                                </div>    
-                        </p:toolbarGroup>
-                    </p:toolbar>
-            
-                
+
+                <h3>Zoom</h3>
+                <p:imageSwitch effect="zoom">
+                        <p:graphicImage value="/samtWebAlpha/resources/upload/image_teste.JPG" />
+                </p:imageSwitch>
+
+                <p:toolbar>
+                    <p:toolbarGroup align="center">
+                        <div align="center">
+                            <p:commandButton value="Início" action="/Inicio.xthml"   icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
+                        </div>    
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+
             </h:form>
         </p:fieldset>
-                
+
     </ui:define>
 
 </ui:composition>
