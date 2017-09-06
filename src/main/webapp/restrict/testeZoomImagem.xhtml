@@ -6,19 +6,10 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
                 template="/WEB-INF/templates/LayoutMaster.xhtml">
 
-    <ui:define name="head">
-        <style type="text/css">
-            span {
-                cursor:pointer;
-            }
-
-            span:hover {
-                color:#FF9900;
-            }
-        </style>
-    </ui:define>
 
     <ui:define name="content">
         <style>
@@ -29,18 +20,29 @@
                 width:301px;
             }
         </style>
-
+        <style type="text/css">
+            .pic-normal {
+                   width: 120px;
+                   border: 2px solid #ACBECE;
+            }
+ 
+           .wrap1 {
+                   width: 190px;
+                   height: 130px;
+                   float: left;
+            }
+        </style>
         <p:fieldset legend="Teste - Zoom da Imagem">
             <br/>
             <h:form prependId="false" id="formTesteZoomImagem">
                 <p:growl id="msg0" />
+                    <h:graphicImage width="600" value="'/samtWebAlpha/resources/upload/image_teste.JPG'" onmouseover="enlargePic(this, {pwidth:'800px'})" onmouseout="releasePic(this)"/>
 
-                <h3>Zoom</h3>
-                <p:imageSwitch effect="zoom">
-                        <p:graphicImage value="/samtWebAlpha/resources/upload/image_teste.JPG" />
-                </p:imageSwitch>
+                    <rich:jQuery name="enlargePic" timing="onJScall" query="animate({width:param.pwidth})" />
+                    <rich:jQuery name="releasePic" timing="onJScall" query="animate({width:'600px'})"/> 
 
-                <p:toolbar>
+                    
+                    <p:toolbar>
                     <p:toolbarGroup align="center">
                         <div align="center">
                             <p:commandButton value="Início" action="/Inicio.xthml"   icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
