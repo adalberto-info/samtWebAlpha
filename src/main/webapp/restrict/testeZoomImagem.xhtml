@@ -6,8 +6,6 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
-                xmlns:a4j="http://richfaces.org/a4j"
-                xmlns:rich="http://richfaces.org/rich"
                 template="/WEB-INF/templates/LayoutMaster.xhtml">
 
 
@@ -20,26 +18,59 @@
                 width:301px;
             }
         </style>
-        <style type="text/css">
-            .pic-normal {
-                   width: 120px;
-                   border: 2px solid #ACBECE;
-            }
- 
-           .wrap1 {
-                   width: 190px;
-                   height: 130px;
-                   float: left;
-            }
-        </style>
+
+	<style>
+		/* styles unrelated to zoom */
+		* { border:0; margin:0; padding:0; }
+		p { position:absolute; top:3px; right:28px; color:#555; font:bold 13px/1 sans-serif;}
+
+		/* these styles are for the demo, but are not required for the plugin */
+		.zoom {
+			display:inline-block;
+			position: relative;
+		}
+		
+		/* magnifying glass icon */
+		.zoom:after {
+			content:'';
+			display:block; 
+			width:33px; 
+			height:33px; 
+			position:absolute; 
+			top:0;
+			right:0;
+			background:url(icon.png);
+		}
+
+		.zoom img {
+			display: block;
+		}
+
+		.zoom img::selection { background-color: transparent; }
+
+		#ex2 img:hover { cursor: url(grab.cur), default; }
+		#ex2 img:active { cursor: url(grabbed.cur), default; }
+	</style>
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+	<script src='/samtWebAlpha/resources/engebras/javascripts/jquery.zoom.js'></script>
+	<script>
+		$(document).ready(function(){
+			$('#ex1').zoom();
+			$('#ex2').zoom({ on:'grab' });
+			$('#ex3').zoom({ on:'click' });			 
+			$('#ex4').zoom({ on:'toggle' });
+		});
+	</script>
+
         <p:fieldset legend="Teste - Zoom da Imagem">
             <br/>
             <h:form prependId="false" id="formTesteZoomImagem">
                 <p:growl id="msg0" />
-                    <h:graphicImage width="600" value="'/samtWebAlpha/resources/upload/image_teste.JPG'" onmouseover="enlargePic(this, {pwidth:'800px'})" onmouseout="releasePic(this)"/>
 
-                    <rich:jQuery name="enlargePic" timing="onJScall" query="animate({width:param.pwidth})" />
-                    <rich:jQuery name="releasePic" timing="onJScall" query="animate({width:'600px'})"/> 
+               	<span class='zoom' id='ex1'>
+                    <img src='/samtWebAlpha/resources/upload/image_teste2.JPG' width='800' height='600' alt='Imagem Infração'/>
+                    <p>Hover</p>
+                </span>
 
                     
                     <p:toolbar>
