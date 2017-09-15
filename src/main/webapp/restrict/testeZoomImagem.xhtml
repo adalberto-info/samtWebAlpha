@@ -67,11 +67,22 @@
             <h:form prependId="false" id="formTesteZoomImagem">
                 <p:growl id="msg0" />
 
-               	<span class='zoom' id='ex1'>
-                    <img src='/samtWebAlpha/resources/upload/image_teste2.JPG' width='800' height='600' alt='Imagem Infração'/>
-                    <p>Hover</p>
-                </span>
+                <p:tabView id="tbv_imagem" widgetVar="tbv_widget_imagem" dynamic="true" cache="true" >
 
+                    <p:tab title="Zoom" id="tbv_imagem_zoom"> 
+                       	<span class='zoom' id='ex1'>
+                            <img src='/samtWebAlpha/resources/upload/image_teste2.JPG' id="imagezoom" width='800' height='600' alt='Imagem Infração' cache="false"/>
+                            <p>Hover</p>
+                        </span>
+
+                    </p:tab>
+
+
+                    <p:tab title="Imagem" id ="tbv_imagem_imagem"> 
+                        <img src='/samtWebAlpha/resources/upload/image_teste2.JPG' cache="false" id="imagemInfracao"  height="600" width="800"/>
+                    </p:tab>
+                    
+                </p:tabView>
                     
                     <p:toolbar>
                     <p:toolbarGroup align="center">

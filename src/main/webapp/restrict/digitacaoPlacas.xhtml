@@ -54,13 +54,18 @@
  <!--   <script src="/samtWebAlpha/resources/engebras/javascripts/jquery-1.8.3.min.js"></script>  -->  
         <script src="/samtWebAlpha/resources/engebras/javascripts/jquery.elevatezoom.js"></script>  
         <script>
-            $("#tbv_imagem:tbv_imagem_zoom:zoom_lente").elevateZoom({
+            $('#zoom_lente'').elevateZoom({
             zoomType: "lens",
             lensShape: "round",
             lensSize: 200
             });
         </script>    
-        
+        <script>
+            function testeJS(){
+
+                alert('deu certo!');
+            }
+        </script>        
         <p:fieldset legend="Digitação de Placas">
             <br/>
             <h:form prependId="false" id="formDigitacaoPlacas">
@@ -205,7 +210,6 @@
 
                                 <h:panelGrid columns="1" id="panelZoomImagem" style="height: 600px; width: 800px">
                                     <img id="zoom_lente" src='/samtWebAlpha/resources/upload/image_teste.JPG' data-zoom-image="/samtWebAlpha/resources/upload/image_zoom.JPG" width="800" height="600"/>  
-                                    <h:graphicImage value="/samtWebAlpha/resources/upload/image_teste.JPG" 
                                 </h:panelGrid>    
                                 <p:panelGrid columns="2" id="panelDescricaoZoomImagem">
                                     <p:outputLabel for="imagemZoom" value="Imagem: "/>
@@ -238,7 +242,8 @@
                                     <p:commandButton value="Vídeo" icon="ui-icon-video" style="width: 100px"/>
                                     <p:commandButton value="Consulta Placa" icon="ui-icon-search" style="width: 150px"/>
                                     <p:commandButton value="Imprimir" icon="ui-icon-print" style="width: 100px"/>
-                                    <p:commandButton value="Teste" icon="ui-icon-zoomin" action="/restrict/testeZoomImagem.xhtml" style="width: 100px"/>
+                                    <p:commandButton value="Teste" icon="ui-icon-zoomin" onclick="testeJS()" style="width: 100px"/>
+                                    <p:commandButton value="Teste2" icon="ui-icon-star" actionListener="#{mbDigitacaoPlacas.executarJS()}" style="width: 100px"/>
                                 </p:toolbarGroup>
                             </p:toolbar>
                         </p:panelGrid>

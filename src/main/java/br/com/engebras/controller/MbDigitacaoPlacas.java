@@ -61,6 +61,7 @@ import com.sun.jna.Library;
 import com.sun.jna.Native;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.faces.context.ExternalContext;
+import org.primefaces.context.RequestContext;
 
 @ManagedBean(name = "mbDigitacaoPlacas")
 @SessionScoped
@@ -1031,6 +1032,11 @@ public class MbDigitacaoPlacas implements Serializable {
 
     }
 
+    public void executarJS(){
+
+        RequestContext.getCurrentInstance().execute("testeJS();");
+    }
+    
     public void setImagemInfracao(StreamedContent imagemInfracao) {
         this.imagemInfracao = imagemInfracao;
     }
