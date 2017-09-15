@@ -54,7 +54,7 @@
  <!--   <script src="/samtWebAlpha/resources/engebras/javascripts/jquery-1.8.3.min.js"></script>  -->  
         <script src="/samtWebAlpha/resources/engebras/javascripts/jquery.elevatezoom.js"></script>  
         <script>
-            $('#zoom_lente'').elevateZoom({
+            $('#zoom_lente').elevateZoom({
             zoomType: "lens",
             lensShape: "round",
             lensSize: 200
@@ -66,6 +66,13 @@
                 alert('deu certo!');
             }
         </script>        
+        <script>
+         function trocaImagemZoom() {
+            $('#zoom_lente').attr('src', '/samtWebAlpha/resources/upload/image_nova.JPG');
+            $('#zoom_lente').attr('data-zoom-image', '/samtWebAlpha/resources/upload/image_nova_zoom.JPG');
+            };
+        </script>
+
         <p:fieldset legend="Digitação de Placas">
             <br/>
             <h:form prependId="false" id="formDigitacaoPlacas">
