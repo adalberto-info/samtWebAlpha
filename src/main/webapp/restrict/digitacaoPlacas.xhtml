@@ -62,14 +62,18 @@
         </script>    
         <script>
             function testeJS(){
-
                 alert('deu certo!');
             }
         </script>        
         <script>
-         function trocaImagemZoom() {
+            function trocaImagemZoom() {
             $('#zoom_lente').attr('src', '/samtWebAlpha/resources/upload/image_nova.JPG');
-            $('#zoom_lente').attr('data-zoom-image', '/samtWebAlpha/resources/upload/image_nova_zoom.JPG');
+            $('#zoom_lente').data('zoom-image', '/samtWebAlpha/resources/upload/image_nova_zoom.JPG');
+            $('#zoom_lente').elevateZoom({
+                zoomType: "lens",
+                lensShape: "round",
+                lensSize: 200
+            });
             };
         </script>
 
@@ -216,7 +220,7 @@
                                 <p:tab title="Zoom" id="tbv_imagem_zoom"> 
 
                                 <h:panelGrid columns="1" id="panelZoomImagem" style="height: 600px; width: 800px">
-                                    <img id="zoom_lente" src='/samtWebAlpha/resources/upload/image_teste.JPG' data-zoom-image="/samtWebAlpha/resources/upload/image_zoom.JPG" width="800" height="600"/>  
+                                    <img id="zoom_lente" src="/samtWebAlpha/resources/upload/image_teste.JPG" data-zoom-image="/samtWebAlpha/resources/upload/image_zoom.JPG" width="800" height="600"/>  
                                 </h:panelGrid>    
                                 <p:panelGrid columns="2" id="panelDescricaoZoomImagem">
                                     <p:outputLabel for="imagemZoom" value="Imagem: "/>
