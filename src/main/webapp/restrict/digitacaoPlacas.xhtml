@@ -61,13 +61,13 @@
             });
         </script>    
         <script>
-            function testeJS(){
-                alert('deu certo!');
+            function testeJS(prMensagem){
+                alert('A mensagem é: ' + prMensagem + '.');
             }
         </script>        
         <script>
-            function trocaImagemZoom() {
-            $('#zoom_lente').attr('src', '/samtWebAlpha/resources/upload/image_nova.JPG');
+            function trocaImagemZoom(prImagem, prImagemZoom) {
+            $('#zoom_lente').attr('src', prImagem);
             $('#zoom_lente').data('zoom-image', '/samtWebAlpha/resources/upload/image_nova_zoom.JPG');
             $('#zoom_lente').elevateZoom({
                 zoomType: "lens",
@@ -253,7 +253,7 @@
                                     <p:commandButton value="Vídeo" icon="ui-icon-video" style="width: 100px"/>
                                     <p:commandButton value="Consulta Placa" icon="ui-icon-search" style="width: 150px"/>
                                     <p:commandButton value="Imprimir" icon="ui-icon-print" style="width: 100px"/>
-                                    <p:commandButton value="Teste" icon="ui-icon-zoomin" onclick="testeJS()" style="width: 100px"/>
+                                    <p:commandButton value="Teste" icon="ui-icon-zoomin" onclick="testeJS('Oi Gente!')" style="width: 100px"/>
                                     <p:commandButton value="Teste2" icon="ui-icon-star" actionListener="#{mbDigitacaoPlacas.executarJS()}" style="width: 100px"/>
                                 </p:toolbarGroup>
                             </p:toolbar>

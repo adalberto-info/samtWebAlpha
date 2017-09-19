@@ -1034,7 +1034,7 @@ public class MbDigitacaoPlacas implements Serializable {
 
     public void executarJS(){
 
-        RequestContext.getCurrentInstance().execute("trocaImagemZoom();");
+        RequestContext.getCurrentInstance().execute("trocaImagemZoom('/samtWebAlpha/resources/upload/image_nova.JPG','/samtWebAlpha/resources/upload/image_nova_zoom.JPG');");
     }
     
     public void setImagemInfracao(StreamedContent imagemInfracao) {
