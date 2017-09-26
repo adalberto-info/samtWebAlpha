@@ -19,79 +19,38 @@
             }
         </style>
 
-	<style>
-		/* styles unrelated to zoom */
-		* { border:0; margin:0; padding:0; }
-		p { position:absolute; top:3px; right:28px; color:#555; font:bold 13px/1 sans-serif;}
+<script>
+  var openFile = function(event) {
+    var input = event.target;
 
-		/* these styles are for the demo, but are not required for the plugin */
-		.zoom {
-			display:inline-block;
-			position: relative;
-		}
-		
-		/* magnifying glass icon */
-		.zoom:after {
-			content:'';
-			display:block; 
-			width:33px; 
-			height:33px; 
-			position:absolute; 
-			top:0;
-			right:0;
-			background:url(icon.png);
-		}
-
-		.zoom img {
-			display: block;
-		}
-
-		.zoom img::selection { background-color: transparent; }
-
-		#ex2 img:hover { cursor: url(grab.cur), default; }
-		#ex2 img:active { cursor: url(grabbed.cur), default; }
-	</style>
-	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
-	<script src='/samtWebAlpha/resources/engebras/javascripts/jquery.zoom.js'></script>
-	<script>
-		$(document).ready(function(){
-			$('#ex1').zoom();
-			$('#ex2').zoom({ on:'grab' });
-			$('#ex3').zoom({ on:'click' });			 
-			$('#ex4').zoom({ on:'toggle' });
-		});
-	</script>
-
-        <p:fieldset legend="Teste - Zoom da Imagem">
+    var reader = new FileReader();
+    reader.onload = function(){
+      var dataURL = reader.result;
+      var output = document.getElementById('output');
+      output.src = dataURL;
+    };
+    reader.readAsDataURL(input.files[0]);
+  };
+</script>
+        
+            
+            <p:fieldset legend="Testes Diversos ">
             <br/>
-            <h:form prependId="false" id="formTesteZoomImagem">
+            <h:form prependId="false" id="formTeste">
                 <p:growl id="msg0" />
-
-                <p:tabView id="tbv_imagem" widgetVar="tbv_widget_imagem" dynamic="true" cache="true" >
-
-                    <p:tab title="Zoom" id="tbv_imagem_zoom"> 
-                       	<span class='zoom' id='ex1'>
-                            <img src='/samtWebAlpha/resources/upload/image_teste2.JPG' id="imagezoom" width='800' height='600' alt='Imagem Infração' cache="false"/>
-                            <p>Hover</p>
-                        </span>
-
-                    </p:tab>
-
-
-                    <p:tab title="Imagem" id ="tbv_imagem_imagem"> 
-                        <img src='/samtWebAlpha/resources/upload/image_teste2.JPG' cache="false" id="imagemInfracao"  height="600" width="800"/>
-                    </p:tab>
+ 
+                <input type='file' accept='image/*' onchange='openFile(event)'/>
+                <br/>
+                <img id='output'/>
+            
                     
-                </p:tabView>
-                    
-                    <p:toolbar>
+                <p:toolbar>
                     <p:toolbarGroup align="center">
                         <div align="center">
                             <p:commandButton value="Início" action="/Inicio.xthml"   icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
                         </div>    
                     </p:toolbarGroup>
                 </p:toolbar>
-
 
             </h:form>
         </p:fieldset>

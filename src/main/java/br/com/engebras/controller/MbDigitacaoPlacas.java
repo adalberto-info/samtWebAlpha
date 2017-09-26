@@ -59,6 +59,8 @@ import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.faces.context.ExternalContext;
 import org.primefaces.context.RequestContext;
@@ -1036,6 +1038,30 @@ public class MbDigitacaoPlacas implements Serializable {
 
         RequestContext.getCurrentInstance().execute("trocaImagemZoom('/samtWebAlpha/resources/upload/image_nova.JPG','/samtWebAlpha/resources/upload/image_nova_zoom.JPG');");
     }
+    
+    public boolean copiaArquivos2() throws IOException {
+        boolean retorno = true;
+
+        File arqOrigem;
+        File arqDestino;
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        
+        arqOrigem = new File("C:/SAMT/teste/image_teste.jpg");
+        arqDestino = new File(servletContext.getRealPath(vpc_dirUpload) + "/xxx.jpg");
+        
+        if (arqDestino.exists()) {
+            arqDestino.delete();
+        }
+
+        Files.copy(arqOrigem.toPath(), arqDestino.toPath(),StandardCopyOption.REPLACE_EXISTING);
+        
+        
+        return retorno;
+
+    }
+    
+    
+    
     
     public void setImagemInfracao(StreamedContent imagemInfracao) {
         this.imagemInfracao = imagemInfracao;
