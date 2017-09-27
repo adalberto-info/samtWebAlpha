@@ -61,12 +61,13 @@ import com.sun.jna.Library;
 import com.sun.jna.Native;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import javax.faces.bean.ViewScoped;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.faces.context.ExternalContext;
 import org.primefaces.context.RequestContext;
 
 @ManagedBean(name = "mbDigitacaoPlacas")
-@SessionScoped
+@ViewScoped
 public class MbDigitacaoPlacas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -159,6 +160,7 @@ public class MbDigitacaoPlacas implements Serializable {
         iniciaVariaveis();
         geraListaVeiculoMarcaCET();
         geraListaMotivoInconsistenciaImagem();
+        uploadImagem();
     }
 
     private InterfaceDAO<AutoInfracao> autoInfracaoDAO() {
@@ -1038,6 +1040,12 @@ public class MbDigitacaoPlacas implements Serializable {
 
         RequestContext.getCurrentInstance().execute("trocaImagemZoom('/samtWebAlpha/resources/upload/image_nova.JPG','/samtWebAlpha/resources/upload/image_nova_zoom.JPG');");
     }
+
+    public void mensagemJS(String plc_mensagem){
+        RequestContext.getCurrentInstance().execute("mensagemAlerta('" + plc_mensagem + "');");
+        
+    }
+
     
     public boolean copiaArquivos2() throws IOException {
         boolean retorno = true;
