@@ -18,32 +18,66 @@
                 width:301px;
             }
         </style>
+        <script src="/samtWebAlpha/resources/engebras/javascripts/jquery.elevatezoom.js"></script>  
+        <script type="text/javascript" src="/samtWebAlpha/resources/engebras/javascripts/tabs.js"></script>
+        <script>
+            $('#zoom_lente').elevateZoom({
+                zoomType: "lens",
+                lensShape: "round",
+                lensSize: 200
+            });
+        </script>    
+        <link rel="stylesheet" type="text/css" href="/samtWebAlpha/resources/engebras/styles/estiloAbas.css" />    
 
-<script>
-  var openFile = function(event) {
-    var input = event.target;
-
-    var reader = new FileReader();
-    reader.onload = function(){
-      var dataURL = reader.result;
-      var output = document.getElementById('output');
-      output.src = dataURL;
-    };
-    reader.readAsDataURL(input.files[0]);
-  };
-</script>
-        
-            
-            <p:fieldset legend="Testes Diversos ">
+        <p:fieldset legend="Testes Diversos ">
             <br/>
             <h:form prependId="false" id="formTeste">
                 <p:growl id="msg0" />
- 
-                <input type='file' accept='image/*' onchange='openFile(event)'/>
-                <br/>
-                <img id='output'/>
-            
-                    
+
+
+                <div class="TabControl">
+                    <div id="header">
+                        <ul class="abas">
+                            <li>
+                                <div class="aba">
+                                    <span>Tab 1</span>      
+                                </div>
+                            </li>
+                            <li>
+                                <div class="aba">
+                                    <span>Tab 2</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="aba">
+                                    <span>Tab 3</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="aba">
+                                    <span>Tab 4</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="content">
+                        <div class="conteudo">
+                            Conteúdo da aba 1
+                            <h:panelGrid columns="1" id="panelZoomImagem" style="height: 600px; width: 800px">
+                                <img id="zoom_lente" src="/samtWebAlpha/resources/upload/image_teste.JPG" data-zoom-image="/samtWebAlpha/resources/upload/image_zoom.JPG" width="800" height="600"/>  
+                            </h:panelGrid>    
+                        </div>
+                        <div class="conteudo">
+                            Conteúdo da aba 2
+                        </div>
+                        <div class="conteudo">
+                            Conteúdo da aba 3
+                        </div>
+                        <div class="conteudo">
+                            Conteúdo da aba 4
+                        </div>
+                    </div>
+                </div>
                 <p:toolbar>
                     <p:toolbarGroup align="center">
                         <div align="center">

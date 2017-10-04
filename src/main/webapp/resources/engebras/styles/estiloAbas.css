@@ -1,0 +1,72 @@
+/*
+
+ Autor: Adalberto Kamida
+ Dt. Criacao: 28/09/2017
+
+*/
+
+
+body{font-family:Calibri, Tahoma, Arial}
+ 
+ .TabControl{
+    width:100%;
+    overflow:hidden;
+    height:400px}
+ 
+ .TabControl #header{
+    width:100%;
+    overflow:hidden;
+    cursor:hand}
+ 
+ .TabControl #content{
+    width:100%;
+    border: solid 1px #27408B;
+    overflow:hidden;
+    height:100%; }
+  
+ .TabControl .abas{display:inline;}
+  
+ .TabControl .abas li{float:left}
+  
+ .abas{
+    list-style:none;
+ }
+ .aba{
+    width:100px;
+    height:30px;
+    border:solid 1px;
+    border-radius:5px 5px 0 0;
+    text-align:center;
+    padding-top:5px;
+    background:#3A5FCD;
+    border-bottom-color:#27408B}
+  
+ .ativa{
+    width:100px;
+    height:30px;
+    border:solid 1px #27408B;
+    border-radius:5px 5px 0 0;
+    text-align:center;
+    padding-top:5px;
+}
+ 
+.ativa span, .selecionada span{color:#fff}
+ 
+.TabControl #content{background:#27408B}
+ 
+.TabControl .conteudo{
+    width:100%;
+    background:#27408B;
+    display:none;
+    height:100%;
+    color:#fff}
+ 
+.selecionada{
+    width:100px;
+    height:30px;
+    border:solid 1px #27408B;
+    border-radius:5px 5px 0 0;
+    text-align:center;
+    padding-top:5px;
+    background:#27408B}
+

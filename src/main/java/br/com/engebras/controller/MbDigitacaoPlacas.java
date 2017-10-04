@@ -127,19 +127,8 @@ public class MbDigitacaoPlacas implements Serializable {
      */
     @PostConstruct
     public void init() {
-        boolean vll_retorno;
         vln_controle = 0;
         vpn_nr_obliteracao = 0;
-        try {
-            vpn_ptn_images = 0;
-            images = new ArrayList<String>();
-            vll_retorno = proximaInfracao();
-            atualizaTela(vpc_dc_nr_multa);
-            atualizaListaImagem();
-            getImagemInfracao();
-        } catch (Exception erro) {
-
-        }
     }
 
     public List<String> getImages() {
@@ -147,6 +136,7 @@ public class MbDigitacaoPlacas implements Serializable {
     }
 
     public MbDigitacaoPlacas() {
+        boolean vll_retorno;
         vpc_dc_mensagem = "";
         vpc_dc_local = "";
         vpc_dc_enquadramento = "";
@@ -160,6 +150,16 @@ public class MbDigitacaoPlacas implements Serializable {
         iniciaVariaveis();
         geraListaVeiculoMarcaCET();
         geraListaMotivoInconsistenciaImagem();
+        vpn_ptn_images = 0;
+        images = new ArrayList<String>();
+        try {
+            vll_retorno = proximaInfracao();
+            atualizaTela(vpc_dc_nr_multa);
+        } catch (Exception erro) {
+
+        }
+        atualizaListaImagem();
+        getImagemInfracao();
         uploadImagem();
     }
 
@@ -508,6 +508,7 @@ public class MbDigitacaoPlacas implements Serializable {
             imagemVeiculo = "";
         }
 
+        mensagemJS("imagem infracao: " + foto + ".");
         imagemObliteracao = vpc_dirUpload + imagemVeiculo;
 
         DefaultStreamedContent content = null;
@@ -552,7 +553,6 @@ public class MbDigitacaoPlacas implements Serializable {
 //        String destino = scontext.getRealPath("/resources/upload/") + "/" + nomeArquivo;
         String destino = scontext.getRealPath(vpc_dirUpload) + "/" + imagemVeiculo;
         File arqDestino = new File(destino);
-
         try {
             if (copiaArquivos(arqOrigem, arqDestino) == false) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Problemas para copiar o arquivo: " + imagemVeiculo + " para o diretorio temporário. Arquivo não foi atualizado !", ""));
@@ -1018,7 +1018,7 @@ public class MbDigitacaoPlacas implements Serializable {
         vpn_X3_bottom = 0;
         vpn_Y3_bottom = 0;
 
-        lib = (Libegb) Native.loadLibrary("c:/dirlib/libegb.dll", Libegb.class);
+  //     lib = (Libegb) Native.loadLibrary("c:/dirlib/libegb.dll", Libegb.class);
         mensagemObliteracao = "Mensagem...";
     }
 

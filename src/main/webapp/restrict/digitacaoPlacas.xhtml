@@ -230,6 +230,7 @@
 
                                 <p:tab title="Imagem" id ="tbv_imagem_imagem"> 
                                     <p:graphicImage value="#{mbDigitacaoPlacas.imagemInfracao}" id="imagemInfracao" cache="false" height="600" width="800"/>
+                                    <p:graphicImage value="c:/samt/SP/000010102488718500_00.JPG" id="imagemInfracao" cache="false" height="600" width="800"/>
                                 </p:tab>
 
                             </p:tabView>
@@ -253,7 +254,7 @@
                                     <p:commandButton value="Vídeo" icon="ui-icon-video" style="width: 100px"/>
                                     <p:commandButton value="Consulta Placa" icon="ui-icon-search" style="width: 150px"/>
                                     <p:commandButton value="Imprimir" icon="ui-icon-print" style="width: 100px"/>
-                                    <p:commandButton value="Teste" icon="ui-icon-zoomin" actionListener="#{mbDigitacaoPlacas.copiaArquivos2()}" style="width: 100px"/>
+                                    <p:commandButton value="Teste" icon="ui-icon-zoomin" actionListener="#{mbDigitacaoPlacas.uploadImagem()}" style="width: 100px"/>
                                     <p:commandButton value="Teste2" icon="ui-icon-star" actionListener="#{mbDigitacaoPlacas.executarJS()}" style="width: 100px"/>
                                 </p:toolbarGroup>
                             </p:toolbar>

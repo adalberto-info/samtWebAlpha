@@ -29,9 +29,11 @@ import br.com.engebras.model.dao.InterfaceDAO;
 import br.com.engebras.model.dao.HibernateDAO;
 import br.com.engebras.model.entities.AutoInfracao;
 import br.com.engebras.model.entities.AutoInfracaoImagem;
+import javax.faces.bean.ViewScoped;
+import org.primefaces.context.RequestContext;
 
 @ManagedBean(name = "mbInicializaDigitacao")
-@SessionScoped
+@ViewScoped
 public class MbInicializaDigitacao implements Serializable {
  
     private static final long serialVersionUID = 1L; 
@@ -315,9 +317,14 @@ public class MbInicializaDigitacao implements Serializable {
         
         query = session.createSQLQuery(vlc_sql);
         vln_resultado = query.executeUpdate();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro inserido com sucesso!!!", ""));
-
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registros inseridos com sucesso!!!", ""));
+        mensagemJS("Registros inseridos com sucesso!!!");
         //inserindo registros na tabela autoInfracaoImagem... 
+        
+    }
+
+    public void mensagemJS(String plc_mensagem){
+        RequestContext.getCurrentInstance().execute("mensagemAlerta('" + plc_mensagem + "');");
         
     }
     
