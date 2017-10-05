@@ -508,7 +508,6 @@ public class MbDigitacaoPlacas implements Serializable {
             imagemVeiculo = "";
         }
 
-        mensagemJS("imagem infracao: " + foto + ".");
         imagemObliteracao = vpc_dirUpload + imagemVeiculo;
 
         DefaultStreamedContent content = null;
@@ -633,6 +632,8 @@ public class MbDigitacaoPlacas implements Serializable {
         SQLQuery query;
         Session session = FacesContextUtil.getRequestSession();
 
+        Integer vln_i;
+        vln_i = 0;
         images.clear();
         if (vpc_dc_nr_multa.isEmpty()) {
             images.add("BRANCO.jpg");
@@ -653,7 +654,8 @@ public class MbDigitacaoPlacas implements Serializable {
                     Map row = (Map) oInfracao;
 
                     images.add(row.get("dc_nomeImagem").toString());
-
+                    mensagemJS("nome imagem: " + images.get(vln_i));
+                    vln_i++;
                 }
             }
 
@@ -850,7 +852,6 @@ public class MbDigitacaoPlacas implements Serializable {
     }
 
     public void voltarObliteracao(){
-        mensagemObliteracao = "Executei o voltarObliteracao...";
 
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
@@ -1018,7 +1019,7 @@ public class MbDigitacaoPlacas implements Serializable {
         vpn_X3_bottom = 0;
         vpn_Y3_bottom = 0;
 
-  //     lib = (Libegb) Native.loadLibrary("c:/dirlib/libegb.dll", Libegb.class);
+        lib = (Libegb) Native.loadLibrary("c:/dirlib/libegb.dll", Libegb.class);
         mensagemObliteracao = "Mensagem...";
     }
 

@@ -216,28 +216,13 @@
                                 </ui:repeat>
                             </p:imageSwitch>
     -->                        
-                            <p:tabView id="tbv_imagem" dynamic="true" cache="true" >
-                                <p:tab title="Zoom" id="tbv_imagem_zoom"> 
 
-                                <h:panelGrid columns="1" id="panelZoomImagem" style="height: 600px; width: 800px">
-                                    <img id="zoom_lente" src="/samtWebAlpha/resources/upload/image_teste.JPG" data-zoom-image="/samtWebAlpha/resources/upload/image_zoom.JPG" width="800" height="600"/>  
-                                </h:panelGrid>    
-                                <p:panelGrid columns="2" id="panelDescricaoZoomImagem">
-                                    <p:outputLabel for="imagemZoom" value="Imagem: "/>
-                                    <p:inputText id="imagemZoom" value="/samtWebAlpha/resources/upload/image_teste.JPG" size="86" disabled="true"/>
-                                </p:panelGrid>
-                                </p:tab>
+                            <p:graphicImage value="#{mbDigitacaoPlacas.imagemInfracao}" id="imagemInfracao" cache="false" height="600" width="800"/>
 
-                                <p:tab title="Imagem" id ="tbv_imagem_imagem"> 
-                                    <p:graphicImage value="#{mbDigitacaoPlacas.imagemInfracao}" id="imagemInfracao" cache="false" height="600" width="800"/>
-                                    <p:graphicImage value="c:/samt/SP/000010102488718500_00.JPG" id="imagemInfracao" cache="false" height="600" width="800"/>
-                                </p:tab>
-
-                            </p:tabView>
                             <p:toolbar>
                                 <p:toolbarGroup>
-                                    <p:commandButton  icon="ui-icon-circle-triangle-w" id="imagem_anterior" actionListener="#{mbDigitacaoPlacas.navegaImagem('ANTERIOR')}" process="@this" update=":tbv_imagem:imagemInfracao" style="width: 100px"/>
-                                    <p:commandButton  icon="ui-icon-circle-triangle-e" id="imagem_proximo" actionListener="#{mbDigitacaoPlacas.navegaImagem('PROXIMO')}" process="@this" update=":tbv_imagem:imagemInfracao" style="width: 100px"/>
+                                    <p:commandButton  icon="ui-icon-circle-triangle-w" id="imagem_anterior" actionListener="#{mbDigitacaoPlacas.navegaImagem('ANTERIOR')}" process="@this" update="imagemInfracao" style="width: 100px"/>
+                                    <p:commandButton  icon="ui-icon-circle-triangle-e" id="imagem_proximo" actionListener="#{mbDigitacaoPlacas.navegaImagem('PROXIMO')}" process="@this" update="imagemInfracao" style="width: 100px"/>
                                 </p:toolbarGroup>
                             </p:toolbar>
     
@@ -254,7 +239,7 @@
                                     <p:commandButton value="Vídeo" icon="ui-icon-video" style="width: 100px"/>
                                     <p:commandButton value="Consulta Placa" icon="ui-icon-search" style="width: 150px"/>
                                     <p:commandButton value="Imprimir" icon="ui-icon-print" style="width: 100px"/>
-                                    <p:commandButton value="Teste" icon="ui-icon-zoomin" actionListener="#{mbDigitacaoPlacas.uploadImagem()}" style="width: 100px"/>
+                                    <p:commandButton value="Zoom" icon="ui-icon-zoomin" action="/restrict/imagemZomm.xhtml" style="width: 100px"/>
                                     <p:commandButton value="Teste2" icon="ui-icon-star" actionListener="#{mbDigitacaoPlacas.executarJS()}" style="width: 100px"/>
                                 </p:toolbarGroup>
                             </p:toolbar>
@@ -287,7 +272,7 @@
                                 <p:commandButton value="Limpar" actionListener="#{mbDigitacaoPlacas.limpaObliteracao()}" update="imageCropper mensagemObliteracao imagemObliteracao msg1" icon="ui-icon-cancel" style="width: 100px"/>
                                 <p:commandButton value="Obliterar" actionListener="#{mbDigitacaoPlacas.crop()}" update="imageCropper imagemObliteracao mensagemObliteracao msg1" icon="ui-icon-tag" style="width: 100px"/>
                                 <p:commandButton value="Finalizar" actionListener="#{mbDigitacaoPlacas.finalizaObliteracao()}" update="imageCropper imagemObliteracao mensagemObliteracao msg1" icon="ui-icon-image" style="width: 100px"/>
-                                <p:commandButton value="Voltar" actionListener="#{mbDigitacaoPlacas.voltarObliteracao()}" onclick="PF('dial_obliteraImagem').hide();" update="tbv_imagem:imagemInfracao mensagemObliteracao msg1" icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
+                                <p:commandButton value="Voltar" actionListener="#{mbDigitacaoPlacas.voltarObliteracao()}" onclick="PF('dial_obliteraImagem').hide();" update="imagemInfracao mensagemObliteracao msg1" icon="ui-icon-arrowreturnthick-1-s" style="width: 100px"/>
                                 </div>    
                         </p:toolbarGroup>
                     </p:toolbar>
