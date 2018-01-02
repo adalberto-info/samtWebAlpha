@@ -59,6 +59,7 @@ import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import javax.faces.bean.ViewScoped;
@@ -135,7 +136,7 @@ public class MbDigitacaoPlacas implements Serializable {
         return images;
     }
 
-    public MbDigitacaoPlacas() {
+    public MbDigitacaoPlacas() throws FileNotFoundException {
         boolean vll_retorno;
         vpc_dc_mensagem = "";
         vpc_dc_local = "";
@@ -493,13 +494,13 @@ public class MbDigitacaoPlacas implements Serializable {
 
     public StreamedContent getImagemInfracao() {
 
-//        File foto=new File("c:\\SAMT\\SP\\000010102488718260_00.jpg");
         File foto;
         if (images.size() == 0) {
             foto = new File(vpc_dirImagens + "BRANCO.jpg");
             imagemVeiculo = "";
         } else {
-            foto = new File(vpc_dirImagens + images.get(vpn_ptn_images));
+    //        foto = new File(vpc_dirImagens + images.get(vpn_ptn_images));
+            foto=new File("c:\\SAMT\\SP\\000010102488718500_00.JPG");
             imagemVeiculo = images.get(vpn_ptn_images);
         }
 
@@ -522,7 +523,7 @@ public class MbDigitacaoPlacas implements Serializable {
         }
         return content;
     }
-
+    
     public void iniciaObliteracao(){
         vpn_nr_obliteracao = 0;
         vpn_X1_top = 0;
@@ -606,7 +607,7 @@ public class MbDigitacaoPlacas implements Serializable {
 
     }
 
-    public void navegaImagem(String direcao) {
+    public void navegaImagem(String direcao) throws FileNotFoundException {
 
         if (direcao.equals("PROXIMO")) {
             if (vpn_ptn_images >= (images.size() - 1)) {
@@ -654,7 +655,6 @@ public class MbDigitacaoPlacas implements Serializable {
                     Map row = (Map) oInfracao;
 
                     images.add(row.get("dc_nomeImagem").toString());
-                    mensagemJS("nome imagem: " + images.get(vln_i));
                     vln_i++;
                 }
             }
