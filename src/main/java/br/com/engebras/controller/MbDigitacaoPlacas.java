@@ -92,9 +92,10 @@ public class MbDigitacaoPlacas implements Serializable {
     private List veiculoMarcaCETs = new ArrayList<>();
     private List motivoInconsistenciaImagens = new ArrayList<>();
     private Date dt_atual;
-    private StreamedContent imagemInfracao;
+    private StreamedContent imagemInfracao2;
     private CroppedImage croppedImage;
 
+    private String imagemInfracao;
     private String imagemVeiculo;
     private String imagemNova;
     private String vpc_dirUpload;
@@ -492,15 +493,15 @@ public class MbDigitacaoPlacas implements Serializable {
 
     }
 
-    public StreamedContent getImagemInfracao() {
+    public StreamedContent getImagemInfracao2() {
 
         File foto;
         if (images.size() == 0) {
             foto = new File(vpc_dirImagens + "BRANCO.jpg");
             imagemVeiculo = "";
         } else {
-    //        foto = new File(vpc_dirImagens + images.get(vpn_ptn_images));
-            foto=new File("c:\\SAMT\\SP\\000010102488718500_00.JPG");
+            foto = new File(vpc_dirImagens + images.get(vpn_ptn_images));
+    //        foto=new File("c:\\SAMT\\SP\\000010102488718500_00.JPG");
             imagemVeiculo = images.get(vpn_ptn_images);
         }
 
@@ -622,7 +623,7 @@ public class MbDigitacaoPlacas implements Serializable {
             }
         }
 
-        getImagemInfracao();
+        getImagemInfracao2();
 
     }
 
@@ -1068,12 +1069,17 @@ public class MbDigitacaoPlacas implements Serializable {
         return retorno;
 
     }
-    
-    
-    
-    
-    public void setImagemInfracao(StreamedContent imagemInfracao) {
+
+    public String getImagemInfracao() {
+        return imagemInfracao;
+    }
+
+    public void setImagemInfracao(String imagemInfracao) {
         this.imagemInfracao = imagemInfracao;
+    }
+    
+    public void setImagemInfracao2(StreamedContent imagemInfracao2) {
+        this.imagemInfracao2 = imagemInfracao2;
     }
 
     public AutoInfracao getAutoInfracao() {
@@ -1088,7 +1094,7 @@ public class MbDigitacaoPlacas implements Serializable {
         return vpc_dc_mensagem;
     }
 
-    public void setVpc_dc_mensagem(String vpc_dc_mensagem) {
+     public void setVpc_dc_mensagem(String vpc_dc_mensagem) {
         this.vpc_dc_mensagem = vpc_dc_mensagem;
     }
 
